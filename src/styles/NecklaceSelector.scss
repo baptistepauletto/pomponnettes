@@ -1,0 +1,50 @@
+.necklace-selector {
+  margin-bottom: 2rem;
+  
+  h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .necklace-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    
+    .necklace-option {
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: 2px solid #eee;
+      transition: all 0.2s ease;
+      width: calc(50% - 0.5rem);
+      
+      &:hover {
+        border-color: #ccc;
+      }
+      
+      &.selected {
+        border-color: #1976d2;
+        box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.3);
+      }
+      
+      img {
+        width: 100%;
+        height: 80px;
+        object-fit: contain;
+        margin-bottom: 0.5rem;
+      }
+      
+      p {
+        text-align: center;
+        font-size: 0.9rem;
+        margin: 0;
+      }
+      
+      @media (max-width: 480px) {
+        width: 100%;
+      }
+    }
+  }
+} 

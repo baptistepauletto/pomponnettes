@@ -1,0 +1,59 @@
+// Main customizer app styles
+.customizer-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+  .customizer-header {
+    text-align: center;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    
+    h1 {
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+    
+    p {
+      color: #666;
+    }
+  }
+  
+  .customizer-content {
+    display: flex;
+    flex: 1;
+    gap: 2rem;
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+    
+    .sidebar {
+      flex: 1;
+      max-width: 300px;
+      
+      @media (max-width: 768px) {
+        max-width: 100%;
+      }
+    }
+    
+    .main-display {
+      flex: 2;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+  }
+  
+  .customizer-footer {
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    color: #666;
+    font-size: 0.9rem;
+  }
+} 

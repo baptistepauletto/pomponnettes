@@ -1,0 +1,197 @@
+.necklace-display {
+  width: 100%;
+  
+  &.empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    color: #666;
+    font-style: italic;
+  }
+  
+  .necklace-container {
+    position: relative;
+    width: 100%;
+    background-color: transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    
+    &.with-grid {
+      background-color: rgba(245, 245, 245, 0.9);
+    }
+    
+    .necklace-image {
+      width: 100%;
+      display: block;
+    }
+    
+    .position-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+      
+      .grid-line {
+        position: absolute;
+        pointer-events: none;
+        
+        &.vertical {
+          height: 100%;
+          width: 1px;
+          background-color: rgba(0, 0, 255, 0.2);
+          
+          .grid-label {
+            position: absolute;
+            top: 0;
+            left: 2px;
+            background-color: rgba(255, 255, 255, 0.7);
+            font-size: 10px;
+            padding: 2px;
+            color: #333;
+          }
+        }
+        
+        &.horizontal {
+          width: 100%;
+          height: 1px;
+          background-color: rgba(0, 0, 255, 0.2);
+          
+          .grid-label {
+            position: absolute;
+            left: 0;
+            top: 2px;
+            background-color: rgba(255, 255, 255, 0.7);
+            font-size: 10px;
+            padding: 2px;
+            color: #333;
+          }
+        }
+      }
+    }
+    
+    .attachment-point {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0);
+      border: 1px solid rgba(200, 200, 200, 0);
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      
+      .point-name {
+        position: absolute;
+        display: inline-block;
+        white-space: nowrap;
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: 5px;
+        font-size: 11px;
+        background-color: rgba(255, 255, 255, 0.7);
+        padding: 1px 4px;
+        border-radius: 2px;
+        color: #333;
+        z-index: 11;
+      }
+      
+      &.visible {
+        background-color: rgba(255, 0, 0, 0.5);
+        border: 1px solid rgba(200, 0, 0, 0.6);
+      }
+      
+      &.can-drop {
+        background-color: rgba(25, 118, 210, 0.5);
+        border-color: rgba(25, 118, 210, 0.7);
+      }
+      
+      &.over {
+        background-color: rgba(25, 118, 210, 0.7);
+        border-color: rgba(25, 118, 210, 0.9);
+        box-shadow: 0 0 0 4px rgba(25, 118, 210, 0.3);
+      }
+      
+      &.occupied {
+        background-color: transparent;
+        border-color: transparent;
+      }
+    }
+    
+    .placed-charm {
+      position: absolute;
+      z-index: 20;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      
+      &:hover {
+        transform: translate(-50%, -100%) scale(1.1) !important;
+      }
+      
+      img {
+        width: 72px;
+        height: 72px;
+        filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
+        transform-origin: center top;
+      }
+      
+      &.left-side img {
+        transform-origin: center top;
+      }
+      
+      &.right-side img {
+        transform-origin: center top;
+      }
+    }
+  }
+  
+  .controls {
+    margin-top: 10px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    
+    label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: #666;
+      
+      input[type="checkbox"] {
+        margin: 0;
+      }
+    }
+  }
+  
+  .position-info {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    font-style: italic;
+  }
+  
+  @media (max-width: 768px) {
+    .necklace-container {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    
+    .attachment-point {
+      width: 14px;
+      height: 14px;
+    }
+    
+    .placed-charm img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+} 
