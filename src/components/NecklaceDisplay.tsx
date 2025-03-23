@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useCustomizer } from '../context/CustomizerContext';
 import { useDroppableAttachmentPoint, usePlacedCharm } from '../hooks/useDragAndDrop';
+import { useTapToPlace, isTouchDevice } from '../hooks/useTapToPlace';
 import '../styles/NecklaceDisplay.scss';
 
 // Component for a single attachment point
@@ -13,20 +14,32 @@ const AttachmentPoint: React.FC<{
 }> = ({ id, position, isOccupied, showAttachmentPoints, showNames }) => {
   const { isOver, canDrop, drop } = useDroppableAttachmentPoint(id, isOccupied);
   const attachmentPointRef = useRef<HTMLDivElement>(null);
+  const { selectedCharmId, clearSelectedCharm } = useTapToPlace();
+  const { addCharm } = useCustomizer();
+  const isMobile = isTouchDevice();
   
   // Apply the drop ref to the element
   drop(attachmentPointRef);
+
+  // Handle tap to place charm on mobile
+  const handleTap = () => {
+    if (isMobile && selectedCharmId && !isOccupied) {
+      addCharm(selectedCharmId, id);
+      clearSelectedCharm();
+    }
+  };
 
   return (
     <div
       ref={attachmentPointRef}
       className={`attachment-point ${isOver ? 'over' : ''} ${canDrop ? 'can-drop' : ''} ${
         isOccupied ? 'occupied' : ''
-      } ${showAttachmentPoints ? 'visible' : ''}`}
+      } ${showAttachmentPoints ? 'visible' : ''} ${(isMobile && selectedCharmId && !isOccupied) ? 'mobile-drop-target' : ''}`}
       style={{
         left: `${position.x}%`,
         top: `${position.y}%`,
       }}
+      onClick={handleTap}
     >
       {showNames && <span className="point-name">{id}</span>}
     </div>
@@ -92,6 +105,8 @@ const PlacedCharm: React.FC<{
   
   // Get transform styles based on position
   const { transform, positionClass } = getCharmTransformStyles(position);
+
+
 
   return (
     <div
