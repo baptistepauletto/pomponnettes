@@ -72,7 +72,7 @@ const getCharmTransformStyles = (position: { x: number; y: number }) => {
   const offsetY = 60;
   
   return {
-    transform: `translate(-50%, -100%) rotate(${rotation}deg) translateY(${offsetY}px)`,
+    transform: `translate(-42%, -100%) rotate(${rotation}deg) translateY(${offsetY}px)`,
     positionClass
   };
 };

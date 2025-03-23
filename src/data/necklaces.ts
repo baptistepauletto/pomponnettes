@@ -5,10 +5,10 @@ export const necklaces: Necklace[] = [
   {
     id: 'gold-chain',
     name: 'Gold Chain',
-    imagePath: '/images/necklaces/gold-chain.jpg',
+    imagePath: '/images/necklaces/gold-chain.png',
     attachmentPoints: [
       // Left side attachment points (top to bottom)
-      { id: 'point1', position: { x: 19, y: 30 }, isOccupied: false },
+      { id: 'point1', position: { x: 20, y: 30 }, isOccupied: false },
       { id: 'point2', position: { x: 20, y: 42 }, isOccupied: false },
       { id: 'point3', position: { x: 22, y: 53 }, isOccupied: false },
       { id: 'point4', position: { x: 24, y: 59 }, isOccupied: false },
