@@ -10,7 +10,7 @@ const CharmOption: React.FC<{ id: string; name: string; imagePath: string }> = (
   imagePath,
 }) => {
   const { isDragging, drag } = useDraggableCharm(id);
-  const { selectCharm, isCharmSelected } = useTapToPlace();
+  const { selectCharm, isCharmSelected, clearSelectedAttachmentPoint } = useTapToPlace();
   const isSelected = isCharmSelected(id);
   const isMobile = isTouchDevice();
   const ref = useRef<HTMLDivElement>(null);
@@ -20,6 +20,9 @@ const CharmOption: React.FC<{ id: string; name: string; imagePath: string }> = (
 
   // Handle tap on mobile
   const handleTap = () => {
+    // Clear any selected attachment point when choosing a charm
+    clearSelectedAttachmentPoint();
+    
     if (isMobile) {
       selectCharm(id);
     }

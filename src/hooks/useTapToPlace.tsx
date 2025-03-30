@@ -20,12 +20,17 @@ export const triggerHapticFeedback = (intensity: 'light' | 'medium' | 'heavy' = 
   }
 };
 
-// Context to share selected charm across components
+// Context to share selected charm and attachment point across components
 type TapToPlaceContextType = {
   selectedCharmId: string | null;
+  selectedAttachmentPointId: string | null;
   selectCharm: (charmId: string) => void;
+  selectAttachmentPoint: (pointId: string) => void;
   clearSelectedCharm: () => void;
+  clearSelectedAttachmentPoint: () => void;
+  clearAllSelections: () => void;
   isCharmSelected: (charmId: string) => boolean;
+  isAttachmentPointSelected: (pointId: string) => boolean;
 };
 
 const TapToPlaceContext = createContext<TapToPlaceContextType | null>(null);
@@ -33,13 +38,27 @@ const TapToPlaceContext = createContext<TapToPlaceContextType | null>(null);
 // Provider component
 export const TapToPlaceProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [selectedCharmId, setSelectedCharmId] = useState<string | null>(null);
+  const [selectedAttachmentPointId, setSelectedAttachmentPointId] = useState<string | null>(null);
 
   const selectCharm = useCallback((charmId: string) => {
     setSelectedCharmId(charmId);
   }, []);
 
+  const selectAttachmentPoint = useCallback((pointId: string) => {
+    setSelectedAttachmentPointId(pointId);
+  }, []);
+
   const clearSelectedCharm = useCallback(() => {
     setSelectedCharmId(null);
+  }, []);
+
+  const clearSelectedAttachmentPoint = useCallback(() => {
+    setSelectedAttachmentPointId(null);
+  }, []);
+
+  const clearAllSelections = useCallback(() => {
+    setSelectedCharmId(null);
+    setSelectedAttachmentPointId(null);
   }, []);
 
   const isCharmSelected = useCallback(
@@ -49,11 +68,23 @@ export const TapToPlaceProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     [selectedCharmId]
   );
 
+  const isAttachmentPointSelected = useCallback(
+    (pointId: string) => {
+      return selectedAttachmentPointId === pointId;
+    },
+    [selectedAttachmentPointId]
+  );
+
   const value = {
     selectedCharmId,
+    selectedAttachmentPointId,
     selectCharm,
+    selectAttachmentPoint,
     clearSelectedCharm,
+    clearSelectedAttachmentPoint,
+    clearAllSelections,
     isCharmSelected,
+    isAttachmentPointSelected,
   };
 
   return <TapToPlaceContext.Provider value={value}>{children}</TapToPlaceContext.Provider>;

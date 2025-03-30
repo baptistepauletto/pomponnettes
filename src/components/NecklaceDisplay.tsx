@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useCustomizer } from '../context/CustomizerContext';
 import { useDroppableAttachmentPoint, usePlacedCharm } from '../hooks/useDragAndDrop';
 import { useTapToPlace, isTouchDevice } from '../hooks/useTapToPlace';
+import CharmPopup from './CharmPopup';
 import '../styles/NecklaceDisplay.scss';
 
 // Component for a single attachment point
@@ -11,7 +12,9 @@ const AttachmentPoint: React.FC<{
   isOccupied: boolean;
   showAttachmentPoints: boolean;
   showNames: boolean;
-}> = ({ id, position, isOccupied, showAttachmentPoints, showNames }) => {
+  onSelect: (id: string, position: { x: number; y: number }) => void;
+  isSelected: boolean;
+}> = ({ id, position, isOccupied, showAttachmentPoints, showNames, onSelect, isSelected }) => {
   const { isOver, canDrop, drop } = useDroppableAttachmentPoint(id, isOccupied);
   const attachmentPointRef = useRef<HTMLDivElement>(null);
   const { selectedCharmId, clearSelectedCharm } = useTapToPlace();
@@ -24,8 +27,12 @@ const AttachmentPoint: React.FC<{
   // Handle tap to place charm on mobile
   const handleTap = () => {
     if (isMobile && selectedCharmId && !isOccupied) {
+      // If we have a charm selected (from the CharmSelector), add it
       addCharm(selectedCharmId, id);
       clearSelectedCharm();
+    } else if (!isOccupied) {
+      // Otherwise, select this attachment point to show the popup
+      onSelect(id, position);
     }
   };
 
@@ -34,7 +41,9 @@ const AttachmentPoint: React.FC<{
       ref={attachmentPointRef}
       className={`attachment-point ${isOver ? 'over' : ''} ${canDrop ? 'can-drop' : ''} ${
         isOccupied ? 'occupied' : ''
-      } ${showAttachmentPoints ? 'visible' : ''} ${(isMobile && selectedCharmId && !isOccupied) ? 'mobile-drop-target' : ''}`}
+      } ${showAttachmentPoints ? 'visible' : ''} ${
+        (isMobile && selectedCharmId && !isOccupied) ? 'mobile-drop-target' : ''
+      } ${isSelected ? 'selected' : ''}`}
       style={{
         left: `${position.x}%`,
         top: `${position.y}%`,
@@ -106,8 +115,6 @@ const PlacedCharm: React.FC<{
   // Get transform styles based on position
   const { transform, positionClass } = getCharmTransformStyles(position);
 
-
-
   return (
     <div
       className={`placed-charm ${positionClass}`}
@@ -161,10 +168,24 @@ const NecklaceDisplay: React.FC = () => {
   const [showAttachmentPoints, setShowAttachmentPoints] = useState(false);
   const [showPointNames, setShowPointNames] = useState(false);
   const [showGrid, setShowGrid] = useState(false);
+  const { selectedAttachmentPointId, selectAttachmentPoint, clearSelectedAttachmentPoint, isAttachmentPointSelected } = useTapToPlace();
+  const [popupPosition, setPopupPosition] = useState<{ x: number; y: number } | null>(null);
 
   if (!selectedNecklace) {
     return <div className="necklace-display empty">Please select a necklace</div>;
   }
+
+  // Handle selecting an attachment point
+  const handleAttachmentPointSelect = (pointId: string, position: { x: number; y: number }) => {
+    selectAttachmentPoint(pointId);
+    setPopupPosition(position);
+  };
+
+  // Handle closing the popup
+  const handleClosePopup = () => {
+    clearSelectedAttachmentPoint();
+    setPopupPosition(null);
+  };
 
   return (
     <div className="necklace-display">
@@ -186,6 +207,8 @@ const NecklaceDisplay: React.FC = () => {
             isOccupied={point.isOccupied}
             showAttachmentPoints={showAttachmentPoints}
             showNames={showPointNames}
+            onSelect={handleAttachmentPointSelect}
+            isSelected={isAttachmentPointSelected(point.id)}
           />
         ))}
 
@@ -198,6 +221,14 @@ const NecklaceDisplay: React.FC = () => {
             position={charm.position}
           />
         ))}
+
+        {/* Render the charm popup if an attachment point is selected */}
+        {selectedAttachmentPointId && popupPosition && (
+          <CharmPopup
+            position={popupPosition}
+            onClose={handleClosePopup}
+          />
+        )}
       </div>
       
       <div className="controls">
