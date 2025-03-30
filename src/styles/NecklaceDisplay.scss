@@ -267,15 +267,22 @@
   }
   
   @media (max-width: 480px) {
-    .placed-charm { 
-
+    .placed-charm {
       transform-origin: center top !important;
+      
       img {
-        width: 30px; /* Base size for phones */
-        height: auto;
-        max-width: 40%; /* Smaller percentage size */
+        width: 35px;
+        height: 35px;
+        max-width: none;
+        transform-origin: center top !important;
       }
       
+      &.left-side img,
+      &.right-side img {
+        width: 35px;
+        height: 35px;
+        transform-origin: center top !important;
+      }
     }
     
     .attachment-point {
