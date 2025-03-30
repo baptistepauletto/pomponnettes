@@ -271,16 +271,16 @@
       transform-origin: center top !important;
       
       img {
-        width: 35px;
-        height: 35px;
+        width: 30px;
+        height: 30px;
         max-width: none;
         transform-origin: center top !important;
       }
       
       &.left-side img,
       &.right-side img {
-        width: 35px;
-        height: 35px;
+        width: 30px;
+        height: 30px;
         transform-origin: center top !important;
       }
     }

@@ -81,20 +81,45 @@ const getCharmTransformStyles = (position: { x: number; y: number }) => {
   const maxRotation = isMobile ? 40 : 55; // Max rotation degrees
   let rotation = 0;
   
-  if (isLeftSide) {
-    // Left side: rotate outward (positive degrees for left side)
-    if (isMobile) {
+  // Base translateX values for mobile
+  const baseTranslateXLeft = -12;
+  const baseTranslateXRight = -85;
+  // Desktop uses a consistent value
+  let translateX = -42;
+
+  if (isMobile) {
+    // For mobile, scale translateX based on position factors
+    if (isLeftSide) {
+      // Scale base on distance from center and bottom
+      // This makes the charms closer to center have less translation
+      // and charms at the bottom have less translation as well
+      const factor = (distanceFromCenter / centerX) * (0.35 + distanceFromBottom);
+      translateX = baseTranslateXLeft * factor;
+      
+      // Make sure we don't exceed the base value
+      translateX = Math.max(translateX, baseTranslateXLeft);
+      
+      // Left side: rotate outward (positive degrees for left side)
       // Enhanced mobile rotation that increases with height and distance from center
       rotation = maxRotation * (distanceFromCenter / centerX) * (0.35 + distanceFromBottom);
-    } else {
-      rotation = maxRotation * (distanceFromCenter / centerX) * distanceFromBottom;
-    }
-  } else if (isRightSide) {
-    // Right side: rotate outward (negative degrees for right side)
-    if (isMobile) {
+    } else if (isRightSide) {
+      // Scale base on distance from center and bottom
+      // Same logic as left side but for right side values
+      const factor = (distanceFromCenter / centerX) * (0.35 + distanceFromBottom);
+      translateX = baseTranslateXRight * factor;
+      
+      // Make sure we don't exceed the base value (for right side, lower is more extreme)
+      translateX = Math.min(translateX, baseTranslateXRight);
+      
+      // Right side: rotate outward (negative degrees for right side)
       // Enhanced mobile rotation that increases with height and distance from center
       rotation = -maxRotation * (distanceFromCenter / centerX) * (0.35 + distanceFromBottom);
-    } else {
+    }
+  } else {
+    // Desktop rotation calculation
+    if (isLeftSide) {
+      rotation = maxRotation * (distanceFromCenter / centerX) * distanceFromBottom;
+    } else if (isRightSide) {
       rotation = -maxRotation * (distanceFromCenter / centerX) * distanceFromBottom;
     }
   }
@@ -106,7 +131,6 @@ const getCharmTransformStyles = (position: { x: number; y: number }) => {
   
   // Use different offsets for mobile vs desktop
   const offsetY = isMobile ? 30 : 60; // Much smaller offset for mobile
-  const translateX = isMobile ? isLeftSide ? -12 : -85 : -42; // Center horizontally on mobile
   
   return {
     transform: `translate(${translateX}%, -100%) rotate(${rotation}deg) translateY(${offsetY}px)`,
