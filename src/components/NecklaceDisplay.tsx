@@ -61,6 +61,9 @@ const getCharmTransformStyles = (position: { x: number; y: number }) => {
   const centerX = 50; // Assuming center of the necklace is at 50%
   const bottomY = 85; // Approximate bottom position of the necklace
   
+  // Check if we're on a mobile device
+  const isMobile = window.innerWidth <= 480;
+  
   // Calculate how far the charm is from the center (horizontally)
   const distanceFromCenter = Math.abs(x - centerX);
   
@@ -73,16 +76,27 @@ const getCharmTransformStyles = (position: { x: number; y: number }) => {
   const isRightSide = x > centerX;
   
   // Calculate rotation based on position
-  // More rotation on the sides, less at the bottom
-  const maxRotation = 55; // Max rotation in degrees
+  // For mobile: MORE rotation on the sides, especially away from the bottom
+  // For desktop: Normal rotation
+  const maxRotation = isMobile ? 40 : 55; // Max rotation degrees
   let rotation = 0;
   
   if (isLeftSide) {
     // Left side: rotate outward (positive degrees for left side)
-    rotation = maxRotation * (distanceFromCenter / centerX) * distanceFromBottom;
+    if (isMobile) {
+      // Enhanced mobile rotation that increases with height and distance from center
+      rotation = maxRotation * (distanceFromCenter / centerX) * (0.35 + distanceFromBottom);
+    } else {
+      rotation = maxRotation * (distanceFromCenter / centerX) * distanceFromBottom;
+    }
   } else if (isRightSide) {
     // Right side: rotate outward (negative degrees for right side)
-    rotation = -maxRotation * (distanceFromCenter / centerX) * distanceFromBottom;
+    if (isMobile) {
+      // Enhanced mobile rotation that increases with height and distance from center
+      rotation = -maxRotation * (distanceFromCenter / centerX) * (0.35 + distanceFromBottom);
+    } else {
+      rotation = -maxRotation * (distanceFromCenter / centerX) * distanceFromBottom;
+    }
   }
   
   // Class for styling
@@ -90,11 +104,12 @@ const getCharmTransformStyles = (position: { x: number; y: number }) => {
   if (isLeftSide) positionClass = 'left-side';
   else if (isRightSide) positionClass = 'right-side';
   
-  // Use a constant Y offset to make all charms attach from the top
-  const offsetY = 60;
+  // Use different offsets for mobile vs desktop
+  const offsetY = isMobile ? 25 : 60; // Smaller offset for mobile but not too small
+  const translateX = isMobile ? -50 : -42; // Center horizontally on mobile
   
   return {
-    transform: `translate(-42%, -100%) rotate(${rotation}deg) translateY(${offsetY}px)`,
+    transform: `translate(${translateX}%, -100%) rotate(${rotation}deg) translateY(${offsetY}px)`,
     positionClass
   };
 };
