@@ -79,8 +79,9 @@ const CharmPopup: React.FC<{
   // Calculate position to ensure popup stays within viewport
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
-  const popupWidth = 280; // Approximate width of popup
-  const popupHeight = 320; // Approximate height of popup
+  const isMobile = window.innerWidth <= 480;
+  const popupWidth = isMobile ? 220 : 280; // Smaller width on mobile
+  const popupHeight = isMobile ? 320 : 400; // Smaller height on mobile
   
   // Start with the position near the attachment point
   let leftPos = `${position.x}%`;
@@ -95,17 +96,39 @@ const CharmPopup: React.FC<{
     
     // Check if popup would go off-screen and adjust accordingly
     const bodyRect = document.body.getBoundingClientRect();
+    
+    // Handle horizontal positioning
     if (pointX + popupWidth > bodyRect.right) {
       leftPos = `calc(${position.x}% - ${popupWidth}px)`;
+    } else if (pointX - 20 < bodyRect.left) {
+      // Ensure the popup isn't too far left
+      leftPos = `calc(${position.x}% + 10px)`;
     }
+    
+    // Handle vertical positioning
     if (pointY + popupHeight > bodyRect.bottom) {
-      topPos = `calc(${position.y}% - ${popupHeight}px)`;
+      topPos = `calc(${position.y}% - ${popupHeight/2}px)`;
+    } else if (pointY - popupHeight/2 < bodyRect.top) {
+      // Ensure the popup isn't too far up
+      topPos = `calc(${position.y}% + ${popupHeight/4}px)`;
+    }
+    
+    // Additional mobile-specific adjustments
+    if (isMobile) {
+      // Center more horizontally on mobile if possible
+      const centerX = containerRect.width / 2;
+      const pointXRelative = containerRect.width * position.x / 100;
+      
+      // If attachment point is near center, center the popup
+      if (Math.abs(pointXRelative - centerX) < centerX * 0.3) {
+        leftPos = `calc(50% - ${popupWidth/2}px)`;
+      }
     }
   }
 
   return (
     <div 
-      className="charm-popup" 
+      className={`charm-popup ${isMobile ? 'mobile' : ''}`} 
       ref={popupRef}
       style={{
         left: leftPos,
