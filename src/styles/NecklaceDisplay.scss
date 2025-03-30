@@ -268,20 +268,14 @@
   
   @media (max-width: 480px) {
     .placed-charm { 
+
+      transform-origin: center top !important;
       img {
         width: 30px; /* Base size for phones */
         height: auto;
         max-width: 40%; /* Smaller percentage size */
       }
       
-      // Allow rotations from JavaScript to work
-      &.left-side, 
-      &.right-side {
-        img {
-          // Let JavaScript handle the rotation
-          transform: none; // Don't override the rotation
-        }
-      }
     }
     
     .attachment-point {

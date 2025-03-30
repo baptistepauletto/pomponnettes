@@ -105,8 +105,8 @@ const getCharmTransformStyles = (position: { x: number; y: number }) => {
   else if (isRightSide) positionClass = 'right-side';
   
   // Use different offsets for mobile vs desktop
-  const offsetY = isMobile ? 25 : 60; // Smaller offset for mobile but not too small
-  const translateX = isMobile ? -50 : -42; // Center horizontally on mobile
+  const offsetY = isMobile ? 30 : 60; // Much smaller offset for mobile
+  const translateX = isMobile ? isLeftSide ? -12 : -85 : -42; // Center horizontally on mobile
   
   return {
     transform: `translate(${translateX}%, -100%) rotate(${rotation}deg) translateY(${offsetY}px)`,
