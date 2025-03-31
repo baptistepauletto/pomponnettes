@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400px" height="300px" viewBox="0 0 400 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Silver Chain</title>
+    <g id="silver-chain" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M200,50 C160,50 140,100 100,100 C60,100 40,150 0,150" id="left-chain" stroke="#C0C0C0" stroke-width="8" stroke-linecap="round"></path>
+        <path d="M200,50 C240,50 260,100 300,100 C340,100 360,150 400,150" id="right-chain" stroke="#C0C0C0" stroke-width="8" stroke-linecap="round"></path>
+        <circle id="clasp" stroke="#C0C0C0" stroke-width="2" fill="#E0E0E0" cx="200" cy="50" r="10"></circle>
+    </g>
+</svg> 
