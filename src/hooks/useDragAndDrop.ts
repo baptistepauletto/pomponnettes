@@ -1,5 +1,5 @@
-import { useCallback, useRef } from 'react';
-import { useDrag, useDrop, DropTargetMonitor, DragSourceMonitor, ConnectDropTarget, ConnectDragSource } from 'react-dnd';
+import { useCallback } from 'react';
+import { useDrag, useDrop, DropTargetMonitor, DragSourceMonitor, } from 'react-dnd';
 import { useCustomizer } from '../context/CustomizerContext';
 
 // Item types for react-dnd
@@ -52,7 +52,7 @@ export const useDroppableAttachmentPoint = (attachmentPointId: string, isOccupie
 };
 
 // Hook for making a placed charm both draggable and removable
-export const usePlacedCharm = (placedCharmId: string, charmId: string) => {
+export const usePlacedCharm = (placedCharmId: string) => {
   const { removeCharm } = useCustomizer();
 
   const handleRemove = useCallback(() => {
