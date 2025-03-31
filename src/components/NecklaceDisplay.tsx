@@ -154,7 +154,7 @@ const PlacedCharm: React.FC<{
   position: { x: number; y: number };
 }> = ({ id, charmId, position }) => {
   const { charms } = useCustomizer();
-  const { handleRemove } = usePlacedCharm(id, charmId);
+  const { handleRemove } = usePlacedCharm(id);
 
   // Find the charm data
   const charm = charms.find((c) => c.id === charmId);

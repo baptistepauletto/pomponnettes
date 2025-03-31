@@ -77,8 +77,6 @@ const CharmPopup: React.FC<{
       });
 
   // Calculate position to ensure popup stays within viewport
-  const viewportWidth = window.innerWidth;
-  const viewportHeight = window.innerHeight;
   const isMobile = window.innerWidth <= 480;
   const popupWidth = isMobile ? 220 : 280; // Smaller width on mobile
   const popupHeight = isMobile ? 320 : 400; // Smaller height on mobile
