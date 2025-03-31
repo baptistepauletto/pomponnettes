@@ -92,33 +92,33 @@ const getCharmTransformStyles = (position: { x: number; y: number }) => {
   
   // Base translateX values for mobile
   const baseTranslateXLeft = -12;
-  const baseTranslateXRight = -85;
+  const baseTranslateXRight = -245;
   // Desktop uses a consistent value
   let translateX = -42;
 
   if (isMobile) {
     // For mobile, scale translateX based on position factors
     if (isLeftSide) {
-      // Scale base on distance from center and bottom
-      // This makes the charms closer to center have less translation
-      // and charms at the bottom have less translation as well
-      const factor = (distanceFromCenter / centerX) * (0.5 + distanceFromBottom);
-      translateX = baseTranslateXLeft * factor
+      // Scale based on distance from center and bottom
+      // This makes charms CLOSER to center have MORE translation
+      // and charms at the bottom have less translation
+      const factor = (1 - distanceFromCenter / centerX) * 2.5;
+      translateX = baseTranslateXLeft * factor;
       
       // Make sure we don't exceed the base value
-      //translateX = Math.max(translateX, baseTranslateXLeft);
+      translateX = Math.min(translateX, baseTranslateXLeft);
       
       // Left side: rotate outward (positive degrees for left side)
       // Enhanced mobile rotation that increases with height and distance from center
       rotation = maxRotation * (distanceFromCenter / centerX) * (0.35 + distanceFromBottom);
     } else if (isRightSide) {
-      // Scale base on distance from center and bottom
-      // Same logic as left side but for right side values
-      const factor = (distanceFromCenter / centerX) * (0.50 + distanceFromBottom);
+      // Scale based on distance from center and bottom
+      // Same inverted logic as left side but for right side values
+      const factor = (1 - distanceFromCenter / centerX) * (0.27 + distanceFromBottom);
       translateX = baseTranslateXRight * factor;
       
       // Make sure we don't exceed the base value (for right side, lower is more extreme)
-      translateX = Math.min(translateX, baseTranslateXRight);
+      translateX = Math.max(translateX, baseTranslateXRight);
       
       // Right side: rotate outward (negative degrees for right side)
       // Enhanced mobile rotation that increases with height and distance from center
