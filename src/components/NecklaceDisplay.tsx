@@ -21,16 +21,25 @@ const AttachmentPoint: React.FC<{
   const { addCharm } = useCustomizer();
   const isMobile = isTouchDevice();
   
-  // Apply the drop ref to the element
-  drop(attachmentPointRef);
+  // Apply the drop ref to the element only if not occupied
+  // This ensures drag-and-drop won't work on occupied points either
+  if (!isOccupied) {
+    drop(attachmentPointRef);
+  }
 
   // Handle tap to place charm on mobile
   const handleTap = () => {
-    if (isMobile && selectedCharmId && !isOccupied) {
+    // If occupied, do absolutely nothing
+    if (isOccupied) {
+      return;
+    }
+    
+    // Only proceed if the point is not occupied
+    if (isMobile && selectedCharmId) {
       // If we have a charm selected (from the CharmSelector), add it
       addCharm(selectedCharmId, id);
       clearSelectedCharm();
-    } else if (!isOccupied) {
+    } else {
       // Otherwise, select this attachment point to show the popup
       onSelect(id, position);
     }
@@ -48,7 +57,7 @@ const AttachmentPoint: React.FC<{
         left: `${position.x}%`,
         top: `${position.y}%`,
       }}
-      onClick={handleTap}
+      onClick={isOccupied ? undefined : handleTap}
     >
       {showNames && <span className="point-name">{id}</span>}
     </div>
@@ -93,11 +102,11 @@ const getCharmTransformStyles = (position: { x: number; y: number }) => {
       // Scale base on distance from center and bottom
       // This makes the charms closer to center have less translation
       // and charms at the bottom have less translation as well
-      const factor = (distanceFromCenter / centerX) * (0.35 + distanceFromBottom);
-      translateX = baseTranslateXLeft * factor;
+      const factor = (distanceFromCenter / centerX) * (0.5 + distanceFromBottom);
+      translateX = baseTranslateXLeft * factor
       
       // Make sure we don't exceed the base value
-      translateX = Math.max(translateX, baseTranslateXLeft);
+      //translateX = Math.max(translateX, baseTranslateXLeft);
       
       // Left side: rotate outward (positive degrees for left side)
       // Enhanced mobile rotation that increases with height and distance from center
@@ -105,7 +114,7 @@ const getCharmTransformStyles = (position: { x: number; y: number }) => {
     } else if (isRightSide) {
       // Scale base on distance from center and bottom
       // Same logic as left side but for right side values
-      const factor = (distanceFromCenter / centerX) * (0.35 + distanceFromBottom);
+      const factor = (distanceFromCenter / centerX) * (0.50 + distanceFromBottom);
       translateX = baseTranslateXRight * factor;
       
       // Make sure we don't exceed the base value (for right side, lower is more extreme)

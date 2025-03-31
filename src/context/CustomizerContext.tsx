@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useCallback, ReactNode, useEffect } from 'react';
 import { Necklace, Charm, PlacedCharm, AttachmentPoint } from '../types';
 import { necklaces } from '../data/necklaces';
 import { charms } from '../data/charms';
@@ -53,7 +53,19 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
       p => p.id === attachmentPointId
     );
 
-    if (!attachmentPoint || attachmentPoint.isOccupied) return;
+    // Extra protection: Check if point exists and is NOT already occupied
+    if (!attachmentPoint) return;
+    
+    // Check if the attachment point is already occupied
+    const isAlreadyOccupied = placedCharms.some(
+      charm => charm.attachmentPointId === attachmentPointId
+    );
+    
+    // If already occupied, don't add another charm
+    if (attachmentPoint.isOccupied || isAlreadyOccupied) {
+      console.log('Attachment point is already occupied');
+      return;
+    }
 
     // Create a unique ID for this placed charm
     const placedCharmId = `placed-charm-${Date.now()}`;
@@ -69,74 +81,66 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
       }
     ]);
 
-    // Mark the attachment point as occupied
-    const updatedNecklaces = necklaces.map(necklace => {
-      if (necklace.id === selectedNecklaceId) {
-        return {
-          ...necklace,
-          attachmentPoints: necklace.attachmentPoints.map(point => {
-            if (point.id === attachmentPointId) {
-              return { ...point, isOccupied: true };
-            }
-            return point;
-          })
-        };
+    // Mark the attachment point as occupied in the necklace data
+    selectedNecklace.attachmentPoints = selectedNecklace.attachmentPoints.map(point => {
+      if (point.id === attachmentPointId) {
+        return { ...point, isOccupied: true };
       }
-      return necklace;
+      return point;
     });
-
-    // Note: In a real app, you'd want to use a more robust state management solution
-    // This is a simplification for this example
-  }, [selectedNecklace, selectedNecklaceId]);
+  }, [selectedNecklace, placedCharms]);
 
   // Action to remove a charm from the necklace
   const removeCharm = useCallback((placedCharmId: string) => {
     // Find the charm to remove
     const charmToRemove = placedCharms.find(c => c.id === placedCharmId);
-    if (!charmToRemove) return;
+    if (!charmToRemove || !selectedNecklace) return;
 
     // Remove the charm
     setPlacedCharms(prev => prev.filter(c => c.id !== placedCharmId));
 
-    // Mark the attachment point as unoccupied
-    const updatedNecklaces = necklaces.map(necklace => {
-      if (necklace.id === selectedNecklaceId) {
-        return {
-          ...necklace,
-          attachmentPoints: necklace.attachmentPoints.map(point => {
-            if (point.id === charmToRemove.attachmentPointId) {
-              return { ...point, isOccupied: false };
-            }
-            return point;
-          })
-        };
-      }
-      return necklace;
-    });
-
-    // Same note as above about state management
-  }, [placedCharms, selectedNecklaceId]);
+    // Mark the attachment point as unoccupied directly
+    const pointToUpdate = selectedNecklace.attachmentPoints.find(
+      point => point.id === charmToRemove.attachmentPointId
+    );
+    
+    if (pointToUpdate) {
+      pointToUpdate.isOccupied = false;
+    }
+  }, [placedCharms, selectedNecklace]);
 
   // Action to clear all charms from the necklace
   const clearAllCharms = useCallback(() => {
+    if (!selectedNecklace) return;
+    
+    // Clear all placed charms
     setPlacedCharms([]);
     
-    // Mark all attachment points as unoccupied
-    const updatedNecklaces = necklaces.map(necklace => {
-      if (necklace.id === selectedNecklaceId) {
-        return {
-          ...necklace,
-          attachmentPoints: necklace.attachmentPoints.map(point => ({
-            ...point,
-            isOccupied: false
-          }))
-        };
-      }
-      return necklace;
+    // Mark all attachment points as unoccupied directly
+    selectedNecklace.attachmentPoints.forEach(point => {
+      point.isOccupied = false;
     });
+  }, [selectedNecklace]);
 
-    // Same note as above about state management
-  }, [selectedNecklaceId]);
+  // Sync attachment point occupation status with placed charms
+  useEffect(() => {
+    if (!selectedNecklace) return;
+    
+    // First reset all attachment points to unoccupied
+    selectedNecklace.attachmentPoints.forEach(point => {
+      point.isOccupied = false;
+    });
+    
+    // Then mark points as occupied based on placed charms
+    placedCharms.forEach(charm => {
+      const point = selectedNecklace.attachmentPoints.find(
+        p => p.id === charm.attachmentPointId
+      );
+      if (point) {
+        point.isOccupied = true;
+      }
+    });
+  }, [selectedNecklace, placedCharms]);
 
   // Context value
   const value: CustomizerContextState = {

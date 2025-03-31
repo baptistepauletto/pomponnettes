@@ -151,6 +151,10 @@
       &.occupied {
         background-color: transparent;
         border-color: transparent;
+        cursor: default;
+        
+        /* Make sure these points don't receive any events */
+        pointer-events: none;
       }
     }
     
@@ -292,6 +296,14 @@
       &.mobile-drop-target {
         width: 18px;
         height: 18px;
+      }
+      
+      &.occupied {
+        /* Strengthen the prevention of interactions on mobile */
+        pointer-events: none !important;
+        cursor: default !important;
+        user-select: none !important;
+        -webkit-tap-highlight-color: transparent !important;
       }
     }
     
