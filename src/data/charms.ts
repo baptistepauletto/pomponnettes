@@ -1,46 +1,47 @@
 import { Charm } from '../types';
+import { getImagePath } from '../utils/imagePaths';
 
 // Sample charm data
 export const charms: Charm[] = [
   {
     id: 'aquarius',
     name: 'Aquarius',
-    imagePath: '/images/charms/aquarius.png',
+    imagePath: getImagePath('images/charms/aquarius.png'),
     width: 72,
     height: 72
   },
   {
     id: 'aries',
     name: 'Aries',
-    imagePath: '/images/charms/aries.png',
+    imagePath: getImagePath('images/charms/aries.png'),
     width: 72,
     height: 72
   },
   {
     id: 'cancer',
     name: 'Cancer',
-    imagePath: '/images/charms/cancer.png',
+    imagePath: getImagePath('images/charms/cancer.png'),
     width: 72,
     height: 72
   },
   {
     id: 'gemini',
     name: 'Gemini',
-    imagePath: '/images/charms/gemini.png',
+    imagePath: getImagePath('images/charms/gemini.png'),
     width: 72,
     height: 72
   },
   {
     id: 'libra',
     name: 'Libra',
-    imagePath: '/images/charms/libra.png',
+    imagePath: getImagePath('images/charms/libra.png'),
     width: 72,
     height: 72
   },
   {
     id: 'scorpio',
     name: 'Scorpio',
-    imagePath: '/images/charms/scorpio.png',
+    imagePath: getImagePath('images/charms/scorpio.png'),
     width: 72,
     height: 72
   },

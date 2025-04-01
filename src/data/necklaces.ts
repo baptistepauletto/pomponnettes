@@ -1,11 +1,12 @@
 import { Necklace } from '../types';
+import { getImagePath } from '../utils/imagePaths';
 
 // Sample necklace data
 export const necklaces: Necklace[] = [
   {
     id: 'gold-chain',
     name: 'Gold Chain',
-    imagePath: '/images/necklaces/gold-chain.png',
+    imagePath: getImagePath('images/necklaces/gold-chain.png'),
     attachmentPoints: [
       // Left side attachment points (top to bottom)
       { id: 'point1', position: { x: 20, y: 30 }, isOccupied: false },
@@ -33,7 +34,7 @@ export const necklaces: Necklace[] = [
   {
     id: 'silver-chain',
     name: 'Silver Chain',
-    imagePath: '/images/necklaces/silver-chain.svg',
+    imagePath: getImagePath('images/necklaces/silver-chain.svg'),
     attachmentPoints: [
       { id: 'point1', position: { x: 40, y: 100 }, isOccupied: false },
       { id: 'point2', position: { x: 80, y: 100 }, isOccupied: false },
