@@ -79,12 +79,23 @@
       width: 16px;
       height: 16px;
       border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0);
-      border: 1px solid rgba(200, 200, 200, 0);
+      background-color: rgba(255, 238, 173, 0.4); /* Light yellow */
+      border: 1px solid rgba(212, 200, 150, 0.5); /* Light gold/grey border */
       transform: translate(-50%, -50%);
       z-index: 10;
       cursor: pointer;
       transition: all 0.2s ease;
+      /* Add a subtle glow */
+      box-shadow: 0 0 0 2px rgba(255, 238, 173, 0.2);
+      /* Apply subtle pulse animation by default */
+      animation: subtle-glow 2s infinite;
+      
+      /* Hovering the attachment point */
+      &:hover {
+        background-color: rgba(255, 238, 173, 0.7);
+        border-color: rgba(212, 200, 150, 0.8);
+        box-shadow: 0 0 0 3px rgba(255, 238, 173, 0.3);
+      }
       
       .point-name {
         position: absolute;
@@ -103,8 +114,10 @@
       }
       
       &.visible {
-        background-color: rgba(255, 0, 0, 0.5);
-        border: 1px solid rgba(200, 0, 0, 0.6);
+        background-color: rgba(255, 238, 173, 0.7); /* Brighter yellow */
+        border: 1px solid rgba(212, 200, 150, 0.8);
+        box-shadow: 0 0 0 3px rgba(255, 238, 173, 0.4);
+        animation: pulse 2s infinite;
       }
       
       &.can-drop {
@@ -152,6 +165,8 @@
         background-color: transparent;
         border-color: transparent;
         cursor: default;
+        animation: none;
+        box-shadow: none;
         
         /* Make sure these points don't receive any events */
         pointer-events: none;
@@ -231,6 +246,18 @@
     }
   }
   
+  @keyframes subtle-glow {
+    0% {
+      box-shadow: 0 0 0 2px rgba(255, 238, 173, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 0 3px rgba(255, 238, 173, 0.4);
+    }
+    100% {
+      box-shadow: 0 0 0 2px rgba(255, 238, 173, 0.2);
+    }
+  }
+  
   .mobile-instructions {
     display: none;
   }
@@ -242,12 +269,30 @@
     }
     
     .attachment-point {
-      width: 12px;
-      height: 12px;
+      width: 18px; /* Slightly larger for touch targets */
+      height: 18px;
+      background-color: rgba(255, 238, 173, 0.6); /* More visible on mobile */
+      border: 1.5px solid rgba(212, 200, 150, 0.7);
+      box-shadow: 0 0 0 3px rgba(255, 238, 173, 0.3);
+      animation: subtle-glow 1.5s infinite; /* Faster animation on mobile */
+      
+      &:hover, &:active {
+        background-color: rgba(255, 238, 173, 0.8);
+        border-color: rgba(212, 200, 150, 0.9);
+        box-shadow: 0 0 0 4px rgba(255, 238, 173, 0.5);
+      }
       
       &.mobile-drop-target {
         width: 20px;
         height: 20px;
+      }
+      
+      &.occupied {
+        background-color: transparent !important;
+        border-color: transparent !important;
+        box-shadow: none !important;
+        animation: none !important;
+        pointer-events: none !important;
       }
     }
     

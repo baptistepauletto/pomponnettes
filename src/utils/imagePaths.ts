@@ -7,9 +7,9 @@ export function getImagePath(path: string): string {
   // Remove leading slash if present
   const cleanPath = path.startsWith('/') ? path.substring(1) : path;
   
-  // In development, images are served from the root
-  // In production (GitHub Pages), images need the /pomponnettes/ prefix
-  const base = import.meta.env.DEV ? '/' : '/pomponnettes/';
+  // In development, images are directly served from the public folder
+  // In production (GitHub Pages), they need the /pomponnettes/ prefix
+  const base = import.meta.env.DEV ? '' : '/pomponnettes/';
   
   return `${base}${cleanPath}`;
 } 
