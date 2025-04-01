@@ -4,12 +4,25 @@
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  z-index: 100;
+  z-index: 1000;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transform: translate(0, -50%);
   max-height: 400px;
+  animation: popup-appear 0.25s ease-out forwards;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  
+  @keyframes popup-appear {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
   
   .charm-popup-header {
     display: flex;
@@ -118,49 +131,60 @@
 // Mobile styles
 @media (max-width: 480px) {
   .charm-popup {
-    width: 220px;
-    max-height: 320px;
-    transform: translate(0, -45%);
+    width: 170px;
+    max-height: 260px;
     
     .charm-popup-header {
-      padding: 8px 12px;
+      padding: 3px 8px;
+      
       
       h3 {
-        font-size: 14px;
+        font-size: 10px;
       }
       
       .close-btn {
-        font-size: 18px;
-        width: 20px;
-        height: 20px;
+        font-size: 15px;
+        width: 16px;
+        height: 16px;
       }
     }
     
     .charm-grid {
       grid-template-columns: repeat(5, 1fr);
-      gap: 4px;
-      padding: 8px;
-      max-height: 220px;
+      gap: 2px;
+      padding: 1px;
+      max-height: 170px;
       
       .charm-item {
-        padding: 4px;
+        padding: 0px;
         border-radius: 6px;
+        border-width: 1px;
+        width: 30px;
+        height: 30px;
+        max-width: 100%;
+        margin: 0 auto;
         
         &:hover {
           transform: none;
+        }
+        
+        img {
+          width: 70%;
+          height: 70%;
+          object-fit: contain;
         }
       }
     }
     
     .category-tabs {
-      padding: 4px 8px 8px;
+      padding: 2px 5px 5px;
       
       .category-tab {
-        width: 32px;
-        height: 32px;
+        width: 24px;
+        height: 24px;
         
         .category-icon {
-          font-size: 16px;
+          font-size: 12px;
         }
       }
     }

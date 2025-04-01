@@ -78,50 +78,35 @@ const CharmPopup: React.FC<{
 
   // Calculate position to ensure popup stays within viewport
   const isMobile = window.innerWidth <= 480;
-  const popupWidth = isMobile ? 220 : 280; // Smaller width on mobile
-  const popupHeight = isMobile ? 320 : 400; // Smaller height on mobile
+  const popupWidth = isMobile ? 170 : 280; // Updated smaller width for mobile
+  const popupHeight = isMobile ? 260 : 400; // Updated smaller height for mobile
   
-  // Start with the position near the attachment point
+  // Calculate initial position based on the attachment point
   let leftPos = `${position.x}%`;
   let topPos = `${position.y}%`;
+  
+  // Check if we're on the right side of the necklace to adjust horizontal position
+  if (position.x > 50) {
+    // If on right side, shift popup to the left of the attachment point
+    leftPos = `calc(${position.x}% - ${popupWidth + 20}px)`;
+  } else {
+    // If on left side, shift popup to the right of the attachment point
+    leftPos = `calc(${position.x}% + 20px)`;
+  }
+  
+  // Center the popup vertically relative to the attachment point
+  topPos = `calc(${position.y}% - ${popupHeight / 2}px)`;
+  
+  // For mobile devices, use a more centered approach
+  if (isMobile) {
 
-  // Convert percentage to pixels (approximate)
-  const containerElement = document.querySelector('.necklace-container');
-  if (containerElement) {
-    const containerRect = containerElement.getBoundingClientRect();
-    const pointX = containerRect.left + (containerRect.width * position.x / 100);
-    const pointY = containerRect.top + (containerRect.height * position.y / 100);
     
-    // Check if popup would go off-screen and adjust accordingly
-    const bodyRect = document.body.getBoundingClientRect();
+    // Horizontal position - centered with a slight offset based on which side the point is on
+    const centerOffset = position.x > 50 ? -20 : 20;
+    leftPos = `calc(50% - ${popupWidth/2}px + ${centerOffset}px)`;
     
-    // Handle horizontal positioning
-    if (pointX + popupWidth > bodyRect.right) {
-      leftPos = `calc(${position.x}% - ${popupWidth}px)`;
-    } else if (pointX - 20 < bodyRect.left) {
-      // Ensure the popup isn't too far left
-      leftPos = `calc(${position.x}% + 10px)`;
-    }
-    
-    // Handle vertical positioning
-    if (pointY + popupHeight > bodyRect.bottom) {
-      topPos = `calc(${position.y}% - ${popupHeight/2}px)`;
-    } else if (pointY - popupHeight/2 < bodyRect.top) {
-      // Ensure the popup isn't too far up
-      topPos = `calc(${position.y}% + ${popupHeight/4}px)`;
-    }
-    
-    // Additional mobile-specific adjustments
-    if (isMobile) {
-      // Center more horizontally on mobile if possible
-      const centerX = containerRect.width / 2;
-      const pointXRelative = containerRect.width * position.x / 100;
-      
-      // If attachment point is near center, center the popup
-      if (Math.abs(pointXRelative - centerX) < centerX * 0.3) {
-        leftPos = `calc(50% - ${popupWidth/2}px)`;
-      }
-    }
+    // Vertical position - centered in the viewport
+    topPos = `calc(50% - ${popupHeight/2}px)`;
   }
 
   return (
