@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useCustomizer } from '../context/CustomizerContext';
 import { useDroppableAttachmentPoint, usePlacedCharm } from '../hooks/useDragAndDrop';
 import { useTapToPlace, isTouchDevice } from '../hooks/useTapToPlace';
@@ -45,13 +45,17 @@ const AttachmentPoint: React.FC<{
     }
   };
 
+  // Calculate classes for mobile with special effects for placement mode
+  const mobileDropTarget = isMobile && !isOccupied && 
+    (selectedCharmId !== null || isSelected);
+
   return (
     <div
       ref={attachmentPointRef}
       className={`attachment-point ${isOver ? 'over' : ''} ${canDrop ? 'can-drop' : ''} ${
         isOccupied ? 'occupied' : ''
       } ${showAttachmentPoints ? 'visible' : ''} ${
-        (isMobile && selectedCharmId && !isOccupied) ? 'mobile-drop-target' : ''
+        mobileDropTarget ? 'mobile-drop-target' : ''
       } ${isSelected ? 'selected' : ''}`}
       style={{
         left: `${position.x}%`,
@@ -212,12 +216,18 @@ const PositionGrid: React.FC = () => {
 };
 
 const NecklaceDisplay: React.FC = () => {
-  const { selectedNecklace, placedCharms } = useCustomizer();
+  const { selectedNecklace, placedCharms, addCharm } = useCustomizer();
   const [showAttachmentPoints, setShowAttachmentPoints] = useState(false);
   const [showPointNames, setShowPointNames] = useState(false);
   const [showGrid, setShowGrid] = useState(false);
+  const [keyboardSelectedCharmId, setKeyboardSelectedCharmId] = useState<string | null>(null);
   const { selectedAttachmentPointId, selectAttachmentPoint, clearSelectedAttachmentPoint, isAttachmentPointSelected } = useTapToPlace();
   const [popupPosition, setPopupPosition] = useState<{ x: number; y: number } | null>(null);
+  const isMobile = window.innerWidth <= 480;
+
+  useEffect(() => {
+    // Show keyboard by default on mobile - always visible, so we don't need a state variable for it
+  }, []);
 
   if (!selectedNecklace) {
     return <div className="necklace-display empty">Please select a necklace</div>;
@@ -225,6 +235,20 @@ const NecklaceDisplay: React.FC = () => {
 
   // Handle selecting an attachment point
   const handleAttachmentPointSelect = (pointId: string, position: { x: number; y: number }) => {
+    if (isMobile && keyboardSelectedCharmId) {
+      // If we have a charm selected from the keyboard, add it to this point
+      addCharm(keyboardSelectedCharmId, pointId);
+      // Reset the selected charm so users can select another
+      setKeyboardSelectedCharmId(null);
+      return;
+    }
+    
+    if (isMobile) {
+      selectAttachmentPoint(pointId);
+      // Don't set popup position on mobile as we're using the keyboard
+      return;
+    }
+    
     selectAttachmentPoint(pointId);
     setPopupPosition(position);
   };
@@ -233,6 +257,11 @@ const NecklaceDisplay: React.FC = () => {
   const handleClosePopup = () => {
     clearSelectedAttachmentPoint();
     setPopupPosition(null);
+  };
+
+  // Handle charm selection from keyboard
+  const handleCharmSelect = (charmId: string | null) => {
+    setKeyboardSelectedCharmId(charmId);
   };
 
   return (
@@ -253,10 +282,10 @@ const NecklaceDisplay: React.FC = () => {
             id={point.id}
             position={point.position}
             isOccupied={point.isOccupied}
-            showAttachmentPoints={showAttachmentPoints}
+            showAttachmentPoints={showAttachmentPoints || (isMobile)}
             showNames={showPointNames}
             onSelect={handleAttachmentPointSelect}
-            isSelected={isAttachmentPointSelected(point.id)}
+            isSelected={!!(isAttachmentPointSelected(point.id) || (keyboardSelectedCharmId && !point.isOccupied))}
           />
         ))}
 
@@ -270,11 +299,12 @@ const NecklaceDisplay: React.FC = () => {
           />
         ))}
 
-        {/* Render the charm popup if an attachment point is selected */}
-        {selectedAttachmentPointId && popupPosition && (
+        {/* Show popup based on device type */}
+        {((!isMobile && selectedAttachmentPointId && popupPosition) || (isMobile)) && (
           <CharmPopup
             position={popupPosition}
-            onClose={handleClosePopup}
+            onClose={isMobile ? () => {} : handleClosePopup}
+            onCharmSelect={isMobile ? handleCharmSelect : undefined}
           />
         )}
       </div>

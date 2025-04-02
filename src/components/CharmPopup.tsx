@@ -13,12 +13,14 @@ type CharmCategory = {
 const CharmPopup: React.FC<{
   position: { x: number; y: number } | null;
   onClose: () => void;
-}> = ({ position, onClose }) => {
+  onCharmSelect?: (charmId: string | null) => void;
+}> = ({ position, onClose, onCharmSelect }) => {
   const { charms } = useCustomizer();
   const { selectedAttachmentPointId, clearAllSelections } = useTapToPlace();
   const { addCharm } = useCustomizer();
   const popupRef = useRef<HTMLDivElement>(null);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [selectedCharmId, setSelectedCharmId] = useState<string | null>(null);
 
   // Define charm categories
   const categories: CharmCategory[] = [
@@ -50,16 +52,30 @@ const CharmPopup: React.FC<{
     };
   }, [onClose]);
 
+  // Notify parent when selectedCharmId changes
+  useEffect(() => {
+    if (onCharmSelect) {
+      onCharmSelect(selectedCharmId);
+    }
+  }, [selectedCharmId, onCharmSelect]);
+
   // Handle charm selection
   const handleCharmClick = (charmId: string) => {
+    const isMobile = window.innerWidth <= 480;
+    
+    if (isMobile) {
+      // On mobile, toggle charm selection
+      setSelectedCharmId(prevId => prevId === charmId ? null : charmId);
+      return;
+    }
+    
+    // On desktop, place charm immediately if attachment point is selected
     if (selectedAttachmentPointId) {
       addCharm(charmId, selectedAttachmentPointId);
       clearAllSelections();
       onClose();
     }
   };
-
-  if (!position) return null;
 
   // Filter charms by category (placeholder - would need real categories in charm data)
   const filteredCharms = activeCategory === 'all' 
@@ -76,50 +92,19 @@ const CharmPopup: React.FC<{
         return randomBool(charm.id);
       });
 
-  // Calculate position to ensure popup stays within viewport
   const isMobile = window.innerWidth <= 480;
-  const popupWidth = isMobile ? 170 : 280; // Updated smaller width for mobile
-  const popupHeight = isMobile ? 260 : 400; // Updated smaller height for mobile
-  
-  // Calculate initial position based on the attachment point
-  let leftPos = `${position.x}%`;
-  let topPos = `${position.y}%`;
-  
-  // Check if we're on the right side of the necklace to adjust horizontal position
-  if (position.x > 50) {
-    // If on right side, shift popup to the left of the attachment point
-    leftPos = `calc(${position.x}% - ${popupWidth + 20}px)`;
-  } else {
-    // If on left side, shift popup to the right of the attachment point
-    leftPos = `calc(${position.x}% + 20px)`;
-  }
-  
-  // Center the popup vertically relative to the attachment point
-  topPos = `calc(${position.y}% - ${popupHeight / 2}px)`;
-  
-  // For mobile devices, use a more centered approach
-  if (isMobile) {
-
-    
-    // Horizontal position - centered with a slight offset based on which side the point is on
-    const centerOffset = position.x > 50 ? -20 : 20;
-    leftPos = `calc(50% - ${popupWidth/2}px + ${centerOffset}px)`;
-    
-    // Vertical position - centered in the viewport
-    topPos = `calc(50% - ${popupHeight/2}px)`;
-  }
 
   return (
     <div 
       className={`charm-popup ${isMobile ? 'mobile' : ''}`} 
       ref={popupRef}
-      style={{
-        left: leftPos,
-        top: topPos,
+      style={isMobile ? undefined : {
+        left: `${position?.x}%`,
+        top: `${position?.y}%`,
       }}
     >
       <div className="charm-popup-header">
-        <h3>Select a Charm</h3>
+        <h3>{isMobile ? 'Pick a Charm' : 'Select a Charm'}</h3>
         <button className="close-btn" onClick={onClose}>×</button>
       </div>
       
@@ -127,13 +112,24 @@ const CharmPopup: React.FC<{
         {filteredCharms.map(charm => (
           <button 
             key={charm.id} 
-            className="charm-item"
+            className={`charm-item ${selectedCharmId === charm.id ? 'selected' : ''}`}
             onClick={() => handleCharmClick(charm.id)}
+            aria-label={charm.name}
           >
             <img src={charm.imagePath} alt={charm.name} />
+            {selectedCharmId === charm.id && isMobile && (
+              <div className="selected-indicator">✓</div>
+            )}
           </button>
         ))}
       </div>
+      
+      {/* Add an instruction if a charm is selected on mobile */}
+      {isMobile && selectedCharmId && (
+        <div className="mobile-instruction">
+          Tap on the necklace to place this charm
+        </div>
+      )}
       
       <div className="category-tabs">
         {categories.map(category => (
