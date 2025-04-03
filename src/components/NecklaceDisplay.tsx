@@ -212,12 +212,14 @@ const PositionGrid: React.FC = () => {
 };
 
 const NecklaceDisplay: React.FC = () => {
-  const { selectedNecklace, placedCharms } = useCustomizer();
+  const { selectedNecklace, placedCharms, addCharm } = useCustomizer();
   const [showAttachmentPoints, setShowAttachmentPoints] = useState(false);
   const [showPointNames, setShowPointNames] = useState(false);
   const [showGrid, setShowGrid] = useState(false);
+  const [keyboardSelectedCharmId, setKeyboardSelectedCharmId] = useState<string | null>(null);
   const { selectedAttachmentPointId, selectAttachmentPoint, clearSelectedAttachmentPoint, isAttachmentPointSelected } = useTapToPlace();
   const [popupPosition, setPopupPosition] = useState<{ x: number; y: number } | null>(null);
+  const isMobile = window.innerWidth <= 480;
 
   if (!selectedNecklace) {
     return <div className="necklace-display empty">Please select a necklace</div>;
@@ -233,6 +235,19 @@ const NecklaceDisplay: React.FC = () => {
   const handleClosePopup = () => {
     clearSelectedAttachmentPoint();
     setPopupPosition(null);
+  };
+
+  // Handle charm selection from keyboard
+  const handleCharmSelect = (charmId: string | null) => {
+    setKeyboardSelectedCharmId(charmId);
+    
+    // When a charm is selected from keyboard, temporarily show attachment points
+    if (charmId) {
+      setShowAttachmentPoints(true);
+    } else {
+      // When charm selection is cleared, hide attachment points
+      setShowAttachmentPoints(false);
+    }
   };
 
   return (
@@ -270,11 +285,12 @@ const NecklaceDisplay: React.FC = () => {
           />
         ))}
 
-        {/* Render the charm popup if an attachment point is selected */}
-        {selectedAttachmentPointId && popupPosition && (
+        {/* Show popup based on device type */}
+        {((!isMobile && selectedAttachmentPointId && popupPosition) || (isMobile)) && (
           <CharmPopup
             position={popupPosition}
-            onClose={handleClosePopup}
+            onClose={isMobile ? () => {} : handleClosePopup}
+            onCharmSelect={isMobile ? handleCharmSelect : undefined}
           />
         )}
       </div>
