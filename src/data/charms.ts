@@ -7,43 +7,43 @@ export const charms: Charm[] = [
     id: 'aquarius',
     name: 'Aquarius',
     imagePath: getImagePath('images/charms/aquarius.png'),
-    width: 32,
-    height: 32
+    width: 48,
+    height: 48
   },
   {
     id: 'aries',
     name: 'Aries',
     imagePath: getImagePath('images/charms/aries.png'),
-    width: 32,
-    height: 32
+    width: 48,
+    height: 48
   },
   {
     id: 'cancer',
     name: 'Cancer',
     imagePath: getImagePath('images/charms/cancer.png'),
-    width: 32,
-    height: 32
+    width: 48,
+    height: 48
   },
   {
     id: 'gemini',
     name: 'Gemini',
     imagePath: getImagePath('images/charms/gemini.png'),
-    width: 32,
-    height: 32
+    width: 48,
+    height: 48
   },
   {
     id: 'libra',
     name: 'Libra',
     imagePath: getImagePath('images/charms/libra.png'),
-    width: 32,
-    height: 32
+    width: 48,
+    height: 48
   },
   {
     id: 'scorpio',
     name: 'Scorpio',
     imagePath: getImagePath('images/charms/scorpio.png'),
-    width: 32,
-    height: 32
+    width: 48,
+    height: 48
   },
   {
     id: 'knot',
