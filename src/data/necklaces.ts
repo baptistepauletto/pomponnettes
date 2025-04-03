@@ -4,6 +4,27 @@ import { getImagePath } from '../utils/imagePaths';
 // Sample necklace data
 export const necklaces: Necklace[] = [
   {
+    id: 'grigri',
+    name: 'Collier Grigri',
+    imagePath: getImagePath('images/necklaces/grigri.png'),
+    attachmentPoints: [
+      { id: 'point1', position: { x: 18, y: 44 }, isOccupied: false },
+      { id: 'point2', position: { x: 18, y: 54 }, isOccupied: false },
+      { id: 'point3', position: { x: 19, y: 65 }, isOccupied: false },
+      { id: 'point4', position: { x: 22, y: 74 }, isOccupied: false },
+      { id: 'point5', position: { x: 29, y: 82 }, isOccupied: false },
+      { id: 'point6', position: { x: 38, y: 89 }, isOccupied: false },
+      { id: 'point7', position: { x: 47, y: 92 }, isOccupied: false },
+      { id: 'point8', position: { x: 56, y: 92 }, isOccupied: false },
+      { id: 'point9', position: { x: 67, y: 89 }, isOccupied: false },
+      { id: 'point10', position: { x: 76, y: 84 }, isOccupied: false },
+      { id: 'point11', position: { x: 82, y: 76 }, isOccupied: false },
+      { id: 'point12', position: { x: 86, y: 66 }, isOccupied: false },
+      { id: 'point13', position: { x: 88, y: 57 }, isOccupied: false },
+      { id: 'point14', position: { x: 88, y: 47 }, isOccupied: false },
+    ]
+  },
+  {
     id: 'gold-chain',
     name: 'Gold Chain',
     imagePath: getImagePath('images/necklaces/gold-chain.png'),
@@ -31,20 +52,5 @@ export const necklaces: Necklace[] = [
       { id: 'point16', position: { x: 80, y: 30 }, isOccupied: false },
     ]
   },
-  {
-    id: 'silver-chain',
-    name: 'Silver Chain',
-    imagePath: getImagePath('images/necklaces/silver-chain.svg'),
-    attachmentPoints: [
-      { id: 'point1', position: { x: 40, y: 100 }, isOccupied: false },
-      { id: 'point2', position: { x: 80, y: 100 }, isOccupied: false },
-      { id: 'point3', position: { x: 120, y: 100 }, isOccupied: false },
-      { id: 'point4', position: { x: 160, y: 100 }, isOccupied: false },
-      { id: 'point5', position: { x: 200, y: 50 }, isOccupied: false },
-      { id: 'point6', position: { x: 240, y: 100 }, isOccupied: false },
-      { id: 'point7', position: { x: 280, y: 100 }, isOccupied: false },
-      { id: 'point8', position: { x: 320, y: 100 }, isOccupied: false },
-      { id: 'point9', position: { x: 360, y: 100 }, isOccupied: false },
-    ]
-  }
+
 ]; 
