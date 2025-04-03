@@ -89,23 +89,11 @@
       width: 16px;
       height: 16px;
       border-radius: 50%;
-      background-color: rgba(80, 200, 120, 0.5); /* Emerald green with higher opacity */
-      border: 1.5px solid rgba(40, 160, 80, 0.6); /* Darker emerald border */
       transform: translate(-50%, -50%);
       z-index: 10;
       cursor: pointer;
       transition: all 0.2s ease;
-      /* Brighter glow */
-      box-shadow: 0 0 0 3px rgba(80, 200, 120, 0.3);
-      /* Apply subtle pulse animation by default */
-      animation: emerald-glow 2s infinite;
-      
-      /* Hovering the attachment point */
-      &:hover {
-        background-color: rgba(80, 200, 120, 0.8);
-        border-color: rgba(40, 160, 80, 0.9);
-        box-shadow: 0 0 0 4px rgba(80, 200, 120, 0.4);
-      }
+    
       
       .point-name {
         position: absolute;
@@ -144,10 +132,7 @@
       }
       
       &.mobile-drop-target {
-        background-color: rgba(76, 175, 80, 0.5);
-        border-color: rgba(76, 175, 80, 0.7);
-        box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.3);
-        animation: pulse 1.5s infinite;
+        
         width: 12px;
         height: 12px;
       }
@@ -284,29 +269,14 @@
     .attachment-point {
       width: 18px; /* Slightly larger for touch targets */
       height: 18px;
-      background-color: rgba(80, 200, 120, 0.6); /* More visible on mobile */
-      border: 1.5px solid rgba(40, 160, 80, 0.7);
-      box-shadow: 0 0 0 3px rgba(80, 200, 120, 0.3);
-      animation: emerald-glow 1.5s infinite; /* Faster animation on mobile */
-      
-      &:hover, &:active {
-        background-color: rgba(80, 200, 120, 0.8);
-        border-color: rgba(40, 160, 80, 0.9);
-        box-shadow: 0 0 0 4px rgba(80, 200, 120, 0.5);
-      }
+
       
       &.mobile-drop-target {
         width: 20px;
         height: 20px;
       }
       
-      &.occupied {
-        background-color: transparent !important;
-        border-color: transparent !important;
-        box-shadow: none !important;
-        animation: none !important;
-        pointer-events: none !important;
-      }
+
     }
     
     .placed-charm img {
@@ -350,17 +320,7 @@
     .attachment-point {
       width: 14px;  /* Larger than before */
       height: 14px;
-      background-color: rgba(80, 200, 120, 0.7); /* Even more visible on small screens */
-      border: 2px solid rgba(40, 160, 80, 0.8);
-      box-shadow: 0 0 0 4px rgba(80, 200, 120, 0.4);
-      
-      &.mobile-drop-target {
-        width: 20px;
-        height: 20px;
-        background-color: rgba(80, 200, 120, 0.9);
-        border-color: rgba(40, 160, 80, 1);
-        box-shadow: 0 0 0 5px rgba(80, 200, 120, 0.6);
-      }
+
       
       &.occupied {
         /* Strengthen the prevention of interactions on mobile */
