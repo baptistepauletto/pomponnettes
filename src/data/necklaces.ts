@@ -18,10 +18,10 @@ export const necklaces: Necklace[] = [
       { id: 'point8', position: { x: 56, y: 92 }, isOccupied: false },
       { id: 'point9', position: { x: 67, y: 89 }, isOccupied: false },
       { id: 'point10', position: { x: 76, y: 84 }, isOccupied: false },
-      { id: 'point11', position: { x: 82, y: 76 }, isOccupied: false },
-      { id: 'point12', position: { x: 86, y: 66 }, isOccupied: false },
-      { id: 'point13', position: { x: 88, y: 57 }, isOccupied: false },
-      { id: 'point14', position: { x: 88, y: 47 }, isOccupied: false },
+      { id: 'point11', position: { x: 82.5, y: 76.25 }, isOccupied: false },
+      { id: 'point12', position: { x: 87, y: 66.5 }, isOccupied: false },
+      { id: 'point13', position: { x: 88.5, y: 56 }, isOccupied: false },
+      { id: 'point14', position: { x: 88.5, y: 46 }, isOccupied: false },
     ]
   },
   {

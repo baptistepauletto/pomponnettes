@@ -67,7 +67,7 @@ const AttachmentPoint: React.FC<{
 // Determine charm rotation and position based on its location on the necklace
 const getCharmTransformStyles = (position: { x: number; y: number }) => {
   const { x, y } = position;
-  const centerX = 50; // Assuming center of the necklace is at 50%
+  const centerX = 53; // Assuming center of the necklace is at 50%
   const bottomY = 85; // Approximate bottom position of the necklace
   
   // Check if we're on a mobile device
@@ -90,36 +90,15 @@ const getCharmTransformStyles = (position: { x: number; y: number }) => {
   const maxRotation = isMobile ? 40 : 55; // Max rotation degrees
   let rotation = 0;
   
-  // Base translateX values for mobile
-  const baseTranslateXLeft = -12;
-  const baseTranslateXRight = -245;
-  // Desktop uses a consistent value
-  let translateX = -42;
-
   if (isMobile) {
     // For mobile, scale translateX based on position factors
     if (isLeftSide) {
       // Scale based on distance from center and bottom
       // This makes charms CLOSER to center have MORE translation
-      // and charms at the bottom have less translation
-      const factor = (1 - distanceFromCenter / centerX) * 2.5;
-      translateX = baseTranslateXLeft * factor;
-      
-      // Make sure we don't exceed the base value
-      translateX = Math.min(translateX, baseTranslateXLeft);
-      
       // Left side: rotate outward (positive degrees for left side)
       // Enhanced mobile rotation that increases with height and distance from center
       rotation = maxRotation * (distanceFromCenter / centerX) * (0.35 + distanceFromBottom);
     } else if (isRightSide) {
-      // Scale based on distance from center and bottom
-      // Same inverted logic as left side but for right side values
-      const factor = (1 - distanceFromCenter / centerX) * (0.27 + distanceFromBottom);
-      translateX = baseTranslateXRight * factor;
-      
-      // Make sure we don't exceed the base value (for right side, lower is more extreme)
-      translateX = Math.max(translateX, baseTranslateXRight);
-      
       // Right side: rotate outward (negative degrees for right side)
       // Enhanced mobile rotation that increases with height and distance from center
       rotation = -maxRotation * (distanceFromCenter / centerX) * (0.35 + distanceFromBottom);
@@ -137,12 +116,10 @@ const getCharmTransformStyles = (position: { x: number; y: number }) => {
   let positionClass = '';
   if (isLeftSide) positionClass = 'left-side';
   else if (isRightSide) positionClass = 'right-side';
-  
-  // Use different offsets for mobile vs desktop
-  const offsetY = isMobile ? 30 : 60; // Much smaller offset for mobile
+
   
   return {
-    transform: `translate(${translateX}%, -100%) rotate(${rotation}deg) translateY(${offsetY}px)`,
+    transform: `translate(-45%, -25%) rotate(${rotation}deg)`,
     positionClass
   };
 };
