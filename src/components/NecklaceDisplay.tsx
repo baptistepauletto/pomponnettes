@@ -189,12 +189,11 @@ const PositionGrid: React.FC = () => {
 };
 
 const NecklaceDisplay: React.FC = () => {
-  const { selectedNecklace, placedCharms, addCharm } = useCustomizer();
+  const { selectedNecklace, placedCharms } = useCustomizer();
   const [showAttachmentPoints, setShowAttachmentPoints] = useState(false);
   const [showPointNames, setShowPointNames] = useState(false);
   const [showGrid, setShowGrid] = useState(false);
-  const [keyboardSelectedCharmId, setKeyboardSelectedCharmId] = useState<string | null>(null);
-  const { selectedAttachmentPointId, selectAttachmentPoint, clearSelectedAttachmentPoint, isAttachmentPointSelected } = useTapToPlace();
+  const {selectedAttachmentPointId, selectAttachmentPoint, clearSelectedAttachmentPoint, isAttachmentPointSelected } = useTapToPlace();
   const [popupPosition, setPopupPosition] = useState<{ x: number; y: number } | null>(null);
   const isMobile = window.innerWidth <= 480;
 
@@ -214,18 +213,6 @@ const NecklaceDisplay: React.FC = () => {
     setPopupPosition(null);
   };
 
-  // Handle charm selection from keyboard
-  const handleCharmSelect = (charmId: string | null) => {
-    setKeyboardSelectedCharmId(charmId);
-    
-    // When a charm is selected from keyboard, temporarily show attachment points
-    if (charmId) {
-      setShowAttachmentPoints(true);
-    } else {
-      // When charm selection is cleared, hide attachment points
-      setShowAttachmentPoints(false);
-    }
-  };
 
   return (
     <div className="necklace-display">
@@ -266,8 +253,7 @@ const NecklaceDisplay: React.FC = () => {
         {((!isMobile && selectedAttachmentPointId && popupPosition) || (isMobile)) && (
           <CharmPopup
             position={popupPosition}
-            onClose={isMobile ? () => {} : handleClosePopup}
-            onCharmSelect={isMobile ? handleCharmSelect : undefined}
+            onClose={handleClosePopup}
           />
         )}
       </div>
