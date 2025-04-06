@@ -145,7 +145,7 @@ const PlacedCharm: React.FC<{
   // Scale factor based on device
   const isMobile = window.innerWidth <= 480;
   const isTablet = window.innerWidth <= 768 && window.innerWidth > 480;
-  const deviceScaleFactor = isMobile ? 0.7 : isTablet ? 0.85 : 1;
+  const deviceScaleFactor = isMobile ? 0.5 : isTablet ? 0.85 : 1;
   
   // Get transform styles based on position
   const { transform, positionClass } = getCharmTransformStyles(position);
