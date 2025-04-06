@@ -35,6 +35,7 @@
     
     .necklace-image {
       width: 100%;
+      filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
       display: block;
     }
     
@@ -183,7 +184,7 @@
       img {
         width: 72px; /* Desktop default size */
         height: auto;
-        filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
+        filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
         transform-origin: center top;
       }
       
