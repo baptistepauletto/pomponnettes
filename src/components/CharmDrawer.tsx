@@ -30,13 +30,13 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
     if (isAnimating) {
       const timer = setTimeout(() => {
         setIsAnimating(false);
-      }, 500); // Match animation duration
+      }, 500); // Exactly match the CSS animation duration
       
       return () => clearTimeout(timer);
     }
   }, [isAnimating]);
   
-  // Set keepSelectedCharm to true when component mounts
+  // Set keepSelectedCharm to true when drawer opens
   useEffect(() => {
     if (isOpen) {
       setKeepSelectedCharm(true);
