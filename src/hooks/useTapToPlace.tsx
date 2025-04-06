@@ -29,6 +29,7 @@ type TapToPlaceContextType = {
   clearSelectedCharm: () => void;
   clearSelectedAttachmentPoint: () => void;
   clearAllSelections: () => void;
+  forceCleanupSelections: () => void;
   isCharmSelected: (charmId: string) => boolean;
   isAttachmentPointSelected: (pointId: string) => boolean;
   keepSelectedCharm: boolean;
@@ -70,6 +71,12 @@ export const TapToPlaceProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     }
   }, [keepSelectedCharm]);
 
+  // Force cleanup regardless of keepSelectedCharm flag
+  const forceCleanupSelections = useCallback(() => {
+    setSelectedAttachmentPointId(null);
+    setSelectedCharmId(null);
+  }, []);
+
   const isCharmSelected = useCallback(
     (charmId: string) => {
       return selectedCharmId === charmId;
@@ -92,6 +99,7 @@ export const TapToPlaceProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     clearSelectedCharm,
     clearSelectedAttachmentPoint,
     clearAllSelections,
+    forceCleanupSelections,
     isCharmSelected,
     isAttachmentPointSelected,
     keepSelectedCharm,

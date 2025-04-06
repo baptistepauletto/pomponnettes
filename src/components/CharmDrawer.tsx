@@ -10,7 +10,7 @@ interface CharmDrawerProps {
 
 const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
   const { charms } = useCustomizer();
-  const { selectCharm, selectedCharmId, setKeepSelectedCharm, clearSelectedCharm } = useTapToPlace();
+  const { selectCharm, selectedCharmId, setKeepSelectedCharm, forceCleanupSelections } = useTapToPlace();
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -50,8 +50,8 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
     setIsAnimating(true);
     
     if (!newIsOpen && isOpen) {
-      // When closing the drawer, clear charm selection and set keepSelectedCharm to false
-      clearSelectedCharm();
+      // When closing the drawer, force clear all selections unconditionally 
+      forceCleanupSelections();
       setKeepSelectedCharm(false);
     } else if (newIsOpen && !isOpen) {
       // When opening the drawer, set keepSelectedCharm to true
