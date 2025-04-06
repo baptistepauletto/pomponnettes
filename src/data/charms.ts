@@ -43,24 +43,24 @@ export const charms: Charm[] = [
     id: 'knot',
     name: 'Knot',
     imagePath: getImagePath('images/charms/knot.png'),
-    sizeScale: 4
+    sizeScale: 2
   },
   {
     id: 'slim-heart',
     name: 'Slim Heart',
     imagePath: getImagePath('images/charms/slim-heart.png'),
-    sizeScale: 4
+    sizeScale: 2
   },
   {
     id: 'sunny-heart',
     name: 'Sunny Heart',
     imagePath: getImagePath('images/charms/sunny-heart.png'),
-    sizeScale: 4
+    sizeScale: 2
   },
   {
     id: 'slim-star',
     name: 'Slim Star',
     imagePath: getImagePath('images/charms/slim-star.png'),
-    sizeScale: 4
+    sizeScale: 2
   }
 ]; 
