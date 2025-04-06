@@ -7,70 +7,60 @@ export const charms: Charm[] = [
     id: 'aquarius',
     name: 'Aquarius',
     imagePath: getImagePath('images/charms/aquarius.png'),
-    width: 48,
-    height: 48
+    sizeScale: 1
   },
   {
     id: 'aries',
     name: 'Aries',
     imagePath: getImagePath('images/charms/aries.png'),
-    width: 48,
-    height: 48
+    sizeScale: 1
   },
   {
     id: 'cancer',
     name: 'Cancer',
     imagePath: getImagePath('images/charms/cancer.png'),
-    width: 48,
-    height: 48
+    sizeScale: 1 
   },
   {
     id: 'gemini',
     name: 'Gemini',
     imagePath: getImagePath('images/charms/gemini.png'),
-    width: 48,
-    height: 48
+    sizeScale: 1
   },
   {
     id: 'libra',
     name: 'Libra',
     imagePath: getImagePath('images/charms/libra.png'),
-    width: 48,
-    height: 48
+    sizeScale: 1
   },
   {
     id: 'scorpio',
     name: 'Scorpio',
     imagePath: getImagePath('images/charms/scorpio.png'),
-    width: 48,
-    height: 48
+    sizeScale: 1
   },
   {
     id: 'knot',
     name: 'Knot',
     imagePath: getImagePath('images/charms/knot.png'),
-    width: 128,
-    height: 128
+    sizeScale: 4
   },
   {
     id: 'slim-heart',
     name: 'Slim Heart',
     imagePath: getImagePath('images/charms/slim-heart.png'),
-    width: 128,
-    height: 128
+    sizeScale: 4
   },
   {
     id: 'sunny-heart',
     name: 'Sunny Heart',
     imagePath: getImagePath('images/charms/sunny-heart.png'),
-    width: 128,
-    height: 128
+    sizeScale: 4
   },
   {
     id: 'slim-star',
     name: 'Slim Star',
     imagePath: getImagePath('images/charms/slim-star.png'),
-    width: 128,
-    height: 128
+    sizeScale: 4
   }
 ]; 

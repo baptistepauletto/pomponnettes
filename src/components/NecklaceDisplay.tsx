@@ -117,9 +117,11 @@ const getCharmTransformStyles = (position: { x: number; y: number }) => {
   if (isLeftSide) positionClass = 'left-side';
   else if (isRightSide) positionClass = 'right-side';
 
-  
+  // Return only the rotation and translate to center the charm (translate(-50%, 0))
+  // This makes the charm's top center align with the attachment point
+  // The actual size adjustment will be handled in the PlacedCharm component
   return {
-    transform: `translate(-45%, -25%) rotate(${rotation}deg)`,
+    transform: `translate(-50%, 0) rotate(${rotation}deg)`,
     positionClass
   };
 };
@@ -137,6 +139,14 @@ const PlacedCharm: React.FC<{
   const charm = charms.find((c) => c.id === charmId);
   if (!charm) return null;
   
+  // Base size for charms (in pixels)
+  const baseCharmSize = 48;
+  
+  // Scale factor based on device
+  const isMobile = window.innerWidth <= 480;
+  const isTablet = window.innerWidth <= 768 && window.innerWidth > 480;
+  const deviceScaleFactor = isMobile ? 0.7 : isTablet ? 0.85 : 1;
+  
   // Get transform styles based on position
   const { transform, positionClass } = getCharmTransformStyles(position);
 
@@ -150,7 +160,15 @@ const PlacedCharm: React.FC<{
       }}
       onClick={handleRemove}
     >
-      <img src={charm.imagePath} alt={charm.name} />
+      <img 
+        src={charm.imagePath} 
+        alt={charm.name} 
+        style={{
+          width: `${baseCharmSize * charm.sizeScale * deviceScaleFactor}px`,
+          height: `${baseCharmSize * charm.sizeScale * deviceScaleFactor}px`,
+          transformOrigin: 'center center'
+        }}
+      />
     </div>
   );
 };
