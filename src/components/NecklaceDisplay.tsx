@@ -249,7 +249,7 @@ const NecklaceDisplay: React.FC = () => {
       {/* Add instruction when in placement mode and a charm is selected */}
       {isDrawerOpen && selectedCharmId && (
         <div className="placement-instructions">
-          Tap on a green attachment point to place your charm
+          Tap on a green attachment point to place/remove your charm
         </div>
       )}
       
