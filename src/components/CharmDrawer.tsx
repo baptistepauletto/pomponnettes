@@ -19,10 +19,11 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
   // Extract unique categories on component mount
   useEffect(() => {
     const uniqueCategories = Array.from(new Set(charms.map(charm => charm.category || 'Other')));
-    setCategories(uniqueCategories);
-    if (uniqueCategories.length > 0) {
-      setSelectedCategory(uniqueCategories[0]);
-    }
+    // Add "All Charms" as the first category
+    const allCategories = ['All Charms', ...uniqueCategories];
+    setCategories(allCategories);
+    // Select "All Charms" by default
+    setSelectedCategory('All Charms');
   }, [charms]);
   
   // Prevent actions during animation
@@ -135,9 +136,9 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
   };
 
   // Get filtered charms based on selected category
-  const filteredCharms = selectedCategory 
-    ? charms.filter(charm => (charm.category || 'Other') === selectedCategory)
-    : charms;
+  const filteredCharms = selectedCategory === 'All Charms'
+    ? charms
+    : charms.filter(charm => (charm.category || 'Other') === selectedCategory);
 
   return (
     <div 
@@ -164,7 +165,7 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
               className={`category-tab ${category === selectedCategory ? 'active' : ''}`}
               onClick={() => !isAnimating && setSelectedCategory(category)}
             >
-              {category}
+              {category === 'All Charms' ? '✨ All' : category}
             </div>
           ))}
         </div>
