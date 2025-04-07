@@ -152,7 +152,7 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
       >
         <div className="handle-bar"></div>
         <div className="handle-text">
-          {isOpen ? 'Tap to close' : 'Tap to view charms'}
+          {isOpen ? 'Tap to stop editing' : 'Tap to open charms drawer'}
         </div>
       </div>
       
