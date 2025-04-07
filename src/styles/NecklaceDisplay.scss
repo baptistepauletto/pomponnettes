@@ -45,7 +45,7 @@
     width: 100%;
     background-color: transparent;
     border-radius: 8px;
-    overflow: hidden;
+    overflow: visible;
     
     &.with-grid {
       background-color: rgba(245, 245, 245, 0.9);
@@ -307,6 +307,7 @@
     .necklace-container {
       max-width: 100%;
       margin: 0 auto;
+      overflow: visible;
     }
     
     .attachment-point {
