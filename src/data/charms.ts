@@ -4,33 +4,152 @@ import { getImagePath } from '../utils/imagePaths';
 // Sample charm data
 export const charms: Charm[] = [
   {
-    id: 'knot',
-    name: 'Knot',
-    imagePath: getImagePath('images/charms/knot.png'),
+    id: 'large-knot',
+    name: 'Large Knot',
+    imagePath: getImagePath('images/charms/large-knot.png'),
     sizeScale: 2,
     category: 'Symbols'
   },
   {
-    id: 'slim-heart',
-    name: 'Slim Heart',
-    imagePath: getImagePath('images/charms/slim-heart.png'),
+    id: 'large-heart',
+    name: 'Large Heart',
+    imagePath: getImagePath('images/charms/large-heart.png'),
     sizeScale: 2,
     category: 'Hearts'
   },
   {
-    id: 'sunny-heart',
-    name: 'Sunny Heart',
-    imagePath: getImagePath('images/charms/sunny-heart.png'),
+    id: 'large-holy-heart',
+    name: 'Large Holy Heart',
+    imagePath: getImagePath('images/charms/large-holy-heart.png'),
     sizeScale: 2,
     category: 'Hearts'
   },
   {
-    id: 'slim-star',
-    name: 'Slim Star',
-    imagePath: getImagePath('images/charms/slim-star.png'),
+    id: 'large-sea-star',
+    name: 'Large Sea Star',
+    imagePath: getImagePath('images/charms/large-sea-star.png'),
     sizeScale: 2,
     category: 'Symbols'
   },
+  {
+    id: 'large-sun', 
+    name: 'Large Sun',
+    imagePath: getImagePath('images/charms/large-sun.png'),
+    sizeScale: 2,
+    category: 'Symbols'
+  },
+  {
+    id: 'spiral-shell',
+    name: 'Spiral Shell',
+    imagePath: getImagePath('images/charms/spiral-shell.png'),
+    sizeScale: 1.5,
+    category: 'Symbols'
+  },
+  {
+    id: 'spiral', 
+    name: 'Spiral',
+    imagePath: getImagePath('images/charms/spiral.png'),
+    sizeScale: 1.5,
+    category: 'Symbols'
+  },
+  {
+    id:'spiral-star',
+    name: 'Spiral Star',
+    imagePath: getImagePath('images/charms/spiral-star.png'),
+    sizeScale: 1.3,
+    category: 'Symbols'
+  },
+  {
+    id: 'medal-sun-moon',
+    name: 'Medal Sun Moon',
+    imagePath: getImagePath('images/charms/medal-sun-moon.png'),
+    sizeScale: 1.5,
+    category: 'Medals'
+  },
+  {
+    id: 'medal-snake',
+    name: 'Medal Snake',
+    imagePath: getImagePath('images/charms/medal-snake.png'),
+    sizeScale: 1.5,
+    category: 'Medals'
+  },
+  {
+    id: 'medal-sun',  
+    name: 'Medal Sun',
+    imagePath: getImagePath('images/charms/medal-sun.png'),
+    sizeScale: 1.5,
+    category: 'Medals'
+  },
+  {
+    id: 'medal-wave',
+    name: 'Medal Wave',
+    imagePath: getImagePath('images/charms/medal-wave.png'),
+    sizeScale: 1.5,
+    category: 'Medals'
+  },
+  {
+    id: 'jelly-fish',
+    name: 'Jelly Fish',
+    imagePath: getImagePath('images/charms/jelly-fish.png'),
+    sizeScale: 1.5,
+    category: 'Animals'
+  },
+  {
+    id: 'elephant',
+    name: 'Elephant',
+    imagePath: getImagePath('images/charms/elephant.png'),
+    sizeScale: 1.5,
+    category: 'Animals'
+  },
+  {
+    id: 'cattle',
+    name: 'Cattle',
+    imagePath: getImagePath('images/charms/cattle.png'),
+    sizeScale: 1.3,
+    category: 'Animals'
+  },
+  {
+    id: 'crab',
+    name: 'Crab',
+    imagePath: getImagePath('images/charms/crab.png'),
+    sizeScale: 1.3,
+    category: 'Animals'
+  },
+  {
+    id: 'turtle',
+    name: 'Turtle',
+    imagePath: getImagePath('images/charms/turtle.png'),
+    sizeScale: 1.3,
+    category: 'Animals'
+  },
+  {
+    id: 'rose',
+    name: 'Rose',
+    imagePath: getImagePath('images/charms/rose.png'),
+    sizeScale: 1.3,
+    category: 'Symbols'
+  },
+  {
+    id:'farfalle',
+    name: 'Farfalle',
+    imagePath: getImagePath('images/charms/farfalle.png'),
+    sizeScale: 1.3,
+    category: 'Symbols'
+  },
+  {
+    id: 'cute-knot',
+    name: 'Cute Knot',
+    imagePath: getImagePath('images/charms/cute-knot.png'),
+    sizeScale: 1.5,
+    category: 'Symbols'
+  },
+  {
+    id: 'teddy-bear',
+    name: 'Teddy Bear',
+    imagePath: getImagePath('images/charms/teddy-bear.png'),
+    sizeScale: 1.5,
+    category: 'Animals'
+  }, 
   {
     id: 'aquarius',
     name: 'Aquarius',
