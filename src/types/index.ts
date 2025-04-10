@@ -17,6 +17,7 @@ export interface Charm {
   name: string;
   imagePath: string;
   sizeScale: number;
+  category?: string;
 }
 
 // Necklace type

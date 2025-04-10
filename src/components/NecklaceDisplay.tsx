@@ -1,23 +1,25 @@
 import React, { useState, useRef } from 'react';
 import { useCustomizer } from '../context/CustomizerContext';
 import { useDroppableAttachmentPoint, usePlacedCharm } from '../hooks/useDragAndDrop';
-import { useTapToPlace, isTouchDevice } from '../hooks/useTapToPlace';
-import CharmPopup from './CharmPopup';
 import '../styles/NecklaceDisplay.scss';
+import { useTapToPlace, isTouchDevice, triggerHapticFeedback } from '../hooks/useTapToPlace';
+import CharmDrawer from './CharmDrawer';
+import { Position } from '../types';
 
 // Component for a single attachment point
-const AttachmentPoint: React.FC<{
+const AttachmentPointComponent: React.FC<{
   id: string;
-  position: { x: number; y: number };
+  position: Position;
   isOccupied: boolean;
   showAttachmentPoints: boolean;
   showNames: boolean;
-  onSelect: (id: string, position: { x: number; y: number }) => void;
+  onSelect: (id: string, position: Position) => void;
   isSelected: boolean;
-}> = ({ id, position, isOccupied, showAttachmentPoints, showNames, onSelect, isSelected }) => {
+  isDrawerOpen: boolean;
+}> = ({ id, position, isOccupied, showAttachmentPoints, showNames, onSelect, isSelected, isDrawerOpen }) => {
   const { isOver, canDrop, drop } = useDroppableAttachmentPoint(id, isOccupied);
   const attachmentPointRef = useRef<HTMLDivElement>(null);
-  const { selectedCharmId, clearSelectedCharm } = useTapToPlace();
+  const { selectedCharmId } = useTapToPlace();
   const { addCharm } = useCustomizer();
   const isMobile = isTouchDevice();
   
@@ -36,9 +38,14 @@ const AttachmentPoint: React.FC<{
     
     // Only proceed if the point is not occupied
     if (isMobile && selectedCharmId) {
-      // If we have a charm selected (from the CharmSelector), add it
+      // If we have a charm selected (from the drawer), add it
       addCharm(selectedCharmId, id);
-      clearSelectedCharm();
+      
+      // Don't clear the selected charm - we want to keep it selected
+      // This allows multiple placements of the same charm
+      
+      // Provide haptic feedback for successful placement
+      triggerHapticFeedback('medium');
     } else {
       // Otherwise, select this attachment point to show the popup
       onSelect(id, position);
@@ -51,7 +58,7 @@ const AttachmentPoint: React.FC<{
       className={`attachment-point ${isOver ? 'over' : ''} ${canDrop ? 'can-drop' : ''} ${
         isOccupied ? 'occupied' : ''
       } ${showAttachmentPoints ? 'visible' : ''} ${
-        (isMobile && selectedCharmId && !isOccupied) ? 'mobile-drop-target' : ''
+        (isDrawerOpen && isMobile && selectedCharmId && !isOccupied) ? 'mobile-drop-target' : ''
       } ${isSelected ? 'selected' : ''}`}
       style={{
         left: `${position.x}%`,
@@ -211,8 +218,8 @@ const NecklaceDisplay: React.FC = () => {
   const [showAttachmentPoints, setShowAttachmentPoints] = useState(false);
   const [showPointNames, setShowPointNames] = useState(false);
   const [showGrid, setShowGrid] = useState(false);
-  const {selectedAttachmentPointId, selectAttachmentPoint, clearSelectedAttachmentPoint, isAttachmentPointSelected } = useTapToPlace();
-  const [popupPosition, setPopupPosition] = useState<{ x: number; y: number } | null>(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const { selectAttachmentPoint, isAttachmentPointSelected, selectedCharmId } = useTapToPlace();
   const isMobile = window.innerWidth <= 480;
 
   if (!selectedNecklace) {
@@ -220,20 +227,32 @@ const NecklaceDisplay: React.FC = () => {
   }
 
   // Handle selecting an attachment point
-  const handleAttachmentPointSelect = (pointId: string, position: { x: number; y: number }) => {
+  const handleAttachmentPointSelect = (pointId: string) => {
     selectAttachmentPoint(pointId);
-    setPopupPosition(position);
   };
 
-  // Handle closing the popup
-  const handleClosePopup = () => {
-    clearSelectedAttachmentPoint();
-    setPopupPosition(null);
+  // Handle drawer open/close state
+  const handleDrawerOpenChange = (open: boolean) => {
+    setIsDrawerOpen(open);
+    
+    // When the drawer is closed, hide attachment points
+    if (!open) {
+      setShowAttachmentPoints(false);
+    } else {
+      // When the drawer is open, show attachment points
+      setShowAttachmentPoints(true);
+    }
   };
-
 
   return (
-    <div className="necklace-display">
+    <div className={`necklace-display ${isDrawerOpen ? 'placement-mode' : ''}`}>
+      {/* Add instruction when in placement mode and a charm is selected */}
+      {isDrawerOpen && selectedCharmId && (
+        <div className="placement-instructions">
+          Tap on a green attachment point to place/remove your charm
+        </div>
+      )}
+      
       <div className={`necklace-container ${showGrid ? 'with-grid' : ''}`}>
         <img
           src={selectedNecklace.imagePath}
@@ -245,7 +264,7 @@ const NecklaceDisplay: React.FC = () => {
 
         {/* Render attachment points */}
         {selectedNecklace.attachmentPoints.map((point) => (
-          <AttachmentPoint
+          <AttachmentPointComponent
             key={point.id}
             id={point.id}
             position={point.position}
@@ -254,6 +273,7 @@ const NecklaceDisplay: React.FC = () => {
             showNames={showPointNames}
             onSelect={handleAttachmentPointSelect}
             isSelected={isAttachmentPointSelected(point.id)}
+            isDrawerOpen={isDrawerOpen}
           />
         ))}
 
@@ -266,50 +286,53 @@ const NecklaceDisplay: React.FC = () => {
             position={charm.position}
           />
         ))}
-
-        {/* Show popup based on device type */}
-        {((!isMobile && selectedAttachmentPointId && popupPosition) || (isMobile)) && (
-          <CharmPopup
-            position={popupPosition}
-            onClose={handleClosePopup}
-          />
-        )}
       </div>
       
-      <div className="controls">
-        <label>
-          <input 
-            type="checkbox" 
-            checked={showAttachmentPoints} 
-            onChange={() => setShowAttachmentPoints(!showAttachmentPoints)} 
-          />
-          Show attachment points
-        </label>
-        <label>
-          <input 
-            type="checkbox" 
-            checked={showPointNames} 
-            onChange={() => setShowPointNames(!showPointNames)} 
-          />
-          Show point names
-        </label>
-        <label>
-          <input 
-            type="checkbox" 
-            checked={showGrid} 
-            onChange={() => setShowGrid(!showGrid)} 
-          />
-          Show position grid
-        </label>
-      </div>
+      {/* Conditionally show controls for desktop only */}
+      {!isMobile && (
+        <div className="controls">
+          <label>
+            <input 
+              type="checkbox" 
+              checked={showAttachmentPoints} 
+              onChange={() => setShowAttachmentPoints(!showAttachmentPoints)} 
+            />
+            Show attachment points
+          </label>
+          <label>
+            <input 
+              type="checkbox" 
+              checked={showPointNames} 
+              onChange={() => setShowPointNames(!showPointNames)} 
+            />
+            Show point names
+          </label>
+          <label>
+            <input 
+              type="checkbox" 
+              checked={showGrid} 
+              onChange={() => setShowGrid(!showGrid)} 
+            />
+            Show position grid
+          </label>
+        </div>
+      )}
       
       {showGrid && (
         <div className="position-info">
           <p>Use these coordinates to update the attachment points in src/data/necklaces.ts</p>
         </div>
       )}
+      
+      {/* Charm drawer for mobile */}
+      {isMobile && (
+        <CharmDrawer 
+          isOpen={isDrawerOpen} 
+          onOpenChange={handleDrawerOpenChange} 
+        />
+      )}
     </div>
   );
 };
 
-export default NecklaceDisplay; 
+export default NecklaceDisplay;

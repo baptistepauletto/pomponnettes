@@ -29,8 +29,11 @@ type TapToPlaceContextType = {
   clearSelectedCharm: () => void;
   clearSelectedAttachmentPoint: () => void;
   clearAllSelections: () => void;
+  forceCleanupSelections: () => void;
   isCharmSelected: (charmId: string) => boolean;
   isAttachmentPointSelected: (pointId: string) => boolean;
+  keepSelectedCharm: boolean;
+  setKeepSelectedCharm: (keep: boolean) => void;
 };
 
 const TapToPlaceContext = createContext<TapToPlaceContextType | null>(null);
@@ -39,6 +42,7 @@ const TapToPlaceContext = createContext<TapToPlaceContextType | null>(null);
 export const TapToPlaceProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [selectedCharmId, setSelectedCharmId] = useState<string | null>(null);
   const [selectedAttachmentPointId, setSelectedAttachmentPointId] = useState<string | null>(null);
+  const [keepSelectedCharm, setKeepSelectedCharm] = useState<boolean>(true); // Default to true - keep charm selected
 
   const selectCharm = useCallback((charmId: string) => {
     setSelectedCharmId(charmId);
@@ -49,16 +53,28 @@ export const TapToPlaceProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   }, []);
 
   const clearSelectedCharm = useCallback(() => {
-    setSelectedCharmId(null);
-  }, []);
+    // Only clear if keepSelectedCharm is false
+    if (!keepSelectedCharm) {
+      setSelectedCharmId(null);
+    }
+  }, [keepSelectedCharm]);
 
   const clearSelectedAttachmentPoint = useCallback(() => {
     setSelectedAttachmentPointId(null);
   }, []);
 
   const clearAllSelections = useCallback(() => {
-    setSelectedCharmId(null);
+    // Always clear attachment point, only clear charm if keepSelectedCharm is false
     setSelectedAttachmentPointId(null);
+    if (!keepSelectedCharm) {
+      setSelectedCharmId(null);
+    }
+  }, [keepSelectedCharm]);
+
+  // Force cleanup regardless of keepSelectedCharm flag
+  const forceCleanupSelections = useCallback(() => {
+    setSelectedAttachmentPointId(null);
+    setSelectedCharmId(null);
   }, []);
 
   const isCharmSelected = useCallback(
@@ -83,8 +99,11 @@ export const TapToPlaceProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     clearSelectedCharm,
     clearSelectedAttachmentPoint,
     clearAllSelections,
+    forceCleanupSelections,
     isCharmSelected,
     isAttachmentPointSelected,
+    keepSelectedCharm,
+    setKeepSelectedCharm
   };
 
   return <TapToPlaceContext.Provider value={value}>{children}</TapToPlaceContext.Provider>;
