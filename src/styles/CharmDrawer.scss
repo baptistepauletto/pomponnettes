@@ -82,7 +82,7 @@
   
   .charm-drawer-content {
     padding: 5px 5px 10px;
-    overflow-y: auto;
+    overflow-y: visible;
     flex-grow: 1;
     max-height: calc(60vh - 60px);
   }
@@ -180,38 +180,78 @@
 
 @media (max-width: 480px) {
   .charm-drawer-container {
-    max-height: 70vh;
+    max-height: 40vh;
     
     &.closed {
-      transform: translateY(calc(100% - 60px));
+      transform: translateY(calc(100% - 28%));
+    }
+    
+    &.open {
+      transform: translateY(0);
     }
     
     .charm-drawer-content {
-      max-height: calc(70vh - 60px);
+      max-height: calc(40vh - 60px);
     }
     
-    .category-tabs {
-      .category-tab {
-        padding: 5px 10px;
+    .charm-drawer-handle {
+      min-height: 45px;
+      padding: 8px 0;
+      
+      .handle-bar {
+        margin-bottom: 6px;
+        width: 40px;
+        height: 4px;
+      }
+      
+      .handle-text {
         font-size: 12px;
       }
     }
     
+    .category-tabs {
+      padding: 6px 5px 4px;
+      margin-bottom: 2px;
+      
+      .category-tab {
+        padding: 3px 7px;
+        font-size: 10px;
+        margin-right: 5px;
+        border-radius: 12px;
+      }
+    }
+    
     .charm-grid {
-      grid-template-columns: repeat(8, 1fr);
-      gap: 4px;
+      /* Fixed height for 2 rows (calculate based on item height + gap) */
+      height: calc(2 * (min(11vw, 42px) + 10px));
+      overflow-x: auto;
+      overflow-y: hidden;
+      grid-auto-flow: column;
+      grid-template-rows: repeat(2, 1fr);
+      grid-template-columns: unset;
+      grid-auto-columns: min(11vw, 42px);
+      gap: 3px;
       padding: 0 8px 5px;
+      /* Ensure smooth scrolling */
+      scroll-behavior: smooth;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE/Edge */
+      
+      /* Hide scrollbar for Chrome/Safari */
+      &::-webkit-scrollbar {
+        display: none;
+      }
       
       .charm-item {
         padding: 3px;
-        border-radius: 5px;
+        border-radius: 10px;
         
         img {
-          transform: scale(0.85);
+          transform: scale(0.90);
         }
         
         &.selected img {
-          transform: scale(0.95);
+          transform: scale(1);
         }
       }
     }

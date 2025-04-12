@@ -96,26 +96,22 @@ const getCharmTransformStyles = (position: { x: number; y: number }) => {
   // For desktop: Normal rotation
   const maxRotation = isMobile ? 40 : 55; // Max rotation degrees
   let rotation = 0;
-  
+  let horizontalOffset = 0;
   if (isMobile) {
-    // For mobile, scale translateX based on position factors
     if (isLeftSide) {
-      // Scale based on distance from center and bottom
-      // This makes charms CLOSER to center have MORE translation
-      // Left side: rotate outward (positive degrees for left side)
-      // Enhanced mobile rotation that increases with height and distance from center
       rotation = maxRotation * (distanceFromCenter / centerX) * (0.35 + distanceFromBottom);
+      horizontalOffset = -25 * Math.abs(rotation) / maxRotation;
     } else if (isRightSide) {
-      // Right side: rotate outward (negative degrees for right side)
-      // Enhanced mobile rotation that increases with height and distance from center
       rotation = -maxRotation * (distanceFromCenter / centerX) * (0.35 + distanceFromBottom);
+      horizontalOffset = 25 * Math.abs(rotation) / maxRotation;
     }
   } else {
-    // Desktop rotation calculation
     if (isLeftSide) {
       rotation = maxRotation * (distanceFromCenter / centerX) * distanceFromBottom;
+      horizontalOffset = -50 * Math.abs(rotation) / maxRotation;
     } else if (isRightSide) {
       rotation = -maxRotation * (distanceFromCenter / centerX) * distanceFromBottom;
+      horizontalOffset = 50 * Math.abs(rotation) / maxRotation;
     }
   }
   
@@ -124,11 +120,22 @@ const getCharmTransformStyles = (position: { x: number; y: number }) => {
   if (isLeftSide) positionClass = 'left-side';
   else if (isRightSide) positionClass = 'right-side';
 
-  // Return only the rotation and translate to center the charm (translate(-50%, 0))
+  // Calculate horizontal offset based on rotation
+
+  if (rotation !== 0) {
+    if (isLeftSide) {
+      // Move left side charms slightly to the left
+
+    } else if (isRightSide) {
+
+    }
+  }
+
+  // Return the rotation and translate to center the charm with horizontal offset
   // This makes the charm's top center align with the attachment point
   // The actual size adjustment will be handled in the PlacedCharm component
   return {
-    transform: `translate(-50%, 0) rotate(${rotation}deg)`,
+    transform: `translate(calc(-50% + ${horizontalOffset}%), 0) rotate(${rotation}deg)`,
     positionClass
   };
 };
