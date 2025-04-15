@@ -18,6 +18,9 @@ export interface Charm {
   imagePath: string;
   sizeScale: number;
   category?: string;
+  // Optional offset for attachment point (in percentage from center)
+  // Default is {x: 0, y: 0} which means the attachment is at center top
+  attachmentOffset?: Position;
 }
 
 // Necklace type

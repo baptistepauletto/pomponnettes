@@ -164,13 +164,17 @@ const PlacedCharm: React.FC<{
   // Get transform styles based on position
   const { transform, positionClass } = getCharmTransformStyles(position);
 
+  // Apply attachment offset if available
+  const offsetX = charm.attachmentOffset?.x || 0;
+  const offsetY = charm.attachmentOffset?.y || 0;
+  
   return (
     <div
       className={`placed-charm ${positionClass}`}
       style={{
         left: `${position.x}%`,
         top: `${position.y}%`,
-        transform,
+        transform: transform + ` translate(${offsetX}%, ${offsetY}%)`,
       }}
       onClick={handleRemove}
     >
