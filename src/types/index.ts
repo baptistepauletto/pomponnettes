@@ -21,6 +21,8 @@ export interface Charm {
   // Optional offset for attachment point (in percentage from center)
   // Default is {x: 0, y: 0} which means the attachment is at center top
   attachmentOffset?: Position;
+  // Price in euros
+  price: number;
 }
 
 // Necklace type
@@ -29,6 +31,8 @@ export interface Necklace {
   name: string;
   imagePath: string;
   attachmentPoints: AttachmentPoint[];
+  // Base price for the necklace without charms
+  basePrice: number;
 }
 
 // Placed charm type for a charm that has been positioned on the necklace

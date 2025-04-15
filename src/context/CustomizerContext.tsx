@@ -13,6 +13,10 @@ interface CustomizerContextState {
   selectedNecklace: Necklace | null;
   placedCharms: PlacedCharm[];
   
+  // Price information
+  totalPrice: number;
+  formattedTotalPrice: string;
+  
   // Actions
   selectNecklace: (necklaceId: string) => void;
   addCharm: (charmId: string, attachmentPointId: string) => void;
@@ -36,6 +40,27 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
 
   // Get the currently selected necklace
   const selectedNecklace = necklaces.find(n => n.id === selectedNecklaceId) || null;
+
+  // Calculate total price
+  const calculateTotalPrice = (): number => {
+    if (!selectedNecklace) return 0;
+    
+    // Start with the base price of the necklace
+    let total = selectedNecklace.basePrice;
+    
+    // Add the price of each placed charm
+    placedCharms.forEach(placedCharm => {
+      const charm = charms.find(c => c.id === placedCharm.charmId);
+      if (charm) {
+        total += charm.price;
+      }
+    });
+    
+    return total;
+  };
+  
+  const totalPrice = calculateTotalPrice();
+  const formattedTotalPrice = `€${totalPrice.toFixed(2)}`;
 
   // Action to select a necklace
   const selectNecklace = useCallback((necklaceId: string) => {
@@ -148,6 +173,8 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
     charms,
     selectedNecklace,
     placedCharms,
+    totalPrice,
+    formattedTotalPrice,
     selectNecklace,
     addCharm,
     removeCharm,

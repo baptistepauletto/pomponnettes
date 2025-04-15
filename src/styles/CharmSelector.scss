@@ -9,7 +9,7 @@
   
   .charm-options {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
     gap: 1rem;
     
     .charm-option {
@@ -32,6 +32,11 @@
         border-color: #1976d2;
       }
       
+      &.selected {
+        border-color: #2a6db7;
+        background-color: rgba(42, 109, 183, 0.1);
+      }
+      
       img {
         width: 40px;
         height: 40px;
@@ -39,10 +44,24 @@
         margin-bottom: 0.5rem;
       }
       
-      p {
+      .charm-details {
         text-align: center;
-        font-size: 0.8rem;
-        margin: 0;
+        width: 100%;
+        
+        .charm-name {
+          font-size: 0.8rem;
+          margin: 0 0 0.2rem 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        
+        .charm-price {
+          font-size: 0.75rem;
+          margin: 0;
+          color: #2a6db7;
+          font-weight: 500;
+        }
       }
     }
   }

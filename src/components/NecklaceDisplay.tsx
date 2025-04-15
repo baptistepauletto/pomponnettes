@@ -4,6 +4,7 @@ import { useDroppableAttachmentPoint, usePlacedCharm } from '../hooks/useDragAnd
 import '../styles/NecklaceDisplay.scss';
 import { useTapToPlace, isTouchDevice, triggerHapticFeedback } from '../hooks/useTapToPlace';
 import CharmDrawer from './CharmDrawer';
+import PriceDisplay from './PriceDisplay';
 import { Position } from '../types';
 
 // Component for a single attachment point
@@ -332,6 +333,13 @@ const NecklaceDisplay: React.FC = () => {
       {showGrid && (
         <div className="position-info">
           <p>Use these coordinates to update the attachment points in src/data/necklaces.ts</p>
+        </div>
+      )}
+      
+      {/* Price display for mobile */}
+      {isMobile && (
+        <div className="mobile-price-container">
+          <PriceDisplay />
         </div>
       )}
       

@@ -301,6 +301,17 @@
     display: none;
   }
   
+  .mobile-price-container {
+    margin: 85px 0;
+    padding: 0 15px;
+    
+    .price-display {
+      margin-top: 100px;
+      margin: 0 auto 20px;
+      max-width: 90%;
+    }
+  }
+  
   @media (max-width: 768px) {
     padding-bottom: 80px; /* Increased from 60px */
     

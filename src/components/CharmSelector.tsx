@@ -4,10 +4,16 @@ import { useDraggableCharm } from '../hooks/useDragAndDrop';
 import { useTapToPlace, isTouchDevice } from '../hooks/useTapToPlace';
 import '../styles/CharmSelector.scss';
 
-const CharmOption: React.FC<{ id: string; name: string; imagePath: string }> = ({
+const CharmOption: React.FC<{ 
+  id: string; 
+  name: string; 
+  imagePath: string;
+  price: number;
+}> = ({
   id,
   name,
   imagePath,
+  price,
 }) => {
   const { isDragging, drag } = useDraggableCharm(id);
   const { selectCharm, isCharmSelected, clearSelectedAttachmentPoint } = useTapToPlace();
@@ -36,7 +42,10 @@ const CharmOption: React.FC<{ id: string; name: string; imagePath: string }> = (
       onClick={handleTap}
     >
       <img src={imagePath} alt={name} />
-      <p>{name}</p>
+      <div className="charm-details">
+        <p className="charm-name">{name}</p>
+        <p className="charm-price">€{price.toFixed(2)}</p>
+      </div>
     </div>
   );
 };
@@ -56,6 +65,7 @@ const CharmSelector: React.FC = () => {
             id={charm.id}
             name={charm.name}
             imagePath={charm.imagePath}
+            price={charm.price}
           />
         ))}
       </div>

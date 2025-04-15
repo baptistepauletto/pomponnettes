@@ -3,6 +3,7 @@ import { CustomizerProvider } from '../context/CustomizerContext';
 import NecklaceSelector from './NecklaceSelector';
 import CharmSelector from './CharmSelector';
 import NecklaceDisplay from './NecklaceDisplay';
+import PriceDisplay from './PriceDisplay';
 import DndProvider from './DndProvider';
 import { TapToPlaceProvider } from '../hooks/useTapToPlace';
 import '../styles/CustomizerApp.scss';
@@ -39,6 +40,8 @@ const CustomizerApp: React.FC = () => {
                 <NecklaceSelector />
                 {/* Show CharmSelector only on desktop */}
                 {!isMobile && <CharmSelector />}
+                {/* Show PriceDisplay only on desktop */}
+                {!isMobile && <PriceDisplay />}
               </div>
               <div className="main-display">
                 <NecklaceDisplay />
