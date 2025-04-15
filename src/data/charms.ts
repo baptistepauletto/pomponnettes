@@ -22,21 +22,21 @@ export const charms: Charm[] = [
     name: 'Large Holy Heart',
     imagePath: getImagePath('images/charms/large-holy-heart.png'),
     sizeScale: 2.5,
-    category: 'Hearts'
+    category: 'Hearts',
   },
   {
     id: 'large-sea-star',
     name: 'Large Sea Star',
     imagePath: getImagePath('images/charms/large-sea-star.png'),
     sizeScale: 2.5,
-    category: 'Symbols'
+    category: 'Symbols',
   },
   {
     id: 'large-sun', 
     name: 'Large Sun',
     imagePath: getImagePath('images/charms/large-sun.png'),
     sizeScale: 2.5,
-    category: 'Symbols'
+    category: 'Symbols',
   },
   {
     id: 'spiral-shell',
@@ -99,14 +99,16 @@ export const charms: Charm[] = [
     name: 'Elephant',
     imagePath: getImagePath('images/charms/elephant.png'),
     sizeScale: 1.4,
-    category: 'Animals'
+    category: 'Animals',
+    attachmentOffset: { x: 0, y: -10 }
   },
   {
     id: 'cattle',
     name: 'Cattle',
     imagePath: getImagePath('images/charms/cattle.png'),
     sizeScale: 1.4,
-    category: 'Animals'
+    category: 'Animals',
+    attachmentOffset: { x: 0, y: -10 }
   },
   {
     id: 'crab',
@@ -141,7 +143,8 @@ export const charms: Charm[] = [
     name: 'Cute Knot',
     imagePath: getImagePath('images/charms/cute-knot.png'),
     sizeScale: 1.85,
-    category: 'Symbols'
+    category: 'Symbols',
+    attachmentOffset: { x: 0, y: -25 }
   },
   {
     id: 'teddy-bear',
