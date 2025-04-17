@@ -233,13 +233,30 @@ const NecklaceDisplay: React.FC = () => {
   const { selectAttachmentPoint, isAttachmentPointSelected, selectedCharmId } = useTapToPlace();
   const isMobile = window.innerWidth <= 480;
   const [hasPlacedCharm, setHasPlacedCharm] = useState(false);
+  const [showRemovalTip, setShowRemovalTip] = useState(false);
+  const [hasShownRemovalTip, setHasShownRemovalTip] = useState(false);
 
   // Effect to track if a charm has been placed
   useEffect(() => {
     if (placedCharms.length > 0 && !hasPlacedCharm) {
       setHasPlacedCharm(true);
     }
-  }, [placedCharms, hasPlacedCharm]);
+
+    if (placedCharms.length === 1 && !hasShownRemovalTip) {
+      setShowRemovalTip(true);
+      setHasShownRemovalTip(true);
+    }
+
+    if (placedCharms.length > 1) {
+      setShowRemovalTip(false);
+    }
+
+    // Hide removal tip if all charms are removed
+    if (placedCharms.length === 0) {
+      setShowRemovalTip(false);
+    }
+
+  }, [placedCharms, hasPlacedCharm, hasShownRemovalTip]);
 
   if (!selectedNecklace) {
     return <div className="necklace-display empty">Please select a necklace</div>;
@@ -263,8 +280,16 @@ const NecklaceDisplay: React.FC = () => {
     }
   };
 
+
   return (
     <div className={`necklace-display ${isDrawerOpen ? 'placement-mode' : ''}`}>
+      {/* Show removal tip when charms are placed and tip hasn't been shown yet */}
+      {showRemovalTip && (
+        <div className="removal-tip">
+          💡 Tap any charm to remove it
+        </div>
+      )}
+      
       {/* Add instruction when in placement mode and a charm is selected, but only if user hasn't placed a charm yet */}
       {isDrawerOpen && selectedCharmId && !hasPlacedCharm && (
         <div className="placement-instructions">
