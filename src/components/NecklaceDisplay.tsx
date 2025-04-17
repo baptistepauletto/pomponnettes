@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useCustomizer } from '../context/CustomizerContext';
 import { useDroppableAttachmentPoint, usePlacedCharm } from '../hooks/useDragAndDrop';
 import '../styles/NecklaceDisplay.scss';
@@ -229,9 +229,17 @@ const NecklaceDisplay: React.FC = () => {
   const [showAttachmentPoints, setShowAttachmentPoints] = useState(false);
   const [showPointNames, setShowPointNames] = useState(false);
   const [showGrid, setShowGrid] = useState(false);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(true);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { selectAttachmentPoint, isAttachmentPointSelected, selectedCharmId } = useTapToPlace();
   const isMobile = window.innerWidth <= 480;
+  const [hasPlacedCharm, setHasPlacedCharm] = useState(false);
+
+  // Effect to track if a charm has been placed
+  useEffect(() => {
+    if (placedCharms.length > 0 && !hasPlacedCharm) {
+      setHasPlacedCharm(true);
+    }
+  }, [placedCharms, hasPlacedCharm]);
 
   if (!selectedNecklace) {
     return <div className="necklace-display empty">Please select a necklace</div>;
@@ -257,10 +265,10 @@ const NecklaceDisplay: React.FC = () => {
 
   return (
     <div className={`necklace-display ${isDrawerOpen ? 'placement-mode' : ''}`}>
-      {/* Add instruction when in placement mode and a charm is selected */}
-      {isDrawerOpen && selectedCharmId && (
+      {/* Add instruction when in placement mode and a charm is selected, but only if user hasn't placed a charm yet */}
+      {isDrawerOpen && selectedCharmId && !hasPlacedCharm && (
         <div className="placement-instructions">
-          Tap on a green attachment point to place/remove your charm
+          Tap a green attachment point to place your charm
         </div>
       )}
       

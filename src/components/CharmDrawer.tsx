@@ -15,6 +15,8 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const drawerRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const [hasSelectedCharm, setHasSelectedCharm] = useState(false);
   
   // Extract unique categories on component mount
   useEffect(() => {
@@ -41,14 +43,24 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
   useEffect(() => {
     if (isOpen) {
       setKeepSelectedCharm(true);
+      
+      // Mark that the user has interacted with the drawer
+      if (!hasInteracted) {
+        setHasInteracted(true);
+      }
     }
-  }, [isOpen, setKeepSelectedCharm]);
+  }, [isOpen, setKeepSelectedCharm, hasInteracted]);
 
   // Handle drawer state changes with animation lock
   const handleDrawerStateChange = (newIsOpen: boolean) => {
     if (isAnimating) return; // Prevent action during animation
     
     setIsAnimating(true);
+    
+    // Mark that the user has interacted with the drawer
+    if (!hasInteracted) {
+      setHasInteracted(true);
+    }
     
     if (!newIsOpen && isOpen) {
       // When closing the drawer, force clear all selections unconditionally 
@@ -133,6 +145,11 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
   const handleCharmSelect = (charmId: string) => {
     if (isAnimating) return;
     selectCharm(charmId);
+    
+    // Remember that the user has selected a charm at least once
+    if (!hasSelectedCharm) {
+      setHasSelectedCharm(true);
+    }
   };
 
   // Get filtered charms based on selected category
@@ -142,9 +159,17 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
 
   return (
     <div 
-      className={`charm-drawer-container ${isOpen ? 'open' : 'closed'}`}
+      className={`charm-drawer-container ${isOpen ? 'open' : 'closed'} ${!hasInteracted ? 'first-time' : ''}`}
       ref={drawerRef}
     >
+      {isOpen && !selectedCharmId && !hasSelectedCharm && (
+        <div className="charm-selection-instructions">
+          <div className="instruction-text">
+            👇 Select a charm from the drawer below
+          </div>
+        </div>
+      )}
+      
       <div 
         className="charm-drawer-handle"
         onClick={() => handleDrawerStateChange(!isOpen)}
