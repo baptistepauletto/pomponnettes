@@ -229,7 +229,7 @@ const NecklaceDisplay: React.FC = () => {
   const [showAttachmentPoints, setShowAttachmentPoints] = useState(false);
   const [showPointNames, setShowPointNames] = useState(false);
   const [showGrid, setShowGrid] = useState(false);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(true);
   const { selectAttachmentPoint, isAttachmentPointSelected, selectedCharmId } = useTapToPlace();
   const isMobile = window.innerWidth <= 480;
 
