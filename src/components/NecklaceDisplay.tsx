@@ -4,6 +4,7 @@ import { useDroppableAttachmentPoint, usePlacedCharm } from '../hooks/useDragAnd
 import '../styles/NecklaceDisplay.scss';
 import { useTapToPlace, isTouchDevice, triggerHapticFeedback } from '../hooks/useTapToPlace';
 import CharmDrawer from './CharmDrawer';
+import NecklaceControls from './NecklaceControls';
 import { Position } from '../types';
 
 // Component for a single attachment point
@@ -331,6 +332,9 @@ const NecklaceDisplay: React.FC = () => {
           />
         ))}
       </div>
+      
+      {/* Add our new necklace controls */}
+      <NecklaceControls />
       
       {/* Conditionally show controls for desktop only */}
       {!isMobile && (
