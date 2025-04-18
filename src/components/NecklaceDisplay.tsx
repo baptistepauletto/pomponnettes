@@ -259,6 +259,13 @@ const NecklaceDisplay: React.FC = () => {
 
   }, [placedCharms, hasPlacedCharm, hasShownRemovalTip]);
 
+  // Effect to mark the user as interacted when drawer is opened
+  useEffect(() => {
+    if (isDrawerOpen && !hasInteractedWithNecklace) {
+      setHasInteractedWithNecklace(true);
+    }
+  }, [isDrawerOpen, hasInteractedWithNecklace]);
+
   if (!selectedNecklace) {
     return <div className="necklace-display empty">Please select a necklace</div>;
   }
@@ -278,6 +285,11 @@ const NecklaceDisplay: React.FC = () => {
     } else {
       // When the drawer is open, show attachment points
       setShowAttachmentPoints(true);
+      
+      // Mark as interacted when drawer is opened
+      if (!hasInteractedWithNecklace) {
+        setHasInteractedWithNecklace(true);
+      }
     }
   };
 
