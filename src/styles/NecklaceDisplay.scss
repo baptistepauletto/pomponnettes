@@ -46,6 +46,7 @@
     background-color: transparent;
     border-radius: 8px;
     overflow: visible;
+    margin-bottom: 15px; /* Added margin at the bottom of the necklace container */
     
     &.with-grid {
       background-color: rgba(245, 245, 245, 0.9);
