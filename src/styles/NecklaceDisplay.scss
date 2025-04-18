@@ -443,6 +443,12 @@
       font-size: 13px;
       padding: 8px 12px;
     }
+    
+    .first-interaction-hint {
+      font-size: 14px;
+      padding: 8px 14px;
+      bottom: -10px;
+    }
   }
 }
 
@@ -459,5 +465,69 @@
   100% {
     transform: translate(-50%, -50%) scale(1);
     box-shadow: 0 0 5px 2px rgba(80, 200, 120, 0.4);
+  }
+}
+
+/* First interaction hint styles */
+.first-interaction-hint {
+  position: absolute;
+  bottom: -15px;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #4CAF50;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  animation: pulse-scale 2s infinite ease-in-out;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+  text-align: center;
+  white-space: normal;
+  width: auto;
+}
+
+/* Tip for showing how to remove charms */
+.removal-tip {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #e91e63;
+  animation: fade-in 0.5s ease-in-out;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(233, 30, 99, 0.3);
+}
+
+/* Animations */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translate(-50%, -50%);
+  }
+  40% {
+    transform: translate(-50%, -55%);
+  }
+  60% {
+    transform: translate(-50%, -53%);
+  }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Update animation for the hint below necklace */
+@keyframes float {
+  0%, 100% {
+    transform: translateX(-50%);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-5px);
   }
 } 

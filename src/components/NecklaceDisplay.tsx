@@ -235,6 +235,7 @@ const NecklaceDisplay: React.FC = () => {
   const [hasPlacedCharm, setHasPlacedCharm] = useState(false);
   const [showRemovalTip, setShowRemovalTip] = useState(false);
   const [hasShownRemovalTip, setHasShownRemovalTip] = useState(false);
+  const [hasInteractedWithNecklace, setHasInteractedWithNecklace] = useState(false);
 
   // Effect to track if a charm has been placed
   useEffect(() => {
@@ -280,6 +281,14 @@ const NecklaceDisplay: React.FC = () => {
     }
   };
 
+  // Handle necklace tap to open drawer on first interaction
+  const handleNecklaceTap = () => {
+    if (isMobile && !hasInteractedWithNecklace && !isDrawerOpen) {
+      setHasInteractedWithNecklace(true);
+      handleDrawerOpenChange(true);
+      triggerHapticFeedback('light');
+    }
+  };
 
   return (
     <div className={`necklace-display ${isDrawerOpen ? 'placement-mode' : ''}`}>
@@ -302,6 +311,7 @@ const NecklaceDisplay: React.FC = () => {
           src={selectedNecklace.imagePath}
           alt={selectedNecklace.name}
           className="necklace-image"
+          onClick={handleNecklaceTap}
         />
 
         {showGrid && <PositionGrid />}
@@ -331,6 +341,13 @@ const NecklaceDisplay: React.FC = () => {
           />
         ))}
       </div>
+      
+      {/* Show first-time interaction hint if never interacted with necklace */}
+      {isMobile && !hasInteractedWithNecklace && !isDrawerOpen && (
+        <div className="first-interaction-hint">
+          👆 Tap the necklace to start customizing
+        </div>
+      )}
       
       {/* Conditionally show controls for desktop only */}
       {!isMobile && (
