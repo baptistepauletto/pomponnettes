@@ -9,7 +9,7 @@ interface CharmDrawerProps {
 }
 
 const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
-  const { charms } = useCustomizer();
+  const { charms, placedCharms } = useCustomizer();
   const { selectCharm, selectedCharmId, setKeepSelectedCharm, forceCleanupSelections } = useTapToPlace();
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -156,6 +156,11 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
   const filteredCharms = selectedCategory === 'All Charms'
     ? charms
     : charms.filter(charm => (charm.category || 'Other') === selectedCategory);
+    
+  // Check if a charm is already placed on the necklace
+  const isCharmPlaced = (charmId: string) => {
+    return placedCharms.some(placedCharm => placedCharm.charmId === charmId);
+  };
 
   return (
     <div 
@@ -197,19 +202,23 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
         
         {/* Charms grid */}
         <div className="charm-grid">
-          {filteredCharms.map(charm => (
-            <div 
-              key={charm.id}
-              className={`charm-item ${charm.id === selectedCharmId ? 'selected' : ''}`}
-              onClick={() => handleCharmSelect(charm.id)}
-            >
-              <img src={charm.imagePath} alt={charm.name} />
-            </div>
-          ))}
+          {filteredCharms.map(charm => {
+            const isPlaced = isCharmPlaced(charm.id);
+            return (
+              <div 
+                key={charm.id}
+                className={`charm-item ${charm.id === selectedCharmId ? 'selected' : ''} ${isPlaced ? 'placed' : ''}`}
+                onClick={() => handleCharmSelect(charm.id)}
+              >
+                <img src={charm.imagePath} alt={charm.name} />
+                {isPlaced && <div className="placed-badge"></div>}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
   );
 };
 
-export default CharmDrawer; 
+export default CharmDrawer;
