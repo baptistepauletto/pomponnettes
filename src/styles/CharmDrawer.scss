@@ -193,6 +193,7 @@
       transition: all 0.3s ease;
       border: 1px solid #eee;
       box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      position: relative;
       
       &.selected {
         background-color: #e3f2fd;
@@ -200,6 +201,21 @@
         
         img {
           transform: scale(0.55);
+        }
+      }
+      
+      &.placed {
+        .placed-badge {
+          position: absolute;
+          top: 3px;
+          right: 3px;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background-color: #4CAF50;
+          border: 1px solid white;
+          box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+          z-index: 2;
         }
       }
       
@@ -295,6 +311,15 @@
         &.selected img {
           transform: scale(0.9);
         }
+        
+        &.placed {
+          .placed-badge {
+            top: 3px;
+            right: 3px;
+            width: 6px;
+            height: 6px;
+          }
+        }
       }
     }
     
@@ -374,4 +399,4 @@
   0% { transform: scale(1); }
   50% { transform: scale(1.05); }
   100% { transform: scale(1); }
-} 
+}
