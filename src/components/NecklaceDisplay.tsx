@@ -13,10 +13,8 @@ const AttachmentPointComponent: React.FC<{
   isOccupied: boolean;
   showAttachmentPoints: boolean;
   showNames: boolean;
-  onSelect: (id: string, position: Position) => void;
-  isSelected: boolean;
   isDrawerOpen: boolean;
-}> = ({ id, position, isOccupied, showAttachmentPoints, showNames, onSelect, isSelected, isDrawerOpen }) => {
+}> = ({ id, position, isOccupied, showAttachmentPoints, showNames, isDrawerOpen }) => {
   const { isOver, canDrop, drop } = useDroppableAttachmentPoint(id, isOccupied);
   const attachmentPointRef = useRef<HTMLDivElement>(null);
   const { selectedCharmId } = useTapToPlace();
@@ -41,14 +39,8 @@ const AttachmentPointComponent: React.FC<{
       // If we have a charm selected (from the drawer), add it
       addCharm(selectedCharmId, id);
       
-      // Don't clear the selected charm - we want to keep it selected
-      // This allows multiple placements of the same charm
-      
       // Provide haptic feedback for successful placement
       triggerHapticFeedback('medium');
-    } else {
-      // Otherwise, select this attachment point to show the popup
-      onSelect(id, position);
     }
   };
 
@@ -59,7 +51,7 @@ const AttachmentPointComponent: React.FC<{
         isOccupied ? 'occupied' : ''
       } ${showAttachmentPoints ? 'visible' : ''} ${
         (isDrawerOpen && isMobile && selectedCharmId && !isOccupied) ? 'mobile-drop-target' : ''
-      } ${isSelected ? 'selected' : ''}`}
+      }`}
       style={{
         left: `${position.x}%`,
         top: `${position.y}%`,
@@ -230,7 +222,7 @@ const NecklaceDisplay: React.FC = () => {
   const [showPointNames, setShowPointNames] = useState(false);
   const [showGrid, setShowGrid] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const { selectAttachmentPoint, isAttachmentPointSelected, selectedCharmId } = useTapToPlace();
+  const { selectedCharmId } = useTapToPlace();
   const isMobile = window.innerWidth <= 480;
   const [hasPlacedCharm, setHasPlacedCharm] = useState(false);
   const [showRemovalTip, setShowRemovalTip] = useState(false);
@@ -269,11 +261,6 @@ const NecklaceDisplay: React.FC = () => {
   if (!selectedNecklace) {
     return <div className="necklace-display empty">Please select a necklace</div>;
   }
-
-  // Handle selecting an attachment point
-  const handleAttachmentPointSelect = (pointId: string) => {
-    selectAttachmentPoint(pointId);
-  };
 
   // Handle drawer open/close state
   const handleDrawerOpenChange = (open: boolean) => {
@@ -337,8 +324,6 @@ const NecklaceDisplay: React.FC = () => {
             isOccupied={point.isOccupied}
             showAttachmentPoints={showAttachmentPoints}
             showNames={showPointNames}
-            onSelect={handleAttachmentPointSelect}
-            isSelected={isAttachmentPointSelected(point.id)}
             isDrawerOpen={isDrawerOpen}
           />
         ))}
