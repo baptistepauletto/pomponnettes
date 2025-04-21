@@ -13,20 +13,42 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
   const { selectCharm, selectedCharmId, setKeepSelectedCharm, forceCleanupSelections } = useTapToPlace();
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [recentlyUsedCharmIds, setRecentlyUsedCharmIds] = useState<string[]>([]);
   const drawerRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
   const [hasSelectedCharm, setHasSelectedCharm] = useState(false);
   
-  // Extract unique categories on component mount
+  // Extract unique categories on component mount and update with Recently Used
   useEffect(() => {
     const uniqueCategories = Array.from(new Set(charms.map(charm => charm.category || 'Other')));
-    // Add "All Charms" as the first category
-    const allCategories = ['All Charms', ...uniqueCategories];
+    // Add "All Charms" and "Recently Used" as categories
+    const allCategories = ['All Charms', 'Recently Used', ...uniqueCategories];
     setCategories(allCategories);
     // Select "All Charms" by default
     setSelectedCategory('All Charms');
   }, [charms]);
+  
+  // Update recently used charms when placedCharms changes
+  useEffect(() => {
+    if (placedCharms && placedCharms.length > 0) {
+      // Create a set of unique charm IDs from current and previous placements
+      const uniqueIds = new Set([...recentlyUsedCharmIds]);
+      
+      // Add all charm IDs from the current placements
+      placedCharms.forEach(placedCharm => {
+        if (placedCharm.charmId) {
+          uniqueIds.add(placedCharm.charmId);
+        }
+      });
+      
+      // Convert back to array and update state if changed
+      const newRecentlyUsedIds = Array.from(uniqueIds);
+      if (newRecentlyUsedIds.length !== recentlyUsedCharmIds.length) {
+        setRecentlyUsedCharmIds(newRecentlyUsedIds);
+      }
+    }
+  }, [placedCharms, recentlyUsedCharmIds]);
   
   // Prevent actions during animation
   useEffect(() => {
@@ -153,14 +175,23 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
   };
 
   // Get filtered charms based on selected category
-  const filteredCharms = selectedCategory === 'All Charms'
-    ? charms
-    : charms.filter(charm => (charm.category || 'Other') === selectedCategory);
-    
-  // Check if a charm is already placed on the necklace
+  const getFilteredCharms = () => {
+    if (selectedCategory === 'All Charms') {
+      return charms;
+    } else if (selectedCategory === 'Recently Used') {
+      return charms.filter(charm => recentlyUsedCharmIds.includes(charm.id));
+    } else {
+      return charms.filter(charm => (charm.category || 'Other') === selectedCategory);
+    }
+  };
+
+  // Check if a charm is currently placed on any necklace
   const isCharmPlaced = (charmId: string) => {
+    if (!placedCharms || placedCharms.length === 0) return false;
     return placedCharms.some(placedCharm => placedCharm.charmId === charmId);
   };
+
+  const filteredCharms = getFilteredCharms();
 
   return (
     <div 
@@ -192,33 +223,43 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
           {categories.map(category => (
             <div 
               key={category}
-              className={`category-tab ${category === selectedCategory ? 'active' : ''}`}
+              className={`category-tab ${category === selectedCategory ? 'active' : ''} ${category === 'Recently Used' ? 'recent-tab' : ''}`}
               onClick={() => !isAnimating && setSelectedCategory(category)}
             >
-              {category === 'All Charms' ? '✨ All' : category}
+              {category === 'All Charms' 
+                ? '✨ All' 
+                : category === 'Recently Used' 
+                  ? '🔄 Recent' 
+                  : category}
             </div>
           ))}
         </div>
         
+        {/* Display empty state for Recently Used category when empty */}
+        {selectedCategory === 'Recently Used' && recentlyUsedCharmIds.length === 0 && (
+          <div className="empty-recently-used">
+            No charms have been used yet
+          </div>
+        )}
+        
         {/* Charms grid */}
-        <div className="charm-grid">
-          {filteredCharms.map(charm => {
-            const isPlaced = isCharmPlaced(charm.id);
-            return (
+        {!(selectedCategory === 'Recently Used' && recentlyUsedCharmIds.length === 0) && (
+          <div className="charm-grid">
+            {filteredCharms.map(charm => (
               <div 
                 key={charm.id}
-                className={`charm-item ${charm.id === selectedCharmId ? 'selected' : ''} ${isPlaced ? 'placed' : ''}`}
+                className={`charm-item ${charm.id === selectedCharmId ? 'selected' : ''} ${isCharmPlaced(charm.id) ? 'placed' : ''}`}
                 onClick={() => handleCharmSelect(charm.id)}
               >
                 <img src={charm.imagePath} alt={charm.name} />
-                {isPlaced && <div className="placed-badge"></div>}
+                {isCharmPlaced(charm.id) && <div className="placed-badge"></div>}
               </div>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
-export default CharmDrawer;
+export default CharmDrawer; 
