@@ -165,6 +165,19 @@
         }
       }
       
+      /* Style for the "Recently Used" category */
+      &.recent-tab {
+        background-color: #f5f5f5;
+        border: 1px solid #e5e5e5;
+        font-weight: 600;
+        
+        &.active {
+          background-color: #ff9800;
+          border-color: #ff9800;
+          color: white;
+        }
+      }
+      
       &.active {
         background-color: #007bff;
         color: white;
@@ -174,6 +187,21 @@
         transform: scale(0.95);
       }
     }
+  }
+  
+  /* Style for empty recently used state */
+  .empty-recently-used {
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+    font-style: italic;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin: 10px;
+    min-height: 120px; /* Height of approximately 2 rows of charms */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .charm-grid {
@@ -279,6 +307,12 @@
       }
     }
     
+    .empty-recently-used {
+      min-height: 96px; /* Match the height of 2 rows in mobile */
+      font-size: 12px;
+      margin: 5px;
+    }
+    
     .charm-grid {
       /* Fixed height for 2 rows (calculate based on item height + gap) */
       height: calc(2 * (min(11vw, 42px) + 10px));
@@ -314,8 +348,6 @@
         
         &.placed {
           .placed-badge {
-            top: 3px;
-            right: 3px;
             width: 6px;
             height: 6px;
           }
@@ -399,4 +431,4 @@
   0% { transform: scale(1); }
   50% { transform: scale(1.05); }
   100% { transform: scale(1); }
-}
+} 
