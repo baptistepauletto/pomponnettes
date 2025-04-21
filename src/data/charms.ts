@@ -70,7 +70,7 @@ export const charms: Charm[] = [
     id: 'medal-snake',
     name: 'Medal Snake',
     imagePath: getImagePath('images/charms/medal-snake.png'),
-    sizeScale: 1.85,
+    sizeScale: 1.65,
     category: 'Medals'
   },
   {
