@@ -39,10 +39,67 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
 
   // Action to select a necklace
   const selectNecklace = useCallback((necklaceId: string) => {
+    // If it's the same necklace, don't do anything
+    if (necklaceId === selectedNecklaceId) return;
+    
+    const currentNecklace = necklaces.find(n => n.id === selectedNecklaceId);
+    const newNecklace = necklaces.find(n => n.id === necklaceId);
+    
+    if (!currentNecklace || !newNecklace) {
+      setSelectedNecklaceId(necklaceId);
+      return;
+    }
+    
+    // Transfer charms from current necklace to new necklace based on attachment point indices
+    const transferredCharms: PlacedCharm[] = [];
+    
+    // Create a map of current charms by their attachment point index
+    const charmsByAttachmentIndex = new Map<number, {charmId: string, placedCharmId: string}>();
+    
+    placedCharms.forEach(charm => {
+      const attachmentPoint = currentNecklace.attachmentPoints.find(
+        p => p.id === charm.attachmentPointId
+      );
+      
+      if (attachmentPoint) {
+        const index = currentNecklace.attachmentPoints.indexOf(attachmentPoint);
+        charmsByAttachmentIndex.set(index, {
+          charmId: charm.charmId,
+          placedCharmId: charm.id
+        });
+      }
+    });
+    
+    // Apply charms to the new necklace based on index mapping
+    charmsByAttachmentIndex.forEach((charmInfo, index) => {
+      // Only transfer if the new necklace has enough attachment points
+      if (index < newNecklace.attachmentPoints.length) {
+        const newAttachmentPoint = newNecklace.attachmentPoints[index];
+        
+        // Mark the new attachment point as occupied
+        newAttachmentPoint.isOccupied = true;
+        
+        // Create a new placed charm with the updated attachment point
+        const newPlacedCharm: PlacedCharm = {
+          id: `transferred-${charmInfo.placedCharmId}`,
+          charmId: charmInfo.charmId,
+          attachmentPointId: newAttachmentPoint.id,
+          position: newAttachmentPoint.position
+        };
+        
+        transferredCharms.push(newPlacedCharm);
+      }
+    });
+    
+    // Update the selected necklace and placed charms
     setSelectedNecklaceId(necklaceId);
-    // Clear placed charms when changing necklace
-    setPlacedCharms([]);
-  }, []);
+    setPlacedCharms(transferredCharms);
+    
+    // Reset occupation status of the previous necklace
+    currentNecklace.attachmentPoints.forEach(point => {
+      point.isOccupied = false;
+    });
+  }, [selectedNecklaceId, placedCharms]);
 
   // Action to add a charm to the necklace
   const addCharm = useCallback((charmId: string, attachmentPointId: string) => {
