@@ -21,6 +21,7 @@
       border-radius: 8px;
       border: 2px solid #eee;
       transition: all 0.2s ease;
+      position: relative;
       
       &:hover {
         border-color: #ccc;
@@ -30,6 +31,34 @@
       &.dragging {
         opacity: 0.5;
         border-color: #1976d2;
+      }
+      
+      &.selected {
+        border-color: #007bff;
+        background-color: #e3f2fd;
+      }
+      
+      .size-indicator {
+        position: absolute;
+        bottom: 5px;
+        left: 5px;
+        width: auto;
+        height: auto;
+        min-width: 12px;
+        padding: 1px 2px;
+        border-radius: 4px;
+        background-color: rgba(0, 0, 0, 0.1);
+        z-index: 3;
+        opacity: 0.9;
+        font-size: 8px;
+        font-weight: bold;
+        color: transparent;
+        text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.5);
+        background-clip: text;
+        -webkit-background-clip: text;
+        letter-spacing: 0.5px;
+        text-align: center;
+        line-height: 1;
       }
       
       img {
