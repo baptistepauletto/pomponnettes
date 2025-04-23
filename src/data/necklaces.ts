@@ -38,18 +38,16 @@ export const necklaces: Necklace[] = [
       
       // Bottom attachment points (left to right)
       { id: 'gc-point6', position: { x: 32, y: 75 }, isOccupied: false },
-      { id: 'gc-point7', position: { x: 36, y: 79 }, isOccupied: false },
-      { id: 'gc-point8', position: { x: 41, y: 82 }, isOccupied: false },
-      { id: 'gc-point9', position: { x: 47, y: 83 }, isOccupied: false },
-      { id: 'gc-point10', position: { x: 53, y: 83 }, isOccupied: false },
+      { id: 'gc-point7', position: { x: 41, y: 82 }, isOccupied: false },
+      { id: 'gc-point8', position: { x: 47, y: 83 }, isOccupied: false },
+      { id: 'gc-point9', position: { x: 53, y: 83 }, isOccupied: false },
       
       // Right side attachment points (bottom to top)
-      { id: 'gc-point11', position: { x: 60, y: 81 }, isOccupied: false },
-      { id: 'gc-point12', position: { x: 64, y: 77 }, isOccupied: false },
-      { id: 'gc-point13', position: { x: 71, y: 68 }, isOccupied: false },
-      { id: 'gc-point14', position: { x: 76, y: 57 }, isOccupied: false },
-      { id: 'gc-point15', position: { x: 78, y: 46 }, isOccupied: false },
-      { id: 'gc-point16', position: { x: 80, y: 30 }, isOccupied: false },
+      { id: 'gc-point10', position: { x: 64, y: 77 }, isOccupied: false },
+      { id: 'gc-point11', position: { x: 71, y: 68 }, isOccupied: false },
+      { id: 'gc-point12', position: { x: 76, y: 57 }, isOccupied: false },
+      { id: 'gc-point13', position: { x: 78, y: 46 }, isOccupied: false },
+      { id: 'gc-point14', position: { x: 80, y: 30 }, isOccupied: false },
     ]
   },
 
