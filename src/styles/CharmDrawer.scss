@@ -13,6 +13,7 @@
   display: flex;
   flex-direction: column;
   will-change: transform;
+  font-family: "Jost", sans-serif;
   
   // Selection instructions
   .charm-selection-instructions {
@@ -37,6 +38,7 @@
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       border: 1px solid rgba(162, 78, 78, 0.3);
       animation: pulse-scale 2s infinite ease-in-out;
+      font-family: "Jost", sans-serif;
     }
   }
   
@@ -119,6 +121,7 @@
       font-weight: 600;
       position: relative;
       z-index: 5;
+      font-family: "Jost", sans-serif;
     }
   }
   
@@ -151,6 +154,7 @@
       white-space: nowrap;
       color: #666;
       transition: all 0.2s ease;
+      font-family: "Jost", sans-serif;
       
       /* Style for the "All Charms" category */
       &:first-child {
@@ -202,6 +206,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: "Jost", sans-serif;
   }
   
   .charm-grid {

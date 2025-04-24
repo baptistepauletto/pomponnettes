@@ -2,6 +2,7 @@
   width: 100%;
   position: relative;
   padding-bottom: 100px; /* Increased from 80px to provide more space for the drawer handle */
+  font-family: "Jost", sans-serif;
   
   &.placement-mode {
     .attachment-point:not(.occupied) {
@@ -38,6 +39,7 @@
     border-radius: 8px;
     color: #666;
     font-style: italic;
+    font-family: "Jost", sans-serif;
   }
   
   .necklace-container {
@@ -128,6 +130,7 @@
         border-radius: 2px;
         color: #333;
         z-index: 11;
+        font-family: "Jost", sans-serif;
       }
       
       &.visible {
@@ -204,6 +207,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
+    font-family: "Jost", sans-serif;
     
     label {
       display: inline-flex;
@@ -211,6 +215,7 @@
       gap: 6px;
       font-size: 14px;
       color: #666;
+      font-family: "Jost", sans-serif;
       
       input[type="checkbox"] {
         margin: 0;
@@ -224,6 +229,7 @@
     font-size: 12px;
     color: #666;
     font-style: italic;
+    font-family: "Jost", sans-serif;
   }
   
   .placement-instructions {
@@ -237,6 +243,7 @@
     justify-content: center;
     animation: fade-in 0.3s ease;
     pointer-events: none;
+    font-family: "Jost", sans-serif;
     
     &::before {
       content: "👇";
@@ -266,6 +273,7 @@
     justify-content: center;
     animation: fade-in 0.3s ease;
     pointer-events: none;
+    font-family: "Jost", sans-serif;
     
     background-color: rgba(255, 255, 255, 0.95);
     border-radius: 12px;
@@ -323,6 +331,7 @@
   
   .mobile-instructions {
     display: none;
+    font-family: "Jost", sans-serif;
   }
   
   @media (max-width: 768px) {
@@ -467,6 +476,7 @@
   text-align: center;
   white-space: normal;
   width: auto;
+  font-family: "Jost", sans-serif;
 }
 
 /* Tip for showing how to remove charms */
