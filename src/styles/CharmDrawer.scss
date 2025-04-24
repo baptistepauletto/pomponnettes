@@ -255,15 +255,14 @@
         min-width: 12px;
         padding: 1px 2px;
         border-radius: 4px;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: rgba(162, 78, 78, 0.15);
+        border: 1px solid rgba(162, 78, 78, 0.3);
         z-index: 3;
         opacity: 0.9;
         font-size: 8px;
         font-weight: bold;
-        color: transparent;
-        text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.5);
-        background-clip: text;
-        -webkit-background-clip: text;
+        color: #A24E4E;
+        font-family: "Jost", sans-serif;
         letter-spacing: 0.5px;
         text-align: center;
         line-height: 1;
@@ -383,6 +382,9 @@
           padding: 1px;
           bottom: 2px;
           left: 2px;
+          background-color: rgba(162, 78, 78, 0.15);
+          border: 1px solid rgba(162, 78, 78, 0.3);
+          color: #A24E4E;
         }
       }
     }
