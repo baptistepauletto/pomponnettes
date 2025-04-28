@@ -1,74 +1,77 @@
-# Necklace Charm Customizer
+# Les Pomponnettes - Necklace Charm Customizer
 
-A responsive web application that allows users to customize necklaces by dragging and dropping charms onto predefined positions on different necklaces.
+A responsive web application that allows users to customize necklaces by placing charms onto predefined positions on different necklaces. The application is built to provide a seamless customization experience on both desktop and mobile devices.
 
-## Project Goals
+## Features Implemented
 
-- Create a responsive web interface that works well on both desktop and mobile devices
-- Allow users to select from multiple necklace backgrounds
-- Provide a selection of charms that can be dragged and dropped onto the necklace
-- Define specific attachment points on each necklace where charms can be placed
-- Create an intuitive and visually appealing user experience
+### Core Functionality
+- **Necklace Selection**: Users can browse and select from various necklace designs using a horizontal carousel
+- **Charm Placement**: Intuitive tap-to-place functionality for placing charms on necklaces
+- **Attachment Points**: Dynamic attachment points that adapt to the selected necklace
+- **Charm Categories**: Charms organized into categories for easy navigation
+- **Recently Used Charms**: A dedicated category for recently used charms for quick access
+- **Price Calculation**: Real-time price updates based on the selected necklace and added charms
 
-## Implementation Plan
+### User Experience Enhancements
+- **Horizontal Scrolling Charm Drawer**: Compact drawer with horizontal scrolling on mobile devices
+- **Responsive Design**: Fully responsive interface that adapts to different screen sizes
+- **Visual Feedback**: Interactive elements provide visual feedback for user actions
+- **Animation Effects**: Smooth transitions and animations for a polished feel
+- **Random Necklace Generation**: One-click generation of necklaces with random charm placements
+- **Reset Functionality**: Easy way to clear all charms and start fresh
 
-### Phase 1: Project Setup and Core Functionality
+### Technical Improvements
+- **Optimized Mobile Experience**: Special considerations for touch interactions and mobile layout
+- **Streamlined Interface**: Removed unnecessary selection popups for a more direct interaction model
+- **Fade-out Animations**: Instructions fade out after user interaction for a cleaner interface
+- **Custom Favicon**: Responsive SVG favicon that adapts to dark mode
 
-1. **Project Initialization**
-   - Set up the project structure
-   - Install necessary dependencies
-   - Configure build tools
+## How to Use
 
-2. **Core UI Components**
-   - Create a responsive layout
-   - Implement necklace background selection
-   - Build the charm selection panel
-   - Develop the main necklace display area
+1. **Select a Necklace**: Browse through available necklace designs in the top carousel
+2. **Add Charms**: Tap on the necklace to open the charm drawer, then select a charm category
+3. **Place Charms**: Tap on an attachment point to place the selected charm
+4. **Remove Charms**: Tap on any placed charm to remove it
+5. **Generate Random Design**: Use the "Generate a necklace" button to automatically place random charms
+6. **Reset Design**: Use the "Reset necklace" button to remove all charms
 
-3. **Drag and Drop Functionality**
-   - Implement drag and drop for charms
-   - Define attachment points for each necklace
-   - Create snap-to functionality for the attachment points
-   - Ensure mobile touch support
+## Development
 
-4. **State Management**
-   - Track the current necklace selection
-   - Manage charm placements
-   - Handle user interactions
+### Getting Started
 
-### Phase 2: Enhancements and Refinements
+1. Clone the repository
+```bash
+git clone https://github.com/yourusername/pomponnettes.git
+cd pomponnettes
+```
 
-1. **Visual Improvements**
-   - Add animations and transitions
-   - Implement loading states
-   - Optimize images and performance
+2. Install dependencies
+```bash
+npm install
+```
 
-2. **User Experience Refinements**
-   - Add tooltips and help information
-   - Improve accessibility
-   - Optimize for different devices
+3. Start the development server
+```bash
+npm run dev
+```
 
-3. **Additional Features**
-   - Save/load customizations
-   - Share functionality
-   - Price calculation
+4. Build for production
+```bash
+npm run build
+```
 
-## Technical Stack
+5. Deploy to GitHub Pages
+```bash
+npm run deploy
+```
 
-- **Frontend Framework**: React.js
-- **Styling**: CSS/SCSS with responsive design principles
-- **Drag and Drop**: React DnD or a similar library
-- **State Management**: React Context API or Redux
-- **Build Tools**: Vite
+### Project Structure
 
-## Getting Started
-
-Instructions for setting up and running the project will be added here.
-
-## Project Structure
-
-Details about the project structure will be added here.
-
-## Development Guidelines
-
-Guidelines for contributing to the project will be added here.
+- `/src`: Source code
+  - `/components`: React components
+  - `/context`: Context providers
+  - `/data`: Static data files for necklaces and charms
+  - `/hooks`: Custom React hooks
+  - `/styles`: SCSS stylesheets
+  - `/types`: TypeScript type definitions
+  - `/utils`: Utility functions
