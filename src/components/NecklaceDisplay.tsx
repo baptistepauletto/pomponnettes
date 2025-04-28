@@ -301,7 +301,7 @@ const NecklaceDisplay: React.FC = () => {
       {/* Add instruction when in placement mode and a charm is selected, but only if user hasn't placed a charm yet */}
       {isDrawerOpen && selectedCharmId && !hasPlacedCharm && (
         <div className="placement-instructions">
-          Tap a green attachment point to place your charm
+          Tap a pink attachment point to place your charm
         </div>
       )}
       
