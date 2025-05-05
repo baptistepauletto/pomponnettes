@@ -216,6 +216,101 @@ const PositionGrid: React.FC = () => {
   return <div className="position-grid">{gridLines}</div>;
 };
 
+// Add this component for the add to cart functionality
+const AddToCartButton = () => {
+  const { addToCart, isAddingToCart, placedCharms } = useCustomizer();
+  const [message, setMessage] = useState<{text: string, type: 'success' | 'error' | '' | 'info'}>({
+    text: '',
+    type: ''
+  });
+  const [manualUrl, setManualUrl] = useState<string | null>(null);
+
+  const handleAddToCart = async () => {
+    if (placedCharms.length === 0) {
+      setMessage({
+        text: 'Please add at least one charm to your necklace',
+        type: 'error'
+      });
+      return;
+    }
+
+    try {
+      setManualUrl(null); // Reset manual URL
+      const result = await addToCart();
+      
+      if (result.success) {
+        // Display the success message
+        setMessage({
+          text: result.message || 'Added to cart successfully!',
+          // If we have a manual URL in development mode, show as info instead of success
+          type: result.data?.manualUrl ? 'info' : 'success'
+        });
+        
+        // If we have a manual URL (especially in development mode), show it
+        if (result.data?.manualUrl) {
+          setManualUrl(result.data.manualUrl);
+        }
+      } else {
+        setMessage({
+          text: result.message || 'Failed to add to cart',
+          type: 'error'
+        });
+        
+        // If we have a manual URL, provide it to the user
+        if (result.data?.manualUrl) {
+          setManualUrl(result.data.manualUrl);
+        }
+      }
+
+      // In development mode with manual URL, keep the message visible
+      if (!result.data?.manualUrl) {
+        setTimeout(() => {
+          setMessage({ text: '', type: '' });
+        }, 3000);
+      }
+    } catch (error) {
+      setMessage({
+        text: 'An error occurred while adding to cart',
+        type: 'error'
+      });
+    }
+  };
+
+  return (
+    <div className="add-to-cart-container">
+      {message.text && (
+        <div className={`cart-message ${message.type}`}>
+          {message.text}
+        </div>
+      )}
+      
+      {manualUrl && (
+        <div className="manual-cart-link">
+          <p className="manual-link-instruction">
+            Click the button below to add your customized necklace to cart:
+          </p>
+          <a 
+            href={manualUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="manual-cart-button"
+          >
+            Add to Cart on Website
+          </a>
+        </div>
+      )}
+      
+      <button 
+        className="add-to-cart-button"
+        onClick={handleAddToCart}
+        disabled={isAddingToCart || placedCharms.length === 0}
+      >
+        {isAddingToCart ? 'Adding to Cart...' : 'Add to Cart'}
+      </button>
+    </div>
+  );
+};
+
 const NecklaceDisplay: React.FC = () => {
   const { selectedNecklace, placedCharms } = useCustomizer();
   const [showAttachmentPoints, setShowAttachmentPoints] = useState(false);
@@ -345,6 +440,9 @@ const NecklaceDisplay: React.FC = () => {
           👆 Tap the necklace to start customizing
         </div>
       )}
+      
+      {/* Add to Cart Button */}
+      <AddToCartButton />
       
       {/* Conditionally show controls for desktop only */}
       {!isMobile && (

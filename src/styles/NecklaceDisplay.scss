@@ -521,4 +521,122 @@
   50% {
     transform: translateX(-50%) translateY(-5px);
   }
+}
+
+/* Add these styles for the Add to Cart functionality */
+.add-to-cart-container {
+  margin-top: 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  .cart-message {
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    
+    &.success {
+      background-color: rgba(76, 175, 80, 0.2);
+      color: #2e7d32;
+      border: 1px solid #2e7d32;
+    }
+    
+    &.error {
+      background-color: rgba(244, 67, 54, 0.2);
+      color: #d32f2f;
+      border: 1px solid #d32f2f;
+    }
+    
+    &.info {
+      background-color: rgba(33, 150, 243, 0.2);
+      color: #1976d2;
+      border: 1px solid #1976d2;
+    }
+  }
+  
+  .manual-cart-link {
+    margin-bottom: 0.8rem;
+    
+    .manual-link-instruction {
+      margin: 0.5rem 0;
+      font-size: 0.9rem;
+      color: #555;
+    }
+    
+    .manual-cart-button {
+      display: inline-block;
+      background-color: #4caf50;
+      color: white;
+      text-decoration: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      
+      &:hover {
+        background-color: #43a047;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+      }
+      
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+  
+  .add-to-cart-button {
+    background-color: #A24E4E;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: "Jost", sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    
+    &:hover {
+      background-color: #8a3b3b;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    &:disabled {
+      background-color: #cccccc;
+      color: #666666;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    margin-top: 1rem;
+    
+    .add-to-cart-button {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+    }
+    
+    .manual-cart-button {
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+    }
+    
+    .manual-link-instruction {
+      font-size: 0.8rem;
+    }
+  }
 } 

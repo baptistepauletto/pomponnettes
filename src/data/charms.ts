@@ -194,5 +194,13 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/scorpio.png'),
     sizeScale: 1,
     category: '♒ Zodiac'
-  }
+  },
+  {
+    id: 'aigle',
+    name: 'TEST',
+    imagePath: getImagePath('images/charms/capricorn.png'),
+    sizeScale: 1,
+    category: '♒ Zodiac'
+  },
+  
 ]; 

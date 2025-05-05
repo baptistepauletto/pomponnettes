@@ -45,3 +45,31 @@
   width: 100%;
   min-height: 100vh;
 }
+
+.app-nav {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 15px;
+}
+
+.app-nav button {
+  padding: 10px 20px;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.app-nav button:hover {
+  background-color: #f5f5f5;
+}
+
+.app-nav button.active {
+  background-color: #4CAF50;
+  color: white;
+  border-color: #4CAF50;
+}

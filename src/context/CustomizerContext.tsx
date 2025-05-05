@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useCallback, ReactNode, use
 import { Necklace, Charm, PlacedCharm } from '../types';
 import { necklaces } from '../data/necklaces';
 import { charms } from '../data/charms';
+import { addToCart as addToCartApi } from '../utils/woocommerce';
 
 // Interface for the context state
 interface CustomizerContextState {
@@ -18,10 +19,12 @@ interface CustomizerContextState {
   addCharm: (charmId: string, attachmentPointId: string) => void;
   removeCharm: (placedCharmId: string) => void;
   clearAllCharms: () => void;
+  addToCart: () => Promise<{ success: boolean; message: string; data?: any }>;
+  isAddingToCart: boolean;
 }
 
-// Create context with initial empty state
-const CustomizerContext = createContext<CustomizerContextState | undefined>(undefined);
+// Create the context
+const CustomizerContext = createContext<CustomizerContextState | null>(null);
 
 // Props for the provider component
 interface CustomizerProviderProps {
@@ -33,6 +36,7 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
   // State
   const [selectedNecklaceId, setSelectedNecklaceId] = useState<string>(necklaces[0].id);
   const [placedCharms, setPlacedCharms] = useState<PlacedCharm[]>([]);
+  const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
 
   // Get the currently selected necklace
   const selectedNecklace = necklaces.find(n => n.id === selectedNecklaceId) || null;
@@ -70,64 +74,58 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
       }
     });
     
-    // Apply charms to the new necklace based on index mapping
+    // Then transfer to the new necklace
     charmsByAttachmentIndex.forEach((charmInfo, index) => {
-      // Only transfer if the new necklace has enough attachment points
       if (index < newNecklace.attachmentPoints.length) {
         const newAttachmentPoint = newNecklace.attachmentPoints[index];
         
-        // Mark the new attachment point as occupied
-        newAttachmentPoint.isOccupied = true;
-        
-        // Create a new placed charm with the updated attachment point
-        const newPlacedCharm: PlacedCharm = {
-          id: `transferred-${charmInfo.placedCharmId}`,
-          charmId: charmInfo.charmId,
-          attachmentPointId: newAttachmentPoint.id,
-          position: newAttachmentPoint.position
-        };
-        
-        transferredCharms.push(newPlacedCharm);
+        if (!newAttachmentPoint.isOccupied) {
+          const charm = charms.find(c => c.id === charmInfo.charmId);
+          
+          if (charm) {
+            // Calculate the unique ID for this placement
+            const placedCharmId = `${charmInfo.charmId}-${newAttachmentPoint.id}-${Date.now()}`;
+            
+            // Add to the new charms array
+            transferredCharms.push({
+              id: placedCharmId,
+              charmId: charmInfo.charmId,
+              attachmentPointId: newAttachmentPoint.id,
+              position: newAttachmentPoint.position
+            });
+            
+            // Mark the attachment point as occupied
+            newAttachmentPoint.isOccupied = true;
+          }
+        }
       }
     });
     
-    // Update the selected necklace and placed charms
+    // Update state
     setSelectedNecklaceId(necklaceId);
     setPlacedCharms(transferredCharms);
-    
-    // Reset occupation status of the previous necklace
-    currentNecklace.attachmentPoints.forEach(point => {
-      point.isOccupied = false;
-    });
   }, [selectedNecklaceId, placedCharms]);
 
   // Action to add a charm to the necklace
   const addCharm = useCallback((charmId: string, attachmentPointId: string) => {
+    // Find the necklace and attachment point
     if (!selectedNecklace) return;
 
-    // Find the attachment point
     const attachmentPoint = selectedNecklace.attachmentPoints.find(
-      p => p.id === attachmentPointId
+      point => point.id === attachmentPointId
     );
 
-    // Extra protection: Check if point exists and is NOT already occupied
-    if (!attachmentPoint) return;
-    
-    // Check if the attachment point is already occupied
-    const isAlreadyOccupied = placedCharms.some(
-      charm => charm.attachmentPointId === attachmentPointId
-    );
-    
-    // If already occupied, don't add another charm
-    if (attachmentPoint.isOccupied || isAlreadyOccupied) {
-      console.log('Attachment point is already occupied');
-      return;
-    }
+    // If the point is already occupied or not found, don't do anything
+    if (!attachmentPoint || attachmentPoint.isOccupied) return;
 
-    // Create a unique ID for this placed charm
-    const placedCharmId = `placed-charm-${Date.now()}`;
+    // Find the charm
+    const charm = charms.find(c => c.id === charmId);
+    if (!charm) return;
 
-    // Add the new charm
+    // Calculate the unique ID for this placement
+    const placedCharmId = `${charmId}-${attachmentPointId}-${Date.now()}`;
+
+    // Add the charm to the necklace
     setPlacedCharms(prev => [
       ...prev,
       {
@@ -138,14 +136,9 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
       }
     ]);
 
-    // Mark the attachment point as occupied in the necklace data
-    selectedNecklace.attachmentPoints = selectedNecklace.attachmentPoints.map(point => {
-      if (point.id === attachmentPointId) {
-        return { ...point, isOccupied: true };
-      }
-      return point;
-    });
-  }, [selectedNecklace, placedCharms]);
+    // Mark the attachment point as occupied directly
+    attachmentPoint.isOccupied = true;
+  }, [selectedNecklace]);
 
   // Action to remove a charm from the necklace
   const removeCharm = useCallback((placedCharmId: string) => {
@@ -178,6 +171,79 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
       point.isOccupied = false;
     });
   }, [selectedNecklace]);
+  
+  // Action to add the customized necklace to the cart
+  const addToCart = useCallback(async () => {
+    if (!selectedNecklace || placedCharms.length === 0) {
+      return { 
+        success: false, 
+        message: 'Please add at least one charm to your necklace before adding to cart' 
+      };
+    }
+    
+    try {
+      setIsAddingToCart(true);
+      
+      // Create a map of charms by attachment point position
+      const charmsByPosition = new Map<string, string>();
+      
+      // First, fill in the charms that are placed
+      placedCharms.forEach(placedCharm => {
+        const charm = charms.find(c => c.id === placedCharm.charmId);
+        const attachmentPoint = selectedNecklace.attachmentPoints.find(
+          p => p.id === placedCharm.attachmentPointId
+        );
+        
+        if (charm && attachmentPoint) {
+          // Extract position number from the attachment point ID
+          // Assuming attachment point IDs are in format like "point-1", "point-2", etc.
+          const positionMatch = attachmentPoint.id.match(/\d+$/);
+          const position = positionMatch ? positionMatch[0] : "";
+          
+          // If we have a valid position, add it to the map
+          if (position) {
+            charmsByPosition.set(position, charm.id);
+          }
+        }
+      });
+      
+      // Create data in the format required for WooCommerce
+      const charmData = [];
+      
+      // Find the max position number in the necklace
+      const maxPosition = selectedNecklace.attachmentPoints.reduce((max, point) => {
+        const positionMatch = point.id.match(/\d+$/);
+        const position = positionMatch ? parseInt(positionMatch[0], 10) : 0;
+        return Math.max(max, position);
+      }, 0);
+      
+      // For each possible position (1 to maxPosition), add an attribute
+      for (let i = 1; i <= maxPosition; i++) {
+        const charmId = charmsByPosition.get(i.toString()) || 'aucun-charm';
+        
+        charmData.push({
+          name: `attribute_pa_charm-${i}`,
+          value: charmId
+        });
+      }
+      
+      // For now, we'll use a placeholder ID for the necklace
+      const necklaceId = 8187; // Actual WooCommerce product ID
+      
+      // Call the WooCommerce API
+      const result = await addToCartApi(necklaceId, charmData);
+      
+      return result;
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      return { 
+        success: false, 
+        message: 'Failed to add to cart. Please try again.' 
+      };
+    } finally {
+      setIsAddingToCart(false);
+    }
+  }, [selectedNecklace, placedCharms, charms]);
 
   // Sync attachment point occupation status with placed charms
   useEffect(() => {
@@ -208,7 +274,9 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
     selectNecklace,
     addCharm,
     removeCharm,
-    clearAllCharms
+    clearAllCharms,
+    addToCart,
+    isAddingToCart
   };
 
   return (
@@ -218,10 +286,10 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
   );
 };
 
-// Custom hook to use the context
-export const useCustomizer = (): CustomizerContextState => {
+// Custom hook to use the customizer context
+export const useCustomizer = () => {
   const context = useContext(CustomizerContext);
-  if (context === undefined) {
+  if (context === null) {
     throw new Error('useCustomizer must be used within a CustomizerProvider');
   }
   return context;
