@@ -5,6 +5,7 @@ import CharmSelector from './CharmSelector';
 import NecklaceDisplay from './NecklaceDisplay';
 import DndProvider from './DndProvider';
 import { TapToPlaceProvider } from '../hooks/useTapToPlace';
+import AddToCartButton from './AddToCartButton';
 import '../styles/CustomizerApp.scss';
 
 const CustomizerApp: React.FC = () => {
@@ -42,6 +43,7 @@ const CustomizerApp: React.FC = () => {
               </div>
               <div className="main-display">
                 <NecklaceDisplay />
+                <AddToCartButton />
               </div>
             </main>
 
