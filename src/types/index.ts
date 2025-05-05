@@ -25,7 +25,7 @@ export interface Charm {
 
 // Necklace type
 export interface Necklace {
-  id: string;
+  id: number;
   name: string;
   imagePath: string;
   attachmentPoints: AttachmentPoint[];

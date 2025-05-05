@@ -4,7 +4,7 @@ import { getImagePath } from '../utils/imagePaths';
 // Sample necklace data
 export const necklaces: Necklace[] = [
   {
-    id: 'grigri',
+    id: 8187,
     name: 'Collier Grigri',
     imagePath: getImagePath('images/necklaces/grigri.png'),
     attachmentPoints: [
@@ -25,7 +25,7 @@ export const necklaces: Necklace[] = [
     ]
   },
   {
-    id: 'gold-chain',
+    id: 8188,
     name: 'Gold Chain',
     imagePath: getImagePath('images/necklaces/gold-chain.png'),
     attachmentPoints: [

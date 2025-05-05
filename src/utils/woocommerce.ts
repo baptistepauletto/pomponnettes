@@ -6,28 +6,68 @@
 import { Necklace, PlacedCharm, Charm } from '../types';
 
 /**
+ * Maps internal charm IDs to WooCommerce attribute values
+ * This mapping can be extended as needed for your specific WooCommerce setup
+ */
+const getWooCommerceCharmId = (internalCharmId: string) => {
+  // If no charm is selected, return the 'no charm' value
+  if (!internalCharmId) {
+    return 'aucun-charm';
+  }
+  
+  // For now, we'll just return the internal ID as the WooCommerce ID
+  // This can be customized with a proper mapping if needed
+  return internalCharmId;
+};
+
+/**
  * Formats customizer data into a format that can be sent to WooCommerce
+ * Uses position-based approach where each attachment point position becomes an attribute
  */
 const formatCustomizerData = (necklace: Necklace, placedCharms: PlacedCharm[], charms: Charm[]) => {
-  // Create a string representation of the customization
-  const necklaceInfo = {
-    id: necklace.id,
-    name: necklace.name
-  };
+  // Get the maximum number of attachment points
+  const maxPosition = necklace.attachmentPoints.length;
+
+  // Create a map of charms by their position number
+  const charmsByPosition = new Map<string, string>();
   
-  const charmsInfo = placedCharms.map(placedCharm => {
-    const charm = charms.find(c => c.id === placedCharm.charmId);
-    return {
-      id: charm?.id,
-      name: charm?.name,
-      attachmentPoint: placedCharm.attachmentPointId
-    };
+  // Fill the map with the placed charms
+  placedCharms.forEach(placedCharm => {
+    const attachmentPoint = necklace.attachmentPoints.find(
+      point => point.id === placedCharm.attachmentPointId
+    );
+    
+    if (attachmentPoint) {
+      // Extract the position number from the attachment point ID
+      // The format is typically "xx-pointN" where N is the position number
+      const positionMatch = attachmentPoint.id.match(/point(\d+)$/);
+      
+      if (positionMatch && positionMatch[1]) {
+        // Use the extracted position number
+        charmsByPosition.set(positionMatch[1], placedCharm.charmId);
+      } else {
+        // Fallback: use the index in the attachment points array + 1
+        const positionIndex = (necklace.attachmentPoints.indexOf(attachmentPoint) + 1).toString();
+        charmsByPosition.set(positionIndex, placedCharm.charmId);
+      }
+    }
   });
+
+  // Create the data array for WooCommerce attributes
+  const charmData = [];
   
-  return {
-    necklace: necklaceInfo,
-    charms: charmsInfo
-  };
+  // For each possible position, add an attribute
+  for (let i = 1; i <= maxPosition; i++) {
+    const charmId = getWooCommerceCharmId(charmsByPosition.get(i.toString()) || '');
+    
+    charmData.push({
+      name: `attribute_pa_charm-${i}`,
+      value: charmId
+    });
+  }
+  
+  
+  return charmData;
 };
 
 /**
@@ -56,17 +96,19 @@ export const addToCart = async (
     }
     
     // Format data for sending to WooCommerce
-    const customData = formatCustomizerData(necklace, placedCharms, charms);
+    const attributeData = formatCustomizerData(necklace, placedCharms, charms);
     
     // Create the form data to be submitted
     const formData = new FormData();
     formData.append('add-to-cart', productId.toString());
     formData.append('quantity', '1');
-    formData.append('customizer_data', JSON.stringify(customData));
+    
+    // Add each charm attribute to the form data
+    attributeData.forEach(attr => {
+      formData.append(attr.name, attr.value);
+    });
     
     // Send the request to the WooCommerce site
-    // Here we're assuming the form is posted to the current site
-    // You may need to adjust this URL based on your WooCommerce setup
     const response = await fetch('/cart/', {
       method: 'POST',
       body: formData,

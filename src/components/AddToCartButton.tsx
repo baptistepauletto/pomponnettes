@@ -3,10 +3,6 @@ import { useCustomizer } from '../context/CustomizerContext';
 import { addToCart } from '../utils/woocommerce';
 import '../styles/AddToCartButton.scss';
 
-// The necklace product ID in WooCommerce
-// This should be configured based on your WooCommerce setup
-const NECKLACE_PRODUCT_ID = 123; // Replace with your actual product ID
-
 const AddToCartButton: React.FC = () => {
   const { selectedNecklace, placedCharms, charms } = useCustomizer();
   const [loading, setLoading] = useState(false);
@@ -37,7 +33,7 @@ const AddToCartButton: React.FC = () => {
         selectedNecklace,
         placedCharms,
         charms,
-        NECKLACE_PRODUCT_ID
+        selectedNecklace.id
       );
 
       setMessage({

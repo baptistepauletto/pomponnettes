@@ -14,7 +14,7 @@ interface CustomizerContextState {
   placedCharms: PlacedCharm[];
   
   // Actions
-  selectNecklace: (necklaceId: string) => void;
+  selectNecklace: (necklaceId: number) => void;
   addCharm: (charmId: string, attachmentPointId: string) => void;
   removeCharm: (placedCharmId: string) => void;
   clearAllCharms: () => void;
@@ -31,14 +31,14 @@ interface CustomizerProviderProps {
 // Provider component
 export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children }) => {
   // State
-  const [selectedNecklaceId, setSelectedNecklaceId] = useState<string>(necklaces[0].id);
+  const [selectedNecklaceId, setSelectedNecklaceId] = useState<number>(necklaces[0].id);
   const [placedCharms, setPlacedCharms] = useState<PlacedCharm[]>([]);
 
   // Get the currently selected necklace
   const selectedNecklace = necklaces.find(n => n.id === selectedNecklaceId) || null;
 
   // Action to select a necklace
-  const selectNecklace = useCallback((necklaceId: string) => {
+  const selectNecklace = useCallback((necklaceId: number) => {
     // If it's the same necklace, don't do anything
     if (necklaceId === selectedNecklaceId) return;
     
@@ -218,8 +218,8 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
   );
 };
 
-// Custom hook to use the context
-export const useCustomizer = (): CustomizerContextState => {
+// Custom hook to use the customizer context
+export const useCustomizer = () => {
   const context = useContext(CustomizerContext);
   if (context === undefined) {
     throw new Error('useCustomizer must be used within a CustomizerProvider');
