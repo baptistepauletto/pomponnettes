@@ -3,7 +3,7 @@
  * This module handles the integration with WooCommerce for adding products to cart
  */
 
-import { Necklace, PlacedCharm, Charm } from '../types';
+import { Necklace, PlacedCharm } from '../types';
 
 /**
  * Maps internal charm IDs to WooCommerce attribute values
@@ -24,7 +24,7 @@ const getWooCommerceCharmId = (internalCharmId: string) => {
  * Formats customizer data into a format that can be sent to WooCommerce
  * Uses position-based approach where each attachment point position becomes an attribute
  */
-const formatCustomizerData = (necklace: Necklace, placedCharms: PlacedCharm[], charms: Charm[]) => {
+const formatCustomizerData = (necklace: Necklace, placedCharms: PlacedCharm[]) => {
   // Get the maximum number of attachment points
   const maxPosition = necklace.attachmentPoints.length;
 
@@ -75,15 +75,11 @@ const formatCustomizerData = (necklace: Necklace, placedCharms: PlacedCharm[], c
  * 
  * @param necklace The selected necklace
  * @param placedCharms Array of placed charms
- * @param charms All available charms (for reference)
- * @param productId The WooCommerce product ID for the necklace
  * @returns Promise with the result of the add to cart operation
  */
 export const addToCart = async (
   necklace: Necklace,
   placedCharms: PlacedCharm[],
-  charms: Charm[],
-  productId: number
 ): Promise<{ success: boolean; message: string }> => {
   try {
     if (!necklace) {
@@ -96,11 +92,16 @@ export const addToCart = async (
     }
     
     // Format data for sending to WooCommerce
-    const attributeData = formatCustomizerData(necklace, placedCharms, charms);
+    const attributeData = formatCustomizerData(necklace, placedCharms);
     
     // Create the form data to be submitted
     const formData = new FormData();
-    formData.append('add-to-cart', productId.toString());
+    
+    // Add the product ID and variation ID
+    formData.append('product_id', necklace.id.toString());
+    formData.append('variation_id', (necklace.variationId).toString());
+    
+    // Add quantity
     formData.append('quantity', '1');
     
     // Add each charm attribute to the form data

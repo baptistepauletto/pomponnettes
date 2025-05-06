@@ -7,6 +7,7 @@ export const necklaces: Necklace[] = [
     id: 8187,
     name: 'Collier Grigri',
     imagePath: getImagePath('images/necklaces/grigri.png'),
+    variationId: 12764,
     attachmentPoints: [
       { id: 'gg-point1', position: { x: 18, y: 44 }, isOccupied: false },
       { id: 'gg-point2', position: { x: 18, y: 54 }, isOccupied: false },
@@ -28,6 +29,7 @@ export const necklaces: Necklace[] = [
     id: 8188,
     name: 'Gold Chain',
     imagePath: getImagePath('images/necklaces/gold-chain.png'),
+    variationId: 12765,
     attachmentPoints: [
       // Left side attachment points (top to bottom)
       { id: 'gc-point1', position: { x: 20, y: 30 }, isOccupied: false },

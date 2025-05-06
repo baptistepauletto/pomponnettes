@@ -29,6 +29,7 @@ export interface Necklace {
   name: string;
   imagePath: string;
   attachmentPoints: AttachmentPoint[];
+  variationId: number; // WooCommerce variation ID
 }
 
 // Placed charm type for a charm that has been positioned on the necklace
