@@ -1,0 +1,10 @@
+/* WordPress-specific styles - only loaded in WordPress environment */
+
+.App {
+  /* Adjust for WordPress theme containment */
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+/* Add more specific overrides as needed */ 

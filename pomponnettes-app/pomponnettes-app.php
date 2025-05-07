@@ -19,6 +19,14 @@ function pomponnettes_enqueue_scripts() {
         '1.0.0'
     );
     
+    // Enqueue WordPress-specific overrides (load after main CSS)
+    wp_enqueue_style(
+        'pomponnettes-wp-css',
+        $plugin_url . 'wordpress-styles.css',
+        array('pomponnettes-css'),
+        '1.0.0'
+    );
+    
     // Enqueue main JS file and its dependencies
     wp_enqueue_script(
         'pomponnettes-js',
