@@ -280,9 +280,9 @@ const NecklaceDisplay: React.FC = () => {
     }
   };
 
-  // Handle necklace tap to open drawer on first interaction
+  // Handle necklace tap to open drawer
   const handleNecklaceTap = () => {
-    if (isMobile && !hasInteractedWithNecklace && !isDrawerOpen) {
+    if (isMobile && !isDrawerOpen) {
       setHasInteractedWithNecklace(true);
       handleDrawerOpenChange(true);
       triggerHapticFeedback('light');
