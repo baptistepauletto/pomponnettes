@@ -9,7 +9,7 @@
   border-top-right-radius: 20px;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  max-height: 60vh;
+  max-height: 66vh;
   display: flex;
   flex-direction: column;
   will-change: transform;
@@ -43,7 +43,7 @@
   }
   
   &.closed {
-    transform: translateY(calc(100% - 60px));
+    transform: translateY(calc(100% - 66px));
     
     .charm-drawer-content {
       opacity: 0;
@@ -79,7 +79,7 @@
   }
   
   .charm-drawer-handle {
-    padding: 15px 0;
+    padding: 16px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -87,7 +87,7 @@
     background-color: #E4D6D6;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    min-height: 60px;
+    min-height: 66px;
     cursor: pointer;
     position: relative;
     box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1);
@@ -106,17 +106,17 @@
     }
     
     .handle-bar {
-      width: 60px;
-      height: 6px;
+      width: 66px;
+      height: 6.5px;
       background-color: #999;
       border-radius: 3px;
-      margin-bottom: 12px;
+      margin-bottom: 13px;
       position: relative;
       z-index: 5;
     }
     
     .handle-text {
-      font-size: 14px;
+      font-size: 15px;
       color: #333;
       font-weight: 600;
       position: relative;
@@ -126,17 +126,17 @@
   }
   
   .charm-drawer-content {
-    padding: 5px 5px 10px;
+    padding: 5px 5px 11px;
     overflow-y: visible;
     flex-grow: 1;
-    max-height: calc(60vh - 60px);
+    max-height: calc(66vh - 66px);
   }
   
   .category-tabs {
     display: flex;
     overflow-x: auto;
-    padding: 8px 5px 5px;
-    margin-bottom: 4px;
+    padding: 9px 6px 6px;
+    margin-bottom: 4.5px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     
@@ -146,11 +146,11 @@
     
     .category-tab {
       flex: 0 0 auto;
-      padding: 5px 10px;
-      margin-right: 6px;
+      padding: 5.5px 11px;
+      margin-right: 7px;
       background-color: rgba(220, 200, 200, 0.7);
-      border-radius: 14px;
-      font-size: 12px;
+      border-radius: 15px;
+      font-size: 13px;
       white-space: nowrap;
       color: #666;
       transition: all 0.2s ease;
@@ -212,8 +212,8 @@
   .charm-grid {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    gap: 5px;
-    padding: 2px 10px;
+    gap: 5.5px;
+    padding: 2px 11px;
     
     .charm-item {
       aspect-ratio: 1;
@@ -233,7 +233,7 @@
         border-color: #A24E4E;
         
         img {
-          transform: scale(0.55);
+          transform: scale(0.6);
         }
       }
       
@@ -273,7 +273,7 @@
         height: 100%;
         object-fit: contain;
         transition: transform 0.3s ease;
-        transform: scale(0.9);
+        transform: scale(0.99);
         max-width: 100%;
         max-height: 100%;
       }
@@ -287,10 +287,10 @@
 
 @media (max-width: 480px) {
   .charm-drawer-container {
-    max-height: 40vh;
+    max-height: 44vh;
     
     &.closed {
-      transform: translateY(calc(100% - 28%));
+      transform: translateY(calc(100% - 31%));
     }
     
     &.open {
@@ -298,53 +298,53 @@
     }
     
     .charm-drawer-content {
-      max-height: calc(40vh - 60px);
+      max-height: calc(44vh - 66px);
     }
     
     .charm-drawer-handle {
-      min-height: 45px;
-      padding: 8px 0;
+      min-height: 49px;
+      padding: 9px 0;
       
       .handle-bar {
-        margin-bottom: 6px;
-        width: 40px;
-        height: 4px;
+        margin-bottom: 6.5px;
+        width: 44px;
+        height: 4.5px;
       }
       
       .handle-text {
-        font-size: 12px;
+        font-size: 13px;
       }
     }
     
     .category-tabs {
-      padding: 6px 5px 4px;
-      margin-bottom: 2px;
+      padding: 7px 5.5px 4.5px;
+      margin-bottom: 2.2px;
       
       .category-tab {
-        padding: 3px 7px;
-        font-size: 10px;
-        margin-right: 5px;
-        border-radius: 12px;
+        padding: 3.5px 8px;
+        font-size: 11px;
+        margin-right: 5.5px;
+        border-radius: 13px;
       }
     }
     
     .empty-recently-used {
-      min-height: 96px; /* Match the height of 2 rows in mobile */
-      font-size: 12px;
-      margin: 5px;
+      min-height: 105px;
+      font-size: 13px;
+      margin: 5.5px;
     }
     
     .charm-grid {
       /* Fixed height for 2 rows (calculate based on item height + gap) */
-      height: calc(2 * (min(11vw, 42px) + 10px));
+      height: calc(2 * (min(12vw, 46px) + 11px));
       overflow-x: auto;
       overflow-y: hidden;
       grid-auto-flow: column;
       grid-template-rows: repeat(2, 1fr);
       grid-template-columns: unset;
-      grid-auto-columns: min(11vw, 42px);
-      gap: 3px;
-      padding: 0 8px 5px;
+      grid-auto-columns: min(12vw, 46px);
+      gap: 3.5px;
+      padding: 0 9px 5.5px;
       /* Ensure smooth scrolling */
       scroll-behavior: smooth;
       scrollbar-width: none; /* Firefox */
@@ -356,15 +356,15 @@
       }
       
       .charm-item {
-        padding: 3px;
-        border-radius: 10px;
+        padding: 3.5px;
+        border-radius: 11px;
         
         img {
-          transform: scale(0.8);
+          transform: scale(0.88);
         }
         
         &.selected img {
-          transform: scale(0.9);
+          transform: scale(0.99);
         }
         
         &.placed {
@@ -402,9 +402,9 @@
 
 @media (min-width: 768px) {
   .charm-drawer-container {
-    max-width: 500px;
+    max-width: 550px;
     left: 50%;
-    transform: translateX(-50%) translateY(calc(100% - 60px));
+    transform: translateX(-50%) translateY(calc(100% - 66px));
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     
     &.open {
