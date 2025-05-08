@@ -21,8 +21,8 @@ export const necklaces: Necklace[] = [
       { id: 'gg-point10', position: { x: 73, y: 84 }, isOccupied: false },
       { id: 'gg-point11', position: { x: 79.5, y: 76.25 }, isOccupied: false },
       { id: 'gg-point12', position: { x: 84, y: 66.5 }, isOccupied: false },
-      { id: 'gg-point13', position: { x: 84.5, y: 56 }, isOccupied: false },
-      { id: 'gg-point14', position: { x: 84.5, y: 46 }, isOccupied: false },
+      { id: 'gg-point13', position: { x: 85.5, y: 56 }, isOccupied: false },
+      { id: 'gg-point14', position: { x: 85.5, y: 46 }, isOccupied: false },
     ]
   },
   {
