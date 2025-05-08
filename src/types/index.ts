@@ -25,10 +25,11 @@ export interface Charm {
 
 // Necklace type
 export interface Necklace {
-  id: string;
+  id: number;
   name: string;
   imagePath: string;
   attachmentPoints: AttachmentPoint[];
+  variationId: number; // WooCommerce variation ID
 }
 
 // Placed charm type for a charm that has been positioned on the necklace
@@ -37,4 +38,18 @@ export interface PlacedCharm {
   charmId: string;
   attachmentPointId: string;
   position: Position;
+}
+
+// Preset charm configuration type
+export interface PresetCharmPlacement {
+  attachmentPointIndex: number;
+  charmId: string;
+}
+
+// Preset configuration for predefined charm arrangements
+export interface PresetConfiguration {
+  id: string;
+  name: string;
+  description: string;
+  configuration: PresetCharmPlacement[];
 } 
