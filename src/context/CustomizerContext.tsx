@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useCallback, ReactNode, useEffect } from 'react';
-import { Necklace, Charm, PlacedCharm } from '../types';
+import { Necklace, Charm, PlacedCharm, PresetConfiguration} from '../types';
 import { necklaces } from '../data/necklaces';
 import { charms } from '../data/charms';
 
@@ -18,6 +18,7 @@ interface CustomizerContextState {
   addCharm: (charmId: string, attachmentPointId: string) => void;
   removeCharm: (placedCharmId: string) => void;
   clearAllCharms: () => void;
+  applyPreset: (presetConfiguration: PresetConfiguration) => void;
 }
 
 // Create context with initial empty state
@@ -179,6 +180,45 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
     });
   }, [selectedNecklace]);
 
+  // Action to apply a preset configuration of charms
+  const applyPreset = useCallback((preset: PresetConfiguration) => {
+    if (!selectedNecklace) return;
+    
+    // First clear all existing charms
+    clearAllCharms();
+    
+    // Now apply the preset configuration
+    const newPlacedCharms: PlacedCharm[] = [];
+    
+    preset.configuration.forEach(placement => {
+      // Check if the attachment point index is valid
+      if (placement.attachmentPointIndex < selectedNecklace.attachmentPoints.length) {
+        const attachmentPoint = selectedNecklace.attachmentPoints[placement.attachmentPointIndex];
+        const charmExists = charms.some(c => c.id === placement.charmId);
+        
+        // Only add if the charm exists and the attachment point is not occupied
+        if (charmExists && !attachmentPoint.isOccupied) {
+          // Mark the attachment point as occupied
+          attachmentPoint.isOccupied = true;
+          
+          // Create a unique ID for this placed charm
+          const placedCharmId = `preset-charm-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`;
+          
+          // Add the charm to the placed charms
+          newPlacedCharms.push({
+            id: placedCharmId,
+            charmId: placement.charmId,
+            attachmentPointId: attachmentPoint.id,
+            position: attachmentPoint.position
+          });
+        }
+      }
+    });
+    
+    // Update the placed charms state
+    setPlacedCharms(newPlacedCharms);
+  }, [selectedNecklace, charms, clearAllCharms]);
+
   // Sync attachment point occupation status with placed charms
   useEffect(() => {
     if (!selectedNecklace) return;
@@ -208,7 +248,8 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
     selectNecklace,
     addCharm,
     removeCharm,
-    clearAllCharms
+    clearAllCharms,
+    applyPreset
   };
 
   return (

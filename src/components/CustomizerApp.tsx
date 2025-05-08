@@ -6,6 +6,7 @@ import NecklaceDisplay from './NecklaceDisplay';
 import DndProvider from './DndProvider';
 import { TapToPlaceProvider } from '../hooks/useTapToPlace';
 import AddToCartButton from './AddToCartButton';
+import ActionButtons from './ActionButtons';
 import '../styles/CustomizerApp.scss';
 
 const CustomizerApp: React.FC = () => {
@@ -43,17 +44,12 @@ const CustomizerApp: React.FC = () => {
               </div>
               <div className="main-display">
                 <NecklaceDisplay />
+                <ActionButtons />
                 <AddToCartButton />
               </div>
             </main>
 
-            <footer className="customizer-footer">
-              <p>Click on a placed charm to remove it</p>
-              {isMobile ? (
-                <p className="mobile-instructions">Swipe up to open the charm selector, then tap a charm and an attachment point to place it</p>
-              ) : (
-                <p className="mobile-instructions">On mobile: Tap a charm and then tap an attachment point to place it</p>
-              )}
+            <footer className="customizer-footer">             
             </footer>
           </div>
         </CustomizerProvider>
