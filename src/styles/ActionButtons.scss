@@ -4,6 +4,8 @@
   gap: 30px;
   margin: 10px 0 20px;
   font-family: "Jost", sans-serif;
+  position: relative;
+  flex-wrap: wrap;
   
   .action-button {
     display: flex;
@@ -55,13 +57,35 @@
       background-color: #97778b;
     }
   }
+  
+  .preset-applied-message {
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 14px;
+    color: #8e6270;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    padding: 0 10px;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Mobile responsive styles */
 @media (max-width: 480px) {
   .action-buttons-container {
     gap: 50px;
-    margin: 5px 0 15px;
+    margin: 5px 0 25px;
     
     .action-button {
       width: 120px;
@@ -71,6 +95,11 @@
       .button-icon {
         font-size: 14px;
       }
+    }
+    
+    .preset-applied-message {
+      bottom: -22px;
+      font-size: 12px;
     }
   }
 } 
