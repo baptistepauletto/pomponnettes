@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useCallback, ReactNode, useEffect } from 'react';
-import { Necklace, Charm, PlacedCharm, PresetConfiguration, PresetCharmPlacement } from '../types';
+import { Necklace, Charm, PlacedCharm, PresetConfiguration} from '../types';
 import { necklaces } from '../data/necklaces';
 import { charms } from '../data/charms';
 
