@@ -14,7 +14,7 @@ export const charmPresets: PresetConfiguration[] = [
       { attachmentPointIndex: 3, charmId: 'rose' },
       { attachmentPointIndex: 7, charmId: 'rose' },
       { attachmentPointIndex: 10, charmId: 'rose' },
-      { attachmentPointIndex: 13, charmId: 'rose' }
+      { attachmentPointIndex: 12, charmId: 'rose' }
     ]
   },
   {
@@ -28,7 +28,7 @@ export const charmPresets: PresetConfiguration[] = [
       { attachmentPointIndex: 7, charmId: 'medal-sun-moon' },
       { attachmentPointIndex: 9, charmId: 'medal-snake' },
       { attachmentPointIndex: 11, charmId: 'medal-wave' },
-      { attachmentPointIndex: 13, charmId: 'medal-sun' }
+      { attachmentPointIndex: 12, charmId: 'medal-sun' }
     ]
   },
   {

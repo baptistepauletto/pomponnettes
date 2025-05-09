@@ -7,7 +7,7 @@ export const necklaces: Necklace[] = [
     id: 8187,
     name: 'Collier Grigri',
     imagePath: getImagePath('images/necklaces/grigri.png'),
-    variationId: 12764,
+    variationId: 12770,
     attachmentPoints: [
       { id: 'gg-point1', position: { x: 15, y: 44 }, isOccupied: false },
       { id: 'gg-point2', position: { x: 15, y: 54 }, isOccupied: false },
@@ -22,7 +22,7 @@ export const necklaces: Necklace[] = [
       { id: 'gg-point11', position: { x: 79.5, y: 76.25 }, isOccupied: false },
       { id: 'gg-point12', position: { x: 84, y: 66.5 }, isOccupied: false },
       { id: 'gg-point13', position: { x: 85.5, y: 56 }, isOccupied: false },
-      { id: 'gg-point14', position: { x: 85.5, y: 46 }, isOccupied: false },
+      //{ id: 'gg-point14', position: { x: 85.5, y: 46 }, isOccupied: false },
     ]
   },
   {
@@ -49,7 +49,7 @@ export const necklaces: Necklace[] = [
       { id: 'gc-point11', position: { x: 71, y: 68 }, isOccupied: false },
       { id: 'gc-point12', position: { x: 76, y: 57 }, isOccupied: false },
       { id: 'gc-point13', position: { x: 78, y: 46 }, isOccupied: false },
-      { id: 'gc-point14', position: { x: 80, y: 30 }, isOccupied: false },
+      //{ id: 'gc-point14', position: { x: 80, y: 30 }, isOccupied: false },
     ]
   },
 

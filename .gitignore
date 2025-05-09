@@ -26,4 +26,6 @@ dist-ssr
 # WordPress plugin files
 /pomponnettes-app/*
 !/pomponnettes-app/pomponnettes-app.php
+!/pomponnettes-app/wordpress-styles.css
+
 pomponnettes-app.zip
