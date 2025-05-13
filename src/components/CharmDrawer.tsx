@@ -15,9 +15,13 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [recentlyUsedCharmIds, setRecentlyUsedCharmIds] = useState<string[]>([]);
   const drawerRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
   const [hasSelectedCharm, setHasSelectedCharm] = useState(false);
+  const [isFirstOpen, setIsFirstOpen] = useState(true);
+  const hasPlayedScrollHint = useRef(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
   
   // Extract unique categories on component mount and update with Recently Used
   useEffect(() => {
@@ -66,12 +70,35 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
     if (isOpen) {
       setKeepSelectedCharm(true);
       
+      // When drawer opens for the first time, mark it
+      if (isFirstOpen) {
+        setIsFirstOpen(false);
+        hasPlayedScrollHint.current = false;
+      }
+      
       // Mark that the user has interacted with the drawer
       if (!hasInteracted) {
         setHasInteracted(true);
       }
     }
-  }, [isOpen, setKeepSelectedCharm, hasInteracted]);
+  }, [isOpen, setKeepSelectedCharm, hasInteracted, isFirstOpen]);
+
+  // Track horizontal scrolling in the charm grid
+  useEffect(() => {
+    const gridElement = gridRef.current;
+    if (!gridElement) return;
+
+    const handleScroll = () => {
+      if (!hasScrolled && gridElement.scrollLeft > 0) {
+        setHasScrolled(true);
+      }
+    };
+
+    gridElement.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      gridElement.removeEventListener('scroll', handleScroll);
+    };
+  }, [hasScrolled]);
 
   // Handle drawer state changes with animation lock
   const handleDrawerStateChange = (newIsOpen: boolean) => {
@@ -172,6 +199,11 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
     if (!hasSelectedCharm) {
       setHasSelectedCharm(true);
     }
+    
+    // Once a charm is selected, stop the scroll hint animation
+    if (!hasScrolled) {
+      setHasScrolled(true);
+    }
   };
 
   // Get filtered charms based on selected category
@@ -195,7 +227,7 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
 
   return (
     <div 
-      className={`charm-drawer-container ${isOpen ? 'open' : 'closed'} ${!hasInteracted ? 'first-time' : ''}`}
+      className={`charm-drawer-container ${isOpen ? 'open' : 'closed'} ${(!hasScrolled && !hasSelectedCharm && isOpen) ? 'first-time' : ''}`}
       ref={drawerRef}
     >
       {isOpen && !selectedCharmId && !hasSelectedCharm && (
@@ -244,7 +276,7 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
         
         {/* Charms grid */}
         {!(selectedCategory === 'Recently Used' && recentlyUsedCharmIds.length === 0) && (
-          <div className="charm-grid">
+          <div className="charm-grid" ref={gridRef}>
             {filteredCharms.map(charm => (
               <div 
                 key={charm.id}

@@ -76,6 +76,12 @@
         animation: text-pulse 2.5s infinite ease-in-out;
       }
     }
+    
+    &.open {
+      .charm-grid {
+        animation: subtle-horizontal-hint 3s infinite ease-in-out;
+      }
+    }
   }
   
   .charm-drawer-handle {
@@ -466,4 +472,15 @@
   0% { transform: scale(1); }
   50% { transform: scale(1.05); }
   100% { transform: scale(1); }
+}
+
+/* Horizontal scroll hint animation */
+@keyframes subtle-horizontal-hint {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(0); } /* Pause at beginning */
+  30% { transform: translateX(-15px); }
+  40% { transform: translateX(0); }
+  50% { transform: translateX(-15px); }
+  60% { transform: translateX(0); }
+  100% { transform: translateX(0); } /* Pause at end */
 } 
