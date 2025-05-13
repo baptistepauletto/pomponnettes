@@ -254,9 +254,7 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
                 <img src={charm.imagePath} alt={charm.name} />
                 {isCharmPlaced(charm.id) && <div className="placed-badge"></div>}
                 <div className="size-indicator">
-                  {charm.sizeScale <= 1 ? 'S' : 
-                   charm.sizeScale <= 1.4 ? 'M' : 
-                   charm.sizeScale <= 1.85 ? 'L' : 'XL'}
+                  {charm.sizeMark}
                 </div>
               </div>
             ))}

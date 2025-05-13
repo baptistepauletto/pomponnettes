@@ -92,7 +92,7 @@ const getCharmTransformStyles = (position: { x: number; y: number }) => {
   if (isMobile) {
     if (isLeftSide) {
       rotation = maxRotation * (distanceFromCenter / centerX) * (0.35 + distanceFromBottom);
-      horizontalOffset = -25 * Math.abs(rotation) / maxRotation;
+      horizontalOffset = -40 * Math.abs(rotation) / maxRotation;
     } else if (isRightSide) {
       rotation = -maxRotation * (distanceFromCenter / centerX) * (0.35 + distanceFromBottom);
       horizontalOffset = 25 * Math.abs(rotation) / maxRotation;
@@ -112,16 +112,6 @@ const getCharmTransformStyles = (position: { x: number; y: number }) => {
   if (isLeftSide) positionClass = 'left-side';
   else if (isRightSide) positionClass = 'right-side';
 
-  // Calculate horizontal offset based on rotation
-
-  if (rotation !== 0) {
-    if (isLeftSide) {
-      // Move left side charms slightly to the left
-
-    } else if (isRightSide) {
-
-    }
-  }
 
   // Return the rotation and translate to center the charm with horizontal offset
   // This makes the charm's top center align with the attachment point
