@@ -343,7 +343,8 @@
       grid-template-rows: repeat(2, 1fr);
       grid-template-columns: unset;
       grid-auto-columns: min(12vw, 46px);
-      gap: 3.5px;
+      column-gap: 3px;
+      row-gap: 2.5px;
       padding: 0 9px 5.5px;
       /* Ensure smooth scrolling */
       scroll-behavior: smooth;
