@@ -136,7 +136,8 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/aigle-1.6cm.png'),
     sizeScale: 1.6,
     sizeMark: 'L',
-    category: '🦋 Animals & Creatures'
+    category: '🦋 Animals & Creatures',
+    attachmentOffset: { x: 0, y: -30 }
   },
   {
     id: 'oeil-coeur',
@@ -208,7 +209,8 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/ange-1.5cm.png'),
     sizeScale: 1.5,
     sizeMark: 'M',
-    category: '✨ Symbols & Sky'
+    category: '✨ Symbols & Sky',
+    attachmentOffset: { x: 0, y: -15 }
   },
   {
     id: 'chien',
