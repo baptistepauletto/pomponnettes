@@ -22,13 +22,13 @@ export const charmPresets: PresetConfiguration[] = [
     name: 'Bold Statement',
     description: 'A striking combination of charms that makes a statement',
     configuration: [
-      { attachmentPointIndex: 0, charmId: 'medal-sun' },
-      { attachmentPointIndex: 2, charmId: 'medal-wave' },
-      { attachmentPointIndex: 4, charmId: 'medal-snake' },
-      { attachmentPointIndex: 7, charmId: 'medal-sun-moon' },
-      { attachmentPointIndex: 9, charmId: 'medal-snake' },
-      { attachmentPointIndex: 11, charmId: 'medal-wave' },
-      { attachmentPointIndex: 12, charmId: 'medal-sun' }
+      { attachmentPointIndex: 0, charmId: 'medaille-soleil' },
+      { attachmentPointIndex: 2, charmId: 'medaille-vague' },
+      { attachmentPointIndex: 4, charmId: 'medaille-serpent' },
+      { attachmentPointIndex: 7, charmId: 'medaille-soleil-lune' },
+      { attachmentPointIndex: 9, charmId: 'medaille-serpent' },
+      { attachmentPointIndex: 11, charmId: 'medaille-vague' },
+      { attachmentPointIndex: 12, charmId: 'medaille-soleil' }
     ]
   },
   {
@@ -36,8 +36,8 @@ export const charmPresets: PresetConfiguration[] = [
     name: 'Minimalist',
     description: 'A simple, understated charm arrangement',
     configuration: [
-      { attachmentPointIndex: 6, charmId: 'cute-knot' },
-      { attachmentPointIndex: 7, charmId: 'cute-knot' }
+      { attachmentPointIndex: 6, charmId: 'noeud-fin' },
+      { attachmentPointIndex: 7, charmId: 'noeud-fin' }
     ]
   }
 ];
