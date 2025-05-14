@@ -1,0 +1,51 @@
+/* WordPress-specific styles for Les Pomponnettes app */
+
+/* Target the parent WordPress container */
+.c-post__inner,
+.c-post_container, 
+.l-section,
+.c-post_wrap,
+.c-post--standard,
+.c-post--page,
+.c-post--no-sidebar,
+.c-post_row-2,
+.entry-content,
+article {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+/* Target the main app container */
+.pomponnettes-app-container {
+  width: 100%;
+  position: relative;
+  overflow: visible;
+}
+
+/* Desktop-only styles - apply full width positioning */
+@media (min-width: 769px) {
+  .pomponnettes-app-container {
+    width: 100vw;
+  }
+
+  /* Make sure the app takes full width */
+  .pomponnettes-app-container .App {
+    width: 100%;
+    background: #E4D6D6;
+  }
+
+  /* Fix any image scaling issues */
+  .pomponnettes-app-container img {
+    max-width: 100%;
+    height: auto;
+  }
+
+}
+
+
+/* Prevent horizontal scrolling */
+body {
+  overflow-x: hidden;
+}
+
