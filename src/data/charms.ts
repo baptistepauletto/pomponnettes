@@ -686,5 +686,557 @@ export const charms: Charm[] = [
     sizeScale: 2.0,
     sizeMark: 'XL',
     category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'bouddha-bleu',
+    name: 'Bouddha Bleu',
+    imagePath: getImagePath('images/charms/bouddha-bleu-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'bouddha-rose',
+    name: 'Bouddha Rose',
+    imagePath: getImagePath('images/charms/bouddha-rose-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'bouddha-turquoise',
+    name: 'Bouddha Turquoise',
+    imagePath: getImagePath('images/charms/bouddha-turquoise-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'bouddha-vert',
+    name: 'Bouddha Vert',
+    imagePath: getImagePath('images/charms/bouddha-vert-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'bouddha-violet',
+    name: 'Bouddha Violet',
+    imagePath: getImagePath('images/charms/bouddha-violet-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'bouddha-violet-clair',
+    name: 'Bouddha Violet Clair',
+    imagePath: getImagePath('images/charms/bouddha-violet-clair-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'cerise',
+    name: 'Cerise',
+    imagePath: getImagePath('images/charms/cerise-1.8cm.png'),
+    sizeScale: 1.8,
+    sizeMark: 'L',
+    category: '🍕 Food & Fun'
+  },
+  {
+    id: 'tortue-bleue-ciel',
+    name: 'Tortue Bleue Ciel',
+    imagePath: getImagePath('images/charms/tortue-bleue-ciel-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🌊 Sea & Beach'
+  },
+  {
+    id: 'tortue-rose',
+    name: 'Tortue Rose',
+    imagePath: getImagePath('images/charms/tortue-rose-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🌊 Sea & Beach'
+  },
+  {
+    id: 'tortue-rouge',
+    name: 'Tortue Rouge',
+    imagePath: getImagePath('images/charms/tortue-rouge-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🌊 Sea & Beach'
+  },
+  {
+    id: 'tortue-turquoise',
+    name: 'Tortue Turquoise',
+    imagePath: getImagePath('images/charms/tortue-turquoise-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🌊 Sea & Beach'
+  },
+  {
+    id: 'vrai-coquillage',
+    name: 'Vrai Coquillage',
+    imagePath: getImagePath('images/charms/vrai-coquillage-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🌊 Sea & Beach'
+  },
+  {
+    id: 'chien-bleu',
+    name: 'Chien Bleu',
+    imagePath: getImagePath('images/charms/chien-bleu-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🦋 Animals & Creatures'
+  },
+  {
+    id: 'chien-rose',
+    name: 'Chien Rose',
+    imagePath: getImagePath('images/charms/chien-rose-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🦋 Animals & Creatures'
+  },
+  {
+    id: 'chien-rose-pale',
+    name: 'Chien Rose Pale',
+    imagePath: getImagePath('images/charms/chien-rose-pale-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🦋 Animals & Creatures'
+  },
+  {
+    id: 'chien-rouge',
+    name: 'Chien Rouge',
+    imagePath: getImagePath('images/charms/chien-rouge-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🦋 Animals & Creatures'
+  },
+  {
+    id: 'chien-vert',
+    name: 'Chien Vert',
+    imagePath: getImagePath('images/charms/chien-vert-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🦋 Animals & Creatures'
+  },
+  {
+    id: 'citron',
+    name: 'Citron',
+    imagePath: getImagePath('images/charms/citron-1.2cm.png'),
+    sizeScale: 1.2,
+    sizeMark: 'M',
+    category: '🍕 Food & Fun'
+  },
+  {
+    id: 'coccinelle-rouge',
+    name: 'Coccinelle Rouge',
+    imagePath: getImagePath('images/charms/coccinelle-rouge-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🦋 Animals & Creatures'
+  },
+  {
+    id: 'coeur-sacre-blanc',
+    name: 'Coeur Sacre Blanc',
+    imagePath: getImagePath('images/charms/coeur-sacre-blanc-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '❤️ Hearts'
+  },
+  {
+    id: 'coeur-sacre-bleu',
+    name: 'Coeur Sacre Bleu',
+    imagePath: getImagePath('images/charms/coeur-sacre-bleu-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '❤️ Hearts'
+  },
+  {
+    id: 'coeur-sacre-bleu-ciel',
+    name: 'Coeur Sacre Bleu Ciel',
+    imagePath: getImagePath('images/charms/coeur-sacre-bleu-ciel-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '❤️ Hearts'
+  },
+  {
+    id: 'coeur-sacre-rose',
+    name: 'Coeur Sacre Rose',
+    imagePath: getImagePath('images/charms/coeur-sacre-rose-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '❤️ Hearts'
+  },
+  {
+    id: 'coeur-sacre-rouge',
+    name: 'Coeur Sacre Rouge',
+    imagePath: getImagePath('images/charms/coeur-sacre-rouge-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '❤️ Hearts'
+  },
+  {
+    id: 'croissant-grand',
+    name: 'Croissant Grand',
+    imagePath: getImagePath('images/charms/croissant-1.8cm.png'),
+    sizeScale: 1.8,
+    sizeMark: 'L',
+    category: '🍕 Food & Fun'
+  },
+  {
+    id: 'double-perle',
+    name: 'Double Perle',
+    imagePath: getImagePath('images/charms/double-perle-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'etoile-de-mer-bleue',
+    name: 'Etoile De Mer Bleue',
+    imagePath: getImagePath('images/charms/etoile-de-mer-bleue-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🌊 Sea & Beach'
+  },
+  {
+    id: 'etoile-de-mer-rose',
+    name: 'Etoile De Mer Rose',
+    imagePath: getImagePath('images/charms/etoile-de-mer-rose-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🌊 Sea & Beach'
+  },
+  {
+    id: 'etoile-de-mer-rouge',
+    name: 'Etoile De Mer Rouge',
+    imagePath: getImagePath('images/charms/etoile-de-mer-rouge-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🌊 Sea & Beach'
+  },
+  {
+    id: 'etoile-de-mer-turquoise',
+    name: 'Etoile De Mer Turquoise',
+    imagePath: getImagePath('images/charms/etoile-de-mer-turquoise-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🌊 Sea & Beach'
+  },
+  {
+    id: 'fleur-rose',
+    name: 'Fleur Rose',
+    imagePath: getImagePath('images/charms/fleur-rose-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🌿 Nature & Plants'
+  },
+  {
+    id: 'fraise',
+    name: 'Fraise',
+    imagePath: getImagePath('images/charms/fraise-1.8cm.png'),
+    sizeScale: 1.8,
+    sizeMark: 'L',
+    category: '🍕 Food & Fun'
+  },
+  {
+    id: 'framboise',
+    name: 'Framboise',
+    imagePath: getImagePath('images/charms/framboise-1.7cm.png'),
+    sizeScale: 1.7,
+    sizeMark: 'L',
+    category: '🍕 Food & Fun'
+  },
+  {
+    id: 'homard',
+    name: 'Homard',
+    imagePath: getImagePath('images/charms/homard-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '🌊 Sea & Beach'
+  },
+  {
+    id: 'main-de-fatma-bleue',
+    name: 'Main De Fatma Bleue',
+    imagePath: getImagePath('images/charms/main-de-fatma-bleue-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'main-de-fatma-bleue-ciel',
+    name: 'Main De Fatma Bleue Ciel',
+    imagePath: getImagePath('images/charms/main-de-fatma-bleue-ciel-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'main-de-fatma-jaune',
+    name: 'Main De Fatma Jaune',
+    imagePath: getImagePath('images/charms/main-de-fatma-jaune-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'main-de-fatma-rose',
+    name: 'Main De Fatma Rose',
+    imagePath: getImagePath('images/charms/main-de-fatma-rose-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'main-de-fatma-turquoise',
+    name: 'Main De Fatma Turquoise',
+    imagePath: getImagePath('images/charms/main-de-fatma-turquoise-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'main-de-fatma-violette',
+    name: 'Main De Fatma Violette',
+    imagePath: getImagePath('images/charms/main-de-fatma-violette-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'mure',
+    name: 'Mure',
+    imagePath: getImagePath('images/charms/mure-1.7cm.png'),
+    sizeScale: 1.7,
+    sizeMark: 'L',
+    category: '🍕 Food & Fun'
+  },
+  {
+    id: 'nounours-blanc',
+    name: 'Nounours Blanc',
+    imagePath: getImagePath('images/charms/nounours-blanc-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🦋 Animals & Creatures'
+  },
+  {
+    id: 'nounours-rose-pale',
+    name: 'Nounours Rose Pale',
+    imagePath: getImagePath('images/charms/nounours-rose-pale-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🦋 Animals & Creatures'
+  },
+  {
+    id: 'nounours-violet',
+    name: 'Nounours Violet',
+    imagePath: getImagePath('images/charms/nounours-violet-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🦋 Animals & Creatures'
+  },
+  {
+    id: 'oeil-turk-bleu',
+    name: 'Oeil Turk Bleu',
+    imagePath: getImagePath('images/charms/oeil-turk-bleu-1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'oeil-turk-jaune',
+    name: 'Oeil Turk Jaune',
+    imagePath: getImagePath('images/charms/oeil-turk-jaune-1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'oeil-turk-noir',
+    name: 'Oeil Turk Noir',
+    imagePath: getImagePath('images/charms/oeil-turk-noir-1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'oeil-turk-rose',
+    name: 'Oeil Turk Rose',
+    imagePath: getImagePath('images/charms/oeil-turk-rose-1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'oeil-turk-rouge',
+    name: 'Oeil Turk Rouge',
+    imagePath: getImagePath('images/charms/oeil-turk-rouge-1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'oeil-turk-turquoise',
+    name: 'Oeil Turk Turquoise',
+    imagePath: getImagePath('images/charms/oeil-turk-turquoise-1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'oeil-turk-vert',
+    name: 'Oeil Turk Vert',
+    imagePath: getImagePath('images/charms/oeil-turk-vert-1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'patte-de-chien-rose',
+    name: 'Patte De Chien Rose',
+    imagePath: getImagePath('images/charms/patte-de-chien-rose-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '🦋 Animals & Creatures'
+  },
+  {
+    id: 'perle',
+    name: 'Perle',
+    imagePath: getImagePath('images/charms/perle-1.2cm.png'),
+    sizeScale: 1.2,
+    sizeMark: 'M',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'perle-chat-bleu',
+    name: 'Perle Chat Bleu',
+    imagePath: getImagePath('images/charms/perle-chat-bleu-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🦋 Animals & Creatures'
+  },
+  {
+    id: 'perle-chat-rouge',
+    name: 'Perle Chat Rouge',
+    imagePath: getImagePath('images/charms/perle-chat-rouge-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🦋 Animals & Creatures'
+  },
+  {
+    id: 'perle-oeil-coeur',
+    name: 'Perle Oeil Coeur',
+    imagePath: getImagePath('images/charms/perle-oeil-coeur-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '❤️ Hearts'
+  },
+  {
+    id: 'perle-oeil-fleur',
+    name: 'Perle Oeil Fleur',
+    imagePath: getImagePath('images/charms/perle-oeil-fleur-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🌿 Nature & Plants'
+  },
+  {
+    id: 'perle-poisson-blanc',
+    name: 'Perle Poisson Blanc',
+    imagePath: getImagePath('images/charms/perle-poisson-blanc-3cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🌊 Sea & Beach'
+  },
+  {
+    id: 'perle-poisson-bleu',
+    name: 'Perle Poisson Bleu',
+    imagePath: getImagePath('images/charms/perle-poisson-bleu-3cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🌊 Sea & Beach'
+  },
+  {
+    id: 'perle-poisson-jaune',
+    name: 'Perle Poisson Jaune',
+    imagePath: getImagePath('images/charms/perle-poisson-jaune-3cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🌊 Sea & Beach'
+  },
+  {
+    id: 'perle-poisson-rose',
+    name: 'Perle Poisson Rose',
+    imagePath: getImagePath('images/charms/perle-poisson-rose-3cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🌊 Sea & Beach'
+  },
+  {
+    id: 'perle-poisson-rouge',
+    name: 'Perle Poisson Rouge',
+    imagePath: getImagePath('images/charms/perle-poisson-rouge-3cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🌊 Sea & Beach'
+  },
+  {
+    id: 'perle-poisson-turquoise',
+    name: 'Perle Poisson Turquoise',
+    imagePath: getImagePath('images/charms/perle-poisson-turquoise-3cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🌊 Sea & Beach'
+  },
+  {
+    id: 'petite-perle',
+    name: 'Petite Perle',
+    imagePath: getImagePath('images/charms/petite-perle-1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '✨ Symbols & Sky'
+  },
+  {
+    id: 'piment',
+    name: 'Piment',
+    imagePath: getImagePath('images/charms/piment-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '🍕 Food & Fun'
+  },
+  {
+    id: 'poisson-multicolore',
+    name: 'Poisson Multicolore',
+    imagePath: getImagePath('images/charms/poisson-multicolore-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🌊 Sea & Beach'
+  },
+  {
+    id: 'poisson-raye',
+    name: 'Poisson Raye',
+    imagePath: getImagePath('images/charms/poisson-raye-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🌊 Sea & Beach'
+  },
+  {
+    id: 'pomme',
+    name: 'Pomme',
+    imagePath: getImagePath('images/charms/pomme-1.8cm.png'),
+    sizeScale: 1.8,
+    sizeMark: 'L',
+    category: '🍕 Food & Fun'
+  },
+  {
+    id: 'tortue-bleue',
+    name: 'Tortue Bleue',
+    imagePath: getImagePath('images/charms/tortue-bleue-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🌊 Sea & Beach'
   }
 ];
