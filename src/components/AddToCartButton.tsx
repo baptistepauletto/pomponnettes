@@ -38,20 +38,11 @@ const AddToCartButton: React.FC = () => {
         text: result.message,
         isError: !result.success
       });
-      
-      // If successful, could redirect to cart or show additional options
-      if (result.success) {
-        // Optional: redirect to cart after a delay
-        // setTimeout(() => {
-        //   window.location.href = '/cart/';
-        // }, 2000);
-      }
     } catch (error) {
       setMessage({
         text: "An unexpected error occurred. Please try again.",
         isError: true
       });
-      console.error("Add to cart error:", error);
     } finally {
       setLoading(false);
     }
