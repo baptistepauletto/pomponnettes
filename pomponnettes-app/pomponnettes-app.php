@@ -96,27 +96,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
     add_filter('woocommerce_add_cart_item_data', 'pomponnettes_add_cart_item_data', 10, 3);
     
     /**
-     * Display custom item data in the cart
-     */
-    function pomponnettes_get_item_data($item_data, $cart_item) {
-        if (isset($cart_item['charm_data']) && is_array($cart_item['charm_data'])) {
-            // Format charm data for display
-            foreach ($cart_item['charm_data'] as $position => $value) {
-                $display_value = str_replace('-', ' ', $value);
-                $display_value = ucfirst($display_value);
-                
-                $item_data[] = array(
-                    'key'   => sprintf(__('Charm %s', 'pomponnettes'), $position),
-                    'value' => $display_value
-                );
-            }
-        }
-        
-        return $item_data;
-    }
-    add_filter('woocommerce_get_item_data', 'pomponnettes_get_item_data', 10, 2);
-    
-    /**
      * Save custom data to order item meta when checkout is completed
      */
     function pomponnettes_checkout_create_order_line_item($item, $cart_item_key, $values, $order) {
