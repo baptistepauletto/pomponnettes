@@ -15,8 +15,7 @@ const getWooCommerceCharmId = (internalCharmId: string) => {
     return 'aucun-charm';
   }
   
-  // For now, we'll just return the internal ID as the WooCommerce ID
-  // This can be customized with a proper mapping if needed
+  // Return the charm ID as-is since they're already in the correct WooCommerce format
   return internalCharmId;
 };
 
@@ -53,25 +52,21 @@ const formatCustomizerData = (necklace: Necklace, placedCharms: PlacedCharm[]) =
     }
   });
 
-  // Create the data array for WooCommerce attributes
-  const charmData = [];
+  // Create the data object for WooCommerce attributes
+  const attributeData: Record<string, string> = {};
   
   // For each possible position, add an attribute
   for (let i = 1; i <= maxPosition; i++) {
     const charmId = getWooCommerceCharmId(charmsByPosition.get(i.toString()) || '');
-    
-    charmData.push({
-      name: `attribute_pa_charm-${i}`,
-      value: charmId
-    });
+    attributeData[`attribute_pa_charm-${i}`] = charmId;
   }
   
-  
-  return charmData;
+  return attributeData;
 };
 
 /**
- * Adds the customized necklace to the WooCommerce cart
+ * Adds the customized necklace to the WooCommerce cart using AJAX
+ * This matches how regular product pages add to cart without page navigation
  * 
  * @param necklace The selected necklace
  * @param placedCharms Array of placed charms
@@ -81,54 +76,82 @@ export const addToCart = async (
   necklace: Necklace,
   placedCharms: PlacedCharm[],
 ): Promise<{ success: boolean; message: string }> => {
-  try {
-    if (!necklace) {
-      return { success: false, message: "No necklace selected" };
-    }
-    
-    // No charms added
-    if (placedCharms.length === 0) {
-      return { success: false, message: "Please add at least one charm to your necklace" };
-    }
-    
-    // Format data for sending to WooCommerce
-    const attributeData = formatCustomizerData(necklace, placedCharms);
-    
-    // Create the form data to be submitted
-    const formData = new FormData();
-    
-    // Add the product ID and variation ID
-    formData.append('product_id', necklace.id.toString());
-    formData.append('variation_id', (necklace.variationId).toString());
-    
-    // Add quantity
-    formData.append('quantity', '1');
-    
-    // Add each charm attribute to the form data
-    attributeData.forEach(attr => {
-      formData.append(attr.name, attr.value);
-    });
-    
-    // Send the request to the WooCommerce site
-    const response = await fetch('/cart/', {
-      method: 'POST',
-      body: formData,
-      credentials: 'include' // Include cookies for session management
-    });
-    
-    if (!response.ok) {
-      throw new Error(`Server responded with ${response.status}`);
-    }
-    
-    return { 
-      success: true, 
-      message: "Your customized necklace has been added to your cart!" 
-    };
-  } catch (error) {
-    console.error("Error adding to cart:", error);
-    return { 
-      success: false, 
-      message: "There was an error adding your necklace to the cart. Please try again." 
-    };
+  if (!necklace) {
+    return { success: false, message: "No necklace selected" };
   }
+  
+  if (placedCharms.length === 0) {
+    return { success: false, message: "Please add at least one charm to your necklace" };
+  }
+
+  // Check if jQuery is available (required for WooCommerce AJAX)
+  if (typeof jQuery === 'undefined') {
+    console.error('jQuery is required for WooCommerce AJAX cart');
+    return { success: false, message: "jQuery not available" };
+  }
+
+  // Get the formatted attribute data
+  const attributeData = formatCustomizerData(necklace, placedCharms);
+  
+  // Create the data object for the request
+  const data: Record<string, any> = {
+    product_id: necklace.id,
+    'add-to-cart': necklace.id,
+    quantity: 1
+  };
+  
+  // Add variation ID if applicable
+  if (necklace.variationId) {
+    data.variation_id = necklace.variationId;
+  }
+  
+  // Add all attributes
+  Object.entries(attributeData).forEach(([name, value]) => {
+    data[name] = value;
+  });
+  
+  // Use jQuery's AJAX method
+  return new Promise((resolve) => {
+    jQuery.ajax({
+      type: 'POST',
+      url: '/?wc-ajax=ip_add_to_cart',
+      data: data,
+      dataType: 'json',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      xhrFields: {
+        withCredentials: true
+      },
+      success: function(response: any) {
+        // Check if response is valid
+        if (response && response.fragments) {
+          // Update mini cart fragments in DOM
+          jQuery.each(response.fragments, function(key: string, value: string) {
+            jQuery(key).replaceWith(value);
+          });
+          
+          // Trigger WooCommerce's standard events
+          jQuery(document.body).trigger('wc_fragments_loaded');
+          jQuery(document.body).trigger('added_to_cart', [response.fragments, response.cart_hash, null]);
+          
+          resolve({ 
+            success: true, 
+            message: "Product added to cart" 
+          });
+        } else {
+          resolve({ 
+            success: false, 
+            message: "Failed to add to cart" 
+          });
+        }
+      },
+      error: function() {
+        resolve({ 
+          success: false, 
+          message: "Network error occurred" 
+        });
+      }
+    });
+  });
 }; 

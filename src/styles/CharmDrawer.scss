@@ -79,7 +79,7 @@
     
     &.open {
       .charm-grid {
-        animation: subtle-horizontal-hint 3s infinite ease-in-out;
+        animation: subtle-horizontal-hint 4s infinite ease-in-out;
       }
     }
   }
@@ -477,10 +477,10 @@
 /* Horizontal scroll hint animation */
 @keyframes subtle-horizontal-hint {
   0% { transform: translateX(0); }
-  20% { transform: translateX(0); } /* Pause at beginning */
-  30% { transform: translateX(-15px); }
   40% { transform: translateX(0); }
   50% { transform: translateX(-15px); }
   60% { transform: translateX(0); }
+  70% { transform: translateX(-15px); }
+  80% { transform: translateX(0); }
   100% { transform: translateX(0); } /* Pause at end */
 } 
