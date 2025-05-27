@@ -74,8 +74,13 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
      * Save custom configuration data to cart item meta
      */
     function pomponnettes_add_cart_item_data($cart_item_data, $product_id, $variation_id) {
-        // Store information that this item was added from the customizer
-        $cart_item_data['added_from_customizer'] = true;
+        // Check if this request came from the Pomponnettes React app
+        $from_pomponnettes_app = isset($_POST['pomponnettes_customizer_used']) && $_POST['pomponnettes_customizer_used'] === 'true';
+        
+        // Only proceed if the request came from our React app
+        if (!$from_pomponnettes_app) {
+            return $cart_item_data;
+        }
         
         // Extract charm data from the attributes
         $charm_data = array();
@@ -86,7 +91,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             }
         }
         
-        // Store charm data for later use
+        // Add customizer flags since we confirmed this came from our app
+        $cart_item_data['added_from_customizer'] = true;
+        
+        // Store charm data if any was found
         if (!empty($charm_data)) {
             $cart_item_data['charm_data'] = $charm_data;
         }

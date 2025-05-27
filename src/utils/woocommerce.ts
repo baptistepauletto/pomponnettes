@@ -97,7 +97,9 @@ export const addToCart = async (
   const data: Record<string, any> = {
     product_id: necklace.id,
     'add-to-cart': necklace.id,
-    quantity: 1
+    quantity: 1,
+    // Flag to identify that this request came from the Pomponnettes customizer
+    pomponnettes_customizer_used: 'true'
   };
   
   // Add variation ID if applicable
