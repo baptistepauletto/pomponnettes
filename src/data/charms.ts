@@ -153,7 +153,8 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/papillon-1.5cm.png'),
     sizeScale: 1.5,
     sizeMark: 'M',
-    category: '🦋 Animals & Creatures'
+    category: '🦋 Animals & Creatures',
+    attachmentOffset: { x: 0, y: -15 }
   },
   {
     id: 'perroquet',
@@ -791,7 +792,8 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/chien-bleu-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🦋 Animals & Creatures'
+    category: '🦋 Animals & Creatures',
+    attachmentOffset: { x: -10, y: 0 }
   },
   {
     id: 'chien-rose',
@@ -799,7 +801,8 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/chien-rose-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🦋 Animals & Creatures'
+    category: '🦋 Animals & Creatures',
+    attachmentOffset: { x: -10, y: 0 }
   },
   {
     id: 'chien-rose-pale',
@@ -807,7 +810,8 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/chien-rose-pale-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🦋 Animals & Creatures'
+    category: '🦋 Animals & Creatures',
+    attachmentOffset: { x: -10, y: 0 }
   },
   {
     id: 'chien-rouge',
@@ -815,7 +819,8 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/chien-rouge-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🦋 Animals & Creatures'
+    category: '🦋 Animals & Creatures',
+    attachmentOffset: { x: -10, y: 0 }
   },
   {
     id: 'chien-vert',
@@ -823,7 +828,8 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/chien-vert-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🦋 Animals & Creatures'
+    category: '🦋 Animals & Creatures',
+    attachmentOffset: { x: -10, y: 0 }
   },
   {
     id: 'citron',
