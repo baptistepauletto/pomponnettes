@@ -45,19 +45,12 @@
       margin-left: -18px;
     }
     
-    @media (max-width: 480px) {
-
-      width: 28px;
-      height: 28px;
-      font-size: 18px;
-      
-      &.left {
-        margin-right: -14px;
-      }
-      
-      &.right {
-        margin-left: -14px;
-      }
+    @media (max-width: 768px) {
+      display: none;
+    }
+    
+    @media (min-width: 769px) {
+      display: flex;
     }
   }
   
@@ -76,9 +69,22 @@
       display: none;
     }
     
+    /* Improve touch scrolling on mobile */
+    -webkit-overflow-scrolling: touch;
+    
+    /* Prevent text selection during swipe */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
     @media (max-width: 480px) {
       padding: 8px 15px;
-      gap: 0.6rem;
+      gap: 0.8rem;
+    }
+    
+    @media (max-width: 768px) {
+      padding: 10px 20px;
     }
     
     .necklace-option {
@@ -90,6 +96,10 @@
       min-width: 140px;
       flex: 0 0 auto;
       
+      /* Improve touch interactions */
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      
       &:hover {
         border-color: #ccc;
       }
@@ -99,11 +109,26 @@
         box-shadow: 0 0 0 2px rgba(162, 78, 78, 0.3);
       }
       
+      /* Visual feedback during swiping */
+      &.swiping {
+        pointer-events: none;
+        opacity: 0.8;
+        transform: scale(0.98);
+      }
+      
       img {
         width: 100%;
         height: 80px;
         object-fit: contain;
         margin-bottom: 0.2rem;
+        
+        /* Prevent image dragging during swipe */
+        -webkit-user-drag: none;
+        -khtml-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+        user-drag: none;
+        pointer-events: none;
       }
       
       p {
@@ -114,18 +139,34 @@
         overflow: hidden;
         text-overflow: ellipsis;
         font-family: "Jost", sans-serif;
+        pointer-events: none;
       }
       
       @media (max-width: 480px) {
-        padding: 0.4rem;
-        width: 100%;
+        padding: 0.3rem;
+        min-width: 130px;
+        max-width: 130px;
         
         img {
-          height: 80px;
+          height: 70px;
         }
         
         p {
-          font-size: 0.7rem;
+          font-size: 0.65rem;
+        }
+      }
+      
+      @media (min-width: 481px) and (max-width: 768px) {
+        min-width: 120px;
+        max-width: 120px;
+        padding: 0.4rem;
+        
+        img {
+          height: 75px;
+        }
+        
+        p {
+          font-size: 0.75rem;
         }
       }
     }
