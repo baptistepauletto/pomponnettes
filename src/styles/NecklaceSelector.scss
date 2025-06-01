@@ -35,6 +35,7 @@
   }
   
   .necklace-options {
+    // Base properties first
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth;
@@ -43,6 +44,26 @@
     padding: 10px 20px;
     gap: 1rem;
     width: 100%;
+    
+    /* Hide scrollbar for Chrome/Safari */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    
+    /* Improve touch scrolling on mobile */
+    -webkit-overflow-scrolling: touch;
+    
+    /* Prevent text selection during swipe */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+    // Mobile specific styles
+    @media (max-width: 480px) {
+      padding: 8px 15px;
+      gap: 0.8rem;
+    }
     
     // Desktop optimization - responsive sizing
     @media (min-width: 481px) {
@@ -61,26 +82,8 @@
       gap: 1.5rem;
     }
     
-    /* Hide scrollbar for Chrome/Safari */
-    &::-webkit-scrollbar {
-      display: none;
-    }
-    
-    /* Improve touch scrolling on mobile */
-    -webkit-overflow-scrolling: touch;
-    
-    /* Prevent text selection during swipe */
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    
-    @media (max-width: 480px) {
-      padding: 8px 15px;
-      gap: 0.8rem;
-    }
-    
     .necklace-option {
+      // Base properties first
       cursor: pointer;
       padding: 0.5rem;
       border-radius: 8px;
@@ -89,46 +92,11 @@
       min-width: 140px;
       flex: 0 0 auto;
       
-      // Small desktop optimization - smaller but still functional
-      @media (min-width: 481px) and (max-width: 768px) {
-        min-width: 130px;
-        padding: 0.5rem;
-        border-radius: 10px;
-        
-        &:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-        }
-      }
-      
-      // Medium desktop optimization - balanced size
-      @media (min-width: 769px) and (max-width: 1023px) {
-        min-width: 145px;
-        padding: 0.6rem;
-        border-radius: 11px;
-        
-        &:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-      }
-      
-      // Large desktop optimization - full size
-      @media (min-width: 1024px) {
-        min-width: 160px;
-        padding: 0.75rem;
-        border-radius: 12px;
-        
-        &:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-      }
-      
       /* Improve touch interactions */
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
       
+      // Hover states
       &:hover {
         border-color: #ccc;
       }
@@ -149,11 +117,68 @@
         transform: scale(0.98);
       }
       
+      // Mobile-specific sizing
+      @media (max-width: 480px) {
+        padding: 0.3rem;
+        min-width: 110px;
+        max-width: 110px;
+      }
+      
+      // Small desktop optimization
+      @media (min-width: 481px) and (max-width: 768px) {
+        min-width: 130px;
+        padding: 0.5rem;
+        border-radius: 10px;
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+      }
+      
+      // Medium desktop optimization
+      @media (min-width: 769px) and (max-width: 1023px) {
+        min-width: 145px;
+        padding: 0.6rem;
+        border-radius: 11px;
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+      }
+      
+      // Large desktop optimization
+      @media (min-width: 1024px) {
+        min-width: 160px;
+        padding: 0.75rem;
+        border-radius: 12px;
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+      }
+      
       img {
+        // Base properties first
         width: 100%;
         height: 80px;
         object-fit: contain;
         margin-bottom: 0.3rem;
+        
+        /* Prevent image dragging during swipe */
+        -webkit-user-drag: none;
+        -khtml-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+        user-drag: none;
+        pointer-events: none;
+        
+        // Mobile sizing
+        @media (max-width: 480px) {
+          height: 70px;
+        }
         
         // Responsive image sizes for desktop
         @media (min-width: 481px) and (max-width: 768px) {
@@ -170,14 +195,6 @@
           height: 90px;
           margin-bottom: 0.5rem;
         }
-        
-        /* Prevent image dragging during swipe */
-        -webkit-user-drag: none;
-        -khtml-user-drag: none;
-        -moz-user-drag: none;
-        -o-user-drag: none;
-        user-drag: none;
-        pointer-events: none;
       }
       
       .necklace-info {
@@ -185,6 +202,7 @@
         pointer-events: none;
         
         .necklace-name {
+          // Base properties first
           font-size: 0.9rem;
           margin: 0 0 0.2rem 0;
           white-space: nowrap;
@@ -192,6 +210,11 @@
           text-overflow: ellipsis;
           font-family: "Jost", sans-serif;
           color: #333;
+          
+          // Mobile sizing
+          @media (max-width: 480px) {
+            font-size: 0.65rem;
+          }
           
           // Responsive text sizes for desktop
           @media (min-width: 481px) and (max-width: 768px) {
@@ -211,11 +234,17 @@
         }
         
         .necklace-price {
+          // Base properties first
           font-size: 0.8rem;
           margin: 0;
           color: #A24E4E;
           font-weight: 600;
           font-family: "Playfair Display", serif;
+          
+          // Mobile sizing
+          @media (max-width: 480px) {
+            font-size: 0.7rem;
+          }
           
           // Responsive price text for desktop
           @media (min-width: 481px) and (max-width: 768px) {
@@ -231,27 +260,6 @@
           @media (min-width: 1024px) {
             font-size: 0.9rem;
             font-weight: 700;
-          }
-        }
-      }
-      
-      // Mobile-specific sizing to show partial views of adjacent necklaces
-      @media (max-width: 480px) {
-        padding: 0.3rem;
-        min-width: 110px;
-        max-width: 110px;
-        
-        img {
-          height: 70px;
-        }
-        
-        .necklace-info {
-          .necklace-name {
-            font-size: 0.65rem;
-          }
-          
-          .necklace-price {
-            font-size: 0.7rem;
           }
         }
       }

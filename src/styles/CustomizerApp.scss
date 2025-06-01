@@ -3,9 +3,10 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  max-width: 1200px;
+  width: 100%;
+  max-width: none;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 0.5rem;
   font-family: "Jost", sans-serif;
   
   // Optimize header space for better layout
@@ -87,20 +88,20 @@
       
       // Small desktop - narrower side panels
       @media (min-width: 481px) and (max-width: 768px) {
-        grid-template-columns: 240px 1fr 240px;
+        grid-template-columns: 2fr 4fr 2fr;
         gap: 1rem;
       }
       
       // Medium desktop - slightly larger side panels
       @media (min-width: 769px) and (max-width: 1023px) {
-        grid-template-columns: 260px 1fr 260px;
+        grid-template-columns: 2fr 4fr 2fr;
         gap: 1.25rem;
       }
       
       // Large desktop - full size side panels
       @media (min-width: 1024px) {
-        grid-template-columns: 280px 1fr 280px;
-        gap: 1.5rem;
+        grid-template-columns: 3fr 7fr 3fr;
+        gap: 0rem;
       }
       
       grid-template-areas: 
