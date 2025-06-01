@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { useCustomizer } from '../context/CustomizerContext';
 import { triggerHapticFeedback } from '../hooks/useTapToPlace';
 import '../styles/NecklaceSelector.scss';
