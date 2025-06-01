@@ -54,31 +54,28 @@ const CustomizerApp: React.FC = () => {
                   </div>
                 </>
               ) : (
-                // Desktop layout - NecklaceSelector spanning all columns
+                // Desktop layout - Direct grid areas
                 <>
                   {/* Top section - Necklace selector spanning all columns */}
                   <div className="necklace-selector-container">
                     <NecklaceSelector />
                   </div>
                   
-                  {/* Bottom section - 3-column panels */}
-                  <div className="panels-container">
-                    {/* Left panel - Charm area */}
-                    <div className="left-panel">
-                      <CharmSelector />
-                    </div>
-                    
-                    {/* Center panel - Necklace display */}
-                    <div className="center-panel">
-                      <NecklaceDisplay />
-                      <ActionButtons />
-                    </div>
-                    
-                    {/* Right panel - Price area */}
-                    <div className="right-panel">
-                      <PriceCalculator />
-                      <AddToCartButton />
-                    </div>
+                  {/* Left panel - Charm area */}
+                  <div className="left-panel">
+                    <CharmSelector />
+                  </div>
+                  
+                  {/* Center panel - Necklace display */}
+                  <div className="center-panel">
+                    <NecklaceDisplay />
+                    <ActionButtons />
+                  </div>
+                  
+                  {/* Right panel - Price area */}
+                  <div className="right-panel">
+                    <PriceCalculator />
+                    <AddToCartButton />
                   </div>
                 </>
               )}

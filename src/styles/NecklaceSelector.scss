@@ -1,10 +1,15 @@
 .necklace-selector {
   margin-bottom: 2rem;
+  width: 100%; // Ensure full width of container
   
   // Desktop optimization for spanning layout
   @media (min-width: 481px) {
     margin-bottom: 1rem;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
   
   h3 {
@@ -21,6 +26,12 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    
+    // Desktop - ensure proper centering
+    @media (min-width: 481px) {
+      max-width: 100%;
+      margin: 0 auto;
+    }
   }
   
   .necklace-options {
@@ -33,14 +44,21 @@
     gap: 1rem;
     width: 100%;
     
-    // Desktop optimization - center content and remove scrolling
+    // Desktop optimization - responsive sizing
     @media (min-width: 481px) {
       overflow-x: visible;
       justify-content: center;
       flex-wrap: wrap;
       padding: 15px 0;
-      gap: 1.5rem;
+      gap: 1rem; // Reduced from 1.5rem
       max-width: 100%;
+      width: auto; // Allow natural width based on content
+      margin: 0 auto; // Center the flex container
+    }
+    
+    // Larger desktop screens - more space
+    @media (min-width: 1024px) {
+      gap: 1.5rem;
     }
     
     /* Hide scrollbar for Chrome/Safari */
@@ -71,8 +89,32 @@
       min-width: 140px;
       flex: 0 0 auto;
       
-      // Desktop optimization - larger and more prominent
-      @media (min-width: 481px) {
+      // Small desktop optimization - smaller but still functional
+      @media (min-width: 481px) and (max-width: 768px) {
+        min-width: 130px;
+        padding: 0.5rem;
+        border-radius: 10px;
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+      }
+      
+      // Medium desktop optimization - balanced size
+      @media (min-width: 769px) and (max-width: 1023px) {
+        min-width: 145px;
+        padding: 0.6rem;
+        border-radius: 11px;
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+      }
+      
+      // Large desktop optimization - full size
+      @media (min-width: 1024px) {
         min-width: 160px;
         padding: 0.75rem;
         border-radius: 12px;
@@ -113,8 +155,18 @@
         object-fit: contain;
         margin-bottom: 0.3rem;
         
-        // Desktop optimization - larger images
-        @media (min-width: 481px) {
+        // Responsive image sizes for desktop
+        @media (min-width: 481px) and (max-width: 768px) {
+          height: 75px;
+          margin-bottom: 0.4rem;
+        }
+        
+        @media (min-width: 769px) and (max-width: 1023px) {
+          height: 85px;
+          margin-bottom: 0.45rem;
+        }
+        
+        @media (min-width: 1024px) {
           height: 90px;
           margin-bottom: 0.5rem;
         }
@@ -141,8 +193,18 @@
           font-family: "Jost", sans-serif;
           color: #333;
           
-          // Desktop optimization
-          @media (min-width: 481px) {
+          // Responsive text sizes for desktop
+          @media (min-width: 481px) and (max-width: 768px) {
+            font-size: 0.85rem;
+            font-weight: 500;
+          }
+          
+          @media (min-width: 769px) and (max-width: 1023px) {
+            font-size: 0.95rem;
+            font-weight: 500;
+          }
+          
+          @media (min-width: 1024px) {
             font-size: 1rem;
             font-weight: 500;
           }
@@ -155,8 +217,18 @@
           font-weight: 600;
           font-family: "Playfair Display", serif;
           
-          // Desktop optimization
-          @media (min-width: 481px) {
+          // Responsive price text for desktop
+          @media (min-width: 481px) and (max-width: 768px) {
+            font-size: 0.8rem;
+            font-weight: 700;
+          }
+          
+          @media (min-width: 769px) and (max-width: 1023px) {
+            font-size: 0.85rem;
+            font-weight: 700;
+          }
+          
+          @media (min-width: 1024px) {
             font-size: 0.9rem;
             font-weight: 700;
           }
