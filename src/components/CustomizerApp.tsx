@@ -38,17 +38,50 @@ const CustomizerApp: React.FC = () => {
             </header>
 
             <main className="customizer-content">
-              <div className="sidebar">
-                <NecklaceSelector />
-                {/* Show CharmSelector only on desktop */}
-                {!isMobile && <CharmSelector />}
-              </div>
-              <div className="main-display">
-                <NecklaceDisplay />
-                <PriceCalculator />
-                <ActionButtons />
-                <AddToCartButton />
-              </div>
+              {isMobile ? (
+                // Mobile layout (unchanged)
+                <>
+                  <div className="sidebar">
+                    <NecklaceSelector />
+                    {/* Show CharmSelector only on desktop */}
+                    {!isMobile && <CharmSelector />}
+                  </div>
+                  <div className="main-display">
+                    <NecklaceDisplay />
+                    <PriceCalculator />
+                    <ActionButtons />
+                    <AddToCartButton />
+                  </div>
+                </>
+              ) : (
+                // Desktop layout - NecklaceSelector spanning all columns
+                <>
+                  {/* Top section - Necklace selector spanning all columns */}
+                  <div className="necklace-selector-container">
+                    <NecklaceSelector />
+                  </div>
+                  
+                  {/* Bottom section - 3-column panels */}
+                  <div className="panels-container">
+                    {/* Left panel - Charm area */}
+                    <div className="left-panel">
+                      <CharmSelector />
+                    </div>
+                    
+                    {/* Center panel - Necklace display */}
+                    <div className="center-panel">
+                      <NecklaceDisplay />
+                      <ActionButtons />
+                    </div>
+                    
+                    {/* Right panel - Price area */}
+                    <div className="right-panel">
+                      <PriceCalculator />
+                      <AddToCartButton />
+                    </div>
+                  </div>
+                </>
+              )}
             </main>
 
             <footer className="customizer-footer">             

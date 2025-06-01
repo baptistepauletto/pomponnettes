@@ -1,59 +1,26 @@
 .necklace-selector {
   margin-bottom: 2rem;
   
+  // Desktop optimization for spanning layout
+  @media (min-width: 481px) {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
   h3 {
     margin-bottom: 1rem;
     font-size: 1.2rem;
     color: #333;
     font-family: "Playfair Display", serif;
+    text-align: center;
   }
   
   .carousel-container {
     position: relative;
     display: flex;
     align-items: center;
-    width: 100%;
-  }
-  
-  .carousel-button {
-    display: flex;
     justify-content: center;
-    align-items: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-color: white;
-    border: 1px solid #ddd;
-    color: #666;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 10;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    flex-shrink: 0;
-    
-    &:hover {
-      background-color: #f8f8f8;
-      color: #333;
-    }
-    
-    &.left {
-      margin-right: -18px;
-    }
-    
-    &.right {
-      margin-left: -18px;
-    }
-    
-    // Hide arrows on mobile devices since swipe gestures are available
-    @media (max-width: 768px) {
-      display: none;
-    }
-    
-    // Keep arrows on tablets and desktop for non-touch users
-    @media (min-width: 769px) {
-      display: flex;
-    }
+    width: 100%;
   }
   
   .necklace-options {
@@ -65,6 +32,16 @@
     padding: 10px 20px;
     gap: 1rem;
     width: 100%;
+    
+    // Desktop optimization - center content and remove scrolling
+    @media (min-width: 481px) {
+      overflow-x: visible;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 15px 0;
+      gap: 1.5rem;
+      max-width: 100%;
+    }
     
     /* Hide scrollbar for Chrome/Safari */
     &::-webkit-scrollbar {
@@ -85,11 +62,6 @@
       gap: 0.8rem;
     }
     
-    // On mobile, add side padding to show partial views of adjacent necklaces
-    @media (max-width: 768px) {
-      padding: 10px 20px;
-    }
-    
     .necklace-option {
       cursor: pointer;
       padding: 0.5rem;
@@ -98,6 +70,18 @@
       transition: all 0.2s ease;
       min-width: 140px;
       flex: 0 0 auto;
+      
+      // Desktop optimization - larger and more prominent
+      @media (min-width: 481px) {
+        min-width: 160px;
+        padding: 0.75rem;
+        border-radius: 12px;
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+      }
       
       /* Improve touch interactions */
       -webkit-tap-highlight-color: transparent;
@@ -110,6 +94,10 @@
       &.selected {
         border-color: #A24E4E;
         box-shadow: 0 0 0 2px rgba(162, 78, 78, 0.3);
+        
+        @media (min-width: 481px) {
+          box-shadow: 0 0 0 2px rgba(162, 78, 78, 0.3), 0 4px 12px rgba(162, 78, 78, 0.2);
+        }
       }
       
       /* Visual feedback during swiping */
@@ -124,6 +112,12 @@
         height: 80px;
         object-fit: contain;
         margin-bottom: 0.3rem;
+        
+        // Desktop optimization - larger images
+        @media (min-width: 481px) {
+          height: 90px;
+          margin-bottom: 0.5rem;
+        }
         
         /* Prevent image dragging during swipe */
         -webkit-user-drag: none;
@@ -146,6 +140,12 @@
           text-overflow: ellipsis;
           font-family: "Jost", sans-serif;
           color: #333;
+          
+          // Desktop optimization
+          @media (min-width: 481px) {
+            font-size: 1rem;
+            font-weight: 500;
+          }
         }
         
         .necklace-price {
@@ -154,6 +154,12 @@
           color: #A24E4E;
           font-weight: 600;
           font-family: "Playfair Display", serif;
+          
+          // Desktop optimization
+          @media (min-width: 481px) {
+            font-size: 0.9rem;
+            font-weight: 700;
+          }
         }
       }
       
@@ -174,27 +180,6 @@
           
           .necklace-price {
             font-size: 0.7rem;
-          }
-        }
-      }
-      
-      // Tablet sizing - slightly larger than mobile but still showing adjacent items
-      @media (min-width: 481px) and (max-width: 768px) {
-        min-width: 120px;
-        max-width: 120px;
-        padding: 0.4rem;
-        
-        img {
-          height: 75px;
-        }
-        
-        .necklace-info {
-          .necklace-name {
-            font-size: 0.75rem;
-          }
-          
-          .necklace-price {
-            font-size: 0.75rem;
           }
         }
       }

@@ -16,19 +16,7 @@ const NecklaceSelector: React.FC = () => {
   // Minimum swipe distance to trigger navigation (in pixels)
   const minSwipeDistance = 50;
 
-  // Handle scroll buttons
-  const scrollCarousel = (direction: 'left' | 'right') => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = 200;
-      const currentScroll = scrollContainerRef.current.scrollLeft;
-      scrollContainerRef.current.scrollTo({
-        left: direction === 'left' ? currentScroll - scrollAmount : currentScroll + scrollAmount,
-        behavior: 'smooth'
-      });
-    }
-  };
-
-  // Navigate to next/previous necklace
+  // Navigate to next/previous necklace (keep for mobile swipe functionality)
   const navigateNecklace = (direction: 'next' | 'prev') => {
     if (!selectedNecklace) return;
     
@@ -63,7 +51,7 @@ const NecklaceSelector: React.FC = () => {
     }, 50);
   };
 
-  // Touch event handlers
+  // Touch event handlers (keep for mobile)
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null);
     setTouchStart(e.targetTouches[0].clientX);
@@ -108,14 +96,6 @@ const NecklaceSelector: React.FC = () => {
     <div className="necklace-selector">
       <h3>Choose Your Necklace</h3>
       <div className="carousel-container">
-        <button 
-          className="carousel-button left" 
-          onClick={() => scrollCarousel('left')}
-          aria-label="Scroll left"
-        >
-          ‹
-        </button>
-        
         <div 
           className="necklace-options" 
           ref={scrollContainerRef}
@@ -137,14 +117,6 @@ const NecklaceSelector: React.FC = () => {
             </div>
           ))}
         </div>
-        
-        <button 
-          className="carousel-button right" 
-          onClick={() => scrollCarousel('right')}
-          aria-label="Scroll right"
-        >
-          ›
-        </button>
       </div>
     </div>
   );
