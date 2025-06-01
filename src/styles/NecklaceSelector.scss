@@ -45,10 +45,12 @@
       margin-left: -18px;
     }
     
+    // Hide arrows on mobile devices since swipe gestures are available
     @media (max-width: 768px) {
       display: none;
     }
     
+    // Keep arrows on tablets and desktop for non-touch users
     @media (min-width: 769px) {
       display: flex;
     }
@@ -83,6 +85,7 @@
       gap: 0.8rem;
     }
     
+    // On mobile, add side padding to show partial views of adjacent necklaces
     @media (max-width: 768px) {
       padding: 10px 20px;
     }
@@ -120,7 +123,7 @@
         width: 100%;
         height: 80px;
         object-fit: contain;
-        margin-bottom: 0.2rem;
+        margin-bottom: 0.3rem;
         
         /* Prevent image dragging during swipe */
         -webkit-user-drag: none;
@@ -131,31 +134,51 @@
         pointer-events: none;
       }
       
-      p {
+      .necklace-info {
         text-align: center;
-        font-size: 0.9rem;
-        margin: 0;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-family: "Jost", sans-serif;
         pointer-events: none;
+        
+        .necklace-name {
+          font-size: 0.9rem;
+          margin: 0 0 0.2rem 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-family: "Jost", sans-serif;
+          color: #333;
+        }
+        
+        .necklace-price {
+          font-size: 0.8rem;
+          margin: 0;
+          color: #A24E4E;
+          font-weight: 600;
+          font-family: "Playfair Display", serif;
+        }
       }
       
+      // Mobile-specific sizing to show partial views of adjacent necklaces
       @media (max-width: 480px) {
         padding: 0.3rem;
-        min-width: 130px;
-        max-width: 130px;
+        min-width: 110px;
+        max-width: 110px;
         
         img {
           height: 70px;
         }
         
-        p {
-          font-size: 0.65rem;
+        .necklace-info {
+          .necklace-name {
+            font-size: 0.65rem;
+          }
+          
+          .necklace-price {
+            font-size: 0.7rem;
+          }
         }
       }
       
+      // Tablet sizing - slightly larger than mobile but still showing adjacent items
       @media (min-width: 481px) and (max-width: 768px) {
         min-width: 120px;
         max-width: 120px;
@@ -165,8 +188,14 @@
           height: 75px;
         }
         
-        p {
-          font-size: 0.75rem;
+        .necklace-info {
+          .necklace-name {
+            font-size: 0.75rem;
+          }
+          
+          .necklace-price {
+            font-size: 0.75rem;
+          }
         }
       }
     }

@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useCustomizer } from '../context/CustomizerContext';
 import { triggerHapticFeedback } from '../hooks/useTapToPlace';
+import { formatPrice } from '../utils/pricing';
 import '../styles/NecklaceSelector.scss';
 
 const NecklaceSelector: React.FC = () => {
@@ -129,7 +130,10 @@ const NecklaceSelector: React.FC = () => {
               onClick={() => !isSwiping && selectNecklace(necklace.id)}
             >
               <img src={necklace.imagePath} alt={necklace.name} />
-              <p>{necklace.name}</p>
+              <div className="necklace-info">
+                <p className="necklace-name">{necklace.name}</p>
+                <p className="necklace-price">{formatPrice(necklace.basePrice)}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -146,4 +150,4 @@ const NecklaceSelector: React.FC = () => {
   );
 };
 
-export default NecklaceSelector; 
+export default NecklaceSelector;

@@ -8,6 +8,7 @@ export const necklaces: Necklace[] = [
     name: 'Collier Grigri',
     imagePath: getImagePath('images/necklaces/grigri.png'),
     variationId: 12764,
+    basePrice: 88.00,
     attachmentPoints: [
       { id: 'gg-point1', position: { x: 15, y: 44 }, isOccupied: false },
       { id: 'gg-point2', position: { x: 15, y: 54 }, isOccupied: false },
@@ -30,6 +31,7 @@ export const necklaces: Necklace[] = [
     name: 'Collier Chouchou',
     imagePath: getImagePath('images/necklaces/chaine-chouchou-or.png'),
     variationId: 12771,
+    basePrice: 67.00,
     attachmentPoints: [
       { id: 'cc-point1', position: { x: 6, y: 65.5 }, isOccupied: false },
       { id: 'cc-point2', position: { x: 9.5, y: 74 }, isOccupied: false },
@@ -51,6 +53,7 @@ export const necklaces: Necklace[] = [
     name: 'Collier Crush',
     imagePath: getImagePath('images/necklaces/chaine-crush.png'),
     variationId: 16811,
+    basePrice: 81.00,
     attachmentPoints: [
       { id: 'ccr-point1', position: { x: 5.4, y: 68.5 }, isOccupied: false },
       { id: 'ccr-point2', position: { x: 9.2, y: 75.5 }, isOccupied: false },
@@ -72,6 +75,7 @@ export const necklaces: Necklace[] = [
     name: 'Collier Lucky',
     imagePath: getImagePath('images/necklaces/chaine-lucky-or.png'),
     variationId: 18961,
+    basePrice: 75.00,
     attachmentPoints: [
       { id: 'cl-point1', position: { x: 15, y: 44 }, isOccupied: false },
       { id: 'cl-point2', position: { x: 15, y: 54 }, isOccupied: false },
@@ -93,6 +97,7 @@ export const necklaces: Necklace[] = [
     name: 'Collier Gypso',
     imagePath: getImagePath('images/necklaces/chaine-gypso-or.png'),
     variationId: 12760,
+    basePrice: 57.00,
     attachmentPoints: [
       { id: 'cg-point1', position: { x: 8, y: 74 }, isOccupied: false },
       { id: 'cg-point2', position: { x: 15, y: 84 }, isOccupied: false },
@@ -111,6 +116,7 @@ export const necklaces: Necklace[] = [
     name: 'Gold Chain',
     imagePath: getImagePath('images/necklaces/gold-chain.png'),
     variationId: 12765,
+    basePrice: 65.00,
     attachmentPoints: [
       // Left side attachment points (top to bottom)
       { id: 'gc-point1', position: { x: 20, y: 30 }, isOccupied: false },
