@@ -18,7 +18,7 @@ const NecklaceSelector: React.FC = () => {
   // Handle scroll buttons
   const scrollCarousel = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
-      const scrollAmount = 200; // Adjust as needed
+      const scrollAmount = 200;
       const currentScroll = scrollContainerRef.current.scrollLeft;
       scrollContainerRef.current.scrollTo({
         left: direction === 'left' ? currentScroll - scrollAmount : currentScroll + scrollAmount,
