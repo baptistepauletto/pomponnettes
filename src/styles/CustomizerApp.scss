@@ -82,7 +82,7 @@
       display: grid;
       grid-template-rows: auto 1fr;
       gap: 1.5rem;
-      height: calc(100vh - 140px); // Account for optimized header and footer
+      height: calc(100vh - 0px); // Account for optimized header and footer
       width: 100%; // Explicit full width
       margin: 0 auto; // Center the entire grid
       
@@ -117,6 +117,7 @@
       }
       
       .left-panel {
+        margin-top: 8rem;
         grid-area: left;
         display: flex;
         flex-direction: column;
@@ -134,6 +135,7 @@
       }
       
       .right-panel {
+        margin-top: 9rem;
         grid-area: right;
         display: flex;
         flex-direction: column;
