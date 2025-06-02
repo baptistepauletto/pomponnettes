@@ -63,13 +63,13 @@ const CustomizerApp: React.FC = () => {
                   
                   {/* Left panel - Charm area */}
                   <div className="left-panel">
+                    <ActionButtons />
                     <CharmSelector />
                   </div>
                   
                   {/* Center panel - Necklace display */}
                   <div className="center-panel">
                     <NecklaceDisplay />
-                    <ActionButtons />
                   </div>
                   
                   {/* Right panel - Price area */}
