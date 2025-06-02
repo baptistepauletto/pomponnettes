@@ -267,7 +267,8 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/botte-cow-boy-1.5cm.png'),
     sizeScale: 1.5,
     sizeMark: 'M',
-    category: '🌍 Travel & Places'
+    category: '🌍 Travel & Places',
+    attachmentOffset: { x: -10, y: 0 }
   },
   {
     id: 'etoile-de-mer',
@@ -493,7 +494,8 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/corse-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🌍 Travel & Places'
+    category: '🌍 Travel & Places',
+    attachmentOffset: { x: -10, y: 0 }
   },
   {
     id: 'coeur-sacre',
@@ -517,7 +519,8 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/grande-botte-cow-boy-2.1cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🌍 Travel & Places'
+    category: '🌍 Travel & Places',
+    attachmentOffset: { x: -10, y: 0 }
   },
   {
     id: 'etoile-spirale',
@@ -909,7 +912,8 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/etoile-de-mer-bleue-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🌊 Sea & Beach'
+    category: '🌊 Sea & Beach',
+    attachmentOffset: { x: -5, y: -5 }
   },
   {
     id: 'etoile-de-mer-rose',
@@ -917,7 +921,8 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/etoile-de-mer-rose-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🌊 Sea & Beach'
+    category: '🌊 Sea & Beach',
+    attachmentOffset: { x: 15, y: -5 }
   },
   {
     id: 'etoile-de-mer-rouge',
@@ -925,7 +930,8 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/etoile-de-mer-rouge-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🌊 Sea & Beach'
+    category: '🌊 Sea & Beach',
+    attachmentOffset: { x: -10, y: -5 }
   },
   {
     id: 'etoile-de-mer-turquoise',
@@ -933,7 +939,8 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/etoile-de-mer-turquoise-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🌊 Sea & Beach'
+    category: '🌊 Sea & Beach',
+    attachmentOffset: { x: -10, y: -5 }
   },
   {
     id: 'fleur-rose',
@@ -965,7 +972,8 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/homard-1.5cm.png'),
     sizeScale: 1.5,
     sizeMark: 'M',
-    category: '🌊 Sea & Beach'
+    category: '🌊 Sea & Beach',
+    attachmentOffset: { x: 10, y: 0 }
   },
   {
     id: 'main-de-fatma-bleue',
@@ -1221,7 +1229,8 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/poisson-multicolore-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🌊 Sea & Beach'
+    category: '🌊 Sea & Beach',
+    attachmentOffset: { x: 0, y: -5 }
   },
   {
     id: 'poisson-raye',

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useCustomizer } from '../context/CustomizerContext';
 import { useDraggableCharm } from '../hooks/useDragAndDrop';
 import { useTapToPlace, isTouchDevice } from '../hooks/useTapToPlace';
@@ -48,24 +48,92 @@ const CharmOption: React.FC<{ id: string; name: string; imagePath: string; sizeS
 };
 
 const CharmSelector: React.FC = () => {
-  const { charms } = useCustomizer();
+  const { charms, placedCharms } = useCustomizer();
   const { selectedCharmId } = useTapToPlace();
   const isMobile = isTouchDevice();
+  
+  // Category management state (desktop only)
+  const [categories, setCategories] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [recentlyUsedCharmIds, setRecentlyUsedCharmIds] = useState<string[]>([]);
+
+  // Extract unique categories on component mount
+  useEffect(() => {
+    const uniqueCategories = Array.from(new Set(charms.map(charm => charm.category || 'Other')));
+    const allCategories = ['All Charms', 'Recently Used', ...uniqueCategories];
+    setCategories(allCategories);
+    setSelectedCategory('All Charms');
+  }, [charms]);
+
+  // Track recently used charms based on placed charms
+  useEffect(() => {
+    const currentCharmIds = placedCharms.map(placedCharm => placedCharm.charmId);
+    const newRecentIds = [...new Set([...currentCharmIds, ...recentlyUsedCharmIds])].slice(0, 10);
+    
+    if (JSON.stringify(newRecentIds) !== JSON.stringify(recentlyUsedCharmIds)) {
+      setRecentlyUsedCharmIds(newRecentIds);
+    }
+  }, [placedCharms, recentlyUsedCharmIds]);
+
+  // Get filtered charms based on selected category
+  const getFilteredCharms = () => {
+    if (selectedCategory === 'All Charms') {
+      return charms;
+    } else if (selectedCategory === 'Recently Used') {
+      return charms.filter(charm => recentlyUsedCharmIds.includes(charm.id));
+    } else {
+      return charms.filter(charm => (charm.category || 'Other') === selectedCategory);
+    }
+  };
+
+  const filteredCharms = getFilteredCharms();
+  const showEmptyRecentlyUsed = selectedCategory === 'Recently Used' && recentlyUsedCharmIds.length === 0;
 
   return (
     <div className="charm-selector">
       <h3>Select a Charm</h3>
-      <div className="charm-options">
-        {charms.map((charm) => (
-          <CharmOption
-            key={charm.id}
-            id={charm.id}
-            name={charm.name}
-            imagePath={charm.imagePath}
-            sizeScale={charm.sizeScale}
-          />
-        ))}
-      </div>
+      
+      {/* Category tabs for desktop only */}
+      {!isMobile && (
+        <div className="category-tabs">
+          {categories.map(category => (
+            <div 
+              key={category}
+              className={`category-tab ${category === selectedCategory ? 'active' : ''} ${category === 'Recently Used' ? 'recent-tab' : ''}`}
+              onClick={() => setSelectedCategory(category)}
+            >
+              {category === 'All Charms' 
+                ? '✨ All' 
+                : category === 'Recently Used' 
+                  ? '🕒 Recent' 
+                  : category}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Empty state for Recently Used */}
+      {!isMobile && showEmptyRecentlyUsed && (
+        <div className="empty-recently-used">
+          No charms have been used yet
+        </div>
+      )}
+
+      {/* Charms grid */}
+      {!showEmptyRecentlyUsed && (
+        <div className="charm-options">
+          {filteredCharms.map((charm) => (
+            <CharmOption
+              key={charm.id}
+              id={charm.id}
+              name={charm.name}
+              imagePath={charm.imagePath}
+              sizeScale={charm.sizeScale}
+            />
+          ))}
+        </div>
+      )}
+
       <p className="instructions">
         {isMobile ? 
           (selectedCharmId ? 
