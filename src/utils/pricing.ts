@@ -1,7 +1,7 @@
 import { Necklace, PlacedCharm } from '../types';
 
 // Pricing constants
-export const CHARM_PRICE = 5.00; // Each charm costs 7 euros
+export const CHARM_PRICE = 4.00; // Each charm costs 4 euros
 export const FREE_SHIPPING_THRESHOLD = 90.00; // Free shipping over 90€
 
 // Discount tiers for bulk charm purchases
