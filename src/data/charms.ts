@@ -16,7 +16,8 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/petite-medaille-0.7cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🏅 Medals'
+    category: '🏅 Medals',
+    attachmentOffset: { x: 0, y: -15 }
   },
   {
     id: 'coeur-moyen',
