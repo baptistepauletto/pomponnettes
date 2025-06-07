@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDrag, useDrop, DropTargetMonitor, DragSourceMonitor, } from 'react-dnd';
 import { useCustomizer } from '../context/CustomizerContext';
 import { AttachmentPoint } from '../types';
@@ -15,13 +15,21 @@ interface DragItem {
 
 // Hook for making a charm draggable
 export const useDraggableCharm = (charmId: string) => {
-  const [{ isDragging }, drag] = useDrag<DragItem, unknown, { isDragging: boolean }>(() => ({
+  const [{ isDragging }, drag, preview] = useDrag<DragItem, unknown, { isDragging: boolean }>(() => ({
     type: ItemTypes.CHARM,
     item: { charmId },
     collect: (monitor: DragSourceMonitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
   }));
+
+  // Hide the default drag preview since we're using a custom one
+  React.useEffect(() => {
+    // Create an empty/transparent image to completely hide the default preview
+    const emptyImage = new Image();
+    emptyImage.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=';
+    preview(emptyImage, { captureDraggingState: true });
+  }, [preview]);
 
   return { isDragging, drag };
 };

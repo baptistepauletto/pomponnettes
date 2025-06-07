@@ -8,6 +8,7 @@ import { TapToPlaceProvider } from '../hooks/useTapToPlace';
 import AddToCartButton from './AddToCartButton';
 import ActionButtons from './ActionButtons';
 import PriceCalculator from './PriceCalculator';
+import DragPreview from './DragPreview';
 import '../styles/CustomizerApp.scss';
 
 const CustomizerApp: React.FC = () => {
@@ -84,6 +85,9 @@ const CustomizerApp: React.FC = () => {
             <footer className="customizer-footer">             
             </footer>
           </div>
+          
+          {/* Custom drag preview layer */}
+          <DragPreview />
         </CustomizerProvider>
       </TapToPlaceProvider>
     </DndProvider>
