@@ -4,11 +4,11 @@ import { getRandomPreset } from '../data/presets';
 import '../styles/ActionButtons.scss';
 
 const ActionButtons: React.FC = () => {
-  const { clearAllCharms, applyPreset } = useCustomizer();
+  const { clearAllCharms, applyPreset, lastAppliedPresetId } = useCustomizer();
 
   const handleRandomize = () => {
-    // Get a random preset
-    const preset = getRandomPreset();
+    // Get a random preset, excluding the last applied one
+    const preset = getRandomPreset(lastAppliedPresetId);
     
     // Apply the preset to the necklace
     applyPreset(preset);
