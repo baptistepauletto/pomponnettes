@@ -32,9 +32,9 @@ export const useDroppableAttachmentPoint = (attachmentPointId: string, isOccupie
 
   const handleDrop = useCallback(
     (item: DragItem) => {
-      if (isOccupied) return false;
+      if (isOccupied) return undefined;
       addCharm(item.charmId, attachmentPointId);
-      return true;
+      return { dropped: true, attachmentPointId };
     },
     [addCharm, attachmentPointId, isOccupied]
   );
@@ -94,13 +94,13 @@ export const useProximityDroppableNecklace = (
   const handleDrop = useCallback(
     (item: DragItem, monitor: DropTargetMonitor) => {
       const dropResult = monitor.getDropResult();
-      if (dropResult) return false; // Already handled by a more specific drop target
+      if (dropResult) return undefined; // Already handled by a more specific drop target
 
       // Get the drop coordinates relative to the container
       const clientOffset = monitor.getClientOffset();
       const containerElement = containerRef.current;
       
-      if (!clientOffset || !containerElement) return false;
+      if (!clientOffset || !containerElement) return undefined;
 
       // Get container bounds
       const containerRect = containerElement.getBoundingClientRect();
@@ -115,10 +115,10 @@ export const useProximityDroppableNecklace = (
       if (nearestPoint) {
         addCharm(item.charmId, nearestPoint.id);
         onTargetedPointChange(null); // Clear targeting after successful drop
-        return true;
+        return { dropped: true, attachmentPointId: nearestPoint.id };
       }
 
-      return false;
+      return undefined;
     },
     [addCharm, attachmentPoints, containerRef, onTargetedPointChange]
   );
