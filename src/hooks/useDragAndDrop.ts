@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { useDrag, useDrop, DropTargetMonitor, DragSourceMonitor, } from 'react-dnd';
 import { useCustomizer } from '../context/CustomizerContext';
 import { AttachmentPoint } from '../types';
@@ -132,7 +132,7 @@ export const useProximityDroppableNecklace = (
   );
 
   const handleHover = useCallback(
-    (item: DragItem, monitor: DropTargetMonitor) => {
+    (_item: DragItem, monitor: DropTargetMonitor) => {
       const clientOffset = monitor.getClientOffset();
       const containerElement = containerRef.current;
       

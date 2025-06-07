@@ -208,7 +208,7 @@ const PositionGrid: React.FC = () => {
 };
 
 const NecklaceDisplay: React.FC = () => {
-  const { selectedNecklace, placedCharms, addCharm } = useCustomizer();
+  const { selectedNecklace, placedCharms } = useCustomizer();
   const [showAttachmentPoints, setShowAttachmentPoints] = useState(false);
   const [showPointNames, setShowPointNames] = useState(false);
   const [showGrid, setShowGrid] = useState(false);
