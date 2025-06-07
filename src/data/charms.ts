@@ -145,7 +145,8 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/oeil-coeur-1.5cm.png'),
     sizeScale: 1.5,
     sizeMark: 'M',
-    category: '❤️ Hearts'
+    category: '❤️ Hearts',
+    attachmentOffset: { x: 0, y: -10 }
   },
   {
     id: 'papillon',
