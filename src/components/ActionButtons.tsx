@@ -1,28 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useCustomizer } from '../context/CustomizerContext';
 import { getRandomPreset } from '../data/presets';
 import '../styles/ActionButtons.scss';
 
 const ActionButtons: React.FC = () => {
-  const { clearAllCharms, applyPreset } = useCustomizer();
-  const [lastAppliedPreset, setLastAppliedPreset] = useState<string | null>(null);
+  const { clearAllCharms, applyPreset, lastAppliedPresetId } = useCustomizer();
 
   const handleRandomize = () => {
-    // Get a random preset
-    const preset = getRandomPreset();
+    // Get a random preset, excluding the last applied one
+    const preset = getRandomPreset(lastAppliedPresetId);
     
     // Apply the preset to the necklace
     applyPreset(preset);
-    
-    // Remember which preset we applied
-    setLastAppliedPreset(preset.name);
-    
-    // Show a toast notification or feedback if desired (not implemented here)
   };
 
   const handleClear = () => {
     clearAllCharms();
-    setLastAppliedPreset(null);
   };
 
   return (
@@ -31,8 +24,8 @@ const ActionButtons: React.FC = () => {
         className="action-button randomize-button"
         onClick={handleRandomize}
       >
-        <span className="button-icon">🎲</span>
-        <span>Randomize</span>
+        <span className="button-icon">✨</span>
+        <span>Nos favoris</span>
       </button>
       
       <button 
@@ -40,14 +33,8 @@ const ActionButtons: React.FC = () => {
         onClick={handleClear}
       >
         <span className="button-icon">🗑️</span>
-        <span>Clear</span>
+        <span>Retirer les charms</span>
       </button>
-      
-      {lastAppliedPreset && (
-        <div className="preset-applied-message">
-          ✨ Applied "{lastAppliedPreset}" preset
-        </div>
-      )}
     </div>
   );
 };

@@ -31,6 +31,7 @@ export interface Necklace {
   imagePath: string;
   attachmentPoints: AttachmentPoint[];
   variationId: number; // WooCommerce variation ID
+  basePrice: number; // Base price in euros
 }
 
 // Placed charm type for a charm that has been positioned on the necklace
@@ -53,4 +54,4 @@ export interface PresetConfiguration {
   name: string;
   description: string;
   configuration: PresetCharmPlacement[];
-} 
+}

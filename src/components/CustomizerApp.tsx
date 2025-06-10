@@ -7,6 +7,8 @@ import DndProvider from './DndProvider';
 import { TapToPlaceProvider } from '../hooks/useTapToPlace';
 import AddToCartButton from './AddToCartButton';
 import ActionButtons from './ActionButtons';
+import PriceCalculator from './PriceCalculator';
+import DragPreview from './DragPreview';
 import '../styles/CustomizerApp.scss';
 
 const CustomizerApp: React.FC = () => {
@@ -37,21 +39,55 @@ const CustomizerApp: React.FC = () => {
             </header>
 
             <main className="customizer-content">
-              <div className="sidebar">
-                <NecklaceSelector />
-                {/* Show CharmSelector only on desktop */}
-                {!isMobile && <CharmSelector />}
-              </div>
-              <div className="main-display">
-                <NecklaceDisplay />
-                <ActionButtons />
-                <AddToCartButton />
-              </div>
+              {isMobile ? (
+                // Mobile layout (unchanged)
+                <>
+                  <div className="sidebar">
+                    <NecklaceSelector />
+                    {/* Show CharmSelector only on desktop */}
+                    {!isMobile && <CharmSelector />}
+                  </div>
+                  <div className="main-display">
+                    <NecklaceDisplay />
+                    <PriceCalculator />
+                    <ActionButtons />
+                    <AddToCartButton />
+                  </div>
+                </>
+              ) : (
+                // Desktop layout - Direct grid areas
+                <>
+                  {/* Top section - Necklace selector spanning all columns */}
+                  <div className="necklace-selector-container">
+                    <NecklaceSelector />
+                  </div>
+                  
+                  {/* Left panel - Charm area */}
+                  <div className="left-panel">
+                    <ActionButtons />
+                    <CharmSelector />
+                  </div>
+                  
+                  {/* Center panel - Necklace display */}
+                  <div className="center-panel">
+                    <NecklaceDisplay />
+                  </div>
+                  
+                  {/* Right panel - Price area */}
+                  <div className="right-panel">
+                    <PriceCalculator />
+                    <AddToCartButton />
+                  </div>
+                </>
+              )}
             </main>
 
             <footer className="customizer-footer">             
             </footer>
           </div>
+          
+          {/* Custom drag preview layer */}
+          <DragPreview />
         </CustomizerProvider>
       </TapToPlaceProvider>
     </DndProvider>

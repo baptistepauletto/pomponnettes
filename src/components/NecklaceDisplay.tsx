@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useCustomizer } from '../context/CustomizerContext';
-import { useDroppableAttachmentPoint, usePlacedCharm } from '../hooks/useDragAndDrop';
+import { useDroppableAttachmentPoint, usePlacedCharm, useProximityDroppableNecklace } from '../hooks/useDragAndDrop';
 import '../styles/NecklaceDisplay.scss';
 import { useTapToPlace, isTouchDevice, triggerHapticFeedback } from '../hooks/useTapToPlace';
 import CharmDrawer from './CharmDrawer';
@@ -14,16 +14,17 @@ const AttachmentPointComponent: React.FC<{
   showAttachmentPoints: boolean;
   showNames: boolean;
   isDrawerOpen: boolean;
-}> = ({ id, position, isOccupied, showAttachmentPoints, showNames, isDrawerOpen }) => {
+  isTargeted: boolean;
+}> = ({ id, position, isOccupied, showAttachmentPoints, showNames, isDrawerOpen, isTargeted }) => {
   const { isOver, canDrop, drop } = useDroppableAttachmentPoint(id, isOccupied);
   const attachmentPointRef = useRef<HTMLDivElement>(null);
   const { selectedCharmId } = useTapToPlace();
   const { addCharm } = useCustomizer();
   const isMobile = isTouchDevice();
   
-  // Apply the drop ref to the element only if not occupied
-  // This ensures drag-and-drop won't work on occupied points either
-  if (!isOccupied) {
+  // Apply the drop ref to the element only if not occupied AND on mobile
+  // For desktop, we use proximity dropping on the necklace container
+  if (!isOccupied && isMobile) {
     drop(attachmentPointRef);
   }
 
@@ -51,7 +52,7 @@ const AttachmentPointComponent: React.FC<{
         isOccupied ? 'occupied' : ''
       } ${showAttachmentPoints ? 'visible' : ''} ${
         (isDrawerOpen && isMobile && selectedCharmId && !isOccupied) ? 'mobile-drop-target' : ''
-      }`}
+      } ${isTargeted ? 'targeted' : ''}`}
       style={{
         left: `${position.x}%`,
         top: `${position.y}%`,
@@ -218,6 +219,21 @@ const NecklaceDisplay: React.FC = () => {
   const [showRemovalTip, setShowRemovalTip] = useState(false);
   const [hasShownRemovalTip, setHasShownRemovalTip] = useState(false);
   const [hasInteractedWithNecklace, setHasInteractedWithNecklace] = useState(false);
+  const necklaceContainerRef = useRef<HTMLDivElement>(null!);
+  const [targetedPointId, setTargetedPointId] = useState<string | null>(null);
+  
+  // Use proximity dropping only for desktop (non-touch devices)
+  const attachmentPoints = selectedNecklace?.attachmentPoints || [];
+  const proximityDrop = useProximityDroppableNecklace(
+    attachmentPoints,
+    setTargetedPointId,
+    necklaceContainerRef
+  );
+
+  // Apply drop functionality to necklace container for desktop
+  if (!isMobile) {
+    proximityDrop.drop(necklaceContainerRef);
+  }
 
   // Effect to track if a charm has been placed
   useEffect(() => {
@@ -295,7 +311,10 @@ const NecklaceDisplay: React.FC = () => {
         </div>
       )}
       
-      <div className={`necklace-container ${showGrid ? 'with-grid' : ''}`}>
+      <div 
+        ref={necklaceContainerRef}
+        className={`necklace-container ${showGrid ? 'with-grid' : ''}`}
+      >
         <img
           src={selectedNecklace.imagePath}
           alt={selectedNecklace.name}
@@ -315,6 +334,7 @@ const NecklaceDisplay: React.FC = () => {
             showAttachmentPoints={showAttachmentPoints}
             showNames={showPointNames}
             isDrawerOpen={isDrawerOpen}
+            isTargeted={targetedPointId === point.id}
           />
         ))}
 

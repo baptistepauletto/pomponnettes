@@ -53,6 +53,8 @@
       background-color: rgba(228, 214, 214, 0.9);
     }
     
+
+    
     .necklace-image {
       width: 100%;
       filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
@@ -141,16 +143,10 @@
       }
       
       &.can-drop {
-        background-color: rgba(25, 118, 210, 0.5);
-        border-color: rgba(25, 118, 210, 0.7);
-        box-shadow: 0 0 0 4px rgba(25, 118, 210, 0.3);
+        background-color: rgba(162, 78, 78, 0.8); /* Pink instead of emerald */
+        border: 2px solid rgba(142, 58, 58, 0.9);
+        box-shadow: 0 0 0 4px rgba(162, 78, 78, 0.5);
         animation: pulse 1.5s infinite;
-      }
-      
-      &.over {
-        background-color: rgba(25, 118, 210, 0.7);
-        border-color: rgba(25, 118, 210, 0.9);
-        box-shadow: 0 0 0 4px rgba(25, 118, 210, 0.3);
       }
       
       &.mobile-drop-target {
@@ -167,6 +163,16 @@
         
         /* Make sure these points don't receive any events */
         pointer-events: none;
+      }
+      
+      &.targeted {
+        background-color: rgba(255, 165, 0, 0.8) !important; /* Orange for proximity targeting */
+        border: 3px solid rgba(255, 140, 0, 0.9) !important;
+        box-shadow: 0 0 0 6px rgba(255, 165, 0, 0.4) !important;
+        width: 20px !important;
+        height: 20px !important;
+        animation: proximity-pulse 0.8s infinite !important;
+        z-index: 15 !important;
       }
     }
     
@@ -326,6 +332,36 @@
     }
     100% {
       box-shadow: 0 0 0 3px rgba(162, 78, 78, 0.3);
+    }
+  }
+  
+  @keyframes proximity-pulse {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      box-shadow: 0 0 0 6px rgba(255, 165, 0, 0.4);
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.1);
+      box-shadow: 0 0 0 8px rgba(255, 165, 0, 0.6);
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      box-shadow: 0 0 0 6px rgba(255, 165, 0, 0.4);
+    }
+  }
+  
+  @keyframes placement-pulse {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      box-shadow: 0 0 0 4px rgba(162, 78, 78, 0.4);
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.2);
+      box-shadow: 0 0 0 6px rgba(162, 78, 78, 0.6);
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      box-shadow: 0 0 0 4px rgba(162, 78, 78, 0.4);
     }
   }
   

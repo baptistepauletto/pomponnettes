@@ -1,17 +1,171 @@
 .charm-selector {
   margin-bottom: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  @media (min-width: 481px) {
+    margin-bottom: 0;
+    height: 100%;
+  }
   
   h3 {
     margin-bottom: 1rem;
     font-size: 1.2rem;
     color: #333;
     font-family: "Playfair Display", serif;
+    flex-shrink: 0;
+    
+    @media (min-width: 481px) {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+      color: #2c2c2c;
+    }
+  }
+  
+  // Category tabs for desktop only
+  .category-tabs {
+    display: none;
+    
+    @media (min-width: 481px) {
+      display: flex;
+      overflow-x: auto;
+      padding: 0.5rem 0;
+      margin-bottom: 1.5rem;
+      gap: 0.5rem;
+      scrollbar-width: thin;
+      
+      &::-webkit-scrollbar {
+        height: 4px;
+      }
+      
+      &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 2px;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background: rgba(162, 78, 78, 0.3);
+        border-radius: 2px;
+        
+        &:hover {
+          background: rgba(162, 78, 78, 0.5);
+        }
+      }
+      
+      .category-tab {
+        flex: 0 0 auto;
+        padding: 0.5rem 0.75rem;
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+        color: #666;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: "Jost", sans-serif;
+        font-weight: 500;
+        
+        &:hover {
+          background-color: #e9ecef;
+          transform: translateY(-1px);
+        }
+        
+        &.active {
+          background-color: #A24E4E;
+          border-color: #A24E4E;
+          color: white;
+          
+          &:hover {
+            background-color: #913F3F;
+          }
+        }
+        
+        &.recent-tab.active {
+          background-color: #ff9800;
+          border-color: #ff9800;
+          
+          &:hover {
+            background-color: #f57c00;
+          }
+        }
+      }
+    }
+  }
+
+  // Empty recently used state for desktop
+  .empty-recently-used {
+    display: none;
+    
+    @media (min-width: 481px) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #888;
+      font-size: 0.9rem;
+      font-style: italic;
+      background-color: rgba(248, 249, 250, 0.7);
+      border-radius: 8px;
+      margin: 1rem 0;
+      min-height: 120px;
+      font-family: "Jost", sans-serif;
+      border: 1px dashed #dee2e6;
+    }
   }
   
   .charm-options {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-    gap: 1rem;
+    gap: 0.8rem;
+    flex: 1;
+    overflow-x: hidden;
+    padding: 5px;
+    
+    @media (max-width: 480px) {
+      grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+      overflow-y: visible;
+      gap: 0.6rem;
+      padding: 4px;
+    }
+    
+    @media (min-width: 481px) {
+      grid-template-columns: repeat(3, 1fr);
+      overflow-y: auto;
+      max-height: calc(100vh - 220px);
+      width: 100%;
+      gap: 0.6rem;
+      padding: 6px;
+      
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+      
+      &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 3px;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #A24E4E, #8B3E3E);
+        border-radius: 3px;
+        
+        &:hover {
+          background: linear-gradient(135deg, #913F3F, #7A3535);
+        }
+      }
+      
+      @media (min-width: 481px) and (max-width: 768px) {
+        gap: 0.5rem;
+        padding: 5px;
+      }
+      
+      @media (min-width: 1024px) {
+        gap: 0.7rem;
+        padding: 7px;
+      }
+    }
     
     .charm-option {
       cursor: grab;
@@ -19,46 +173,105 @@
       flex-direction: column;
       align-items: center;
       padding: 0.5rem;
+      margin: 2px;
       border-radius: 8px;
       border: 2px solid #eee;
-      transition: all 0.2s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
+      background: white;
+      width: 100%;
+      box-sizing: border-box;
+      
+      @media (max-width: 480px) {
+        padding: 0.5rem;
+        margin: 2px;
+        border-radius: 8px;
+      }
+      
+      @media (min-width: 481px) {
+        padding: 0.6rem 0.4rem;
+        margin: 3px;
+        border-radius: 12px;
+        border: 1.5px solid #f0f0f0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+          padding: 0.5rem 0.3rem;
+          margin: 2px;
+        }
+        
+        @media (min-width: 1024px) {
+          padding: 0.7rem 0.5rem;
+          margin: 3px;
+        }
+      }
       
       &:hover {
         border-color: #ccc;
         transform: translateY(-2px);
+        
+        @media (min-width: 481px) {
+          border-color: #A24E4E;
+          box-shadow: 0 6px 16px rgba(162, 78, 78, 0.15);
+          transform: translateY(-3px) scale(1.02);
+        }
+      }
+      
+      &:active {
+        @media (min-width: 481px) {
+          transform: translateY(-1px) scale(1.01);
+        }
       }
       
       &.dragging {
         opacity: 0.5;
         border-color: #A24E4E;
+        
+        @media (min-width: 481px) {
+          box-shadow: 0 8px 20px rgba(162, 78, 78, 0.25);
+        }
       }
       
       &.selected {
         border-color: #A24E4E;
         background-color: rgba(162, 78, 78, 0.15);
+        
+        @media (min-width: 481px) {
+          background: linear-gradient(135deg, rgba(162, 78, 78, 0.1), rgba(162, 78, 78, 0.05));
+          box-shadow: 0 4px 12px rgba(162, 78, 78, 0.2);
+          border-color: #A24E4E;
+        }
       }
       
       .size-indicator {
         position: absolute;
-        bottom: 5px;
-        left: 5px;
+        top: 6px;
+        right: 6px;
         width: auto;
         height: auto;
-        min-width: 12px;
-        padding: 1px 2px;
-        border-radius: 4px;
-        background-color: rgba(162, 78, 78, 0.15);
-        border: 1px solid rgba(162, 78, 78, 0.3);
+        min-width: 14px;
+        padding: 2px 4px;
+        border-radius: 6px;
+        background-color: rgba(162, 78, 78, 0.9);
+        border: none;
         z-index: 3;
-        opacity: 0.9;
         font-size: 8px;
         font-weight: bold;
-        color: #A24E4E;
+        color: white;
         font-family: "Jost", sans-serif;
         letter-spacing: 0.5px;
         text-align: center;
         line-height: 1;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        
+        @media (min-width: 481px) {
+          top: 8px;
+          right: 8px;
+          min-width: 16px;
+          padding: 2px 5px;
+          border-radius: 8px;
+          font-size: 9px;
+        }
       }
       
       img {
@@ -66,6 +279,30 @@
         height: 40px;
         object-fit: contain;
         margin-bottom: 0.5rem;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+        transition: transform 0.3s ease;
+        
+        @media (min-width: 481px) {
+          width: 45px;
+          height: 45px;
+          margin-bottom: 0.6rem;
+          
+          @media (min-width: 481px) and (max-width: 768px) {
+            width: 38px;
+            height: 38px;
+          }
+          
+          @media (min-width: 1024px) {
+            width: 50px;
+            height: 50px;
+          }
+        }
+      }
+      
+      &:hover img {
+        @media (min-width: 481px) {
+          transform: scale(1.05);
+        }
       }
       
       p {
@@ -73,6 +310,23 @@
         font-size: 0.8rem;
         margin: 0;
         font-family: "Jost", sans-serif;
+        color: #555;
+        line-height: 1.2;
+        font-weight: 500;
+        
+        @media (min-width: 481px) {
+          font-size: 0.75rem;
+          color: #444;
+          font-weight: 600;
+          
+          @media (min-width: 481px) and (max-width: 768px) {
+            font-size: 0.7rem;
+          }
+          
+          @media (min-width: 1024px) {
+            font-size: 0.8rem;
+          }
+        }
       }
     }
   }
@@ -83,5 +337,19 @@
     font-size: 0.9rem;
     color: #666;
     font-family: "Jost", sans-serif;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 8px;
+    border-left: 3px solid #A24E4E;
+    flex-shrink: 0;
+    
+    @media (min-width: 481px) {
+      font-size: 0.85rem;
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 10px;
+      color: #555;
+      font-weight: 500;
+    }
   }
-} 
+}

@@ -44,8 +44,17 @@ export const charmPresets: PresetConfiguration[] = [
 
 /**
  * Gets a random preset from the available presets
+ * Optionally excludes a preset by ID to prevent getting the same one twice
  */
-export const getRandomPreset = (): PresetConfiguration => {
-  const randomIndex = Math.floor(Math.random() * charmPresets.length);
-  return charmPresets[randomIndex];
+export const getRandomPreset = (excludePresetId?: string | null): PresetConfiguration => {
+  // Filter out the excluded preset if provided
+  const availablePresets = excludePresetId 
+    ? charmPresets.filter(preset => preset.id !== excludePresetId)
+    : charmPresets;
+  
+  // If all presets are excluded (shouldn't happen with current data), fall back to all presets
+  const presetsToChooseFrom = availablePresets.length > 0 ? availablePresets : charmPresets;
+  
+  const randomIndex = Math.floor(Math.random() * presetsToChooseFrom.length);
+  return presetsToChooseFrom[randomIndex];
 }; 
