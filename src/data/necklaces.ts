@@ -23,10 +23,69 @@ export const necklaces: Necklace[] = [
       { id: 'gg-point11', position: { x: 82, y: 71.25 }, isOccupied: false },
       { id: 'gg-point12', position: { x: 84.5, y: 61.5 }, isOccupied: false },
       { id: 'gg-point13', position: { x: 85.5, y: 51 }, isOccupied: false },
-      //{ id: 'gg-point14', position: { x: 85.5, y: 46 }, isOccupied: false },
     ]
   },
-  // {
+  {
+    id: 8188, // à changer
+    name: 'Collier Grigri Argent',
+    imagePath: getImagePath('images/necklaces/grigri_argent.png'),
+    variationId: 12764,
+    basePrice: 39.00,
+    attachmentPoints: [
+      { id: 'gg-point1', position: { x: 14.5, y: 49}, isOccupied: false },
+      { id: 'gg-point2', position: { x: 15, y: 59 }, isOccupied: false },
+      { id: 'gg-point3', position: { x: 16.75, y: 69 }, isOccupied: false },
+      { id: 'gg-point4', position: { x: 22, y: 78 }, isOccupied: false },
+      { id: 'gg-point5', position: { x: 29.5, y: 85 }, isOccupied: false },
+      { id: 'gg-point6', position: { x: 38.5, y: 89.75 }, isOccupied: false },
+      { id: 'gg-point7', position: { x: 48.5, y: 92 }, isOccupied: false },
+      { id: 'gg-point8', position: { x: 58.5, y: 90.2 }, isOccupied: false },
+      { id: 'gg-point9', position: { x: 68.25, y: 86.75 }, isOccupied: false },
+      { id: 'gg-point10', position: { x: 77, y: 80 }, isOccupied: false },
+      { id: 'gg-point11', position: { x: 82, y: 71.25 }, isOccupied: false },
+      { id: 'gg-point12', position: { x: 84.5, y: 61.5 }, isOccupied: false },
+      { id: 'gg-point13', position: { x: 85.5, y: 51 }, isOccupied: false },
+    ]
+  },
+  {
+    id: 10465,
+    name: 'Collier Gypso',
+    imagePath: getImagePath('images/necklaces/chaine-gypso-or.png'),
+    variationId: 12760,
+    basePrice: 22.00,
+    attachmentPoints: [
+      { id: 'cg-point1', position: { x: 8, y: 74 }, isOccupied: false },
+      { id: 'cg-point2', position: { x: 15, y: 84 }, isOccupied: false },
+      { id: 'cg-point3', position: { x: 26, y: 91.2 }, isOccupied: false },
+      { id: 'cg-point4', position: { x: 39, y: 95.8 }, isOccupied: false },
+      { id: 'cg-point5', position: { x: 53, y: 97 }, isOccupied: false },
+      { id: 'cg-point6', position: { x: 66, y: 94 }, isOccupied: false },
+      { id: 'cg-point7', position: { x: 77.5, y: 87.5 }, isOccupied: false },
+      { id: 'cg-point8', position: { x: 86.5, y: 78.5 }, isOccupied: false },
+      { id: 'cg-point9', position: { x: 92, y: 68 }, isOccupied: false },
+
+    ]
+  },
+  {
+    id: 10466, // à changer
+    name: 'Collier Gypso Argent',
+    imagePath: getImagePath('images/necklaces/chaine-gypso-argent.png'),
+    variationId: 12760,
+    basePrice: 22.00,
+    attachmentPoints: [
+      { id: 'cg-point1', position: { x: 8, y: 74 }, isOccupied: false },
+      { id: 'cg-point2', position: { x: 15, y: 84 }, isOccupied: false },
+      { id: 'cg-point3', position: { x: 26, y: 91.2 }, isOccupied: false },
+      { id: 'cg-point4', position: { x: 39, y: 95.8 }, isOccupied: false },
+      { id: 'cg-point5', position: { x: 53, y: 97 }, isOccupied: false },
+      { id: 'cg-point6', position: { x: 66, y: 94 }, isOccupied: false },
+      { id: 'cg-point7', position: { x: 77.5, y: 87.5 }, isOccupied: false },
+      { id: 'cg-point8', position: { x: 86.5, y: 78.5 }, isOccupied: false },
+      { id: 'cg-point9', position: { x: 92, y: 68 }, isOccupied: false },
+
+    ]
+  },
+    // {
   //   id: 8608,
   //   name: 'Collier Chouchou',
   //   imagePath: getImagePath('images/necklaces/chaine-chouchou-or.png'),
@@ -92,25 +151,6 @@ export const necklaces: Necklace[] = [
   //     { id: 'cl-point13', position: { x: 85.5, y: 56 }, isOccupied: false },
   //   ]
   // },
-  {
-    id: 10465,
-    name: 'Collier Gypso',
-    imagePath: getImagePath('images/necklaces/chaine-gypso-or.png'),
-    variationId: 12760,
-    basePrice: 22.00,
-    attachmentPoints: [
-      { id: 'cg-point1', position: { x: 8, y: 74 }, isOccupied: false },
-      { id: 'cg-point2', position: { x: 15, y: 84 }, isOccupied: false },
-      { id: 'cg-point3', position: { x: 26, y: 91.2 }, isOccupied: false },
-      { id: 'cg-point4', position: { x: 39, y: 95.8 }, isOccupied: false },
-      { id: 'cg-point5', position: { x: 53, y: 97 }, isOccupied: false },
-      { id: 'cg-point6', position: { x: 66, y: 94 }, isOccupied: false },
-      { id: 'cg-point7', position: { x: 77.5, y: 87.5 }, isOccupied: false },
-      { id: 'cg-point8', position: { x: 86.5, y: 78.5 }, isOccupied: false },
-      { id: 'cg-point9', position: { x: 92, y: 68 }, isOccupied: false },
-
-    ]
-  },
   // {
   //   id: 8188,
   //   name: 'Gold Chain',
