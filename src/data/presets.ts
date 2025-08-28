@@ -12,8 +12,8 @@ export const charmPresets: PresetConfiguration[] = [
     configuration: [
       { attachmentPointIndex: 0, charmId: 'rose' },
       { attachmentPointIndex: 3, charmId: 'rose' },
-      { attachmentPointIndex: 7, charmId: 'rose' },
-      { attachmentPointIndex: 10, charmId: 'rose' },
+      { attachmentPointIndex: 6, charmId: 'rose' },
+      { attachmentPointIndex: 9, charmId: 'rose' },
       { attachmentPointIndex: 12, charmId: 'rose' }
     ]
   },
