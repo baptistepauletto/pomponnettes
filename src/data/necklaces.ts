@@ -34,16 +34,15 @@ export const necklaces: Necklace[] = [
     basePrice: 22.00,
     displayScale: 1.0, 
     attachmentPoints: [
-      { id: 'cg-point1', position: { x: 8, y: 74 }, isOccupied: false },
-      { id: 'cg-point2', position: { x: 15, y: 84 }, isOccupied: false },
-      { id: 'cg-point3', position: { x: 26, y: 91.2 }, isOccupied: false },
-      { id: 'cg-point4', position: { x: 39, y: 95.8 }, isOccupied: false },
-      { id: 'cg-point5', position: { x: 53, y: 97 }, isOccupied: false },
-      { id: 'cg-point6', position: { x: 66, y: 94 }, isOccupied: false },
-      { id: 'cg-point7', position: { x: 77.5, y: 87.5 }, isOccupied: false },
-      { id: 'cg-point8', position: { x: 86.5, y: 78.5 }, isOccupied: false },
-      { id: 'cg-point9', position: { x: 92, y: 68 }, isOccupied: false },
-
+      { id: 'cg-point1', position: { x: 16.25, y: 68.25 }, isOccupied: false },
+      { id: 'cg-point2', position: { x: 21.5, y: 78 }, isOccupied: false },
+      { id: 'cg-point3', position: { x: 29.15, y: 85.25 }, isOccupied: false },
+      { id: 'cg-point4', position: { x: 39, y: 90}, isOccupied: false },
+      { id: 'cg-point5', position: { x: 49.5, y: 92 }, isOccupied: false },
+      { id: 'cg-point6', position: { x: 60, y: 90.25 }, isOccupied: false },
+      { id: 'cg-point7', position: { x: 69.15, y: 84.75 }, isOccupied: false },
+      { id: 'cg-point8', position: { x: 76.65, y: 76.65 }, isOccupied: false },
+      { id: 'cg-point9', position: { x: 82, y: 67 }, isOccupied: false },
     ]
   },
   {
@@ -77,16 +76,15 @@ export const necklaces: Necklace[] = [
     basePrice: 22.00,
     displayScale: 1.0, 
     attachmentPoints: [
-      { id: 'cg-point1', position: { x: 8, y: 74 }, isOccupied: false },
-      { id: 'cg-point2', position: { x: 15, y: 84 }, isOccupied: false },
-      { id: 'cg-point3', position: { x: 26, y: 91.2 }, isOccupied: false },
-      { id: 'cg-point4', position: { x: 39, y: 95.8 }, isOccupied: false },
-      { id: 'cg-point5', position: { x: 53, y: 97 }, isOccupied: false },
-      { id: 'cg-point6', position: { x: 66, y: 94 }, isOccupied: false },
-      { id: 'cg-point7', position: { x: 77.5, y: 87.5 }, isOccupied: false },
-      { id: 'cg-point8', position: { x: 86.5, y: 78.5 }, isOccupied: false },
-      { id: 'cg-point9', position: { x: 92, y: 68 }, isOccupied: false },
-
+      { id: 'cg-point1', position: { x: 16.25, y: 68.25 }, isOccupied: false },
+      { id: 'cg-point2', position: { x: 21.5, y: 78 }, isOccupied: false },
+      { id: 'cg-point3', position: { x: 29.15, y: 85.25 }, isOccupied: false },
+      { id: 'cg-point4', position: { x: 39, y: 90}, isOccupied: false },
+      { id: 'cg-point5', position: { x: 49.5, y: 92 }, isOccupied: false },
+      { id: 'cg-point6', position: { x: 60, y: 90.25 }, isOccupied: false },
+      { id: 'cg-point7', position: { x: 69.15, y: 84.75 }, isOccupied: false },
+      { id: 'cg-point8', position: { x: 76.65, y: 76.65 }, isOccupied: false },
+      { id: 'cg-point9', position: { x: 82, y: 67 }, isOccupied: false },
     ]
   },
     // {
