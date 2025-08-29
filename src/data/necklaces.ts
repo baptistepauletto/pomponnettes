@@ -26,6 +26,25 @@ export const necklaces: Necklace[] = [
     ]
   },
   {
+    id: 10465,
+    name: 'Collier Gypso',
+    imagePath: getImagePath('images/necklaces/chaine-gypso-or.png'),
+    variationId: 12760,
+    basePrice: 22.00,
+    attachmentPoints: [
+      { id: 'cg-point1', position: { x: 8, y: 74 }, isOccupied: false },
+      { id: 'cg-point2', position: { x: 15, y: 84 }, isOccupied: false },
+      { id: 'cg-point3', position: { x: 26, y: 91.2 }, isOccupied: false },
+      { id: 'cg-point4', position: { x: 39, y: 95.8 }, isOccupied: false },
+      { id: 'cg-point5', position: { x: 53, y: 97 }, isOccupied: false },
+      { id: 'cg-point6', position: { x: 66, y: 94 }, isOccupied: false },
+      { id: 'cg-point7', position: { x: 77.5, y: 87.5 }, isOccupied: false },
+      { id: 'cg-point8', position: { x: 86.5, y: 78.5 }, isOccupied: false },
+      { id: 'cg-point9', position: { x: 92, y: 68 }, isOccupied: false },
+
+    ]
+  },
+  {
     id: 8188, // à changer
     name: 'Collier Grigri Argent',
     imagePath: getImagePath('images/necklaces/grigri_argent.png'),
@@ -45,25 +64,6 @@ export const necklaces: Necklace[] = [
       { id: 'gg-point11', position: { x: 82, y: 71.25 }, isOccupied: false },
       { id: 'gg-point12', position: { x: 84.5, y: 61.5 }, isOccupied: false },
       { id: 'gg-point13', position: { x: 85.5, y: 51 }, isOccupied: false },
-    ]
-  },
-  {
-    id: 10465,
-    name: 'Collier Gypso',
-    imagePath: getImagePath('images/necklaces/chaine-gypso-or.png'),
-    variationId: 12760,
-    basePrice: 22.00,
-    attachmentPoints: [
-      { id: 'cg-point1', position: { x: 8, y: 74 }, isOccupied: false },
-      { id: 'cg-point2', position: { x: 15, y: 84 }, isOccupied: false },
-      { id: 'cg-point3', position: { x: 26, y: 91.2 }, isOccupied: false },
-      { id: 'cg-point4', position: { x: 39, y: 95.8 }, isOccupied: false },
-      { id: 'cg-point5', position: { x: 53, y: 97 }, isOccupied: false },
-      { id: 'cg-point6', position: { x: 66, y: 94 }, isOccupied: false },
-      { id: 'cg-point7', position: { x: 77.5, y: 87.5 }, isOccupied: false },
-      { id: 'cg-point8', position: { x: 86.5, y: 78.5 }, isOccupied: false },
-      { id: 'cg-point9', position: { x: 92, y: 68 }, isOccupied: false },
-
     ]
   },
   {
