@@ -319,6 +319,11 @@ const NecklaceDisplay: React.FC = () => {
           src={selectedNecklace.imagePath}
           alt={selectedNecklace.name}
           className="necklace-image"
+          style={{
+            transform: selectedNecklace.displayScale 
+              ? `scale(${selectedNecklace.displayScale})` 
+              : undefined
+          }}
           onClick={handleNecklaceTap}
         />
 
