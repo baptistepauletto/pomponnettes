@@ -51,7 +51,7 @@ const PriceCalculator: React.FC = () => {
               <div className="breakdown-item">
                 <span className="item-label">
                   {placedCharms.length} charm{placedCharms.length !== 1 ? 's' : ''} 
-                  {pricing.hasDiscount && (
+                  {pricing.hasFreeCharms && (
                     <span className="original-price">
                       ({formatPrice(pricing.charmsOriginalPrice)})
                     </span>
@@ -60,14 +60,14 @@ const PriceCalculator: React.FC = () => {
                 <span className="item-price">{formatPrice(pricing.charmsPrice)}</span>
               </div>
 
-              {/* Discount display */}
-              {pricing.hasDiscount && (
+              {/* Free charms display */}
+              {pricing.hasFreeCharms && (
                 <div className="breakdown-item discount">
                   <span className="item-label">
-                    💰 {pricing.discountName} discount
+                    🎁 {pricing.freeCharmsCount} FREE charm{pricing.freeCharmsCount !== 1 ? 's' : ''}
                   </span>
                   <span className="item-price discount-amount">
-                    -{formatPrice(pricing.discount)}
+                    -{formatPrice(pricing.freeCharmsValue)}
                   </span>
                 </div>
               )}
@@ -112,16 +112,21 @@ const PriceCalculator: React.FC = () => {
             </div>
           )}
 
-          {/* Next discount hint */}
-          {pricing.nextDiscount && (
-            <div className="next-discount">
-              <div className="discount-hint">
-                💡 Add {pricing.nextDiscount.charmsNeeded} more charm{pricing.nextDiscount.charmsNeeded !== 1 ? 's' : ''} to get {pricing.nextDiscount.nextDiscountName}!
+          {/* Next free charm hint - purple when close, yellow when not */}
+          {pricing.nextFreeCharm && (
+            pricing.closeToFreeCharm ? (
+              <div className="approaching-free-charm">
+                <div className="approaching-hint">
+                  ✨ You're close! Just {pricing.nextFreeCharm.charmsNeeded} more charm{pricing.nextFreeCharm.charmsNeeded !== 1 ? 's' : ''} for a FREE one!
+                </div>
               </div>
-              <div className="potential-savings">
-                Potential savings: {formatPrice(pricing.nextDiscount.potentialSavings)}
+            ) : (
+              <div className="next-discount">
+                <div className="discount-hint">
+                  🎁 Add {pricing.nextFreeCharm.charmsNeeded} more charm{pricing.nextFreeCharm.charmsNeeded !== 1 ? 's' : ''} to get your next one FREE!
+                </div>
               </div>
-            </div>
+            )
           )}
         </div>
       )}
