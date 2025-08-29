@@ -9,6 +9,7 @@ export const necklaces: Necklace[] = [
     imagePath: getImagePath('images/necklaces/grigri.png'),
     variationId: 12764,
     basePrice: 39.00,
+    displayScale: 1.0, // Adjust this value to make the necklace appear larger (>1.0) or smaller (<1.0)
     attachmentPoints: [
       { id: 'gg-point1', position: { x: 14.5, y: 49}, isOccupied: false },
       { id: 'gg-point2', position: { x: 15, y: 59 }, isOccupied: false },
@@ -31,6 +32,7 @@ export const necklaces: Necklace[] = [
     imagePath: getImagePath('images/necklaces/chaine-gypso-or.png'),
     variationId: 12760,
     basePrice: 22.00,
+    displayScale: 1.0, 
     attachmentPoints: [
       { id: 'cg-point1', position: { x: 8, y: 74 }, isOccupied: false },
       { id: 'cg-point2', position: { x: 15, y: 84 }, isOccupied: false },
@@ -50,6 +52,7 @@ export const necklaces: Necklace[] = [
     imagePath: getImagePath('images/necklaces/grigri_argent.png'),
     variationId: 12764,
     basePrice: 39.00,
+    displayScale: 1.0,
     attachmentPoints: [
       { id: 'gg-point1', position: { x: 14.5, y: 49}, isOccupied: false },
       { id: 'gg-point2', position: { x: 15, y: 59 }, isOccupied: false },
@@ -72,6 +75,7 @@ export const necklaces: Necklace[] = [
     imagePath: getImagePath('images/necklaces/chaine-gypso-argent.png'),
     variationId: 12760,
     basePrice: 22.00,
+    displayScale: 1.0, 
     attachmentPoints: [
       { id: 'cg-point1', position: { x: 8, y: 74 }, isOccupied: false },
       { id: 'cg-point2', position: { x: 15, y: 84 }, isOccupied: false },
