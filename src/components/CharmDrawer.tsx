@@ -233,7 +233,7 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
       {isOpen && !selectedCharmId && !hasSelectedCharm && (
         <div className="charm-selection-instructions">
           <div className="instruction-text">
-            👇 Select a charm from the drawer below
+            👇 CHOISIS UN CHARM DANS LE TIROIR
           </div>
         </div>
       )}
