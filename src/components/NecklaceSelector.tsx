@@ -1,15 +1,57 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useCustomizer } from '../context/CustomizerContext';
 import '../styles/NecklaceSelector.scss';
 
 const NecklaceSelector: React.FC = () => {
   const { necklaces, selectedNecklace, selectNecklace } = useCustomizer();
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(false);
+
+  // Check scroll position and update arrow visibility
+  const updateArrowVisibility = () => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const { scrollLeft, scrollWidth, clientWidth } = container;
+    
+    // Show left arrow if we can scroll left
+    setShowLeftArrow(scrollLeft > 0);
+    
+    // Show right arrow if we can scroll right (with small tolerance for rounding)
+    setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1);
+  };
+
+  // Set up scroll listener and initial check
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    // Initial check
+    updateArrowVisibility();
+
+    // Add scroll listener
+    container.addEventListener('scroll', updateArrowVisibility);
+    
+    // Also check on resize in case container size changes
+    window.addEventListener('resize', updateArrowVisibility);
+
+    return () => {
+      container.removeEventListener('scroll', updateArrowVisibility);
+      window.removeEventListener('resize', updateArrowVisibility);
+    };
+  }, [necklaces]); // Re-run when necklaces change
 
   return (
     <div className="necklace-selector">
       <h3>ÉTAPE 1: CHOISIS TA CHAÎNE</h3>
       <div className="carousel-container">
-        <div className="necklace-options">
+        {/* Left arrow - only visible on mobile when can scroll left */}
+        <div className={`scroll-arrow left-arrow ${showLeftArrow ? 'visible' : ''}`}>
+          ←
+        </div>
+        
+        <div className="necklace-options" ref={scrollContainerRef}>
           {necklaces.map((necklace) => (
             <div
               key={necklace.id}
@@ -22,6 +64,11 @@ const NecklaceSelector: React.FC = () => {
               </div>
             </div>
           ))}
+        </div>
+        
+        {/* Right arrow - only visible on mobile when can scroll right */}
+        <div className={`scroll-arrow right-arrow ${showRightArrow ? 'visible' : ''}`}>
+          →
         </div>
       </div>
     </div>
