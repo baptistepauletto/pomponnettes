@@ -8,6 +8,7 @@ import { TapToPlaceProvider } from '../hooks/useTapToPlace';
 import AddToCartButton from './AddToCartButton';
 import ActionButtons from './ActionButtons';
 import PriceCalculator from './PriceCalculator';
+import Description from './Description';
 import DragPreview from './DragPreview';
 import '../styles/CustomizerApp.scss';
 
@@ -50,6 +51,7 @@ const CustomizerApp: React.FC = () => {
                     <NecklaceDisplay />
                     <ActionButtons />
                     <PriceCalculator />
+                    <Description />
                     <AddToCartButton />
                   </div>
                 </>
@@ -65,6 +67,7 @@ const CustomizerApp: React.FC = () => {
                   <div className="left-panel">
                     <ActionButtons />
                     <CharmSelector />
+                    <Description />
                   </div>
                   
                   {/* Center panel - Necklace display */}
