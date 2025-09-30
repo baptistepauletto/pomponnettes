@@ -34,8 +34,7 @@ const CustomizerApp: React.FC = () => {
         <CustomizerProvider>
           <div className="customizer-app">
             <header className="customizer-header">
-              <h1>Necklace Charm Customizer</h1>
-              <p>Design your perfect necklace by {isMobile ? 'selecting charms and placing them on attachment points' : 'dragging and dropping charms onto attachment points'}</p>
+              <h1>Personnalise<br className="mobile-break" /> ton <em>collier</em></h1>
             </header>
 
             <main className="customizer-content">
