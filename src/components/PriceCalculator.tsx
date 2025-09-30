@@ -22,17 +22,15 @@ const PriceCalculator: React.FC = () => {
   return (
     <div className="price-calculator">
       {/* Main price display */}
-      <div className="price-display" onClick={() => setShowBreakdown(!showBreakdown)}>
-        <div className="total-price">
-          <span className="price-amount">{formatPrice(pricing.total)}</span>
+      <div className="price-header" onClick={() => setShowBreakdown(!showBreakdown)}>
+        <div className="price-label-section">
+          <h3>TOTAL</h3>
           {pricing.savings > 0 && (
             <span className="savings">Save {formatPrice(pricing.savings)}</span>
           )}
         </div>
-        <div className="price-details">
-          <span className="tap-hint">
-            {showBreakdown ? '👆 Tap to hide details' : '👆 Tap for price breakdown'}
-          </span>
+        <div className="price-value-section">
+          <span className="price-amount">{formatPrice(pricing.total)}</span>
         </div>
       </div>
 
@@ -128,13 +126,13 @@ const PriceCalculator: React.FC = () => {
               </div>
             )
           )}
-        </div>
-      )}
 
-      {/* Quick charm price reference */}
-      {!pricing.hasCharms && (
-        <div className="charm-info">
-          <span className="info-text">Each charm: {formatPrice(CHARM_PRICE)}</span>
+          {/* Quick charm price reference */}
+          {!pricing.hasCharms && (
+            <div className="charm-info">
+              <span className="info-text">Each charm: {formatPrice(CHARM_PRICE)}</span>
+            </div>
+          )}
         </div>
       )}
     </div>
