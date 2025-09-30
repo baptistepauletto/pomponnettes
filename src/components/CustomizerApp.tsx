@@ -48,8 +48,8 @@ const CustomizerApp: React.FC = () => {
                   </div>
                   <div className="main-display">
                     <NecklaceDisplay />
-                    <PriceCalculator />
                     <ActionButtons />
+                    <PriceCalculator />
                     <AddToCartButton />
                   </div>
                 </>
