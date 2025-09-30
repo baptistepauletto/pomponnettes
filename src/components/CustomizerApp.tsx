@@ -51,8 +51,8 @@ const CustomizerApp: React.FC = () => {
                     <NecklaceDisplay />
                     <ActionButtons />
                     <PriceCalculator />
-                    <Description />
                     <AddToCartButton />
+                    <Description />
                   </div>
                 </>
               ) : (
