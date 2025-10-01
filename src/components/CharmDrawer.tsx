@@ -259,9 +259,9 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
               onClick={() => !isAnimating && setSelectedCategory(category)}
             >
               {category === 'All Charms' 
-                ? '✨ All' 
+                ? '✨ Tous' 
                 : category === 'Recently Used' 
-                  ? '🕒 Recent' 
+                  ? '🕒 Récents' 
                   : category}
             </div>
           ))}
@@ -270,7 +270,7 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
         {/* Display empty state for Recently Used category when empty */}
         {selectedCategory === 'Recently Used' && recentlyUsedCharmIds.length === 0 && (
           <div className="empty-recently-used">
-            No charms have been used yet
+            Vous n'avez pas encore placé aucun charm.
           </div>
         )}
         
