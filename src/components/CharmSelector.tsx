@@ -49,7 +49,6 @@ const CharmOption: React.FC<{ id: string; name: string; imagePath: string; sizeS
 
 const CharmSelector: React.FC = () => {
   const { charms, placedCharms } = useCustomizer();
-  const { selectedCharmId } = useTapToPlace();
   const isMobile = isTouchDevice();
   
   // Category management state (desktop only)
