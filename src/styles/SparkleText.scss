@@ -1,0 +1,155 @@
+// SparkleText component styles
+.sparkle-text {
+  --glare: rgba(255, 255, 255, 0.75);
+  --font-size: 1.5rem; // Base font size
+  
+  position: relative;
+  display: inline-block;
+  
+  // Responsive font sizes
+  @media (max-width: 480px) {
+    --font-size: 2.5rem;
+  }
+  
+  @media (min-width: 481px) {
+    --font-size: 3.5rem;
+  }
+  
+  // Main text with glitter effect
+  .text-main {
+    display: inline-block;
+    font-size: var(--font-size);
+    font-family: "Playfair Display", sans-serif;
+    position: relative;
+    z-index: 1;
+    
+    // Subtle glitter animation
+    animation: glitter 18s infinite;
+  }
+  
+  // Sparkle SVGs
+  .sparkle {
+    position: absolute;
+    z-index: 3;
+    width: calc(var(--font-size) * 0.5);
+    aspect-ratio: 1;
+    color: var(--glare);
+    transform: translate(-50%, -50%) scale(0);
+    
+    path {
+      fill: currentColor;
+    }
+    
+    animation: sparkle-auto 10s infinite;
+    animation-delay: calc(var(--d) * 0.3s);
+  }
+  
+  // Individual sparkle positions and properties
+  .sparkle-1 {
+    --x: 0;
+    --y: 20;
+    --s: 1.1;
+    --d: 1;
+    top: calc(var(--y) * 1%);
+    left: calc(var(--x) * 1%);
+  }
+  
+  .sparkle-2 {
+    --x: 15;
+    --y: 80;
+    --s: 1.25;
+    --d: 2;
+    top: calc(var(--y) * 1%);
+    left: calc(var(--x) * 1%);
+  }
+  
+  .sparkle-3 {
+    --x: 45;
+    --y: 40;
+    --s: 1.1;
+    --d: 3;
+    top: calc(var(--y) * 1%);
+    left: calc(var(--x) * 1%);
+  }
+  
+  .sparkle-4 {
+    --x: 75;
+    --y: 60;
+    --s: 0.9;
+    --d: 2;
+    top: calc(var(--y) * 1%);
+    left: calc(var(--x) * 1%);
+  }
+  
+  .sparkle-5 {
+    --x: 100;
+    --y: 30;
+    --s: 0.8;
+    --d: 4;
+    top: calc(var(--y) * 1%);
+    left: calc(var(--x) * 1%);
+  }
+}
+
+// Sparkle animation keyframes - automatic every 17 seconds
+@keyframes sparkle-auto {
+  0%, 85% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  88% {
+    transform: translate(-50%, -50%) scale(var(--s, 1));
+    opacity: 1;
+  }
+  92% {
+    transform: translate(-50%, -50%) scale(var(--s, 1));
+    opacity: 1;
+  }
+  95%, 100% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+}
+
+// Subtle glitter effect for text
+@keyframes glitter {
+  0%, 90% {
+    text-shadow: 
+      1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  92% {
+    text-shadow: 
+      1px 1px 2px rgba(0, 0, 0, 0.1),
+      0 0 5px rgba(255, 255, 255, 0.3),
+      0 0 10px rgba(255, 255, 255, 0.2);
+  }
+  94% {
+    text-shadow: 
+      1px 1px 2px rgba(0, 0, 0, 0.1),
+      0 0 8px rgba(255, 255, 255, 0.4),
+      0 0 15px rgba(255, 255, 255, 0.3);
+  }
+  96%, 100% {
+    text-shadow: 
+      1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Mobile-specific adjustments
+@media (max-width: 480px) {
+  .sparkle-text {
+    .sparkle {
+      width: calc(var(--font-size) * 0.6); // Smaller sparkles on mobile
+    }
+  }
+}
+
+// Ensure proper text styling inheritance
+.sparkle-text {
+  .text-main {
+    em {
+      font-style: italic;
+      font-weight: 900;
+    }
+  }
+}

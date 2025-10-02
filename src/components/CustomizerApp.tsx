@@ -10,6 +10,7 @@ import ActionButtons from './ActionButtons';
 import PriceCalculator from './PriceCalculator';
 import Description from './Description';
 import DragPreview from './DragPreview';
+import SparkleText from './SparkleText';
 import '../styles/CustomizerApp.scss';
 
 const CustomizerApp: React.FC = () => {
@@ -35,7 +36,9 @@ const CustomizerApp: React.FC = () => {
         <CustomizerProvider>
           <div className="customizer-app">
             <header className="customizer-header">
-              <h1>Personnalise<br className="mobile-break" /> ton <em>collier</em></h1>
+              <SparkleText>
+                Personnalise<br className="mobile-break" /> ton <em>collier</em>
+              </SparkleText>
             </header>
 
             <main className="customizer-content">
