@@ -22,7 +22,7 @@ const Description: React.FC = () => {
           <div className="description-text">
             <p>
               <strong>TAILLE</strong>
-               <br />{selectedNecklace?.sizeDescription || 'Longueur du collier : 42 cm + 5 cm réglable.'}
+               <br />{selectedNecklace?.sizeDescription}
             </p>
             <p>
               <strong>COMPOSITION </strong>
