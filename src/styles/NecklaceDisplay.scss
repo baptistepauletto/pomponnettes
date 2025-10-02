@@ -54,10 +54,39 @@
     
 
     
+    // Engraved logo background
+    .logo-background {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50%;
+      height: 50%;
+      z-index: 1;
+      pointer-events: none;
+      
+      .engraved-logo {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        opacity: 0.4;
+        filter: 
+          invert(1) 
+          brightness(2) 
+          contrast(100%)
+          drop-shadow(1px 1px 1px rgba(162, 78, 78, 0.3))
+          drop-shadow(-1px -1px 1px rgba(255, 255, 255, 0.8));
+        mix-blend-mode: normal;
+        transform: scale(0.8);
+      }
+    }
+    
     .necklace-image {
       width: 100%;
       filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
       display: block;
+      position: relative;
+      z-index: 2;
     }
     
     .position-grid {
@@ -371,6 +400,12 @@
       overflow: visible;
       transform: scale(1.2);
       transform-origin: center center;
+      
+      .logo-background {
+        .engraved-logo {
+          opacity: 0.3; // 5x more visible on tablet
+        }
+      }
     }
     
     .attachment-point {
@@ -415,6 +450,13 @@
       overflow: visible;
       transform: scale(1.3);
       transform-origin: center center;
+      
+      .logo-background {
+        .engraved-logo {
+          opacity: 0.45; 
+          transform: scale(0.7); // Smaller on mobile
+        }
+      }
     }
     
     .placed-charm {

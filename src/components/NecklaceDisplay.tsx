@@ -315,6 +315,15 @@ const NecklaceDisplay: React.FC = () => {
         ref={necklaceContainerRef}
         className={`necklace-container ${showGrid ? 'with-grid' : ''}`}
       >
+        {/* Engraved logo background */}
+        <div className="logo-background">
+          <img 
+            src="/images/logo/logo-les-pomponettes-noir-sans-txt.png" 
+            alt="Les Pomponnettes Logo" 
+            className="engraved-logo"
+          />
+        </div>
+        
         <img
           src={selectedNecklace.imagePath}
           alt={selectedNecklace.name}
