@@ -24,16 +24,14 @@ const ActionButtons: React.FC = () => {
         className="action-button randomize-button"
         onClick={handleRandomize}
       >
-        <span className="button-icon">✨</span>
-        <span>Nos favoris</span>
+        <span>FAVORIS DES POMPONNETTES</span>
       </button>
       
       <button 
         className="action-button clear-button"
         onClick={handleClear}
       >
-        <span className="button-icon">🗑️</span>
-        <span>Retirer les charms</span>
+        <span>RETIRER TOUS LES CHARMS</span>
       </button>
     </div>
   );

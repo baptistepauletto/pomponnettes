@@ -5,6 +5,7 @@ import '../styles/NecklaceDisplay.scss';
 import { useTapToPlace, isTouchDevice, triggerHapticFeedback } from '../hooks/useTapToPlace';
 import CharmDrawer from './CharmDrawer';
 import { Position } from '../types';
+import { getImagePath } from '../utils/imagePaths';
 
 // Component for a single attachment point
 const AttachmentPointComponent: React.FC<{
@@ -300,14 +301,14 @@ const NecklaceDisplay: React.FC = () => {
       {/* Show removal tip when charms are placed and tip hasn't been shown yet */}
       {showRemovalTip && (
         <div className="removal-tip">
-          💡 Tap any charm to remove it
+          💡 TAP UN CHARM POUR LE RETIRER
         </div>
       )}
       
       {/* Add instruction when in placement mode and a charm is selected, but only if user hasn't placed a charm yet */}
       {isDrawerOpen && selectedCharmId && !hasPlacedCharm && (
         <div className="placement-instructions">
-          Tap a pink attachment point to place your charm
+          👇 TAP UN POINT POUR PLACER TON CHARM
         </div>
       )}
       
@@ -315,6 +316,15 @@ const NecklaceDisplay: React.FC = () => {
         ref={necklaceContainerRef}
         className={`necklace-container ${showGrid ? 'with-grid' : ''}`}
       >
+        {/* Engraved logo background */}
+        <div className="logo-background">
+          <img 
+            src={getImagePath("images/logo/logo-les-pomponettes-noir-sans-txt.png")} 
+            alt="Les Pomponnettes Logo" 
+            className="engraved-logo"
+          />
+        </div>
+        
         <img
           src={selectedNecklace.imagePath}
           alt={selectedNecklace.name}
@@ -357,7 +367,7 @@ const NecklaceDisplay: React.FC = () => {
       {/* Show first-time interaction hint if never interacted with necklace */}
       {isMobile && !hasInteractedWithNecklace && !isDrawerOpen && (
         <div className="first-interaction-hint">
-          👆 Tap the necklace to start customizing
+          👆 TAP LE COLLIER POUR COMMENCER
         </div>
       )}
       

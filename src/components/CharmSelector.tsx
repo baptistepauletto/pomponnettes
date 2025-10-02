@@ -49,7 +49,6 @@ const CharmOption: React.FC<{ id: string; name: string; imagePath: string; sizeS
 
 const CharmSelector: React.FC = () => {
   const { charms, placedCharms } = useCustomizer();
-  const { selectedCharmId } = useTapToPlace();
   const isMobile = isTouchDevice();
   
   // Category management state (desktop only)
@@ -91,7 +90,7 @@ const CharmSelector: React.FC = () => {
 
   return (
     <div className="charm-selector">
-      <h3>Select a Charm</h3>
+      <h3>ÉTAPE 2: PLACE TES CHARMS</h3>
       
       {/* Category tabs for desktop only */}
       {!isMobile && (
@@ -103,9 +102,9 @@ const CharmSelector: React.FC = () => {
               onClick={() => setSelectedCategory(category)}
             >
               {category === 'All Charms' 
-                ? '✨ All' 
+                ? '✨ Tous' 
                 : category === 'Recently Used' 
-                  ? '🕒 Recent' 
+                  ? '🕒 Récents' 
                   : category}
             </div>
           ))}
@@ -115,7 +114,7 @@ const CharmSelector: React.FC = () => {
       {/* Empty state for Recently Used */}
       {!isMobile && showEmptyRecentlyUsed && (
         <div className="empty-recently-used">
-          No charms have been used yet
+          Vous n'avez pas encore placé aucun charm.
         </div>
       )}
 
@@ -133,16 +132,6 @@ const CharmSelector: React.FC = () => {
           ))}
         </div>
       )}
-
-      <p className="instructions">
-        {isMobile ? 
-          (selectedCharmId ? 
-            "Now tap an attachment point on the necklace" : 
-            "Tap a charm to select it"
-          ) : 
-          "Drag and drop charms onto the necklace"
-        }
-      </p>
     </div>
   );
 };

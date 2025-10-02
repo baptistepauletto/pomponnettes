@@ -22,17 +22,15 @@ const PriceCalculator: React.FC = () => {
   return (
     <div className="price-calculator">
       {/* Main price display */}
-      <div className="price-display" onClick={() => setShowBreakdown(!showBreakdown)}>
-        <div className="total-price">
-          <span className="price-amount">{formatPrice(pricing.total)}</span>
+      <div className="price-header" onClick={() => setShowBreakdown(!showBreakdown)}>
+        <div className="price-label-section">
+          <h3>TOTAL</h3>
           {pricing.savings > 0 && (
             <span className="savings">Save {formatPrice(pricing.savings)}</span>
           )}
         </div>
-        <div className="price-details">
-          <span className="tap-hint">
-            {showBreakdown ? '👆 Tap to hide details' : '👆 Tap for price breakdown'}
-          </span>
+        <div className="price-value-section">
+          <span className="price-amount">{formatPrice(pricing.total)}</span>
         </div>
       </div>
 
@@ -64,7 +62,7 @@ const PriceCalculator: React.FC = () => {
               {pricing.hasFreeCharms && (
                 <div className="breakdown-item discount">
                   <span className="item-label">
-                    🎁 {pricing.freeCharmsCount} FREE charm{pricing.freeCharmsCount !== 1 ? 's' : ''}
+                    🎁 {pricing.freeCharmsCount} Charm{pricing.freeCharmsCount !== 1 ? 's' : ''} gratuit{pricing.freeCharmsCount !== 1 ? 's' : ''}
                   </span>
                   <span className="item-price discount-amount">
                     -{formatPrice(pricing.freeCharmsValue)}
@@ -76,15 +74,15 @@ const PriceCalculator: React.FC = () => {
 
           {/* Subtotal */}
           <div className="breakdown-item subtotal">
-            <span className="item-label">Subtotal</span>
+            <span className="item-label">Sous-total</span>
             <span className="item-price">{formatPrice(pricing.subtotal)}</span>
           </div>
 
           {/* Shipping */}
           <div className="breakdown-item">
             <span className="item-label">
-              Shipping 
-              {pricing.freeShipping && <span className="free-badge">FREE</span>}
+              Livraison 
+              {pricing.freeShipping && <span className="free-badge">GRATUITE</span>}
             </span>
             <span className="item-price">
               {pricing.freeShipping ? formatPrice(0) : formatPrice(pricing.shipping)}
@@ -101,7 +99,7 @@ const PriceCalculator: React.FC = () => {
           {!pricing.freeShipping && (
             <div className="shipping-progress">
               <div className="progress-text">
-                Add {formatPrice(90 - pricing.subtotal)} more for free shipping! 🚚
+                Ajoutez {formatPrice(90 - pricing.subtotal)} pour obtenir la livraison gratuite!
               </div>
               <div className="progress-bar">
                 <div 
@@ -117,24 +115,24 @@ const PriceCalculator: React.FC = () => {
             pricing.closeToFreeCharm ? (
               <div className="approaching-free-charm">
                 <div className="approaching-hint">
-                  ✨ You're close! Just {pricing.nextFreeCharm.charmsNeeded} more charm{pricing.nextFreeCharm.charmsNeeded !== 1 ? 's' : ''} for a FREE one!
+                  ✨ Vous êtes proches! Plus que {pricing.nextFreeCharm.charmsNeeded} charm{pricing.nextFreeCharm.charmsNeeded !== 1 ? 's' : ''} pour en obtenir un gratuit!
                 </div>
               </div>
             ) : (
               <div className="next-discount">
                 <div className="discount-hint">
-                  🎁 Add {pricing.nextFreeCharm.charmsNeeded} more charm{pricing.nextFreeCharm.charmsNeeded !== 1 ? 's' : ''} to get your next one FREE!
+                  🎁 Ajoutez {pricing.nextFreeCharm.charmsNeeded} charm{pricing.nextFreeCharm.charmsNeeded !== 1 ? 's' : ''} et le prochain sera gratuit!
                 </div>
               </div>
             )
           )}
-        </div>
-      )}
 
-      {/* Quick charm price reference */}
-      {!pricing.hasCharms && (
-        <div className="charm-info">
-          <span className="info-text">Each charm: {formatPrice(CHARM_PRICE)}</span>
+          {/* Quick charm price reference */}
+          {!pricing.hasCharms && (
+            <div className="charm-info">
+              <span className="info-text">Chaque charm: {formatPrice(CHARM_PRICE)}</span>
+            </div>
+          )}
         </div>
       )}
     </div>

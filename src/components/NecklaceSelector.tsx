@@ -1,121 +1,74 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useCustomizer } from '../context/CustomizerContext';
-import { triggerHapticFeedback } from '../hooks/useTapToPlace';
-import { formatPrice } from '../utils/pricing';
 import '../styles/NecklaceSelector.scss';
 
 const NecklaceSelector: React.FC = () => {
   const { necklaces, selectedNecklace, selectNecklace } = useCustomizer();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  
-  // Touch/swipe state
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
-  const [isSwiping, setIsSwiping] = useState(false);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(false);
 
-  // Minimum swipe distance to trigger navigation (in pixels)
-  const minSwipeDistance = 50;
+  // Check scroll position and update arrow visibility
+  const updateArrowVisibility = () => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
 
-  // Navigate to next/previous necklace (keep for mobile swipe functionality)
-  const navigateNecklace = (direction: 'next' | 'prev') => {
-    if (!selectedNecklace) return;
+    const { scrollLeft, scrollWidth, clientWidth } = container;
     
-    const currentIndex = necklaces.findIndex(n => n.id === selectedNecklace.id);
-    let newIndex;
+    // Show left arrow if we can scroll left
+    setShowLeftArrow(scrollLeft > 0);
     
-    if (direction === 'next') {
-      newIndex = currentIndex + 1 >= necklaces.length ? 0 : currentIndex + 1;
-    } else {
-      newIndex = currentIndex - 1 < 0 ? necklaces.length - 1 : currentIndex - 1;
-    }
-    
-    selectNecklace(necklaces[newIndex].id);
-    
-    // Provide haptic feedback for successful navigation
-    triggerHapticFeedback('light');
-    
-    // Scroll the new necklace into view
-    setTimeout(() => {
-      const container = scrollContainerRef.current;
-      if (container) {
-        const necklaceElements = container.children;
-        const targetElement = necklaceElements[newIndex] as HTMLElement;
-        if (targetElement) {
-          targetElement.scrollIntoView({
-            behavior: 'smooth',
-            block: 'nearest',
-            inline: 'center'
-          });
-        }
-      }
-    }, 50);
+    // Show right arrow if we can scroll right (with small tolerance for rounding)
+    setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1);
   };
 
-  // Touch event handlers (keep for mobile)
-  const onTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-    setIsSwiping(true);
-  };
+  // Set up scroll listener and initial check
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
 
-  const onTouchMove = (e: React.TouchEvent) => {
-    if (!isSwiping) return;
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
+    // Initial check
+    updateArrowVisibility();
 
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd || !isSwiping) {
-      setIsSwiping(false);
-      return;
-    }
+    // Add scroll listener
+    container.addEventListener('scroll', updateArrowVisibility);
     
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
+    // Also check on resize in case container size changes
+    window.addEventListener('resize', updateArrowVisibility);
 
-    if (isLeftSwipe) {
-      navigateNecklace('next');
-    } else if (isRightSwipe) {
-      navigateNecklace('prev');
-    }
-    
-    setIsSwiping(false);
-    setTouchStart(null);
-    setTouchEnd(null);
-  };
-
-  // Prevent default touch behavior on the container to avoid conflicts
-  const onTouchStartContainer = (e: React.TouchEvent) => {
-    // Only prevent default if we're starting a potential swipe
-    if (e.touches.length === 1) {
-      onTouchStart(e);
-    }
-  };
+    return () => {
+      container.removeEventListener('scroll', updateArrowVisibility);
+      window.removeEventListener('resize', updateArrowVisibility);
+    };
+  }, [necklaces]); // Re-run when necklaces change
 
   return (
     <div className="necklace-selector">
       <h3>ÉTAPE 1: CHOISIS TA CHAÎNE</h3>
       <div className="carousel-container">
-        <div 
-          className="necklace-options" 
-          ref={scrollContainerRef}
-          onTouchStart={onTouchStartContainer}
-          onTouchMove={onTouchMove}
-          onTouchEnd={onTouchEnd}
-        >
+        {/* Left arrow - only visible on mobile when can scroll left */}
+        <div className={`scroll-arrow left-arrow ${showLeftArrow ? 'visible' : ''}`}>
+          ←
+        </div>
+        
+        <div className="necklace-options" ref={scrollContainerRef}>
           {necklaces.map((necklace) => (
             <div
               key={necklace.id}
-              className={`necklace-option ${selectedNecklace?.id === necklace.id ? 'selected' : ''} ${isSwiping ? 'swiping' : ''}`}
-              onClick={() => !isSwiping && selectNecklace(necklace.id)}
+              className={`necklace-option ${selectedNecklace?.id === necklace.id ? 'selected' : ''}`}
+              onClick={() => selectNecklace(necklace.id)}
             >
               <img src={necklace.imagePath} alt={necklace.name} />
               <div className="necklace-info">
                 <p className="necklace-name">{necklace.name}</p>
-                <p className="necklace-price">{formatPrice(necklace.basePrice)}</p>
               </div>
             </div>
           ))}
+        </div>
+        
+        {/* Right arrow - only visible on mobile when can scroll right */}
+        <div className={`scroll-arrow right-arrow ${showRightArrow ? 'visible' : ''}`}>
+          →
         </div>
       </div>
     </div>
