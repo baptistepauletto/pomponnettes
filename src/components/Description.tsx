@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import '../styles/Description.scss';
+import { useCustomizer } from '../context/CustomizerContext';
 
 const Description: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const { selectedNecklace } = useCustomizer();
 
   return (
     <div className="description">
@@ -20,7 +22,7 @@ const Description: React.FC = () => {
           <div className="description-text">
             <p>
               <strong>TAILLE</strong>
-               <br />Longueur du collier : 42 cm + 5 cm réglable.
+               <br />{selectedNecklace?.sizeDescription || 'Longueur du collier : 42 cm + 5 cm réglable.'}
             </p>
             <p>
               <strong>COMPOSITION </strong>

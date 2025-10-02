@@ -33,6 +33,7 @@ export interface Necklace {
   variationId: number; // WooCommerce variation ID
   basePrice: number; // Base price in euros
   displayScale?: number; // Optional scale factor for necklace image display (default: 1.0)
+  sizeDescription?: string; // Description of the necklace size/length
 }
 
 // Placed charm type for a charm that has been positioned on the necklace
