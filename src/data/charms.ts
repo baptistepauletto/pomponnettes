@@ -148,7 +148,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/aigle-1.6cm.png'),
     sizeScale: 1.6,
     sizeMark: 'L',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: 0, y: -30 }
   },
   {
@@ -166,7 +166,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/papillon-1.5cm.png'),
     sizeScale: 1.5,
     sizeMark: 'M',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: 0, y: -15 }
   },
   {
@@ -175,7 +175,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/perroquet-1.7cm.png'),
     sizeScale: 1.7,
     sizeMark: 'L',
-    category: '🐻 Animaux '
+    category: '🐻 Animaux'
   },
   {
     id: 'coquillage',
@@ -200,7 +200,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/petit-nounours-1.5cm.png'),
     sizeScale: 1.5,
     sizeMark: 'M',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: 0, y: -5 }
   },
   {
@@ -209,7 +209,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/cheval-1.5cm.png'),
     sizeScale: 1.5,
     sizeMark: 'M',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: 0, y: -5 }
   },
   {
@@ -236,7 +236,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/chien-1.5cm.png'),
     sizeScale: 1.5,
     sizeMark: 'M',
-    category: '🐻 Animaux '
+    category: '🐻 Animaux'
   },
   {
     id: 'fer-a-cheval',
@@ -260,7 +260,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/coccinelle-1.5cm.png'),
     sizeScale: 1.5,
     sizeMark: 'M',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: 0, y: -5 }
   },
   {
@@ -349,7 +349,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/serpent-1.8cm.png'),
     sizeScale: 1.8,
     sizeMark: 'L',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: 0, y: -5 }
   },
   {
@@ -367,7 +367,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/escargot-1.8cm.png'),
     sizeScale: 1.8,
     sizeMark: 'L',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: 0, y: -10 }
   },
   {
@@ -439,7 +439,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/abeille-1.6cm.png'),
     sizeScale: 1.6,
     sizeMark: 'L',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: 0, y: -15 }
   },
   {
@@ -520,7 +520,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/scarabee-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: 0, y: -5 }
   },
   {
@@ -619,7 +619,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/betail-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: 0, y: -20 }
   },
   {
@@ -628,7 +628,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/elephant-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: -10, y: -15 }
   },
   {
@@ -673,7 +673,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/nounours-2.2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: 0, y: -5 }
   },
   {
@@ -870,7 +870,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/chien-bleu-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: -10, y: -10 }
   },
   {
@@ -879,7 +879,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/chien-rose-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: -10, y: -10 }
   },
   {
@@ -888,7 +888,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/chien-rose-pale-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: -10, y: -10 }
   },
   {
@@ -897,7 +897,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/chien-rouge-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: -10, y: -10 }
   },
   {
@@ -906,7 +906,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/chien-vert-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: -10, y: -10 }
   },
   {
@@ -924,7 +924,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/coccinelle-rouge-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: 0, y: -5 }
   },
   {
@@ -1131,7 +1131,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/nounours-blanc-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: 0, y: -5 }
   },
   {
@@ -1140,7 +1140,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/nounours-rose-pale-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: 0, y: -5 }
   },
   {
@@ -1149,7 +1149,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/nounours-violet-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: 0, y: -5 }
   },
   {
@@ -1221,7 +1221,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/patte-de-chien-rose-1.5cm.png'),
     sizeScale: 1.5,
     sizeMark: 'M',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: 0, y: -5 }
   },
   {
@@ -1239,7 +1239,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/perle-chat-bleu-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: 0, y: -8 }
   },
   {
@@ -1248,7 +1248,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/perle-chat-rouge-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '🐻 Animaux ',
+    category: '🐻 Animaux',
     attachmentOffset: { x: 0, y: -8 }
   },
   {
