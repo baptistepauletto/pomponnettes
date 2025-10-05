@@ -15,7 +15,7 @@
     --font-size: 3.5rem;
   }
   
-  // Main text with glitter effect
+  // Main text without glitter effect
   .text-main {
     display: inline-block;
     font-size: var(--font-size);
@@ -23,8 +23,7 @@
     position: relative;
     z-index: 1;
     
-    // Subtle glitter animation
-    animation: glitter 18s infinite;
+    // No animation - glitter effect removed
   }
   
   // Sparkle SVGs
@@ -40,7 +39,7 @@
       fill: currentColor;
     }
     
-    animation: sparkle-auto 10s infinite;
+    animation: sparkle-auto 900s infinite;
     animation-delay: calc(var(--d) * 0.3s);
   }
   
