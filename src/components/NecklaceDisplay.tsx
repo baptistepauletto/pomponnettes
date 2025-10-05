@@ -301,14 +301,14 @@ const NecklaceDisplay: React.FC = () => {
       {/* Show removal tip when charms are placed and tip hasn't been shown yet */}
       {showRemovalTip && (
         <div className="removal-tip">
-          💡 TAP UN CHARM POUR LE RETIRER
+          TAP UN CHARM POUR LE RETIRER
         </div>
       )}
       
       {/* Add instruction when in placement mode and a charm is selected, but only if user hasn't placed a charm yet */}
       {isDrawerOpen && selectedCharmId && !hasPlacedCharm && (
         <div className="placement-instructions">
-          👇 TAP UN POINT POUR PLACER TON CHARM
+          TAP UN POINT POUR PLACER TON CHARM
         </div>
       )}
       
@@ -367,7 +367,7 @@ const NecklaceDisplay: React.FC = () => {
       {/* Show first-time interaction hint if never interacted with necklace */}
       {isMobile && !hasInteractedWithNecklace && !isDrawerOpen && (
         <div className="first-interaction-hint">
-          👆 TAP LE COLLIER POUR COMMENCER
+          TAP LE COLLIER POUR COMMENCER
         </div>
       )}
       
