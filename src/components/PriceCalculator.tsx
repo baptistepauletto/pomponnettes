@@ -26,7 +26,7 @@ const PriceCalculator: React.FC = () => {
         <div className="price-label-section">
           <h3>TOTAL</h3>
           {pricing.savings > 0 && (
-            <span className="savings">Save {formatPrice(pricing.savings)}</span>
+            <span className="savings">Économisez {formatPrice(pricing.savings)}</span>
           )}
         </div>
         <div className="price-value-section">

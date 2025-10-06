@@ -261,7 +261,7 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
               {category === 'All Charms' 
                 ? '✨ Tous' 
                 : category === 'Recently Used' 
-                  ? '🕒 Récents' 
+                  ? '🕒 Vus récents' 
                   : category}
             </div>
           ))}
