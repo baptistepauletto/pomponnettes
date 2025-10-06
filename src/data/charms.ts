@@ -1520,5 +1520,68 @@ export const charms: Charm[] = [
     sizeMark: 'S',
     category: '⭐ Symboles',
     attachmentOffset: { x: 0, y: -2 }
+  },
+  {
+    id: 'aubergine',
+    name: 'Aubergine',
+    imagePath: getImagePath('images/charms/aubergine-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🍒 Nourriture',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'perle-coquillage-beige',
+    name: 'Perle Coquillage Beige',
+    imagePath: getImagePath('images/charms/perle-coquillage-beige-2.8cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🦞 Océan',
+    attachmentOffset: { x: 0, y: -8 }
+  },
+  {
+    id: 'perle-coquillage-rose',
+    name: 'Perle Coquillage Rose',
+    imagePath: getImagePath('images/charms/perle-coquillage-rose-2.8cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🦞 Océan',
+    attachmentOffset: { x: 5, y: -8 }
+  },
+  {
+    id: 'perle-coquillage-rouge',
+    name: 'Perle Coquillage Rouge',
+    imagePath: getImagePath('images/charms/perle-coquillage-rouge-2.8cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🦞 Océan',
+    attachmentOffset: { x: 0, y: -8 }
+  },
+  {
+    id: 'poupee-bleue',
+    name: 'Poupée Bleue',
+    imagePath: getImagePath('images/charms/poupée-bleue-2.8cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🐻 Animaux',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'poupee-rose',
+    name: 'Poupée Rose',
+    imagePath: getImagePath('images/charms/poupée-rose-2.8cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🐻 Animaux',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'poupee-rouge',
+    name: 'Poupée Rouge',
+    imagePath: getImagePath('images/charms/poupée-rouge-2.8cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '🐻 Animaux',
+    attachmentOffset: { x: 0, y: -5 }
   }
 ];
