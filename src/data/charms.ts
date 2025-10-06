@@ -1376,5 +1376,149 @@ export const charms: Charm[] = [
     sizeMark: 'XL',
     category: '🦞 Océan',
     attachmentOffset: { x: 0, y: -7 }
+  },
+  {
+    id: 'double-oeil-blanc',
+    name: 'Double Oeil Blanc',
+    imagePath: getImagePath('images/charms/double-oeil-blanc-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'double-oeil-bleu',
+    name: 'Double Oeil Bleu',
+    imagePath: getImagePath('images/charms/double-oeil-bleu-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'double-oeil-rose',
+    name: 'Double Oeil Rose',
+    imagePath: getImagePath('images/charms/double-oeil-rose-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 5, y: 0 }
+  },
+  {
+    id: 'double-oeil-rouge',
+    name: 'Double Oeil Rouge',
+    imagePath: getImagePath('images/charms/double-oeil-rouge-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 5, y: -5 }
+  },
+  {
+    id: 'perle-bleu-ciel',
+    name: 'Perle Bleu Ciel',
+    imagePath: getImagePath('images/charms/perle-bleu-ciel-0.8cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'perle-breloque',
+    name: 'Perle Breloque',
+    imagePath: getImagePath('images/charms/perle-breloque-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'perle-cylindre-bleue',
+    name: 'Perle Cylindre Bleue',
+    imagePath: getImagePath('images/charms/perle-cylindre-bleue-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'perle-cylindre-rose',
+    name: 'Perle Cylindre Rose',
+    imagePath: getImagePath('images/charms/perle-cylindre-rose-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 5, y: -5 }
+  },
+  {
+    id: 'perle-cylindre-rouge',
+    name: 'Perle Cylindre Rouge',
+    imagePath: getImagePath('images/charms/perle-cylindre-rouge-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'perle-cylindre-verte',
+    name: 'Perle Cylindre Verte',
+    imagePath: getImagePath('images/charms/perle-cylindre-verte-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'XL',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'perle-nature',
+    name: 'Perle Nature',
+    imagePath: getImagePath('images/charms/perle-nature-0.8cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 5, y: -5 }
+  },
+  {
+    id: 'perle-rose',
+    name: 'Perle Rose',
+    imagePath: getImagePath('images/charms/perle-rose-0.8cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: -10, y: -2 }
+  },
+  {
+    id: 'perle-rouge',
+    name: 'Perle Rouge',
+    imagePath: getImagePath('images/charms/perle-rouge-0.8cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 3, y: -10 }
+  },
+  {
+    id: 'perle-turquoise',
+    name: 'Perle Turquoise',
+    imagePath: getImagePath('images/charms/perle-turquoise-0.8cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 0, y: -2 }
+  },
+  {
+    id: 'perle-verte',
+    name: 'Perle Verte',
+    imagePath: getImagePath('images/charms/perle-verte-0.8cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 10, y: -2 }
+  },
+  {
+    id: 'perle-violette',
+    name: 'Perle Violette',
+    imagePath: getImagePath('images/charms/perle-violette-0.8cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 0, y: -2 }
   }
 ];
