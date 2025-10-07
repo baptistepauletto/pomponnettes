@@ -5,7 +5,6 @@ import '../styles/NecklaceDisplay.scss';
 import { useTapToPlace, isTouchDevice, triggerHapticFeedback } from '../hooks/useTapToPlace';
 import CharmDrawer from './CharmDrawer';
 import { Position } from '../types';
-import { getImagePath } from '../utils/imagePaths';
 
 // Component for a single attachment point
 const AttachmentPointComponent: React.FC<{
@@ -316,15 +315,6 @@ const NecklaceDisplay: React.FC = () => {
         ref={necklaceContainerRef}
         className={`necklace-container ${showGrid ? 'with-grid' : ''}`}
       >
-        {/* Engraved logo background */}
-        <div className="logo-background">
-          <img 
-            src={getImagePath("images/logo/logo-les-pomponettes-noir-sans-txt.png")} 
-            alt="Les Pomponnettes Logo" 
-            className="engraved-logo"
-          />
-        </div>
-        
         <img
           src={selectedNecklace.imagePath}
           alt={selectedNecklace.name}
