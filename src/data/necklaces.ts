@@ -9,7 +9,7 @@ export const necklaces: Necklace[] = [
     imagePath: getImagePath('images/necklaces/grigri.png'),
     variationId: 12764,
     basePrice: 39.00,
-    displayScale: 1.0, // Adjust this value to make the necklace appear larger (>1.0) or smaller (<1.0)
+    displayScale: 1.0, 
     sizeDescription: 'Longueur du collier : 42 cm + 5 cm réglable.',
     attachmentPoints: [
       { id: 'gg-point1', position: { x: 14.5, y: 49}, isOccupied: false },
@@ -48,10 +48,10 @@ export const necklaces: Necklace[] = [
     ]
   },
   {
-    id: 8188, // à changer
+    id: 9645,
     name: 'Collier Grigri Argent',
     imagePath: getImagePath('images/necklaces/grigri_argent.png'),
-    variationId: 12764,
+    variationId: 12812,
     basePrice: 39.00,
     displayScale: 1.0,
     sizeDescription: 'Longueur du collier : 42 cm + 5 cm réglable.',
@@ -72,10 +72,10 @@ export const necklaces: Necklace[] = [
     ]
   },
   {
-    id: 10466, // à changer
+    id: 10561,
     name: 'Collier Gypso Argent',
     imagePath: getImagePath('images/necklaces/chaine-gypso-argent.png'),
-    variationId: 12760,
+    variationId: 22553,
     basePrice: 22.00,
     displayScale: 1.0,
     sizeDescription: 'Longueur du collier : 44 cm + 5 cm réglable.', 
