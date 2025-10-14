@@ -4,11 +4,11 @@ import { useDraggableCharm } from '../hooks/useDragAndDrop';
 import { useTapToPlace, isTouchDevice } from '../hooks/useTapToPlace';
 import '../styles/CharmSelector.scss';
 
-const CharmOption: React.FC<{ id: string; name: string; imagePath: string; sizeScale: number }> = ({
+const CharmOption: React.FC<{ id: string; name: string; imagePath: string; sizeMark: string }> = ({
   id,
   name,
   imagePath,
-  sizeScale,
+  sizeMark,
 }) => {
   const { isDragging, drag } = useDraggableCharm(id);
   const { selectCharm, isCharmSelected, clearSelectedAttachmentPoint } = useTapToPlace();
@@ -38,9 +38,7 @@ const CharmOption: React.FC<{ id: string; name: string; imagePath: string; sizeS
     >
       <img src={imagePath} alt={name} />
       <div className="size-indicator">
-        {sizeScale <= 1 ? 'S' : 
-         sizeScale <= 1.4 ? 'M' : 
-         sizeScale <= 1.85 ? 'L' : 'XL'}
+        {sizeMark}
       </div>
       <p>{name}</p>
     </div>
@@ -104,7 +102,7 @@ const CharmSelector: React.FC = () => {
               {category === 'All Charms' 
                 ? '✨ Tous' 
                 : category === 'Recently Used' 
-                  ? '🕒 Récents' 
+                  ? '🕒 Vus récents' 
                   : category}
             </div>
           ))}
@@ -127,7 +125,7 @@ const CharmSelector: React.FC = () => {
               id={charm.id}
               name={charm.name}
               imagePath={charm.imagePath}
-              sizeScale={charm.sizeScale}
+              sizeMark={charm.sizeMark || 'M'}
             />
           ))}
         </div>
