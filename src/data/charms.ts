@@ -61,7 +61,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/petit-smiley-0.8cm.png'),
     sizeScale: 0.8,
     sizeMark: 'XS',
-    category: '🍒 Nourriture',
+    category: '⭐ Symboles',
     attachmentOffset: { x: 0, y: -5 }
   },
   {
@@ -112,7 +112,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/etoile-1.2cm.png'),
     sizeScale: 1.2,
     sizeMark: 'M',
-    category: '⭐ Symboles',
+    category: '🌸 Nature',
     attachmentOffset: { x: 0, y: -15 }
   },
   {
@@ -121,7 +121,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/soleil-1.2cm.png'),
     sizeScale: 1.4,
     sizeMark: 'M',
-    category: '⭐ Symboles',
+    category: '🌸 Nature',
     attachmentOffset: { x: 0, y: -10 }
   },
   {
@@ -130,7 +130,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/smiley-moyen-1.2cm.png'),
     sizeScale: 1.2,
     sizeMark: 'M',
-    category: '🍒 Nourriture',
+    category: '⭐ Symboles',
     attachmentOffset: { x: 0, y: -10 }
   },
   {
@@ -278,7 +278,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lune-1.5cm.png'),
     sizeScale: 1.5,
     sizeMark: 'M',
-    category: '⭐ Symboles'
+    category: '🌸 Nature'
   },
   {
     id: 'botte-cow-boy',
@@ -574,7 +574,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/etoile-spirale-2.4cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '⭐ Symboles',
+    category: '🦞 Océan',
     attachmentOffset: { x: 0, y: -7 }
   },
   {
@@ -718,7 +718,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/grand-soleil-3.4cm.png'),
     sizeScale: 2.2,
     sizeMark: 'XL',
-    category: '⭐ Symboles'
+    category: '🌸 Nature'
   },
   {
     id: 'grand-coeur',
@@ -978,7 +978,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/double-perle-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '⭐ Symboles',
+    category: '🐚 Perles',
     attachmentOffset: { x: 0, y: -5 }
   },
   {
@@ -1221,7 +1221,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/perle-1.2cm.png'),
     sizeScale: 1.6,
     sizeMark: 'L',
-    category: '⭐ Symboles',
+    category: '🐚 Perles',
     attachmentOffset: { x: 0, y: -10 }
   },
   {
@@ -1320,7 +1320,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/petite-perle-1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '⭐ Symboles',
+    category: '🐚 Perles',
     attachmentOffset: { x: 0, y: -2 }
   },
   {
@@ -1410,7 +1410,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/perle-bleu-ciel-0.8cm.png'),
     sizeScale: 0.8,
     sizeMark: 'XS',
-    category: '⭐ Symboles',
+    category: '🐚 Perles',
     attachmentOffset: { x: 0, y: -5 }
   },
   {
@@ -1419,7 +1419,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/perle-breloque-1.5cm.png'),
     sizeScale: 1.5,
     sizeMark: 'M',
-    category: '⭐ Symboles',
+    category: '🐚 Perles',
     attachmentOffset: { x: 0, y: -5 }
   },
   {
@@ -1428,7 +1428,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/perle-cylindre-bleue-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '⭐ Symboles',
+    category: '🐚 Perles',
     attachmentOffset: { x: 0, y: -5 }
   },
   {
@@ -1437,7 +1437,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/perle-cylindre-rose-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '⭐ Symboles',
+    category: '🐚 Perles',
     attachmentOffset: { x: 5, y: -5 }
   },
   {
@@ -1446,7 +1446,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/perle-cylindre-rouge-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '⭐ Symboles',
+    category: '🐚 Perles',
     attachmentOffset: { x: 0, y: -5 }
   },
   {
@@ -1455,7 +1455,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/perle-cylindre-verte-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'XL',
-    category: '⭐ Symboles',
+    category: '🐚 Perles',
     attachmentOffset: { x: 0, y: -5 }
   },
   {
@@ -1464,7 +1464,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/perle-nature-0.8cm.png'),
     sizeScale: 0.8,
     sizeMark: 'XS',
-    category: '⭐ Symboles',
+    category: '🐚 Perles',
     attachmentOffset: { x: 5, y: -5 }
   },
   {
@@ -1473,7 +1473,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/perle-rose-0.8cm.png'),
     sizeScale: 0.8,
     sizeMark: 'XS',
-    category: '⭐ Symboles',
+    category: '🐚 Perles',
     attachmentOffset: { x: -10, y: -2 }
   },
   {
@@ -1482,7 +1482,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/perle-rouge-0.8cm.png'),
     sizeScale: 0.8,
     sizeMark: 'XS',
-    category: '⭐ Symboles',
+    category: '🐚 Perles',
     attachmentOffset: { x: 3, y: -10 }
   },
   {
@@ -1491,7 +1491,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/perle-turquoise-0.8cm.png'),
     sizeScale: 0.8,
     sizeMark: 'XS',
-    category: '⭐ Symboles',
+    category: '🐚 Perles',
     attachmentOffset: { x: 0, y: -2 }
   },
   {
@@ -1500,7 +1500,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/perle-verte-0.8cm.png'),
     sizeScale: 0.8,
     sizeMark: 'XS',
-    category: '⭐ Symboles',
+    category: '🐚 Perles',
     attachmentOffset: { x: 10, y: -2 }
   },
   {
@@ -1509,7 +1509,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/perle-violette-0.8cm.png'),
     sizeScale: 0.8,
     sizeMark: 'XS',
-    category: '⭐ Symboles',
+    category: '🐚 Perles',
     attachmentOffset: { x: 0, y: -2 }
   },
   {
