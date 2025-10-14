@@ -3,21 +3,21 @@ import { getImagePath } from '../utils/imagePaths';
 
 export const charms: Charm[] = [
   {
-    id: 'sirene',
-    name: 'Sirene',
-    imagePath: getImagePath('images/charms/sirene-0.8cm.png'),
-    sizeScale: 1.0,
-    sizeMark: 'S',
-    category: '🐻 Animaux'
-  },
-  {
     id: 'petite-medaille',
     name: 'Petite Médaille',
     imagePath: getImagePath('images/charms/petite-medaille-0.7cm.png'),
-    sizeScale: 1.0,
-    sizeMark: 'S',
+    sizeScale: 0.7,
+    sizeMark: 'XS',
     category: '🌞 Médailles',
-    attachmentOffset: { x: 0, y: -15 }
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'sirene',
+    name: 'Sirene',
+    imagePath: getImagePath('images/charms/sirene-0.8cm.png'),
+    sizeScale: 0.8,
+    sizeMark: 'XS',
+    category: '🦞 Océan'
   },
   {
     id: 'coeur-moyen',
@@ -32,8 +32,8 @@ export const charms: Charm[] = [
     id: 'croix-couleur',
     name: 'Croix Couleur',
     imagePath: getImagePath('images/charms/croix-couleur-0.8cm.png'),
-    sizeScale: 1.0,
-    sizeMark: 'S',
+    sizeScale: 0.8,
+    sizeMark: 'XS',
     category: '⭐ Symboles',
     attachmentOffset: { x: 0, y: -5 }
   },
@@ -41,8 +41,8 @@ export const charms: Charm[] = [
     id: 'croix-diamant',
     name: 'Croix Diamant',
     imagePath: getImagePath('images/charms/croix-diamant-0.8cm.png'),
-    sizeScale: 1.0,
-    sizeMark: 'S',
+    sizeScale: 0.8,
+    sizeMark: 'XS',
     category: '⭐ Symboles',
     attachmentOffset: { x: 0, y: -5 }
   },
@@ -50,8 +50,8 @@ export const charms: Charm[] = [
     id: 'arbre-de-vie',
     name: 'Arbre De Vie',
     imagePath: getImagePath('images/charms/arbre-de-vie-0.8cm.png'),
-    sizeScale: 1.0,
-    sizeMark: 'S',
+    sizeScale: 0.8,
+    sizeMark: 'XS',
     category: '🌸 Nature',
     attachmentOffset: { x: 0, y: -5 }
   },
@@ -59,8 +59,8 @@ export const charms: Charm[] = [
     id: 'petit-smiley',
     name: 'Petit Smiley',
     imagePath: getImagePath('images/charms/petit-smiley-0.8cm.png'),
-    sizeScale: 1.0,
-    sizeMark: 'S',
+    sizeScale: 0.8,
+    sizeMark: 'XS',
     category: '🍒 Nourriture',
     attachmentOffset: { x: 0, y: -5 }
   },
@@ -68,16 +68,16 @@ export const charms: Charm[] = [
     id: 'petit-coeur',
     name: 'Petit Coeur',
     imagePath: getImagePath('images/charms/petit-coeur-0.8cm.png'),
-    sizeScale: 1.0,
-    sizeMark: 'S',
+    sizeScale: 0.8,
+    sizeMark: 'XS',
     category: '❤️ Cœurs'
   },
   {
     id: 'petit-trefle',
     name: 'Petit Trefle',
     imagePath: getImagePath('images/charms/petit-trefle-0.8cm.png'),
-    sizeScale: 1.0,
-    sizeMark: 'S',
+    sizeScale: 0.8,
+    sizeMark: 'XS',
     category: '🌸 Nature',
     attachmentOffset: { x: 0, y: -5 }
   },
@@ -93,16 +93,16 @@ export const charms: Charm[] = [
     id: 'petite-fraise',
     name: 'Petite Fraise',
     imagePath: getImagePath('images/charms/petite-fraise-1.2cm.png'),
-    sizeScale: 1.2,
-    sizeMark: 'M',
+    sizeScale: 0.8,
+    sizeMark: 'XS',
     category: '🍒 Nourriture'
   },
   {
     id: 'petite-fleur',
     name: 'Petite Fleur',
     imagePath: getImagePath('images/charms/petite-fleur-1.2cm.png'),
-    sizeScale: 1.2,
-    sizeMark: 'M',
+    sizeScale: 1.0,
+    sizeMark: 'S',
     category: '🌸 Nature',
     attachmentOffset: { x: 0, y: -10 }
   },
@@ -189,8 +189,8 @@ export const charms: Charm[] = [
     id: 'petite-cerise',
     name: 'Petite Cerise',
     imagePath: getImagePath('images/charms/petite-cerise-1.5cm.png'),
-    sizeScale: 1.5,
-    sizeMark: 'M',
+    sizeScale: 1.0,
+    sizeMark: 'S',
     category: '🍒 Nourriture',
     attachmentOffset: { x: 0, y: -5 }
   },
