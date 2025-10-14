@@ -18,7 +18,7 @@ export interface Charm {
   imagePath: string;
   sizeScale: number;
   category?: string;
-  sizeMark?: 'S' | 'M' | 'L' | 'XL'; // Size category based on charm size
+  sizeMark?: 'XS' | 'S' | 'M' | 'L' | 'XL'; // Size category based on charm size
   // Optional offset for attachment point (in percentage from center)
   // Default is {x: 0, y: 0} which means the attachment is at center top
   attachmentOffset?: Position;
