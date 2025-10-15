@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useCustomizer } from '../context/CustomizerContext';
-import { useDroppableAttachmentPoint, usePlacedCharm, useProximityDroppableNecklace } from '../hooks/useDragAndDrop';
+import { useDroppableAttachmentPoint, usePlacedCharm, useDraggablePlacedCharm, useProximityDroppableNecklace } from '../hooks/useDragAndDrop';
 import '../styles/NecklaceDisplay.scss';
 import { useTapToPlace, isTouchDevice, triggerHapticFeedback } from '../hooks/useTapToPlace';
 import CharmDrawer from './CharmDrawer';
@@ -52,7 +52,7 @@ const AttachmentPointComponent: React.FC<{
         isOccupied ? 'occupied' : ''
       } ${showAttachmentPoints ? 'visible' : ''} ${
         (isDrawerOpen && isMobile && selectedCharmId && !isOccupied) ? 'mobile-drop-target' : ''
-      } ${isTargeted ? 'targeted' : ''}`}
+      } ${isTargeted ? 'targeted' : ''} ${isTargeted && isOccupied ? 'occupied' : ''}`}
       style={{
         left: `${position.x}%`,
         top: `${position.y}%`,
@@ -128,21 +128,35 @@ const PlacedCharm: React.FC<{
   id: string;
   charmId: string;
   position: { x: number; y: number };
-}> = ({ id, charmId, position }) => {
+  attachmentPointId: string;
+}> = ({ id, charmId, position, attachmentPointId }) => {
   const { charms } = useCustomizer();
-  const { handleRemove } = usePlacedCharm(id);
+  const { handleRemove } = usePlacedCharm(id, charmId, attachmentPointId);
+  const { isDragging, drag, canDrag } = useDraggablePlacedCharm(id, charmId, attachmentPointId);
+  const isMobileDevice = isTouchDevice();
+  const charmRef = useRef<HTMLDivElement>(null);
+  
+  // Make placed charms drop targets for swapping
+  const { isOver: isCharmOver, canDrop: canCharmDrop, drop: charmDrop } = useDroppableAttachmentPoint(attachmentPointId, true);
 
   // Find the charm data
   const charm = charms.find((c) => c.id === charmId);
   if (!charm) return null;
+
+  // Always apply drag ref (the hook handles desktop/mobile logic internally)
+  drag(charmRef);
+  
+  // Apply drop ref for swapping (only on desktop)
+  if (canDrag) {
+    charmDrop(charmRef);
+  }
   
   // Base size for charms (in pixels)
   const baseCharmSize = 48;
   
   // Scale factor based on device
-  const isMobile = window.innerWidth <= 480;
   const isTablet = window.innerWidth <= 768 && window.innerWidth > 480;
-  const deviceScaleFactor = isMobile ? 0.5 : isTablet ? 0.85 : 1;
+  const deviceScaleFactor = isMobileDevice ? 0.5 : isTablet ? 0.85 : 1;
   
   // Get transform styles based on position
   const { transform, positionClass } = getCharmTransformStyles(position);
@@ -150,16 +164,28 @@ const PlacedCharm: React.FC<{
   // Apply attachment offset if available
   const offsetX = charm.attachmentOffset?.x || 0;
   const offsetY = charm.attachmentOffset?.y || 0;
+
+  // Handle click vs drag - only remove on click if not dragging
+  const handleClick = () => {
+    // On mobile, always allow removal
+    // On desktop, only allow removal if not in the middle of a drag operation
+    if (!canDrag || !isDragging) {
+      handleRemove();
+    }
+  };
   
   return (
     <div
-      className={`placed-charm ${positionClass}`}
+      ref={charmRef}
+      className={`placed-charm ${positionClass} ${isDragging ? 'dragging' : ''} ${canDrag ? 'desktop-draggable' : ''} ${isCharmOver && canCharmDrop ? 'swap-target' : ''}`}
       style={{
         left: `${position.x}%`,
         top: `${position.y}%`,
         transform: transform + ` translate(${offsetX}%, ${offsetY}%)`,
+        opacity: isDragging ? 0.5 : 1,
+        cursor: canDrag ? (isDragging ? 'grabbing' : 'grab') : 'pointer',
       }}
-      onClick={handleRemove}
+      onClick={handleClick}
     >
       <img 
         src={charm.imagePath} 
@@ -167,7 +193,7 @@ const PlacedCharm: React.FC<{
         style={{
           width: `${baseCharmSize * charm.sizeScale * deviceScaleFactor}px`,
           height: `${baseCharmSize * charm.sizeScale * deviceScaleFactor}px`,
-          transformOrigin: 'center center'
+          transformOrigin: 'center center',
         }}
       />
     </div>
@@ -350,6 +376,7 @@ const NecklaceDisplay: React.FC = () => {
             id={charm.id}
             charmId={charm.charmId}
             position={charm.position}
+            attachmentPointId={charm.attachmentPointId}
           />
         ))}
       </div>

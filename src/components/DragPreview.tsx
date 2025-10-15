@@ -23,13 +23,14 @@ const DragPreview: React.FC = () => {
     })
   );
 
-  // Only show preview for charm items
-  if (!isDragging || itemType !== ItemTypes.CHARM || !currentOffset || !item) {
+  // Only show preview for charm items (both new charms and placed charms)
+  if (!isDragging || (itemType !== ItemTypes.CHARM && itemType !== ItemTypes.PLACED_CHARM) || !currentOffset || !item) {
     return null;
   }
 
-  // Find the charm data
-  const charm = charms.find(c => c.id === item.charmId);
+  // Find the charm data - handle both DragItem and PlacedCharmDragItem
+  const charmId = itemType === ItemTypes.CHARM ? item.charmId : item.charmId;
+  const charm = charms.find(c => c.id === charmId);
   if (!charm) return null;
 
   const transform = `translate(${currentOffset.x}px, ${currentOffset.y}px)`;

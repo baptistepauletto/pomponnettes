@@ -18,6 +18,8 @@ interface CustomizerContextState {
   selectNecklace: (necklaceId: number) => void;
   addCharm: (charmId: string, attachmentPointId: string) => void;
   removeCharm: (placedCharmId: string) => void;
+  moveCharm: (placedCharmId: string, newAttachmentPointId: string) => void;
+  swapCharms: (placedCharmId: string, targetAttachmentPointId: string) => void;
   clearAllCharms: () => void;
   applyPreset: (presetConfiguration: PresetConfiguration) => void;
 }
@@ -159,6 +161,92 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
     setLastAppliedPresetId(null);
   }, [placedCharms, selectedNecklace]);
 
+  // Action to move a charm to a different attachment point
+  const moveCharm = useCallback((placedCharmId: string, newAttachmentPointId: string) => {
+    if (!selectedNecklace) return;
+
+    // Find the charm to move
+    const charmToMove = placedCharms.find(c => c.id === placedCharmId);
+    if (!charmToMove) return;
+
+    // Find the new attachment point
+    const newAttachmentPoint = selectedNecklace.attachmentPoints.find(
+      p => p.id === newAttachmentPointId
+    );
+    if (!newAttachmentPoint) return;
+
+    // Check if the new attachment point is already occupied
+    const isNewPointOccupied = placedCharms.some(
+      charm => charm.attachmentPointId === newAttachmentPointId
+    );
+    
+    // Don't move if the new point is occupied (use swapCharms instead)
+    if (isNewPointOccupied) return;
+
+    // Update the charm's attachment point and position
+    setPlacedCharms(prev => prev.map(charm => 
+      charm.id === placedCharmId 
+        ? { 
+            ...charm, 
+            attachmentPointId: newAttachmentPointId,
+            position: newAttachmentPoint.position
+          }
+        : charm
+    ));
+    
+    // Clear last applied preset since charms were manually modified
+    setLastAppliedPresetId(null);
+  }, [placedCharms, selectedNecklace]);
+
+  // Action to swap two charms between attachment points
+  const swapCharms = useCallback((placedCharmId: string, targetAttachmentPointId: string) => {
+    if (!selectedNecklace) return;
+
+    // Find the charm to move
+    const charmToMove = placedCharms.find(c => c.id === placedCharmId);
+    if (!charmToMove) return;
+
+    // Find the charm at the target attachment point
+    const targetCharm = placedCharms.find(c => c.attachmentPointId === targetAttachmentPointId);
+    if (!targetCharm) {
+      // If no charm at target, just move instead of swap
+      moveCharm(placedCharmId, targetAttachmentPointId);
+      return;
+    }
+
+    // Find the attachment points
+    const sourceAttachmentPoint = selectedNecklace.attachmentPoints.find(
+      p => p.id === charmToMove.attachmentPointId
+    );
+    const targetAttachmentPoint = selectedNecklace.attachmentPoints.find(
+      p => p.id === targetAttachmentPointId
+    );
+
+    if (!sourceAttachmentPoint || !targetAttachmentPoint) return;
+
+    // Swap the charms' attachment points and positions
+    setPlacedCharms(prev => prev.map(charm => {
+      if (charm.id === placedCharmId) {
+        return {
+          ...charm,
+          attachmentPointId: targetAttachmentPointId,
+          position: targetAttachmentPoint.position
+        };
+      }
+      if (charm.id === targetCharm.id) {
+        return {
+          ...charm,
+          attachmentPointId: charmToMove.attachmentPointId,
+          position: sourceAttachmentPoint.position
+        };
+      }
+      return charm;
+    }));
+    
+    // Clear last applied preset since charms were manually modified
+    setLastAppliedPresetId(null);
+  }, [placedCharms, selectedNecklace, moveCharm]);
+
   // Action to clear all charms from the necklace
   const clearAllCharms = useCallback(() => {
     if (!selectedNecklace) return;
@@ -222,6 +310,8 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
     selectNecklace,
     addCharm,
     removeCharm,
+    moveCharm,
+    swapCharms,
     clearAllCharms,
     applyPreset
   };
