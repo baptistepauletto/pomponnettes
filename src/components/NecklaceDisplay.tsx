@@ -388,8 +388,8 @@ const NecklaceDisplay: React.FC = () => {
         </div>
       )}
       
-      {/* Conditionally show controls for desktop only */}
-      {!isMobile && (
+      {/* Conditionally show controls for desktop only and in development */}
+      {!isMobile && window.location.hostname === 'localhost' && (
         <div className="controls">
           <label>
             <input 
@@ -418,7 +418,7 @@ const NecklaceDisplay: React.FC = () => {
         </div>
       )}
       
-      {showGrid && (
+      {showGrid && window.location.hostname === 'localhost' && (
         <div className="position-info">
           <p>Use these coordinates to update the attachment points in src/data/necklaces.ts</p>
         </div>
