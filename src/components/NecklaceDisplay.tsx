@@ -399,7 +399,7 @@ const NecklaceDisplay: React.FC = () => {
       {/* Show removal tip when charms are placed and tip hasn't been shown yet */}
       {showRemovalTip && (
         <div className="removal-tip">
-          TAP UN CHARM POUR LE RETIRER
+          TAP 2X UN CHARM POUR LE RETIRER
         </div>
       )}
       
