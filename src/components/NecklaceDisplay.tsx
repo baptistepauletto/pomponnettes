@@ -152,7 +152,7 @@ const PlacedCharm: React.FC<{
   attachmentPointId: string;
 }> = ({ id, charmId, position, attachmentPointId }) => {
   const { charms, swapCharms } = useCustomizer();
-  const { handleRemove } = usePlacedCharm(id, charmId, attachmentPointId);
+  const { handleRemove } = usePlacedCharm(id);
   const { isDragging, drag, canDrag } = useDraggablePlacedCharm(id, charmId, attachmentPointId);
   const isMobileDevice = isTouchDevice();
   const charmRef = useRef<HTMLDivElement>(null);

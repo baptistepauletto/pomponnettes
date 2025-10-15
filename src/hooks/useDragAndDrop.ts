@@ -308,7 +308,7 @@ export const useProximityDroppableNecklace = (
 };
 
 // Hook for making a placed charm both draggable and removable
-export const usePlacedCharm = (placedCharmId: string, charmId: string, attachmentPointId: string) => {
+export const usePlacedCharm = (placedCharmId: string) => {
   const { removeCharm } = useCustomizer();
 
   const handleRemove = useCallback(() => {
