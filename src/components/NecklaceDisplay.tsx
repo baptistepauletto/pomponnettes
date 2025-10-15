@@ -45,11 +45,9 @@ const AttachmentPointComponent: React.FC<{
       
       if (isOccupied) {
         // Swap with existing charm
-        console.log('🔄 Mobile swap attempt:', { selectedPlacedCharmId, targetPointId: id, isOccupied });
         swapCharms(selectedPlacedCharmId, id);
       } else {
         // Move to empty point
-        console.log('➡️ Mobile move attempt:', { selectedPlacedCharmId, targetPointId: id, isOccupied });
         moveCharm(selectedPlacedCharmId, id);
       }
       
@@ -209,7 +207,6 @@ const PlacedCharm: React.FC<{
     
     // If another charm is in move mode and we tap this charm, swap them
     if (selectedPlacedCharmId && selectedPlacedCharmId !== id) {
-      console.log('🔄 Direct charm-to-charm swap:', { from: selectedPlacedCharmId, to: id });
       swapCharms(selectedPlacedCharmId, attachmentPointId);
       clearSelectedPlacedCharm();
       return;
