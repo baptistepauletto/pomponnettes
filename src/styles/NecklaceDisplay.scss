@@ -153,6 +153,30 @@
         height: 22px;
       }
       
+      &.move-mode-target {
+        background-color: rgba(210, 120, 120, 0.7) !important;
+        border: 2px solid rgba(180, 90, 90, 0.9) !important;
+        box-shadow: 0 0 8px 4px rgba(210, 120, 120, 0.5) !important;
+        width: 18px !important;
+        height: 18px !important;
+        opacity: 1 !important;
+        animation: move-mode-pulse 1.5s infinite ease-in-out !important;
+        z-index: 15 !important;
+        
+        // Show swap indicator for occupied points in move mode
+        &.occupied::after {
+          content: '⇄';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 10px;
+          color: white;
+          font-weight: bold;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+      }
+      
       &.occupied {
         background-color: transparent;
         border-color: transparent;
@@ -274,6 +298,38 @@
           animation: pulse-swap 1s infinite ease-in-out;
         }
       }
+      
+      // Mobile move mode styling
+      &.move-mode {
+        transform: scale(1.1);
+        z-index: 25;
+        
+        img {
+          filter: drop-shadow(0 6px 12px rgba(210, 120, 120, 0.6)) 
+                  drop-shadow(0 0 8px rgba(210, 120, 120, 0.4));
+        }
+        
+        // Add move indicator
+        &::after {
+          content: '✋';
+          position: absolute;
+          top: -10px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: rgba(210, 120, 120, 0.9);
+          color: white;
+          border-radius: 50%;
+          width: 20px;
+          height: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 10px;
+          font-weight: bold;
+          z-index: 1;
+          animation: pulse-move 1s infinite ease-in-out;
+        }
+      }
     }
   }
   
@@ -373,6 +429,18 @@
     0% { transform: translateX(-50%) scale(1); }
     50% { transform: translateX(-50%) scale(1.2); }
     100% { transform: translateX(-50%) scale(1); }
+  }
+  
+  @keyframes pulse-move {
+    0% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.2); }
+    100% { transform: translateX(-50%) scale(1); }
+  }
+  
+  @keyframes move-mode-pulse {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
   }
   
   @keyframes pulse {

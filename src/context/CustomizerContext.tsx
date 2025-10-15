@@ -200,6 +200,7 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
 
   // Action to swap two charms between attachment points
   const swapCharms = useCallback((placedCharmId: string, targetAttachmentPointId: string) => {
+    console.log('🔄 swapCharms called:', { placedCharmId, targetAttachmentPointId });
     if (!selectedNecklace) return;
 
     // Find the charm to move
