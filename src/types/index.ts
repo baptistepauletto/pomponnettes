@@ -43,17 +43,3 @@ export interface PlacedCharm {
   attachmentPointId: string;
   position: Position;
 }
-
-// Preset charm configuration type
-export interface PresetCharmPlacement {
-  attachmentPointIndex: number;
-  charmId: string;
-}
-
-// Preset configuration for predefined charm arrangements
-export interface PresetConfiguration {
-  id: string;
-  name: string;
-  description: string;
-  configuration: PresetCharmPlacement[];
-}
