@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
-import { Necklace, Charm, PlacedCharm, PresetConfiguration} from '../types';
+import { Necklace, Charm, PlacedCharm } from '../types';
 import { necklaces } from '../data/necklaces';
 import { charms } from '../data/charms';
 
@@ -12,7 +12,6 @@ interface CustomizerContextState {
   // Current selections
   selectedNecklace: Necklace | null;
   placedCharms: PlacedCharm[];
-  lastAppliedPresetId: string | null;
   
   // Actions
   selectNecklace: (necklaceId: number) => void;
@@ -21,7 +20,6 @@ interface CustomizerContextState {
   moveCharm: (placedCharmId: string, newAttachmentPointId: string) => void;
   swapCharms: (placedCharmId: string, targetAttachmentPointId: string) => void;
   clearAllCharms: () => void;
-  applyPreset: (presetConfiguration: PresetConfiguration) => void;
 }
 
 // Create context with initial empty state
@@ -37,7 +35,6 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
   // State
   const [selectedNecklaceId, setSelectedNecklaceId] = useState<number>(necklaces[0].id);
   const [placedCharms, setPlacedCharms] = useState<PlacedCharm[]>([]);
-  const [lastAppliedPresetId, setLastAppliedPresetId] = useState<string | null>(null);
 
   // Get the currently selected necklace with computed occupation status
   const baseNecklace = necklaces.find(n => n.id === selectedNecklaceId) || null;
@@ -144,8 +141,6 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
       }
     ]);
     
-    // Clear last applied preset since charms were manually modified
-    setLastAppliedPresetId(null);
   }, [selectedNecklace, placedCharms]);
 
   // Action to remove a charm from the necklace
@@ -157,8 +152,6 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
     // Remove the charm (occupation status will be computed automatically)
     setPlacedCharms(prev => prev.filter(c => c.id !== placedCharmId));
     
-    // Clear last applied preset since charms were manually modified
-    setLastAppliedPresetId(null);
   }, [placedCharms, selectedNecklace]);
 
   // Action to move a charm to a different attachment point
@@ -194,8 +187,6 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
         : charm
     ));
     
-    // Clear last applied preset since charms were manually modified
-    setLastAppliedPresetId(null);
   }, [placedCharms, selectedNecklace]);
 
   // Action to swap two charms between attachment points
@@ -243,8 +234,6 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
       return charm;
     }));
     
-    // Clear last applied preset since charms were manually modified
-    setLastAppliedPresetId(null);
   }, [placedCharms, selectedNecklace, moveCharm]);
 
   // Action to clear all charms from the necklace
@@ -254,50 +243,7 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
     // Clear all placed charms (occupation status will be computed automatically)
     setPlacedCharms([]);
     
-    // Clear last applied preset since charms were cleared
-    setLastAppliedPresetId(null);
   }, [selectedNecklace]);
-
-  // Action to apply a preset configuration of charms
-  const applyPreset = useCallback((preset: PresetConfiguration) => {
-    if (!baseNecklace) return;
-    
-    // Apply the preset configuration without clearing first
-    const newPlacedCharms: PlacedCharm[] = [];
-    const occupiedAttachmentIds = new Set<string>(); // Track locally occupied points during preset application
-    
-    preset.configuration.forEach(placement => {
-      // Check if the attachment point index is valid
-      if (placement.attachmentPointIndex < baseNecklace.attachmentPoints.length) {
-        const attachmentPoint = baseNecklace.attachmentPoints[placement.attachmentPointIndex];
-        const charmExists = charms.some(c => c.id === placement.charmId);
-        
-        // Only add if the charm exists and the attachment point is not already used in this preset
-        if (charmExists && !occupiedAttachmentIds.has(attachmentPoint.id)) {
-          // Mark this attachment point as occupied for the rest of this preset application
-          occupiedAttachmentIds.add(attachmentPoint.id);
-          
-          // Create a unique ID for this placed charm
-          const placedCharmId = `preset-charm-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`;
-          
-          // Add the charm to the placed charms
-          newPlacedCharms.push({
-            id: placedCharmId,
-            charmId: placement.charmId,
-            attachmentPointId: attachmentPoint.id,
-            position: attachmentPoint.position
-          });
-        }
-      }
-    });
-    
-    // Replace all placed charms with the new preset configuration
-    setPlacedCharms(newPlacedCharms);
-    
-    // Remember this preset ID as the last applied
-    setLastAppliedPresetId(preset.id);
-  }, [baseNecklace, charms, lastAppliedPresetId]);
-
 
 
   // Context value
@@ -306,14 +252,12 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
     charms,
     selectedNecklace,
     placedCharms,
-    lastAppliedPresetId,
     selectNecklace,
     addCharm,
     removeCharm,
     moveCharm,
     swapCharms,
-    clearAllCharms,
-    applyPreset
+    clearAllCharms
   };
 
   return (

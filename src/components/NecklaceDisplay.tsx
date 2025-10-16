@@ -18,8 +18,8 @@ const AttachmentPointComponent: React.FC<{
 }> = ({ id, position, isOccupied, showAttachmentPoints, showNames, isDrawerOpen, isTargeted }) => {
   const { isOver, canDrop, drop } = useDroppableAttachmentPoint(id, isOccupied);
   const attachmentPointRef = useRef<HTMLDivElement>(null);
-  const { selectedCharmId } = useTapToPlace();
-  const { addCharm } = useCustomizer();
+  const { selectedCharmId, selectedPlacedCharmId, clearSelectedPlacedCharm } = useTapToPlace();
+  const { addCharm, moveCharm, swapCharms, placedCharms } = useCustomizer();
   const isMobile = isTouchDevice();
   
   // Apply the drop ref to the element only if not occupied AND on mobile
@@ -28,20 +28,37 @@ const AttachmentPointComponent: React.FC<{
     drop(attachmentPointRef);
   }
 
-  // Handle tap to place charm on mobile
+  // Handle tap to place charm or move placed charm on mobile
   const handleTap = () => {
-    // If occupied, do absolutely nothing
-    if (isOccupied) {
+    if (!isMobile) return;
+    
+    // Handle placed charm movement (move mode)
+    if (selectedPlacedCharmId) {
+      const placedCharm = placedCharms.find(c => c.id === selectedPlacedCharmId);
+      if (!placedCharm) return;
+      
+      // Don't allow moving to the same position
+      if (placedCharm.attachmentPointId === id) {
+        clearSelectedPlacedCharm(); // Exit move mode
+        return;
+      }
+      
+      if (isOccupied) {
+        // Swap with existing charm
+        swapCharms(selectedPlacedCharmId, id);
+      } else {
+        // Move to empty point
+        moveCharm(selectedPlacedCharmId, id);
+      }
+      
+      // Exit move mode after successful operation
+      clearSelectedPlacedCharm();
       return;
     }
     
-    // Only proceed if the point is not occupied
-    if (isMobile && selectedCharmId) {
-      // If we have a charm selected (from the drawer), add it
+    // Handle new charm placement (from drawer)
+    if (selectedCharmId && !isOccupied) {
       addCharm(selectedCharmId, id);
-      
-      // Provide haptic feedback for successful placement
-      triggerHapticFeedback('medium');
     }
   };
 
@@ -52,12 +69,14 @@ const AttachmentPointComponent: React.FC<{
         isOccupied ? 'occupied' : ''
       } ${showAttachmentPoints ? 'visible' : ''} ${
         (isDrawerOpen && isMobile && selectedCharmId && !isOccupied) ? 'mobile-drop-target' : ''
-      } ${isTargeted ? 'targeted' : ''} ${isTargeted && isOccupied ? 'occupied' : ''}`}
+      } ${isTargeted ? 'targeted' : ''} ${isTargeted && isOccupied ? 'occupied' : ''} ${
+        (isMobile && selectedPlacedCharmId) ? 'move-mode-target' : ''
+      }`}
       style={{
         left: `${position.x}%`,
         top: `${position.y}%`,
       }}
-      onClick={isOccupied ? undefined : handleTap}
+      onClick={handleTap}
     >
       {showNames && <span className="point-name">{id}</span>}
     </div>
@@ -130,14 +149,22 @@ const PlacedCharm: React.FC<{
   position: { x: number; y: number };
   attachmentPointId: string;
 }> = ({ id, charmId, position, attachmentPointId }) => {
-  const { charms } = useCustomizer();
-  const { handleRemove } = usePlacedCharm(id, charmId, attachmentPointId);
+  const { charms, swapCharms } = useCustomizer();
+  const { handleRemove } = usePlacedCharm(id);
   const { isDragging, drag, canDrag } = useDraggablePlacedCharm(id, charmId, attachmentPointId);
   const isMobileDevice = isTouchDevice();
   const charmRef = useRef<HTMLDivElement>(null);
   
   // Make placed charms drop targets for swapping
   const { isOver: isCharmOver, canDrop: canCharmDrop, drop: charmDrop } = useDroppableAttachmentPoint(attachmentPointId, true);
+  
+  // Mobile tap-to-place functionality
+  const { selectPlacedCharm, isPlacedCharmSelected, clearSelectedPlacedCharm, selectedPlacedCharmId } = useTapToPlace();
+  const isInMoveMode = isMobileDevice && isPlacedCharmSelected(id);
+  
+  // Double tap detection for mobile
+  const lastTapTime = useRef<number>(0);
+  const tapTimeout = useRef<number | null>(null);
 
   // Find the charm data
   const charm = charms.find((c) => c.id === charmId);
@@ -165,19 +192,62 @@ const PlacedCharm: React.FC<{
   const offsetX = charm.attachmentOffset?.x || 0;
   const offsetY = charm.attachmentOffset?.y || 0;
 
-  // Handle click vs drag - only remove on click if not dragging
-  const handleClick = () => {
-    // On mobile, always allow removal
+  // Handle mobile tap interactions (single tap = move mode, double tap = remove)
+  const handleMobileTap = () => {
+    if (!isMobileDevice) return;
+    
+    const currentTime = Date.now();
+    const timeDiff = currentTime - lastTapTime.current;
+    
+    // Clear any existing timeout
+    if (tapTimeout.current) {
+      window.clearTimeout(tapTimeout.current);
+      tapTimeout.current = null;
+    }
+    
+    // If another charm is in move mode and we tap this charm, swap them
+    if (selectedPlacedCharmId && selectedPlacedCharmId !== id) {
+      swapCharms(selectedPlacedCharmId, attachmentPointId);
+      clearSelectedPlacedCharm();
+      return;
+    }
+    
+    // Double tap detection (within 300ms)
+    if (timeDiff < 300) {
+      // Double tap - remove charm
+      handleRemove();
+      clearSelectedPlacedCharm(); // Clear move mode
+      lastTapTime.current = 0;
+    } else {
+      // Single tap - enter/exit move mode
+      tapTimeout.current = window.setTimeout(() => {
+        if (isInMoveMode) {
+          // Already in move mode, exit it
+          clearSelectedPlacedCharm();
+        } else {
+          // Enter move mode
+          selectPlacedCharm(id);
+        }
+        tapTimeout.current = null;
+      }, 300);
+      lastTapTime.current = currentTime;
+    }
+  };
+
+  // Handle desktop click (remove only)
+  const handleDesktopClick = () => {
     // On desktop, only allow removal if not in the middle of a drag operation
-    if (!canDrag || !isDragging) {
+    if (!isDragging) {
       handleRemove();
     }
   };
+
+  const handleClick = isMobileDevice ? handleMobileTap : handleDesktopClick;
   
   return (
     <div
       ref={charmRef}
-      className={`placed-charm ${positionClass} ${isDragging ? 'dragging' : ''} ${canDrag ? 'desktop-draggable' : ''} ${isCharmOver && canCharmDrop ? 'swap-target' : ''}`}
+      className={`placed-charm ${positionClass} ${isDragging ? 'dragging' : ''} ${canDrag ? 'desktop-draggable' : ''} ${isCharmOver && canCharmDrop ? 'swap-target' : ''} ${isInMoveMode ? 'move-mode' : ''}`}
       style={{
         left: `${position.x}%`,
         top: `${position.y}%`,
@@ -239,7 +309,7 @@ const NecklaceDisplay: React.FC = () => {
   const [showPointNames, setShowPointNames] = useState(false);
   const [showGrid, setShowGrid] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const { selectedCharmId } = useTapToPlace();
+  const { selectedCharmId, selectedPlacedCharmId } = useTapToPlace();
   const isMobile = window.innerWidth <= 480;
   const [hasPlacedCharm, setHasPlacedCharm] = useState(false);
   const [showRemovalTip, setShowRemovalTip] = useState(false);
@@ -326,7 +396,7 @@ const NecklaceDisplay: React.FC = () => {
       {/* Show removal tip when charms are placed and tip hasn't been shown yet */}
       {showRemovalTip && (
         <div className="removal-tip">
-          TAP UN CHARM POUR LE RETIRER
+          TAP 2X UN CHARM POUR LE RETIRER
         </div>
       )}
       
@@ -356,18 +426,32 @@ const NecklaceDisplay: React.FC = () => {
         {showGrid && <PositionGrid />}
 
         {/* Render attachment points */}
-        {selectedNecklace.attachmentPoints.map((point) => (
-          <AttachmentPointComponent
-            key={point.id}
-            id={point.id}
-            position={point.position}
-            isOccupied={point.isOccupied}
-            showAttachmentPoints={showAttachmentPoints}
-            showNames={showPointNames}
-            isDrawerOpen={isDrawerOpen}
-            isTargeted={targetedPointId === point.id}
-          />
-        ))}
+        {selectedNecklace.attachmentPoints.map((point) => {
+          // Calculate occupation status considering move mode
+          let isOccupied = point.isOccupied;
+          
+          // If we're in move mode, the selected charm should be treated as not occupying its current position
+          if (selectedPlacedCharmId && isMobile) {
+            const selectedCharm = placedCharms.find(c => c.id === selectedPlacedCharmId);
+            if (selectedCharm && selectedCharm.attachmentPointId === point.id) {
+              // This point is occupied by the charm being moved, so treat it as empty
+              isOccupied = false;
+            }
+          }
+          
+          return (
+            <AttachmentPointComponent
+              key={point.id}
+              id={point.id}
+              position={point.position}
+              isOccupied={isOccupied}
+              showAttachmentPoints={showAttachmentPoints}
+              showNames={showPointNames}
+              isDrawerOpen={isDrawerOpen}
+              isTargeted={targetedPointId === point.id}
+            />
+          );
+        })}
 
         {/* Render placed charms */}
         {placedCharms.map((charm) => (
