@@ -99,6 +99,15 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             $cart_item_data['charm_data'] = $charm_data;
         }
         
+        // Store cart options
+        if (isset($_POST['emballage-cadeau'])) {
+            $cart_item_data['gift_wrap'] = sanitize_text_field($_POST['emballage-cadeau']);
+        }
+        
+        if (isset($_POST['confiance-charms'])) {
+            $cart_item_data['charm_order_trust'] = sanitize_text_field($_POST['confiance-charms']);
+        }
+        
         return $cart_item_data;
     }
     add_filter('woocommerce_add_cart_item_data', 'pomponnettes_add_cart_item_data', 10, 3);
@@ -113,6 +122,14 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         
         if (isset($values['charm_data'])) {
             $item->add_meta_data('_charm_data', $values['charm_data'], true);
+        }
+        
+        if (isset($values['gift_wrap'])) {
+            $item->add_meta_data('_gift_wrap', $values['gift_wrap'], true);
+        }
+        
+        if (isset($values['charm_order_trust'])) {
+            $item->add_meta_data('_charm_order_trust', $values['charm_order_trust'], true);
         }
     }
     add_action('woocommerce_checkout_create_order_line_item', 'pomponnettes_checkout_create_order_line_item', 10, 4);
