@@ -18,13 +18,6 @@ const AddToCartButton: React.FC = () => {
       return;
     }
 
-    if (placedCharms.length === 0) {
-      setMessage({
-        text: "Please add at least one charm to your necklace",
-        isError: true
-      });
-      return;
-    }
 
     setLoading(true);
     setMessage(null);
@@ -81,7 +74,7 @@ const AddToCartButton: React.FC = () => {
         <button 
           className="add-to-cart-button"
           onClick={handleAddToCart}
-          disabled={loading || !selectedNecklace || placedCharms.length === 0}
+          disabled={loading || !selectedNecklace}
         >
           {loading ? (
             <span className="loading-spinner"></span>

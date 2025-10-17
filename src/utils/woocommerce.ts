@@ -80,9 +80,6 @@ export const addToCart = async (
     return { success: false, message: "No necklace selected" };
   }
   
-  if (placedCharms.length === 0) {
-    return { success: false, message: "Please add at least one charm to your necklace" };
-  }
 
   // Check if jQuery is available (required for WooCommerce AJAX)
   if (typeof jQuery === 'undefined') {
