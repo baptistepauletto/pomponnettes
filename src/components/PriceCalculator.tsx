@@ -4,10 +4,10 @@ import { getPriceBreakdown, formatPrice, CHARM_PRICE } from '../utils/pricing';
 import '../styles/PriceCalculator.scss';
 
 const PriceCalculator: React.FC = () => {
-  const { selectedNecklace, placedCharms } = useCustomizer();
+  const { selectedNecklace, placedCharms, giftWrap } = useCustomizer();
   const [showBreakdown, setShowBreakdown] = useState(false);
   
-  const pricing = getPriceBreakdown(selectedNecklace, placedCharms);
+  const pricing = getPriceBreakdown(selectedNecklace, placedCharms, giftWrap);
 
   if (!selectedNecklace) {
     return (
@@ -70,6 +70,14 @@ const PriceCalculator: React.FC = () => {
                 </div>
               )}
             </>
+          )}
+
+          {/* Gift wrap */}
+          {giftWrap && (
+            <div className="breakdown-item">
+              <span className="item-label">Emballage cadeau</span>
+              <span className="item-price">{formatPrice(pricing.giftWrapPrice)}</span>
+            </div>
           )}
 
           {/* Subtotal */}

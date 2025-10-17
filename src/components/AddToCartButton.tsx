@@ -4,7 +4,7 @@ import { addToCart } from '../utils/woocommerce';
 import '../styles/AddToCartButton.scss';
 
 const AddToCartButton: React.FC = () => {
-  const { selectedNecklace, placedCharms } = useCustomizer();
+  const { selectedNecklace, placedCharms, giftWrap, charmOrderTrust } = useCustomizer();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{text: string, isError: boolean} | null>(null);
   const [quantity, setQuantity] = useState(1);
@@ -25,7 +25,9 @@ const AddToCartButton: React.FC = () => {
     try {
       const result = await addToCart(
         selectedNecklace,
-        placedCharms
+        placedCharms,
+        giftWrap,
+        charmOrderTrust
       );
 
       setMessage({

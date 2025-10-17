@@ -8,6 +8,7 @@ import { TapToPlaceProvider } from '../hooks/useTapToPlace';
 import AddToCartButton from './AddToCartButton';
 import ActionButtons from './ActionButtons';
 import PriceCalculator from './PriceCalculator';
+import CartOptions from './CartOptions';
 import Description from './Description';
 import DragPreview from './DragPreview';
 import SparkleText from './SparkleText';
@@ -54,6 +55,7 @@ const CustomizerApp: React.FC = () => {
                     <NecklaceDisplay />
                     <ActionButtons />
                     <PriceCalculator />
+                    <CartOptions />
                     <AddToCartButton />
                     <Description />
                   </div>
@@ -81,6 +83,7 @@ const CustomizerApp: React.FC = () => {
                   {/* Right panel - Price area */}
                   <div className="right-panel">
                     <PriceCalculator />
+                    <CartOptions />
                     <AddToCartButton />
                   </div>
                 </>
