@@ -13,6 +13,10 @@ interface CustomizerContextState {
   selectedNecklace: Necklace | null;
   placedCharms: PlacedCharm[];
   
+  // Cart options
+  giftWrap: boolean;
+  charmOrderTrust: boolean;
+  
   // Actions
   selectNecklace: (necklaceId: number) => void;
   addCharm: (charmId: string, attachmentPointId: string) => void;
@@ -20,6 +24,8 @@ interface CustomizerContextState {
   moveCharm: (placedCharmId: string, newAttachmentPointId: string) => void;
   swapCharms: (placedCharmId: string, targetAttachmentPointId: string) => void;
   clearAllCharms: () => void;
+  setGiftWrap: (enabled: boolean) => void;
+  setCharmOrderTrust: (enabled: boolean) => void;
 }
 
 // Create context with initial empty state
@@ -35,6 +41,8 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
   // State
   const [selectedNecklaceId, setSelectedNecklaceId] = useState<number>(necklaces[0].id);
   const [placedCharms, setPlacedCharms] = useState<PlacedCharm[]>([]);
+  const [giftWrap, setGiftWrap] = useState<boolean>(false);
+  const [charmOrderTrust, setCharmOrderTrust] = useState<boolean>(false);
 
   // Get the currently selected necklace with computed occupation status
   const baseNecklace = necklaces.find(n => n.id === selectedNecklaceId) || null;
@@ -252,12 +260,16 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
     charms,
     selectedNecklace,
     placedCharms,
+    giftWrap,
+    charmOrderTrust,
     selectNecklace,
     addCharm,
     removeCharm,
     moveCharm,
     swapCharms,
-    clearAllCharms
+    clearAllCharms,
+    setGiftWrap,
+    setCharmOrderTrust
   };
 
   return (

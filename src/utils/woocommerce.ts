@@ -75,6 +75,8 @@ const formatCustomizerData = (necklace: Necklace, placedCharms: PlacedCharm[]) =
 export const addToCart = async (
   necklace: Necklace,
   placedCharms: PlacedCharm[],
+  giftWrap: boolean = false,
+  charmOrderTrust: boolean = false
 ): Promise<{ success: boolean; message: string }> => {
   if (!necklace) {
     return { success: false, message: "No necklace selected" };
@@ -108,6 +110,10 @@ export const addToCart = async (
   Object.entries(attributeData).forEach(([name, value]) => {
     data[name] = value;
   });
+  
+  // Add cart options
+  data['emballage-cadeau'] = giftWrap ? 'oui' : 'non';
+  data['confiance-charms'] = charmOrderTrust ? 'oui' : 'non';
   
   // Use jQuery's AJAX method
   return new Promise((resolve) => {

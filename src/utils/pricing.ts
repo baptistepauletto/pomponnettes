@@ -2,6 +2,7 @@ import { Necklace, PlacedCharm } from '../types';
 
 // Pricing constants
 export const CHARM_PRICE = 7.00; // Each charm costs 7 euros
+export const GIFT_WRAP_PRICE = 1.50; // Gift wrap costs 1.5 euros
 export const FREE_SHIPPING_THRESHOLD = 90.00; // Free shipping over 90€
 
 // Free charm thresholds based on necklace type
@@ -81,7 +82,7 @@ export function calculateFreeCharms(necklace: Necklace | null, charmCount: numbe
 /**
  * Calculate the total price for a customized necklace
  */
-export function calculateTotalPrice(necklace: Necklace | null, placedCharms: PlacedCharm[]) {
+export function calculateTotalPrice(necklace: Necklace | null, placedCharms: PlacedCharm[], giftWrap: boolean = false) {
   if (!necklace) {
     return {
       necklacePrice: 0,
@@ -89,6 +90,7 @@ export function calculateTotalPrice(necklace: Necklace | null, placedCharms: Pla
       charmsOriginalPrice: 0,
       freeCharmsCount: 0,
       freeCharmsValue: 0,
+      giftWrapPrice: 0,
       subtotal: 0,
       shipping: 0,
       total: 0,
@@ -106,7 +108,10 @@ export function calculateTotalPrice(necklace: Necklace | null, placedCharms: Pla
   const freeCharmsValue = freeCharmInfo.freeCharms * CHARM_PRICE;
   const charmsPrice = charmsOriginalPrice - freeCharmsValue;
   
-  const subtotal = necklacePrice + charmsPrice;
+  // Calculate gift wrap cost
+  const giftWrapPrice = giftWrap ? GIFT_WRAP_PRICE : 0;
+  
+  const subtotal = necklacePrice + charmsPrice + giftWrapPrice;
   
   // Calculate shipping
   const freeShipping = subtotal >= FREE_SHIPPING_THRESHOLD;
@@ -121,6 +126,7 @@ export function calculateTotalPrice(necklace: Necklace | null, placedCharms: Pla
     charmsOriginalPrice,
     freeCharmsCount: freeCharmInfo.freeCharms,
     freeCharmsValue,
+    giftWrapPrice,
     subtotal,
     shipping,
     total,
@@ -171,8 +177,8 @@ export function calculateNextFreeCharmInfo(necklace: Necklace | null, currentCha
 /**
  * Get price breakdown for display
  */
-export function getPriceBreakdown(necklace: Necklace | null, placedCharms: PlacedCharm[]) {
-  const pricing = calculateTotalPrice(necklace, placedCharms);
+export function getPriceBreakdown(necklace: Necklace | null, placedCharms: PlacedCharm[], giftWrap: boolean = false) {
+  const pricing = calculateTotalPrice(necklace, placedCharms, giftWrap);
   const nextFreeCharm = calculateNextFreeCharmInfo(necklace, placedCharms.length);
   const freeCharmInfo = calculateFreeCharms(necklace, placedCharms.length);
   
