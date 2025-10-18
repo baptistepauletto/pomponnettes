@@ -1574,5 +1574,239 @@ export const charms: Charm[] = [
     sizeMark: 'L',
     category: '🐻 Animaux',
     attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'bretzel',
+    name: 'Bretzel',
+    imagePath: getImagePath('images/charms/bretzel-1.2cm.png'),
+    sizeScale: 1.2,
+    sizeMark: 'S',
+    category: '🍒 Nourriture',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'carpe',
+    name: 'Carpe',
+    imagePath: getImagePath('images/charms/carpe-3.7cm.png'),
+    sizeScale: 2.5,
+    sizeMark: 'XL',
+    category: '🦞 Océan',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'coccinelle-petite',
+    name: 'Coccinelle Petite',
+    imagePath: getImagePath('images/charms/coccinelle-1.4cm.png'),
+    sizeScale: 1.4,
+    sizeMark: 'S',
+    category: '🐻 Animaux',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'coeur-sacre-jaune',
+    name: 'Coeur Sacré Jaune',
+    imagePath: getImagePath('images/charms/coeur-sacre-jaune-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'M',
+    category: '❤️ Cœurs',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'coeur-sacre-orange',
+    name: 'Coeur Sacré Orange',
+    imagePath: getImagePath('images/charms/coeur-sacre-orange-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'M',
+    category: '❤️ Cœurs',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'coeur-sacre-vert',
+    name: 'Coeur Sacré Vert',
+    imagePath: getImagePath('images/charms/coeur-sacre-vert-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'M',
+    category: '❤️ Cœurs',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'coeur-sacre-violet',
+    name: 'Coeur Sacré Violet',
+    imagePath: getImagePath('images/charms/coeur-sacre-violet-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'M',
+    category: '❤️ Cœurs',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'etoile-de-mer-jaune',
+    name: 'Étoile De Mer Jaune',
+    imagePath: getImagePath('images/charms/etoile-de-mer-jaune-2cm.png'),
+    sizeScale: 1.7,
+    sizeMark: 'M',
+    category: '🦞 Océan',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'etoile-de-mer-verte',
+    name: 'Étoile De Mer Verte',
+    imagePath: getImagePath('images/charms/etoile-de-mer-verte-2cm.png'),
+    sizeScale: 1.7,
+    sizeMark: 'M',
+    category: '🦞 Océan',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'etoile-de-mer-violette',
+    name: 'Étoile De Mer Violette',
+    imagePath: getImagePath('images/charms/etoile-de-mer-violette-2cm.png'),
+    sizeScale: 1.7,
+    sizeMark: 'M',
+    category: '🦞 Océan',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'fleur-orange',
+    name: 'Fleur Orange',
+    imagePath: getImagePath('images/charms/felur-orange-2cm.png'),
+    sizeScale: 1.8,
+    sizeMark: 'M',
+    category: '🌸 Nature',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'fleur-bleue-ciel',
+    name: 'Fleur Bleue Ciel',
+    imagePath: getImagePath('images/charms/fleur-bleue-ciel-2cm.png'),
+    sizeScale: 1.8,
+    sizeMark: 'M',
+    category: '🌸 Nature',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'fleur-bleue-fonce',
+    name: 'Fleur Bleue Foncé',
+    imagePath: getImagePath('images/charms/fleur-bleue-fonce-2cm.png'),
+    sizeScale: 1.8,
+    sizeMark: 'M',
+    category: '🌸 Nature',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'fleur-jaune',
+    name: 'Fleur Jaune',
+    imagePath: getImagePath('images/charms/fleur-jaune-2cm.png'),
+    sizeScale: 1.8,
+    sizeMark: 'M',
+    category: '🌸 Nature',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'fleur-rouge',
+    name: 'Fleur Rouge',
+    imagePath: getImagePath('images/charms/fleur-rouge-2cm.png'),
+    sizeScale: 1.8,
+    sizeMark: 'M',
+    category: '🌸 Nature',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'fleur-verte',
+    name: 'Fleur Verte',
+    imagePath: getImagePath('images/charms/fleur-verte-2cm.png'),
+    sizeScale: 1.8,
+    sizeMark: 'M',
+    category: '🌸 Nature',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'grand-crabe',
+    name: 'Grand Crabe',
+    imagePath: getImagePath('images/charms/grand-crabe-4cm.png'),
+    sizeScale: 2.5,
+    sizeMark: 'XL',
+    category: '🦞 Océan',
+    attachmentOffset: { x: -17, y: -4 }
+  },
+  {
+    id: 'grande-etoile',
+    name: 'Grande Étoile',
+    imagePath: getImagePath('images/charms/grande-etoile-3.7cm.png'),
+    sizeScale: 2.5,
+    sizeMark: 'XL',
+    category: '🌸 Nature',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'grande-sardine',
+    name: 'Grande Sardine',
+    imagePath: getImagePath('images/charms/grande-sardine-4cm.png'),
+    sizeScale: 2.5,
+    sizeMark: 'XL',
+    category: '🦞 Océan',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'homard-grand',
+    name: 'Homard Grand',
+    imagePath: getImagePath('images/charms/homard-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'M',
+    category: '🦞 Océan',
+    attachmentOffset: { x: 10, y: 0 }
+  },
+  {
+    id: 'medaille-amour',
+    name: 'Médaille Amour',
+    imagePath: getImagePath('images/charms/medaille-amour-1.7cm.png'),
+    sizeScale: 1.7,
+    sizeMark: 'M',
+    category: '🌞 Médailles',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'petit-coquillage-spirale',
+    name: 'Petit Coquillage Spirale',
+    imagePath: getImagePath('images/charms/petit-coquillage-spirale-1.3cm.png'),
+    sizeScale: 1.3,
+    sizeMark: 'S',
+    category: '🦞 Océan',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'petit-fer-a-cheval',
+    name: 'Petit Fer À Cheval',
+    imagePath: getImagePath('images/charms/petit-fer-a-cheval-1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'XS',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'poisson-multicolore-bleu',
+    name: 'Poisson Multicolore Bleu',
+    imagePath: getImagePath('images/charms/poisson-multicolore-bleu-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'M',
+    category: '🦞 Océan',
+    attachmentOffset: { x: 0, y: -4 }
+  },
+  {
+    id: 'tortue-verte',
+    name: 'Tortue Verte',
+    imagePath: getImagePath('images/charms/tortue-verte-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'M',
+    category: '🦞 Océan',
+    attachmentOffset: { x: 0, y: -2 }
+  },
+  {
+    id: 'tortue-violette',
+    name: 'Tortue Violette',
+    imagePath: getImagePath('images/charms/tortue-violette-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'M',
+    category: '🦞 Océan',
+    attachmentOffset: { x: 0, y: -2 }
   }
 ];
