@@ -1806,7 +1806,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-A-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 0, y: 0 }
   },
   {
@@ -1815,7 +1815,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-B-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 0, y: 0 }
   },
   {
@@ -1824,7 +1824,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-C-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 0, y: 0 }
   },
   {
@@ -1833,7 +1833,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-D-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 0, y: 0 }
   },
   {
@@ -1842,7 +1842,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-E-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 0, y: 0 }
   },
   {
@@ -1851,7 +1851,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-F-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 0, y: 0 }
   },
   {
@@ -1860,7 +1860,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-G-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 0, y: 0 }
   },
   {
@@ -1869,7 +1869,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-H-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 30, y: 0 }
   },
   {
@@ -1878,7 +1878,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-I-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 0, y: 0 }
   },
   {
@@ -1887,7 +1887,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-J-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 0, y: 0 }
   },
   {
@@ -1896,7 +1896,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-K-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 30, y: 0 }
   },
   {
@@ -1905,7 +1905,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-L-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 20, y: 0 }
   },
   {
@@ -1914,7 +1914,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-M-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 35, y: 0 }
   },
   {
@@ -1923,7 +1923,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-N-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 30, y: 0 }
   },
   {
@@ -1932,7 +1932,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-O-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 0, y: 0 }
   },
   {
@@ -1941,7 +1941,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-P-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 0, y: 0 }
   },
   {
@@ -1950,7 +1950,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-Q-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 0, y: 0 }
   },
   {
@@ -1959,7 +1959,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-R-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 10, y: 0 }
   },
   {
@@ -1968,7 +1968,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-S-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 0, y: 0 }
   },
   {
@@ -1977,7 +1977,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-T-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 0, y: 0 }
   },
   {
@@ -1986,7 +1986,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-U-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 30, y: 0 }
   },
   {
@@ -1995,7 +1995,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-V-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 25, y: 0 }
   },
   {
@@ -2004,7 +2004,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-W-1.1cm.png'),
     sizeScale: 1.2,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 0, y: -10 }
   },
   {
@@ -2013,7 +2013,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-X-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 20, y: 0 }
   },
   {
@@ -2022,7 +2022,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-Y-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 25, y: 0 }
   },
   {
@@ -2031,7 +2031,7 @@ export const charms: Charm[] = [
     imagePath: getImagePath('images/charms/lettre-Z-1.1cm.png'),
     sizeScale: 1.0,
     sizeMark: 'S',
-    category: '🔤 Lettres',
+    category: '🔠 Lettres',
     attachmentOffset: { x: 0, y: 0 }
   }
 ];
