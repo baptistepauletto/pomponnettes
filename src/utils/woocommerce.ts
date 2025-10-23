@@ -94,8 +94,8 @@ export const addToCart = async (
   
   // Create the data object for the request
   const data: Record<string, any> = {
-    product_id: necklace.id,
-    'add-to-cart': necklace.id,
+    product_id: necklace.woocommerceId,
+    'add-to-cart': necklace.woocommerceId,
     quantity: 1,
     // Flag to identify that this request came from the Pomponnettes customizer
     pomponnettes_customizer_used: 'true'

@@ -4,7 +4,8 @@ import { getImagePath } from '../utils/imagePaths';
 // Sample necklace data
 export const necklaces: Necklace[] = [
   {
-    id: 8187,
+    id: 1,
+    woocommerceId: 8187,
     name: 'Collier Grigri',
     imagePath: getImagePath('images/necklaces/grigri.png'),
     variationId: 12764,
@@ -28,7 +29,8 @@ export const necklaces: Necklace[] = [
     ]
   },
   {
-    id: 10465,
+    id: 2,
+    woocommerceId: 10465,
     name: 'Collier Gypso',
     imagePath: getImagePath('images/necklaces/chaine-gypso-or.png'),
     variationId: 12760,
@@ -48,7 +50,8 @@ export const necklaces: Necklace[] = [
     ]
   },
   {
-    id: 9645,
+    id: 3,
+    woocommerceId: 9645,
     name: 'Collier Grigri Argent',
     imagePath: getImagePath('images/necklaces/grigri_argent.png'),
     variationId: 12812,
@@ -72,7 +75,8 @@ export const necklaces: Necklace[] = [
     ]
   },
   {
-    id: 10561,
+    id: 4,
+    woocommerceId: 10561,
     name: 'Collier Gypso Argent',
     imagePath: getImagePath('images/necklaces/chaine-gypso-argent.png'),
     variationId: 22553,
@@ -92,11 +96,12 @@ export const necklaces: Necklace[] = [
     ]
   },
   {
-    id: 10562,
+    id: 5,
+    woocommerceId: 21290,
     name: 'Bandana Beige',
     imagePath: getImagePath('images/necklaces/bandana-beige.png'),
-    variationId: 22553,
-    basePrice: 22.00,
+    variationId: 24768,
+    basePrice: 32.50,
     displayScale: .8,
     sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
     attachmentPoints: [
@@ -108,11 +113,12 @@ export const necklaces: Necklace[] = [
     ]
   },
   {
-    id: 10563,
+    id: 6,
+    woocommerceId: 21290,
     name: 'Bandana Noir',
     imagePath: getImagePath('images/necklaces/bandana-noir.png'),
-    variationId: 22553,
-    basePrice: 22.00,
+    variationId: 22562,
+    basePrice: 32.50,
     displayScale: .8,
     sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
     attachmentPoints: [
