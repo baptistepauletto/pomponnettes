@@ -21,11 +21,23 @@ export function getNecklaceType(necklaceName: string): 'GRIGRI' | 'GYPSO' | null
   return null;
 }
 
+// Helper function to check if necklace is a bandana
+export function isBandana(necklace: Necklace | null): boolean {
+  if (!necklace) return false;
+  const name = necklace.name.toLowerCase();
+  return name.includes('bandana');
+}
+
 /**
  * Calculate free charms based on necklace type and charm count
  */
 export function calculateFreeCharms(necklace: Necklace | null, charmCount: number) {
   if (!necklace) {
+    return { freeCharms: 0, totalFreeCharms: 0, nextFreeAt: null, charmsUntilFree: 0 };
+  }
+  
+  // Bandanas don't have free charm promotions since charms don't affect price
+  if (isBandana(necklace)) {
     return { freeCharms: 0, totalFreeCharms: 0, nextFreeAt: null, charmsUntilFree: 0 };
   }
   
@@ -101,6 +113,35 @@ export function calculateTotalPrice(necklace: Necklace | null, placedCharms: Pla
 
   const necklacePrice = necklace.basePrice;
   const charmCount = placedCharms.length;
+  
+  // Special pricing for bandanas: fixed price regardless of charms
+  if (isBandana(necklace)) {
+    const charmsOriginalPrice = charmCount * CHARM_PRICE;
+    const giftWrapPrice = giftWrap ? GIFT_WRAP_PRICE : 0;
+    const subtotal = necklacePrice + giftWrapPrice; // No charm cost for bandanas
+    
+    // Calculate shipping
+    const freeShipping = subtotal >= FREE_SHIPPING_THRESHOLD;
+    const shipping = freeShipping ? 0 : 5.90;
+    
+    const total = subtotal + shipping;
+    
+    return {
+      necklacePrice,
+      charmsPrice: 0, // Charms are free with bandanas
+      charmsOriginalPrice,
+      freeCharmsCount: 0, // No free charm system for bandanas
+      freeCharmsValue: 0,
+      giftWrapPrice,
+      subtotal,
+      shipping,
+      total,
+      freeShipping,
+      savings: 0 // Don't show savings bubble for bandanas
+    };
+  }
+  
+  // Standard pricing for other necklaces
   const charmsOriginalPrice = charmCount * CHARM_PRICE;
   
   // Calculate free charms
@@ -147,6 +188,9 @@ export function formatPrice(price: number, currency: string = '€'): string {
  */
 export function calculateNextFreeCharmInfo(necklace: Necklace | null, currentCharmCount: number) {
   if (!necklace) return null;
+  
+  // Bandanas don't have free charm promotions since charms don't affect price
+  if (isBandana(necklace)) return null;
   
   const necklaceType = getNecklaceType(necklace.name);
   if (!necklaceType) return null;

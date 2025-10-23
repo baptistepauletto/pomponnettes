@@ -105,11 +105,11 @@ export const necklaces: Necklace[] = [
     displayScale: .8,
     sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
     attachmentPoints: [
-      { id: 'cg-point1', position: { x: 34, y: 73 }, isOccupied: false },
-      { id: 'cg-point2', position: { x: 42.5, y: 80.6}, isOccupied: false },
-      { id: 'cg-point3', position: { x: 52.25, y: 87.8 }, isOccupied: false },
-      { id: 'cg-point4', position: { x: 60.15, y: 80.3}, isOccupied: false },
-      { id: 'cg-point5', position: { x: 68.1, y: 72.9 }, isOccupied: false }
+      { id: 'bb-point1', position: { x: 34, y: 73 }, isOccupied: false },
+      { id: 'bb-point2', position: { x: 42.5, y: 80.6}, isOccupied: false },
+      { id: 'bb-point3', position: { x: 52.25, y: 87.8 }, isOccupied: false },
+      { id: 'bb-point4', position: { x: 60.15, y: 80.3}, isOccupied: false },
+      { id: 'bb-point5', position: { x: 68.1, y: 72.9 }, isOccupied: false }
     ]
   },
   {
@@ -122,11 +122,11 @@ export const necklaces: Necklace[] = [
     displayScale: .8,
     sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
     attachmentPoints: [
-      { id: 'cg-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
-      { id: 'cg-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
-      { id: 'cg-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
-      { id: 'cg-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
-      { id: 'cg-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false }
+      { id: 'bn-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
+      { id: 'bn-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
+      { id: 'bn-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
+      { id: 'bn-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
+      { id: 'bn-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false }
     ]
   },
     // {
