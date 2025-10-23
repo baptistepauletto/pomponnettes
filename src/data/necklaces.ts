@@ -98,7 +98,7 @@ export const necklaces: Necklace[] = [
     variationId: 22553,
     basePrice: 22.00,
     displayScale: .8,
-    sizeDescription: 'Longueur du collier : 44 cm + 5 cm réglable.', 
+    sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
     attachmentPoints: [
       { id: 'cg-point1', position: { x: 34, y: 73 }, isOccupied: false },
       { id: 'cg-point2', position: { x: 42.5, y: 80.6}, isOccupied: false },
@@ -114,7 +114,7 @@ export const necklaces: Necklace[] = [
     variationId: 22553,
     basePrice: 22.00,
     displayScale: .8,
-    sizeDescription: 'Longueur du collier : 44 cm + 5 cm réglable.', 
+    sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
     attachmentPoints: [
       { id: 'cg-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
       { id: 'cg-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
