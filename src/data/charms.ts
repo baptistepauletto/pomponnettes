@@ -255,15 +255,6 @@ export const charms: Charm[] = [
     category: '⭐ Symboles'
   },
   {
-    id: 'coccinelle',
-    name: 'Coccinelle',
-    imagePath: getImagePath('images/charms/coccinelle-1.5cm.png'),
-    sizeScale: 1.4,
-    sizeMark: 'S',
-    category: '🐻 Animaux',
-    attachmentOffset: { x: 0, y: -5 }
-  },
-  {
     id: 'medaille-scarabee',
     name: 'Médaille Scarabée',
     imagePath: getImagePath('images/charms/medaille-scarabee-1.5cm.png'),
@@ -1594,8 +1585,8 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: 0 }
   },
   {
-    id: 'coccinelle-petite',
-    name: 'Coccinelle Petite',
+    id: 'coccinelle',
+    name: 'Coccinelle',
     imagePath: getImagePath('images/charms/coccinelle-1.4cm.png'),
     sizeScale: 1.4,
     sizeMark: 'S',
@@ -1808,5 +1799,239 @@ export const charms: Charm[] = [
     sizeMark: 'M',
     category: '🦞 Océan',
     attachmentOffset: { x: 0, y: -2 }
+  },
+  {
+    id: 'lettre-a',
+    name: 'Lettre A',
+    imagePath: getImagePath('images/charms/lettre-A-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'lettre-b',
+    name: 'Lettre B',
+    imagePath: getImagePath('images/charms/lettre-B-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'lettre-c',
+    name: 'Lettre C',
+    imagePath: getImagePath('images/charms/lettre-C-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'lettre-d',
+    name: 'Lettre D',
+    imagePath: getImagePath('images/charms/lettre-D-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'lettre-e',
+    name: 'Lettre E',
+    imagePath: getImagePath('images/charms/lettre-E-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'lettre-f',
+    name: 'Lettre F',
+    imagePath: getImagePath('images/charms/lettre-F-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'lettre-g',
+    name: 'Lettre G',
+    imagePath: getImagePath('images/charms/lettre-G-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'lettre-h',
+    name: 'Lettre H',
+    imagePath: getImagePath('images/charms/lettre-H-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 30, y: 0 }
+  },
+  {
+    id: 'lettre-i',
+    name: 'Lettre I',
+    imagePath: getImagePath('images/charms/lettre-I-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'lettre-j',
+    name: 'Lettre J',
+    imagePath: getImagePath('images/charms/lettre-J-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'lettre-k',
+    name: 'Lettre K',
+    imagePath: getImagePath('images/charms/lettre-K-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 30, y: 0 }
+  },
+  {
+    id: 'lettre-l',
+    name: 'Lettre L',
+    imagePath: getImagePath('images/charms/lettre-L-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 20, y: 0 }
+  },
+  {
+    id: 'lettre-m',
+    name: 'Lettre M',
+    imagePath: getImagePath('images/charms/lettre-M-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 35, y: 0 }
+  },
+  {
+    id: 'lettre-n',
+    name: 'Lettre N',
+    imagePath: getImagePath('images/charms/lettre-N-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 30, y: 0 }
+  },
+  {
+    id: 'lettre-o',
+    name: 'Lettre O',
+    imagePath: getImagePath('images/charms/lettre-O-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'lettre-p',
+    name: 'Lettre P',
+    imagePath: getImagePath('images/charms/lettre-P-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'lettre-q',
+    name: 'Lettre Q',
+    imagePath: getImagePath('images/charms/lettre-Q-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'lettre-r',
+    name: 'Lettre R',
+    imagePath: getImagePath('images/charms/lettre-R-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 10, y: 0 }
+  },
+  {
+    id: 'lettre-s',
+    name: 'Lettre S',
+    imagePath: getImagePath('images/charms/lettre-S-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'lettre-t',
+    name: 'Lettre T',
+    imagePath: getImagePath('images/charms/lettre-T-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'lettre-u',
+    name: 'Lettre U',
+    imagePath: getImagePath('images/charms/lettre-U-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 30, y: 0 }
+  },
+  {
+    id: 'lettre-v',
+    name: 'Lettre V',
+    imagePath: getImagePath('images/charms/lettre-V-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 25, y: 0 }
+  },
+  {
+    id: 'lettre-w',
+    name: 'Lettre W',
+    imagePath: getImagePath('images/charms/lettre-W-1.1cm.png'),
+    sizeScale: 1.2,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 0, y: -10 }
+  },
+  {
+    id: 'lettre-x',
+    name: 'Lettre X',
+    imagePath: getImagePath('images/charms/lettre-X-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 20, y: 0 }
+  },
+  {
+    id: 'lettre-y',
+    name: 'Lettre Y',
+    imagePath: getImagePath('images/charms/lettre-Y-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 25, y: 0 }
+  },
+  {
+    id: 'lettre-z',
+    name: 'Lettre Z',
+    imagePath: getImagePath('images/charms/lettre-Z-1.1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🔤 Lettres',
+    attachmentOffset: { x: 0, y: 0 }
   }
 ];
