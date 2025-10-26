@@ -8,14 +8,6 @@ Author: Baptiste Pauletto
 
 // Register scripts and styles
 function pomponnettes_enqueue_scripts() {
-    // Only enqueue on pages that contain the shortcode; run late to load after theme
-    if (is_admin()) { return; }
-    global $post;
-    $should_enqueue = false;
-    if ($post && isset($post->post_content)) {
-        $should_enqueue = has_shortcode($post->post_content, 'pomponnettes_app');
-    }
-    if (!$should_enqueue) { return; }
     // Get the plugin directory URL
     $plugin_url = plugin_dir_url( __FILE__ );
     
@@ -67,8 +59,8 @@ function pomponnettes_enqueue_scripts() {
 
 // Register shortcode
 function pomponnettes_app_shortcode() {
-    // Return the container div where React will mount
-    return '<div id="root" class="pomponnettes-app-container"></div>';
+    // Enqueue scripts and styles
+    pomponnettes_enqueue_scripts();
 }
 
 // Add shortcode
