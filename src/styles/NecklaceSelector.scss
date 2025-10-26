@@ -4,6 +4,7 @@
   
   // Desktop optimization for spanning layout
   @media (min-width: 481px) {
+    letter-spacing: normal;
     margin-bottom: 1rem;
     text-align: center;
     display: flex;
@@ -13,7 +14,8 @@
   }
   
   h3 {
-    margin-bottom: 1rem;
+    letter-spacing: normal;
+    margin: 0 0 1rem 0;
     font-size: .8rem;
     color: #A24E4E;
     font-family: "Jost", sans-serif;
