@@ -26,7 +26,7 @@ article {
 /* Desktop-only styles - apply full width positioning */
 @media (min-width: 769px) {
   .pomponnettes-app-container {
-    width: 100vw;
+    width: 100%;
   }
 
   /* Make sure the app takes full width */
@@ -44,8 +44,5 @@ article {
 }
 
 
-/* Prevent horizontal scrolling */
-body {
-  overflow-x: hidden;
-}
+/* Avoid global overflow rules; ensure container stays within page width */
 
