@@ -468,7 +468,7 @@ const NecklaceDisplay: React.FC = () => {
       {/* Show first-time interaction hint if never interacted with necklace */}
       {isMobile && !hasInteractedWithNecklace && !isDrawerOpen && (
         <div className="first-interaction-hint">
-          TAP LE COLLIER POUR COMMENCER
+          TAP LE BANDANA POUR COMMENCER
         </div>
       )}
       

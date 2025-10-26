@@ -245,7 +245,7 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
       >
         <div className="handle-bar"></div>
         <div className="handle-text">
-          {isOpen ? 'TAP POUR ADMIRER TON COLLIER' : 'ÉTAPE 2: TAP POUR CHOISIR TES CHARMS'}
+          {isOpen ? 'TAP POUR ADMIRER TON BANDANA' : 'ÉTAPE 3: TAP POUR CHOISIR TES CHARMS'}
         </div>
       </div>
       

@@ -1,0 +1,40 @@
+/* WordPress-specific styles for Les Pomponnettes app (scoped) */
+
+/* Ensure consistent text sizing on mobile Safari and browsers */
+.pomponnettes-app-container {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Container-scoped button/input reset to neutralize theme overrides */
+.pomponnettes-app-container button,
+.pomponnettes-app-container input[type="button"],
+.pomponnettes-app-container input[type="submit"],
+.pomponnettes-app-container .button {
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  box-shadow: none;
+  text-transform: none;
+  letter-spacing: normal;
+  font: inherit;
+  color: inherit;
+}
+
+/* Strengthen key app buttons against strong theme rules */
+.pomponnettes-app-container .add-to-cart-button,
+.pomponnettes-app-container .quantity-btn {
+  background-color: #A24E4E;
+  color: #fff;
+  border-radius: 12px;
+  border: none;
+}
+
+/* Keep the app container unconfined */
+.pomponnettes-app-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+

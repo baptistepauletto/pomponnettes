@@ -38,7 +38,7 @@ const CustomizerApp: React.FC = () => {
           <div className="customizer-app">
             <header className="customizer-header">
               <SparkleText>
-                Personnalise<br className="mobile-break" /> ton <em>collier</em>
+                Personnalise<br className="mobile-break" /> ton <em>bandana</em>
               </SparkleText>
             </header>
 

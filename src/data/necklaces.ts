@@ -3,7 +3,7 @@ import { getImagePath } from '../utils/imagePaths';
 
 // Sample necklace data
 export const necklaces: Necklace[] = [
-  {
+  /* {
     id: 1,
     woocommerceId: 8187,
     name: 'Collier Grigri',
@@ -94,14 +94,14 @@ export const necklaces: Necklace[] = [
       { id: 'cg-point8', position: { x: 76.65, y: 76.65 }, isOccupied: false },
       { id: 'cg-point9', position: { x: 82, y: 67 }, isOccupied: false },
     ]
-  },
+  }, */
   {
     id: 5,
     woocommerceId: 21290,
     name: 'Bandana Beige',
     imagePath: getImagePath('images/necklaces/bandana-beige.png'),
     variationId: 24768,
-    basePrice: 32.50,
+    basePrice: 49.00,
     displayScale: .8,
     sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
     attachmentPoints: [
@@ -118,7 +118,7 @@ export const necklaces: Necklace[] = [
     name: 'Bandana Noir',
     imagePath: getImagePath('images/necklaces/bandana-noir.png'),
     variationId: 22562,
-    basePrice: 32.50,
+    basePrice: 49.00,
     displayScale: .8,
     sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
     attachmentPoints: [
@@ -127,6 +127,278 @@ export const necklaces: Necklace[] = [
       { id: 'bn-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
       { id: 'bn-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
       { id: 'bn-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false }
+    ]
+  },
+  {
+    id: 7,
+    woocommerceId: 21290,
+    name: 'Bandana Blanc',
+    imagePath: getImagePath('images/necklaces/bandana-blanc.png'),
+    variationId: 0,
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
+    attachmentPoints: [
+      { id: 'bd-blanc-point1', position: { x: 32.1, y: 73.8 }, isOccupied: false },
+      { id: 'bd-blanc-point2', position: { x: 41, y: 81}, isOccupied: false },
+      { id: 'bd-blanc-point3', position: { x: 50.9, y: 87.4 }, isOccupied: false },
+      { id: 'bd-blanc-point4', position: { x: 59, y: 80.1}, isOccupied: false },
+      { id: 'bd-blanc-point5', position: { x: 67.1, y: 72.8 }, isOccupied: false }
+    ]
+  },
+  {
+    id: 8,
+    woocommerceId: 21290,
+    name: 'Bandana Bleu Électrique',
+    imagePath: getImagePath('images/necklaces/bandana-bleu-electrique.png'),
+    variationId: 0,
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
+    attachmentPoints: [
+      { id: 'bd-bleu-electrique-point1', position: { x: 31, y: 72.9 }, isOccupied: false },
+      { id: 'bd-bleu-electrique-point2', position: { x: 40.5, y: 80.3}, isOccupied: false },
+      { id: 'bd-bleu-electrique-point3', position: { x: 49.8, y: 87.6 }, isOccupied: false },
+      { id: 'bd-bleu-electrique-point4', position: { x: 58.5, y: 80.4}, isOccupied: false },
+      { id: 'bd-bleu-electrique-point5', position: { x: 67.1, y: 73.1 }, isOccupied: false }
+    ]
+  },
+  {
+    id: 9,
+    woocommerceId: 21290,
+    name: 'Bandana Bleu Jean',
+    imagePath: getImagePath('images/necklaces/bandana-bleu-jean.png'),
+    variationId: 0,
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
+    attachmentPoints: [
+      { id: 'bd-bleu-jean-point1', position: { x: 33.1, y: 73.2 }, isOccupied: false },
+      { id: 'bd-bleu-jean-point2', position: { x: 41.85, y: 80.7}, isOccupied: false },
+      { id: 'bd-bleu-jean-point3', position: { x: 50.6, y: 87.6 }, isOccupied: false },
+      { id: 'bd-bleu-jean-point4', position: { x: 58.9, y: 79.8}, isOccupied: false },
+      { id: 'bd-bleu-jean-point5', position: { x: 66.3, y: 72.6 }, isOccupied: false }
+    ]
+  },
+  {
+    id: 10,
+    woocommerceId: 21290,
+    name: 'Bandana Bleu Marine',
+    imagePath: getImagePath('images/necklaces/bandana-bleu-marine.png'),
+    variationId: 0,
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
+    attachmentPoints: [
+      { id: 'bd-bleu-marine-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
+      { id: 'bd-bleu-marine-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
+      { id: 'bd-bleu-marine-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
+      { id: 'bd-bleu-marine-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
+      { id: 'bd-bleu-marine-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false }
+    ]
+  },
+  {
+    id: 11,
+    woocommerceId: 21290,
+    name: 'Bandana Gris Clair',
+    imagePath: getImagePath('images/necklaces/bandana-gris-clair.png'),
+    variationId: 0,
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
+    attachmentPoints: [
+      { id: 'bd-gris-clair-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
+      { id: 'bd-gris-clair-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
+      { id: 'bd-gris-clair-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
+      { id: 'bd-gris-clair-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
+      { id: 'bd-gris-clair-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false }
+    ]
+  },
+  {
+    id: 12,
+    woocommerceId: 21290,
+    name: 'Bandana Gris Foncé',
+    imagePath: getImagePath('images/necklaces/bandana-gris-fonce.png'),
+    variationId: 0,
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
+    attachmentPoints: [
+      { id: 'bd-gris-fonce-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
+      { id: 'bd-gris-fonce-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
+      { id: 'bd-gris-fonce-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
+      { id: 'bd-gris-fonce-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
+      { id: 'bd-gris-fonce-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false }
+    ]
+  },
+  {
+    id: 13,
+    woocommerceId: 21290,
+    name: 'Bandana Kaki (Motif Blanc)',
+    imagePath: getImagePath('images/necklaces/bandana-kaki-motif-blanc.png'),
+    variationId: 0,
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
+    attachmentPoints: [
+      { id: 'bd-kaki-motif-blanc-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
+      { id: 'bd-kaki-motif-blanc-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
+      { id: 'bd-kaki-motif-blanc-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
+      { id: 'bd-kaki-motif-blanc-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
+      { id: 'bd-kaki-motif-blanc-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false }
+    ]
+  },
+  {
+    id: 14,
+    woocommerceId: 21290,
+    name: 'Bandana Kaki (Motif Noir)',
+    imagePath: getImagePath('images/necklaces/bandana-kaki-motif-noir.png'),
+    variationId: 0,
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
+    attachmentPoints: [
+      { id: 'bd-kaki-motif-noir-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
+      { id: 'bd-kaki-motif-noir-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
+      { id: 'bd-kaki-motif-noir-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
+      { id: 'bd-kaki-motif-noir-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
+      { id: 'bd-kaki-motif-noir-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false }
+    ]
+  },
+  {
+    id: 15,
+    woocommerceId: 21290,
+    name: 'Bandana Marron',
+    imagePath: getImagePath('images/necklaces/bandana-marron.png'),
+    variationId: 0,
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
+    attachmentPoints: [
+      { id: 'bd-marron-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
+      { id: 'bd-marron-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
+      { id: 'bd-marron-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
+      { id: 'bd-marron-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
+      { id: 'bd-marron-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false }
+    ]
+  },
+  {
+    id: 16,
+    woocommerceId: 21290,
+    name: 'Bandana Prune (Motif Blanc)',
+    imagePath: getImagePath('images/necklaces/bandana-prune-motif-blanc.png'),
+    variationId: 0,
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
+    attachmentPoints: [
+      { id: 'bd-prune-motif-blanc-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
+      { id: 'bd-prune-motif-blanc-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
+      { id: 'bd-prune-motif-blanc-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
+      { id: 'bd-prune-motif-blanc-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
+      { id: 'bd-prune-motif-blanc-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false }
+    ]
+  },
+  {
+    id: 17,
+    woocommerceId: 21290,
+    name: 'Bandana Prune (Motif Noir)',
+    imagePath: getImagePath('images/necklaces/bandana-prune-motif-noir.png'),
+    variationId: 0,
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
+    attachmentPoints: [
+      { id: 'bd-prune-motif-noir-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
+      { id: 'bd-prune-motif-noir-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
+      { id: 'bd-prune-motif-noir-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
+      { id: 'bd-prune-motif-noir-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
+      { id: 'bd-prune-motif-noir-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false }
+    ]
+  },
+  {
+    id: 18,
+    woocommerceId: 21290,
+    name: 'Bandana Rose Bonbon',
+    imagePath: getImagePath('images/necklaces/bandana-rose-bonbon.png'),
+    variationId: 0,
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
+    attachmentPoints: [
+      { id: 'bd-rose-bonbon-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
+      { id: 'bd-rose-bonbon-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
+      { id: 'bd-rose-bonbon-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
+      { id: 'bd-rose-bonbon-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
+      { id: 'bd-rose-bonbon-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false }
+    ]
+  },
+  {
+    id: 19,
+    woocommerceId: 21290,
+    name: 'Bandana Rose Fushia',
+    imagePath: getImagePath('images/necklaces/bandana-rose-fushia.png'),
+    variationId: 0,
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
+    attachmentPoints: [
+      { id: 'bd-rose-fushia-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
+      { id: 'bd-rose-fushia-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
+      { id: 'bd-rose-fushia-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
+      { id: 'bd-rose-fushia-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
+      { id: 'bd-rose-fushia-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false }
+    ]
+  },
+  {
+    id: 20,
+    woocommerceId: 21290,
+    name: 'Bandana Sauge',
+    imagePath: getImagePath('images/necklaces/bandana-sauge.png'),
+    variationId: 0,
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
+    attachmentPoints: [
+      { id: 'bd-sauge-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
+      { id: 'bd-sauge-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
+      { id: 'bd-sauge-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
+      { id: 'bd-sauge-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
+      { id: 'bd-sauge-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false }
+    ]
+  },
+  {
+    id: 21,
+    woocommerceId: 21290,
+    name: 'Bandana Vieux Rouge',
+    imagePath: getImagePath('images/necklaces/bandana-vieux-rouge.png'),
+    variationId: 0,
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
+    attachmentPoints: [
+      { id: 'bd-vieux-rouge-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
+      { id: 'bd-vieux-rouge-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
+      { id: 'bd-vieux-rouge-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
+      { id: 'bd-vieux-rouge-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
+      { id: 'bd-vieux-rouge-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false }
+    ]
+  },
+  {
+    id: 22,
+    woocommerceId: 21290,
+    name: 'Bandana Violet',
+    imagePath: getImagePath('images/necklaces/bandana-violet.png'),
+    variationId: 0,
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
+    attachmentPoints: [
+      { id: 'bd-violet-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
+      { id: 'bd-violet-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
+      { id: 'bd-violet-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
+      { id: 'bd-violet-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
+      { id: 'bd-violet-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false }
     ]
   },
     // {
