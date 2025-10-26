@@ -11,11 +11,19 @@ function pomponnettes_enqueue_scripts() {
     // Get the plugin directory URL
     $plugin_url = plugin_dir_url( __FILE__ );
     
+    // Enqueue Google Fonts used by the app
+    wp_enqueue_style(
+        'pomponnettes-fonts',
+        'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Jost:wght@300..700&display=swap',
+        array(),
+        null
+    );
+    
     // Enqueue main CSS file
     wp_enqueue_style(
         'pomponnettes-css',
         $plugin_url . 'assets/index.css',
-        array(),
+        array('pomponnettes-fonts'),
         '1.0.0'
     );
     
