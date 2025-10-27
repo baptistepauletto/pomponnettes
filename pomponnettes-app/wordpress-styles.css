@@ -1,0 +1,26 @@
+/*
+  WordPress page-level styles for the Pomponnettes app
+  - This file styles ONLY the host page/wrappers around the app.
+  - It does NOT affect anything inside the Shadow DOM app.
+  - Safe to tweak layout, spacing, backgrounds around the app container.
+*/
+
+/* Match the app background to blend with the page */
+.pomponnettes-app-container {
+  background-color: #E4D6D6;
+}
+
+/* Suggested starting layout (uncomment/tweak as needed) */
+/*
+.pomponnettes-app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+html:has(.pomponnettes-app-container) .entry-content {
+  padding: 0; 
+}
+*/
+
+

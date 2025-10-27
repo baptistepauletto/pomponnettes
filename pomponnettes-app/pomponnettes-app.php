@@ -8,6 +8,12 @@ Author: Baptiste Pauletto
 
 // Register scripts and styles
 function pomponnettes_enqueue_scripts() {
+    // Only load on pages containing the shortcode
+    if (is_admin()) { return; }
+    global $post;
+    if (!$post || !isset($post->post_content) || !has_shortcode($post->post_content, 'pomponnettes_app')) {
+        return;
+    }
     // Get the plugin directory URL
     $plugin_url = plugin_dir_url( __FILE__ );
     
@@ -19,19 +25,11 @@ function pomponnettes_enqueue_scripts() {
         null
     );
     
-    // Enqueue main CSS file
-    wp_enqueue_style(
-        'pomponnettes-css',
-        $plugin_url . 'assets/index.css',
-        array('pomponnettes-fonts'),
-        '1.0.0'
-    );
-    
-    // Enqueue WordPress-specific overrides (load after main CSS)
+    // Enqueue WordPress-specific overrides (scoped, minimal)
     wp_enqueue_style(
         'pomponnettes-wp-css',
         $plugin_url . 'wordpress-styles.css',
-        array('pomponnettes-css'),
+        array('pomponnettes-fonts'),
         '1.0.0'
     );
     
@@ -45,6 +43,10 @@ function pomponnettes_enqueue_scripts() {
         '1.0.0',
         true
     );
+    // Load as ES module so modern build (import.meta, dynamic imports) works
+    if (function_exists('wp_script_add_data')) {
+        wp_script_add_data('pomponnettes-js', 'type', 'module');
+    }
     
     // Pass the plugin URL to JavaScript
     wp_localize_script(
@@ -59,8 +61,8 @@ function pomponnettes_enqueue_scripts() {
 
 // Register shortcode
 function pomponnettes_app_shortcode() {
-    // Enqueue scripts and styles
-    pomponnettes_enqueue_scripts();
+    // Return the host element; the React app mounts into a Shadow DOM here
+    return '<div id="root" class="pomponnettes-app-container"></div>';
 }
 
 // Add shortcode
@@ -68,6 +70,15 @@ add_shortcode('pomponnettes_app', 'pomponnettes_app_shortcode');
 
 // Ensure assets load after the theme styles/scripts
 add_action('wp_enqueue_scripts', 'pomponnettes_enqueue_scripts', 100);
+
+// Force our JS to load as an ES module (needed for import.meta)
+add_filter('script_loader_tag', function($tag, $handle, $src) {
+    if ($handle === 'pomponnettes-js') {
+        $id_attr = ' id="' . esc_attr($handle) . '-js"';
+        return '<script type="module" src="' . esc_url($src) . '"' . $id_attr . '></script>';
+    }
+    return $tag;
+}, 10, 3);
 
 /**
  * =====================================================================

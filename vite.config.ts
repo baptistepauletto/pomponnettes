@@ -10,6 +10,7 @@ export default defineConfig(({ mode }) => {
     // Use relative paths in production, absolute in development
     base: isProduction ? './' : '/',
     build: {
+      cssCodeSplit: false,
       outDir: 'dist',
       assetsDir: '.',
       rollupOptions: {
