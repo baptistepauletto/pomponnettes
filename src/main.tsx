@@ -39,6 +39,10 @@ if (rootHost) {
   } else {
     // Standalone/dev: load CSS into document and render into light DOM
     import('./index.css');
+    // GH Pages only: add scope class on body so prefixed CSS applies
+    if (import.meta.env.PROD && window.location.hostname.endsWith('github.io')) {
+      document.body.classList.add('pomponnettes-app-container');
+    }
 
     ReactDOM.createRoot(rootHost).render(
       <React.StrictMode>
