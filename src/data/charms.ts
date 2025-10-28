@@ -2033,5 +2033,113 @@ export const charms: Charm[] = [
     sizeMark: 'S',
     category: '🔠 Lettres',
     attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'signe-belier',
+    name: 'Signe Bélier',
+    imagePath: getImagePath('images/charms/signe-belier-1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🦀 Signes Astrologiques',
+    attachmentOffset: { x: 25, y: 0 }
+  },
+  {
+    id: 'signe-taureau',
+    name: 'Signe Taureau',
+    imagePath: getImagePath('images/charms/signe-taureau-0.8cm.png'),
+    sizeScale: 1,
+    sizeMark: 'S',
+    category: '🦀 Signes Astrologiques',
+    attachmentOffset: { x: 30, y: 5 }
+  },
+  {
+    id: 'signe-cancer',
+    name: 'Signe Cancer',
+    imagePath: getImagePath('images/charms/signe-cancer-0.7cm.png'),
+    sizeScale: 1,
+    sizeMark: 'S',
+    category: '🦀 Signes Astrologiques',
+    attachmentOffset: { x: 5, y: 0 }
+  },
+  {
+    id: 'signe-lion',
+    name: 'Signe Lion',
+    imagePath: getImagePath('images/charms/signe-lion-1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🦀 Signes Astrologiques',
+    attachmentOffset: { x: 10, y: 5 }
+  },
+  {
+    id: 'signe-vierge',
+    name: 'Signe Vierge',
+    imagePath: getImagePath('images/charms/signe-vierge-1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🦀 Signes Astrologiques',
+    attachmentOffset: { x: 0, y: 5 }
+  },
+  {
+    id: 'signe-balance',
+    name: 'Signe Balance',
+    imagePath: getImagePath('images/charms/signe-balance-0.9cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🦀 Signes Astrologiques',
+    attachmentOffset: { x: 2, y: 0 }
+  },
+  {
+    id: 'signe-scorpion',
+    name: 'Signe Scorpion',
+    imagePath: getImagePath('images/charms/signe-scorpion-1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🦀 Signes Astrologiques',
+    attachmentOffset: { x: 15, y: 5 }
+  },
+  {
+    id: 'signe-sagittaire',
+    name: 'Signe Sagittaire',
+    imagePath: getImagePath('images/charms/signe-sagittaire-1-cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🦀 Signes Astrologiques',
+    attachmentOffset: { x: 5, y: 5 }
+  },
+  {
+    id: 'signe-capricorne',
+    name: 'Signe Capricorne',
+    imagePath: getImagePath('images/charms/signe-capricorne-1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🦀 Signes Astrologiques',
+    attachmentOffset: { x: 5, y: 5 }
+  },
+  {
+    id: 'signe-verseau',
+    name: 'Signe Verseau',
+    imagePath: getImagePath('images/charms/signe-verseau-0.7cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🦀 Signes Astrologiques',
+    attachmentOffset: { x: 5, y: -5 }
+  },
+  {
+    id: 'signe-poisson',
+    name: 'Signe Poisson',
+    imagePath: getImagePath('images/charms/signe-poisson-1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🦀 Signes Astrologiques',
+    attachmentOffset: { x: 25, y: 5 }
+  },
+  {
+    id: 'signe-gemeaux',
+    name: 'Signe Gémeaux',
+    imagePath: getImagePath('images/charms/signe-gemeau-1cm.png'),
+    sizeScale: 1.0,
+    sizeMark: 'S',
+    category: '🦀 Signes Astrologiques',
+    attachmentOffset: { x: 0, y: 5 }
   }
 ];
