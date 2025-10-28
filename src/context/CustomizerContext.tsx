@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
-import { Necklace, Charm, PlacedCharm } from '../types';
+import { Necklace, Charm, PlacedCharm, AttachmentPoint } from '../types';
 import { necklaces } from '../data/necklaces';
 import { charms } from '../data/charms';
 
@@ -12,6 +12,7 @@ interface CustomizerContextState {
   // Current selections
   selectedNecklace: Necklace | null;
   placedCharms: PlacedCharm[];
+  selectedHoleCount: 1 | 3 | 5 | 7;
   
   // Cart options
   giftWrap: boolean;
@@ -26,6 +27,7 @@ interface CustomizerContextState {
   clearAllCharms: () => void;
   setGiftWrap: (enabled: boolean) => void;
   setCharmOrderTrust: (enabled: boolean) => void;
+  setSelectedHoleCount: (count: 1 | 3 | 5 | 7) => void;
 }
 
 // Create context with initial empty state
@@ -43,14 +45,74 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
   const [placedCharms, setPlacedCharms] = useState<PlacedCharm[]>([]);
   const [giftWrap, setGiftWrap] = useState<boolean>(false);
   const [charmOrderTrust, setCharmOrderTrust] = useState<boolean>(false);
+  const [selectedHoleCount, setSelectedHoleCountState] = useState<1 | 3 | 5 | 7>(5);
+
+  // Helpers
+  const isBandana = (n: Necklace | null) => !!n && n.name.toLowerCase().includes('bandana');
+
+  const getBandanaVariantImagePath = (basePath: string, count: 1 | 3 | 5 | 7) => {
+    // basePath like images/necklaces/bandana-beige.png or full resolved from imagePaths
+    // Extract filename
+    const parts = basePath.split('/');
+    const file = parts[parts.length - 1];
+    const withoutExt = file.replace(/\.png$/i, '');
+    // Remove any existing -<n>-oeillet or -<n>-oeillets suffix
+    const normalized = withoutExt.replace(/-(1|3|5|7)-oeillets?$/i, '');
+    const variant = `${normalized}-${count}-oeillets.png`;
+    // Replace last part
+    parts[parts.length - 1] = variant;
+    return parts.join('/');
+  };
+
+  const computeAttachmentPointsForCount = (basePoints: AttachmentPoint[], count: 1 | 3 | 5 | 7): AttachmentPoint[] => {
+    // Always work with a left-to-right ordered copy
+    const points = [...basePoints].sort((a, b) => a.position.x - b.position.x);
+
+    // If we don't have at least 7 defined, fall back to centered subset of what's available
+    const len = points.length;
+    if (count >= len) {
+      return points.slice(0, count).map(p => ({ ...p }));
+    }
+
+    if (count === 7) {
+      return points.slice(0, Math.min(7, len)).map(p => ({ ...p }));
+    }
+
+    if (count === 5) {
+      // Drop the two extremes
+      if (len >= 7) return points.slice(1, 6).map(p => ({ ...p }));
+      // Fallback center subset
+      const start = Math.max(0, Math.floor(len / 2) - 2);
+      return points.slice(start, start + 5).map(p => ({ ...p }));
+    }
+
+    if (count === 3) {
+      if (len >= 7) return points.slice(2, 5).map(p => ({ ...p }));
+      const start = Math.max(0, Math.floor(len / 2) - 1);
+      return points.slice(start, start + 3).map(p => ({ ...p }));
+    }
+
+    // count === 1
+    return [ { ...points[Math.floor(len / 2)] } ];
+  };
 
   // Get the currently selected necklace with computed occupation status
   const baseNecklace = necklaces.find(n => n.id === selectedNecklaceId) || null;
   
+  // Derive bandana-specific fields
+  const derivedImagePath = baseNecklace && isBandana(baseNecklace)
+    ? getBandanaVariantImagePath(baseNecklace.imagePath, selectedHoleCount)
+    : baseNecklace?.imagePath;
+
+  const derivedAttachmentPoints = baseNecklace && isBandana(baseNecklace)
+    ? computeAttachmentPointsForCount(baseNecklace.attachmentPoints, selectedHoleCount)
+    : baseNecklace?.attachmentPoints || [];
+  
   // Compute occupation status from placed charms without mutating original data
   const selectedNecklace = baseNecklace ? {
     ...baseNecklace,
-    attachmentPoints: baseNecklace.attachmentPoints.map(point => ({
+    imagePath: derivedImagePath || baseNecklace.imagePath,
+    attachmentPoints: derivedAttachmentPoints.map(point => ({
       ...point,
       isOccupied: placedCharms.some(charm => charm.attachmentPointId === point.id)
     }))
@@ -253,6 +315,19 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
     
   }, [selectedNecklace]);
 
+  // Update hole count with cleanup of placed charms that no longer have valid points (bandanas only)
+  const setSelectedHoleCount = useCallback((count: 1 | 3 | 5 | 7) => {
+    setSelectedHoleCountState(count);
+    const current = necklaces.find(n => n.id === selectedNecklaceId) || null;
+    if (!current || !isBandana(current)) return;
+
+    // Compute allowed points for new count
+    const allowedPoints = computeAttachmentPointsForCount(current.attachmentPoints, count);
+    const allowedIds = new Set(allowedPoints.map(p => p.id));
+    // Filter placed charms to only those on allowed ids
+    setPlacedCharms(prev => prev.filter(c => allowedIds.has(c.attachmentPointId)));
+  }, [selectedNecklaceId]);
+
 
   // Context value
   const value: CustomizerContextState = {
@@ -260,6 +335,7 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
     charms,
     selectedNecklace,
     placedCharms,
+    selectedHoleCount,
     giftWrap,
     charmOrderTrust,
     selectNecklace,
@@ -269,7 +345,8 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
     swapCharms,
     clearAllCharms,
     setGiftWrap,
-    setCharmOrderTrust
+    setCharmOrderTrust,
+    setSelectedHoleCount
   };
 
   return (

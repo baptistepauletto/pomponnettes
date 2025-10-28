@@ -3,7 +3,7 @@ import { useCustomizer } from '../context/CustomizerContext';
 import '../styles/NecklaceSelector.scss';
 
 const NecklaceSelector: React.FC = () => {
-  const { necklaces, selectedNecklace, selectNecklace } = useCustomizer();
+  const { necklaces, selectedNecklace, selectNecklace, selectedHoleCount, setSelectedHoleCount } = useCustomizer();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(false);
@@ -71,6 +71,25 @@ const NecklaceSelector: React.FC = () => {
           →
         </div>
       </div>
+
+      {/* Step 2 - hole count selection (bandanas only) */}
+      {selectedNecklace && selectedNecklace.name.toLowerCase().includes('bandana') && (
+        <div className="hole-count-selector">
+          <h3>ÉTAPE 2: CHOISIS TON NOMBRE DE CHARMS</h3>
+          <div className="hole-count-buttons">
+            {[7, 5, 3, 1].map((count) => (
+              <button
+                key={count}
+                type="button"
+                className={`hole-count-button ${selectedHoleCount === count ? 'selected' : ''}`}
+                onClick={() => setSelectedHoleCount(count as 1 | 3 | 5 | 7)}
+              >
+                {count}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
