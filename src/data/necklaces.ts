@@ -105,13 +105,13 @@ export const necklaces: Necklace[] = [
     displayScale: .8,
     sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
     attachmentPoints: [
-      { id: 'bb-point0', position: { x: 25.5, y: 65.4 }, isOccupied: false },
+      { id: 'bb-point0', position: { x: 25, y: 65.45 }, isOccupied: false },
       { id: 'bb-point1', position: { x: 34, y: 73 }, isOccupied: false },
       { id: 'bb-point2', position: { x: 42.5, y: 80.6}, isOccupied: false },
       { id: 'bb-point3', position: { x: 52.25, y: 87.8 }, isOccupied: false },
       { id: 'bb-point4', position: { x: 60.15, y: 80.3}, isOccupied: false },
       { id: 'bb-point5', position: { x: 68.1, y: 72.9 }, isOccupied: false },
-      { id: 'bb-point6', position: { x: 76.05, y: 65.5 }, isOccupied: false }
+      { id: 'bb-point6', position: { x: 76.3, y: 65.9 }, isOccupied: false }
     ]
   },
   {
@@ -124,13 +124,13 @@ export const necklaces: Necklace[] = [
     displayScale: .8,
     sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
     attachmentPoints: [
-      { id: 'bn-point0', position: { x: 24.3, y: 65.0 }, isOccupied: false },
+      { id: 'bn-point0', position: { x: 24.3, y: 64.7 }, isOccupied: false },
       { id: 'bn-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
       { id: 'bn-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
       { id: 'bn-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
       { id: 'bn-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
       { id: 'bn-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false },
-      { id: 'bn-point6', position: { x: 76.4, y: 65.5 }, isOccupied: false }
+      { id: 'bn-point6', position: { x: 76.2, y: 65.3 }, isOccupied: false }
     ]
   },
   {
@@ -143,13 +143,13 @@ export const necklaces: Necklace[] = [
     displayScale: .8,
     sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
     attachmentPoints: [
-      { id: 'bd-blanc-point0', position: { x: 23.2, y: 66.6 }, isOccupied: false },
+      { id: 'bd-blanc-point0', position: { x: 23.2, y: 67 }, isOccupied: false },
       { id: 'bd-blanc-point1', position: { x: 32.1, y: 73.8 }, isOccupied: false },
       { id: 'bd-blanc-point2', position: { x: 41, y: 81}, isOccupied: false },
       { id: 'bd-blanc-point3', position: { x: 50.9, y: 87.4 }, isOccupied: false },
       { id: 'bd-blanc-point4', position: { x: 59, y: 80.1}, isOccupied: false },
-      { id: 'bd-blanc-point5', position: { x: 67.1, y: 72.8 }, isOccupied: false },
-      { id: 'bd-blanc-point6', position: { x: 75.2, y: 65.5 }, isOccupied: false }
+      { id: 'bd-blanc-point5', position: { x: 67, y: 72.7 }, isOccupied: false },
+      { id: 'bd-blanc-point6', position: { x: 75, y: 65.5 }, isOccupied: false }
     ]
   },
   {
@@ -162,13 +162,13 @@ export const necklaces: Necklace[] = [
     displayScale: .8,
     sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
     attachmentPoints: [
-      { id: 'bd-bleu-electrique-point0', position: { x: 21.5, y: 65.5 }, isOccupied: false },
+      { id: 'bd-bleu-electrique-point0', position: { x: 21, y: 64.55 }, isOccupied: false },
       { id: 'bd-bleu-electrique-point1', position: { x: 31, y: 72.9 }, isOccupied: false },
       { id: 'bd-bleu-electrique-point2', position: { x: 40.5, y: 80.3}, isOccupied: false },
       { id: 'bd-bleu-electrique-point3', position: { x: 49.8, y: 87.6 }, isOccupied: false },
       { id: 'bd-bleu-electrique-point4', position: { x: 58.5, y: 80.4}, isOccupied: false },
       { id: 'bd-bleu-electrique-point5', position: { x: 67.1, y: 73.1 }, isOccupied: false },
-      { id: 'bd-bleu-electrique-point6', position: { x: 75.7, y: 65.8 }, isOccupied: false }
+      { id: 'bd-bleu-electrique-point6', position: { x: 76.5, y: 65 }, isOccupied: false }
     ]
   },
   {
@@ -181,13 +181,13 @@ export const necklaces: Necklace[] = [
     displayScale: .8,
     sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
     attachmentPoints: [
-      { id: 'bd-bleu-jean-point0', position: { x: 24.35, y: 65.7 }, isOccupied: false },
+      { id: 'bd-bleu-jean-point0', position: { x: 23.7, y: 65.3 }, isOccupied: false },
       { id: 'bd-bleu-jean-point1', position: { x: 33.1, y: 73.2 }, isOccupied: false },
       { id: 'bd-bleu-jean-point2', position: { x: 41.85, y: 80.7}, isOccupied: false },
       { id: 'bd-bleu-jean-point3', position: { x: 50.6, y: 87.6 }, isOccupied: false },
       { id: 'bd-bleu-jean-point4', position: { x: 58.9, y: 79.8}, isOccupied: false },
       { id: 'bd-bleu-jean-point5', position: { x: 66.3, y: 72.6 }, isOccupied: false },
-      { id: 'bd-bleu-jean-point6', position: { x: 73.7, y: 65.4 }, isOccupied: false }
+      { id: 'bd-bleu-jean-point6', position: { x: 74.35, y: 65.5 }, isOccupied: false }
     ]
   },
   {
@@ -200,13 +200,13 @@ export const necklaces: Necklace[] = [
     displayScale: .8,
     sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
     attachmentPoints: [
-      { id: 'bd-bleu-marine-point0', position: { x: 24.3, y: 65.0 }, isOccupied: false },
-      { id: 'bd-bleu-marine-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
-      { id: 'bd-bleu-marine-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
-      { id: 'bd-bleu-marine-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
-      { id: 'bd-bleu-marine-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
-      { id: 'bd-bleu-marine-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false },
-      { id: 'bd-bleu-marine-point6', position: { x: 76.4, y: 65.5 }, isOccupied: false }
+      { id: 'bd-bleu-marine-point0', position: { x: 23.5, y: 65.7 }, isOccupied: false },
+      { id: 'bd-bleu-marine-point1', position: { x: 33.55, y: 73.4 }, isOccupied: false },
+      { id: 'bd-bleu-marine-point2', position: { x: 42.6, y: 81.1}, isOccupied: false },
+      { id: 'bd-bleu-marine-point3', position: { x: 51, y: 88.1 }, isOccupied: false },
+      { id: 'bd-bleu-marine-point4', position: { x: 60.5, y: 80.7}, isOccupied: false },
+      { id: 'bd-bleu-marine-point5', position: { x: 68.5, y: 73.3 }, isOccupied: false },
+      { id: 'bd-bleu-marine-point6', position: { x: 78, y: 65.5 }, isOccupied: false }
     ]
   },
   {
@@ -219,13 +219,13 @@ export const necklaces: Necklace[] = [
     displayScale: .8,
     sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
     attachmentPoints: [
-      { id: 'bd-gris-clair-point0', position: { x: 24.3, y: 65.0 }, isOccupied: false },
-      { id: 'bd-gris-clair-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
-      { id: 'bd-gris-clair-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
-      { id: 'bd-gris-clair-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
-      { id: 'bd-gris-clair-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
-      { id: 'bd-gris-clair-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false },
-      { id: 'bd-gris-clair-point6', position: { x: 76.4, y: 65.5 }, isOccupied: false }
+      { id: 'bd-gris-clair-point0', position: { x: 24.3, y: 64.6 }, isOccupied: false },
+      { id: 'bd-gris-clair-point1', position: { x: 32.6, y: 72 }, isOccupied: false },
+      { id: 'bd-gris-clair-point2', position: { x: 40.8, y: 79.8}, isOccupied: false },
+      { id: 'bd-gris-clair-point3', position: { x: 48.8, y: 87.2 }, isOccupied: false },
+      { id: 'bd-gris-clair-point4', position: { x: 57.5, y: 79.8}, isOccupied: false },
+      { id: 'bd-gris-clair-point5', position: { x: 64.9, y: 72.2 }, isOccupied: false },
+      { id: 'bd-gris-clair-point6', position: { x: 72.9, y: 64.7 }, isOccupied: false }
     ]
   },
   {
@@ -238,13 +238,13 @@ export const necklaces: Necklace[] = [
     displayScale: .8,
     sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
     attachmentPoints: [
-      { id: 'bd-gris-fonce-point0', position: { x: 24.3, y: 65.0 }, isOccupied: false },
-      { id: 'bd-gris-fonce-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
-      { id: 'bd-gris-fonce-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
-      { id: 'bd-gris-fonce-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
-      { id: 'bd-gris-fonce-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
-      { id: 'bd-gris-fonce-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false },
-      { id: 'bd-gris-fonce-point6', position: { x: 76.4, y: 65.5 }, isOccupied: false }
+      { id: 'bd-gris-fonce-point0', position: { x: 25.2, y: 66.15 }, isOccupied: false },
+      { id: 'bd-gris-fonce-point1', position: { x: 33.65, y: 73.7 }, isOccupied: false },
+      { id: 'bd-gris-fonce-point2', position: { x: 42.5, y: 81.1}, isOccupied: false },
+      { id: 'bd-gris-fonce-point3', position: { x: 51.2, y: 88.3 }, isOccupied: false },
+      { id: 'bd-gris-fonce-point4', position: { x: 60.4, y: 80.6}, isOccupied: false },
+      { id: 'bd-gris-fonce-point5', position: { x: 68.1, y: 73.7 }, isOccupied: false },
+      { id: 'bd-gris-fonce-point6', position: { x: 76.65, y: 66.6 }, isOccupied: false }
     ]
   },
   {
@@ -257,13 +257,13 @@ export const necklaces: Necklace[] = [
     displayScale: .8,
     sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
     attachmentPoints: [
-      { id: 'bd-kaki-motif-blanc-point0', position: { x: 24.3, y: 65.0 }, isOccupied: false },
-      { id: 'bd-kaki-motif-blanc-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
-      { id: 'bd-kaki-motif-blanc-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
-      { id: 'bd-kaki-motif-blanc-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
-      { id: 'bd-kaki-motif-blanc-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
-      { id: 'bd-kaki-motif-blanc-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false },
-      { id: 'bd-kaki-motif-blanc-point6', position: { x: 76.4, y: 65.5 }, isOccupied: false }
+      { id: 'bd-kaki-motif-blanc-point0', position: { x: 24.35, y: 66.1 }, isOccupied: false },
+      { id: 'bd-kaki-motif-blanc-point1', position: { x: 33.25, y: 73.7 }, isOccupied: false },
+      { id: 'bd-kaki-motif-blanc-point2', position: { x: 42.1, y: 81}, isOccupied: false },
+      { id: 'bd-kaki-motif-blanc-point3', position: { x: 51.25, y: 87.7 }, isOccupied: false },
+      { id: 'bd-kaki-motif-blanc-point4', position: { x: 60.2, y: 80.4}, isOccupied: false },
+      { id: 'bd-kaki-motif-blanc-point5', position: { x: 68.3, y: 73.1 }, isOccupied: false },
+      { id: 'bd-kaki-motif-blanc-point6', position: { x: 77.3, y: 66.3}, isOccupied: false }
     ]
   },
   {
@@ -276,13 +276,13 @@ export const necklaces: Necklace[] = [
     displayScale: .8,
     sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
     attachmentPoints: [
-      { id: 'bd-kaki-motif-noir-point0', position: { x: 24.3, y: 65.0 }, isOccupied: false },
-      { id: 'bd-kaki-motif-noir-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
-      { id: 'bd-kaki-motif-noir-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
-      { id: 'bd-kaki-motif-noir-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
-      { id: 'bd-kaki-motif-noir-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
-      { id: 'bd-kaki-motif-noir-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false },
-      { id: 'bd-kaki-motif-noir-point6', position: { x: 76.4, y: 65.5 }, isOccupied: false }
+      { id: 'bd-kaki-motif-noir-point0', position: { x: 25.9, y: 64.9 }, isOccupied: false },
+      { id: 'bd-kaki-motif-noir-point1', position: { x: 34.4, y: 72.8 }, isOccupied: false },
+      { id: 'bd-kaki-motif-noir-point2', position: { x: 42.65, y: 80.6}, isOccupied: false },
+      { id: 'bd-kaki-motif-noir-point3', position: { x: 51, y: 87.8 }, isOccupied: false },
+      { id: 'bd-kaki-motif-noir-point4', position: { x: 59.9, y: 80.4}, isOccupied: false },
+      { id: 'bd-kaki-motif-noir-point5', position: { x: 68, y: 73.6 }, isOccupied: false },
+      { id: 'bd-kaki-motif-noir-point6', position: { x: 76.05, y: 66.75 }, isOccupied: false }
     ]
   },
   {
@@ -295,13 +295,13 @@ export const necklaces: Necklace[] = [
     displayScale: .8,
     sizeDescription: 'Taille du bandana : 60 cm x 60 cm', 
     attachmentPoints: [
-      { id: 'bd-marron-point0', position: { x: 24.3, y: 65.0 }, isOccupied: false },
-      { id: 'bd-marron-point1', position: { x: 33.1, y: 72.8 }, isOccupied: false },
-      { id: 'bd-marron-point2', position: { x: 41.9, y: 80.6}, isOccupied: false },
-      { id: 'bd-marron-point3', position: { x: 51.2, y: 87.8 }, isOccupied: false },
-      { id: 'bd-marron-point4', position: { x: 59.2, y: 80.7}, isOccupied: false },
-      { id: 'bd-marron-point5', position: { x: 67.8, y: 73.1 }, isOccupied: false },
-      { id: 'bd-marron-point6', position: { x: 76.4, y: 65.5 }, isOccupied: false }
+      { id: 'bd-marron-point0', position: { x: 21.3, y: 65.6 }, isOccupied: false },
+      { id: 'bd-marron-point1', position: { x: 30.2, y: 72.8 }, isOccupied: false },
+      { id: 'bd-marron-point2', position: { x: 39.7, y: 80.7}, isOccupied: false },
+      { id: 'bd-marron-point3', position: { x: 48.6, y: 87.8 }, isOccupied: false },
+      { id: 'bd-marron-point4', position: { x: 57.7, y: 80.4}, isOccupied: false },
+      { id: 'bd-marron-point5', position: { x: 65.7, y: 73.5 }, isOccupied: false },
+      { id: 'bd-marron-point6', position: { x: 74.4, y: 65.8 }, isOccupied: false }
     ]
   },
   {
