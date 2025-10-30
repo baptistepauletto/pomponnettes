@@ -36,7 +36,7 @@ const CharmOption: React.FC<{ id: string; name: string; imagePath: string; sizeM
       style={{ opacity: isDragging ? 0.4 : 1 }}
       onClick={handleTap}
     >
-      <img src={imagePath} alt={name} />
+      <img src={imagePath} alt={name} loading="lazy" decoding="async" />
       <div className="size-indicator">
         {sizeMark}
       </div>

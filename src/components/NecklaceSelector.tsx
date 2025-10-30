@@ -58,7 +58,7 @@ const NecklaceSelector: React.FC = () => {
               className={`necklace-option ${selectedNecklace?.id === necklace.id ? 'selected' : ''}`}
               onClick={() => selectNecklace(necklace.id)}
             >
-              <img src={necklace.imagePath} alt={necklace.name} />
+              <img src={necklace.imagePath} alt={necklace.name} loading="lazy" decoding="async" />
               <div className="necklace-info">
                 <p className="necklace-name">{necklace.name}</p>
               </div>

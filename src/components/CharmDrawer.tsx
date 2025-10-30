@@ -283,7 +283,7 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
                 className={`charm-item ${charm.id === selectedCharmId ? 'selected' : ''} ${isCharmPlaced(charm.id) ? 'placed' : ''}`}
                 onClick={() => handleCharmSelect(charm.id)}
               >
-                <img src={charm.imagePath} alt={charm.name} />
+                <img src={charm.imagePath} alt={charm.name} loading="lazy" decoding="async" />
                 {isCharmPlaced(charm.id) && <div className="placed-badge"></div>}
                 <div className="size-indicator">
                   {charm.sizeMark}
