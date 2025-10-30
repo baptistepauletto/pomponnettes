@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useCustomizer } from '../context/CustomizerContext';
 import '../styles/NecklaceSelector.scss';
+import { toThumbWebpUrl } from '../utils/images';
 
 const NecklaceSelector: React.FC = () => {
   const { necklaces, selectedNecklace, selectNecklace, selectedHoleCount, setSelectedHoleCount } = useCustomizer();
@@ -58,7 +59,13 @@ const NecklaceSelector: React.FC = () => {
               className={`necklace-option ${selectedNecklace?.id === necklace.id ? 'selected' : ''}`}
               onClick={() => selectNecklace(necklace.id)}
             >
-              <img src={necklace.imagePath} alt={necklace.name} loading="lazy" decoding="async" />
+              <img 
+                src={toThumbWebpUrl(necklace.imagePath)} 
+                alt={necklace.name} 
+                loading="lazy" 
+                decoding="async"
+                onError={(e) => { e.currentTarget.src = necklace.imagePath; }}
+              />
               <div className="necklace-info">
                 <p className="necklace-name">{necklace.name}</p>
               </div>

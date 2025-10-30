@@ -3,6 +3,7 @@ import { useCustomizer } from '../context/CustomizerContext';
 import { useDraggableCharm } from '../hooks/useDragAndDrop';
 import { useTapToPlace, isTouchDevice } from '../hooks/useTapToPlace';
 import '../styles/CharmSelector.scss';
+import { toThumbWebpUrl } from '../utils/images';
 
 const CharmOption: React.FC<{ id: string; name: string; imagePath: string; sizeMark: string }> = ({
   id,
@@ -36,7 +37,13 @@ const CharmOption: React.FC<{ id: string; name: string; imagePath: string; sizeM
       style={{ opacity: isDragging ? 0.4 : 1 }}
       onClick={handleTap}
     >
-      <img src={imagePath} alt={name} loading="lazy" decoding="async" />
+      <img 
+        src={toThumbWebpUrl(imagePath)} 
+        alt={name} 
+        loading="lazy" 
+        decoding="async"
+        onError={(e) => { e.currentTarget.src = imagePath; }}
+      />
       <div className="size-indicator">
         {sizeMark}
       </div>

@@ -411,17 +411,23 @@ const NecklaceDisplay: React.FC = () => {
         ref={necklaceContainerRef}
         className={`necklace-container ${showGrid ? 'with-grid' : ''}`}
       >
-        <img
-          src={selectedNecklace.imagePath}
-          alt={selectedNecklace.name}
-          className="necklace-image"
-          style={{
-            transform: selectedNecklace.displayScale 
-              ? `scale(${selectedNecklace.displayScale})` 
-              : undefined
-          }}
-          onClick={handleNecklaceTap}
-        />
+        <picture>
+          <source 
+            type="image/webp" 
+            srcSet={selectedNecklace.imagePath.replace(/\.(png|jpe?g|webp)$/i, '.webp')} 
+          />
+          <img
+            src={selectedNecklace.imagePath}
+            alt={selectedNecklace.name}
+            className="necklace-image"
+            style={{
+              transform: selectedNecklace.displayScale 
+                ? `scale(${selectedNecklace.displayScale})` 
+                : undefined
+            }}
+            onClick={handleNecklaceTap}
+          />
+        </picture>
 
         {showGrid && <PositionGrid />}
 

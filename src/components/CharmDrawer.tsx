@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useCustomizer } from '../context/CustomizerContext';
 import '../styles/CharmDrawer.scss';
+import { toThumbWebpUrl } from '../utils/images';
 import { useTapToPlace } from '../hooks/useTapToPlace';
 
 interface CharmDrawerProps {
@@ -283,7 +284,13 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
                 className={`charm-item ${charm.id === selectedCharmId ? 'selected' : ''} ${isCharmPlaced(charm.id) ? 'placed' : ''}`}
                 onClick={() => handleCharmSelect(charm.id)}
               >
-                <img src={charm.imagePath} alt={charm.name} loading="lazy" decoding="async" />
+                <img 
+                  src={toThumbWebpUrl(charm.imagePath)} 
+                  alt={charm.name} 
+                  loading="lazy" 
+                  decoding="async"
+                  onError={(e) => { e.currentTarget.src = charm.imagePath; }}
+                />
                 {isCharmPlaced(charm.id) && <div className="placed-badge"></div>}
                 <div className="size-indicator">
                   {charm.sizeMark}
