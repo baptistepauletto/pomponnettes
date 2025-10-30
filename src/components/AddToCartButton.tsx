@@ -4,46 +4,26 @@ import { addToCart } from '../utils/woocommerce';
 import '../styles/AddToCartButton.scss';
 
 const AddToCartButton: React.FC = () => {
-  const { selectedNecklace, placedCharms } = useCustomizer();
+  const { selectedNecklace, placedCharms, giftWrap, charmOrderTrust } = useCustomizer();
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<{text: string, isError: boolean} | null>(null);
   const [quantity, setQuantity] = useState(1);
 
   const handleAddToCart = async () => {
-    if (!selectedNecklace) {
-      setMessage({
-        text: "Please select a necklace first",
-        isError: true
-      });
-      return;
-    }
+    if (!selectedNecklace) return;
 
-    if (placedCharms.length === 0) {
-      setMessage({
-        text: "Please add at least one charm to your necklace",
-        isError: true
-      });
-      return;
-    }
 
     setLoading(true);
-    setMessage(null);
+    
 
     try {
-      const result = await addToCart(
+      await addToCart(
         selectedNecklace,
-        placedCharms
+        placedCharms,
+        giftWrap,
+        charmOrderTrust
       );
-
-      setMessage({
-        text: result.message,
-        isError: !result.success
-      });
     } catch (error) {
-      setMessage({
-        text: "An unexpected error occurred. Please try again.",
-        isError: true
-      });
+      // swallow errors (no UI message requested)
     } finally {
       setLoading(false);
     }
@@ -81,7 +61,7 @@ const AddToCartButton: React.FC = () => {
         <button 
           className="add-to-cart-button"
           onClick={handleAddToCart}
-          disabled={loading || !selectedNecklace || placedCharms.length === 0}
+          disabled={loading || !selectedNecklace}
         >
           {loading ? (
             <span className="loading-spinner"></span>
@@ -91,11 +71,7 @@ const AddToCartButton: React.FC = () => {
         </button>
       </div>
       
-      {message && (
-        <div className={`cart-message ${message.isError ? 'error' : 'success'}`}>
-          {message.text}
-        </div>
-      )}
+      
     </div>
   );
 };

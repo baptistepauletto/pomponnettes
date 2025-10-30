@@ -75,14 +75,13 @@ const formatCustomizerData = (necklace: Necklace, placedCharms: PlacedCharm[]) =
 export const addToCart = async (
   necklace: Necklace,
   placedCharms: PlacedCharm[],
+  giftWrap: boolean = false,
+  charmOrderTrust: boolean = false
 ): Promise<{ success: boolean; message: string }> => {
   if (!necklace) {
     return { success: false, message: "No necklace selected" };
   }
   
-  if (placedCharms.length === 0) {
-    return { success: false, message: "Please add at least one charm to your necklace" };
-  }
 
   // Check if jQuery is available (required for WooCommerce AJAX)
   if (typeof jQuery === 'undefined') {
@@ -95,8 +94,8 @@ export const addToCart = async (
   
   // Create the data object for the request
   const data: Record<string, any> = {
-    product_id: necklace.id,
-    'add-to-cart': necklace.id,
+    product_id: necklace.woocommerceId,
+    'add-to-cart': necklace.woocommerceId,
     quantity: 1,
     // Flag to identify that this request came from the Pomponnettes customizer
     pomponnettes_customizer_used: 'true'
@@ -111,6 +110,10 @@ export const addToCart = async (
   Object.entries(attributeData).forEach(([name, value]) => {
     data[name] = value;
   });
+  
+  // Add cart options
+  data['emballage-cadeau'] = giftWrap ? 'oui' : 'non';
+  data['confiance-charms'] = charmOrderTrust ? 'oui' : 'non';
   
   // Use jQuery's AJAX method
   return new Promise((resolve) => {

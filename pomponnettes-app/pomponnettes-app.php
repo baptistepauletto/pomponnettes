@@ -8,22 +8,28 @@ Author: Baptiste Pauletto
 
 // Register scripts and styles
 function pomponnettes_enqueue_scripts() {
+    // Only load on pages containing the shortcode
+    if (is_admin()) { return; }
+    global $post;
+    if (!$post || !isset($post->post_content) || !has_shortcode($post->post_content, 'pomponnettes_app')) {
+        return;
+    }
     // Get the plugin directory URL
     $plugin_url = plugin_dir_url( __FILE__ );
     
-    // Enqueue main CSS file
+    // Enqueue Google Fonts used by the app
     wp_enqueue_style(
-        'pomponnettes-css',
-        $plugin_url . 'assets/index.css',
+        'pomponnettes-fonts',
+        'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Jost:wght@300..700&display=swap',
         array(),
-        '1.0.0'
+        null
     );
     
-    // Enqueue WordPress-specific overrides (load after main CSS)
+    // Enqueue WordPress-specific overrides (scoped, minimal)
     wp_enqueue_style(
         'pomponnettes-wp-css',
         $plugin_url . 'wordpress-styles.css',
-        array('pomponnettes-css'),
+        array('pomponnettes-fonts'),
         '1.0.0'
     );
     
@@ -37,6 +43,10 @@ function pomponnettes_enqueue_scripts() {
         '1.0.0',
         true
     );
+    // Load as ES module so modern build (import.meta, dynamic imports) works
+    if (function_exists('wp_script_add_data')) {
+        wp_script_add_data('pomponnettes-js', 'type', 'module');
+    }
     
     // Pass the plugin URL to JavaScript
     wp_localize_script(
@@ -51,15 +61,24 @@ function pomponnettes_enqueue_scripts() {
 
 // Register shortcode
 function pomponnettes_app_shortcode() {
-    // Enqueue scripts and styles
-    pomponnettes_enqueue_scripts();
-    
-    // Return the container div where React will mount
+    // Return the host element; the React app mounts into a Shadow DOM here
     return '<div id="root" class="pomponnettes-app-container"></div>';
 }
 
 // Add shortcode
 add_shortcode('pomponnettes_app', 'pomponnettes_app_shortcode');
+
+// Ensure assets load after the theme styles/scripts
+add_action('wp_enqueue_scripts', 'pomponnettes_enqueue_scripts', 100);
+
+// Force our JS to load as an ES module (needed for import.meta)
+add_filter('script_loader_tag', function($tag, $handle, $src) {
+    if ($handle === 'pomponnettes-js') {
+        $id_attr = ' id="' . esc_attr($handle) . '-js"';
+        return '<script type="module" src="' . esc_url($src) . '"' . $id_attr . '></script>';
+    }
+    return $tag;
+}, 10, 3);
 
 /**
  * =====================================================================
@@ -99,6 +118,15 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             $cart_item_data['charm_data'] = $charm_data;
         }
         
+        // Store cart options
+        if (isset($_POST['emballage-cadeau'])) {
+            $cart_item_data['gift_wrap'] = sanitize_text_field($_POST['emballage-cadeau']);
+        }
+        
+        if (isset($_POST['confiance-charms'])) {
+            $cart_item_data['charm_order_trust'] = sanitize_text_field($_POST['confiance-charms']);
+        }
+        
         return $cart_item_data;
     }
     add_filter('woocommerce_add_cart_item_data', 'pomponnettes_add_cart_item_data', 10, 3);
@@ -113,6 +141,14 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         
         if (isset($values['charm_data'])) {
             $item->add_meta_data('_charm_data', $values['charm_data'], true);
+        }
+        
+        if (isset($values['gift_wrap'])) {
+            $item->add_meta_data('_gift_wrap', $values['gift_wrap'], true);
+        }
+        
+        if (isset($values['charm_order_trust'])) {
+            $item->add_meta_data('_charm_order_trust', $values['charm_order_trust'], true);
         }
     }
     add_action('woocommerce_checkout_create_order_line_item', 'pomponnettes_checkout_create_order_line_item', 10, 4);

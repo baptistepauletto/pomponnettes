@@ -1,0 +1,81 @@
+.cart-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0;
+  padding-left: 5px;
+  background: transparent;
+}
+
+.cart-option {
+  display: flex;
+  align-items: flex-start;
+  padding: 0;
+}
+
+.cart-option-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1.3;
+  color: #666;
+  user-select: none;
+  text-align: left;
+  width: 100%;
+  
+  &:hover {
+    color: #333;
+  }
+}
+
+.cart-option-checkbox {
+  margin: 0;
+  margin-top: 1px; // Align with first line of text
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  cursor: pointer;
+  accent-color: #E1E1E1; // Light gray theme for checked state
+  
+  &:focus {
+    outline: 1px solid #E1E1E1;
+    outline-offset: 1px;
+  }
+}
+
+.cart-option-text {
+  flex: 1;
+  word-wrap: break-word;
+  text-align: left;
+}
+
+// Mobile specific styles
+@media (max-width: 768px) {
+  .cart-options {
+    margin: 12px 0;
+    gap: 6px;
+  }
+  
+  .cart-option-label {
+    font-size: 12px;
+    line-height: 1.2;
+  }
+  
+  .cart-option-checkbox {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+// Desktop specific styles
+@media (min-width: 769px) {
+  .cart-options {
+    margin: 16px 0 8px 0; // Less bottom margin on desktop since it's above the button
+  }
+  
+  .cart-option-label {
+    font-size: 13px;
+  }
+}

@@ -27,6 +27,7 @@ export interface Charm {
 // Necklace type
 export interface Necklace {
   id: number;
+  woocommerceId: number;
   name: string;
   imagePath: string;
   attachmentPoints: AttachmentPoint[];
