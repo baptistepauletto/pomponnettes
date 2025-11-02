@@ -1,74 +1,29 @@
-/*
-  WordPress page-level styles for the Pomponnettes app
-  - This file styles ONLY the host page/wrappers around the app.
-  - It does NOT affect anything inside the Shadow DOM app.
-  - Safe to tweak layout, spacing, backgrounds around the app container.
-*/
 
 /* Match the app background to blend with the page */
 .pomponnettes-app-container {
   background-color: #E4D6D6;
 }
 
-/* Suggested starting layout (uncomment/tweak as needed) */
-/*
-.pomponnettes-app-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 16px;
+/* Mobile-only: keep theme spacing, just blend the background under the app */
+@media (max-width: 480px) {
+  html:has(.pomponnettes-app-container) .c-post__inner {
+    background-color: #E4D6D6 !important;
+  }
 }
 
-html:has(.pomponnettes-app-container) .entry-content {
-  padding: 0; 
-}
-*/
-
-
-
-/*
-  Ensure the WordPress page wrappers around the app use the same background
-  and allow the app to span the full page width. Scoped so it only applies
-  on pages where the app exists.
-*/
-html:has(.pomponnettes-app-container) body,
-html:has(.pomponnettes-app-container) .site,
-html:has(.pomponnettes-app-container) .l-section__content,
-html:has(.pomponnettes-app-container) .c-post__container,
-html:has(.pomponnettes-app-container) .c-post__wrap,
-html:has(.pomponnettes-app-container) .c-post__inner,
-html:has(.pomponnettes-app-container) .c-post__content,
-html:has(.pomponnettes-app-container) .entry-content {
-  background-color: #E4D6D6 !important;
-}
-
-/* Remove theme padding/gutters so the app blends edge-to-edge */
-html:has(.pomponnettes-app-container) .l-section__content,
-html:has(.pomponnettes-app-container) .c-post__inner,
-html:has(.pomponnettes-app-container) .c-post__content,
-html:has(.pomponnettes-app-container) .entry-content {
-  padding: 0 !important;
-}
-
-/* Let the app area be full width instead of theme-constrained container */
-html:has(.pomponnettes-app-container) .c-post__container,
-html:has(.pomponnettes-app-container) .l-section__content,
-html:has(.pomponnettes-app-container) .c-post__wrap,
-html:has(.pomponnettes-app-container) .c-post__inner,
-html:has(.pomponnettes-app-container) .c-post__content,
-html:has(.pomponnettes-app-container) .entry-content {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 auto !important;
-  box-shadow: none !important;
-}
-
-/* Ensure the app container itself stretches fully */
-.pomponnettes-app-container {
-  width: 100%;
-  max-width: 100%;
-}
-
-/* Optional: if your theme adds extra row spacing after content blocks */
-html:has(.pomponnettes-app-container) .c-post__row-2 {
-  background: #E4D6D6 !important;
+/* Desktop-only: allow the page to use full width by removing the fixed max-width */
+@media (min-width: 481px) {
+  html:has(.pomponnettes-app-container) .c-post--page {
+    max-width: none !important;
+    width: 100% !important;
+  }
+  /* Remove the theme content max width */
+  html:has(.pomponnettes-app-container) .c-post__content {
+    max-width: none !important;
+    width: 100% !important;
+  }
+  /* Remove inner padding around the app wrapper */
+  html:has(.pomponnettes-app-container) .c-post__inner {
+    padding: 0 !important;
+  }
 }
