@@ -134,7 +134,7 @@ const NecklaceSelector: React.FC = () => {
       {/* Step 2 - hole count selection (bandanas only) */}
       {selectedNecklace && selectedNecklace.name.toLowerCase().includes('bandana') && (
         <div className="hole-count-selector">
-          <h3>ÉTAPE 2: SÉLECTIONNE TON NOMBRE DE CHARMS</h3>
+          <h3>ÉTAPE 2: CHOISIS TON NOMBRE DE CHARMS</h3>
           <div className="hole-count-buttons">
             {[1, 3, 5, 7].map((count) => (
               <button
