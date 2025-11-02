@@ -34,23 +34,25 @@
       padding: 0.5rem 0;
       margin-bottom: 1.5rem;
       gap: 0.5rem;
+      /* Match the charms vertical scrollbar look */
       scrollbar-width: thin;
+      scrollbar-color: #8B3E3E rgba(0, 0, 0, 0.05);
       
       &::-webkit-scrollbar {
-        height: 4px;
+        height: 6px;
       }
       
       &::-webkit-scrollbar-track {
         background: rgba(0, 0, 0, 0.05);
-        border-radius: 2px;
+        border-radius: 3px;
       }
       
       &::-webkit-scrollbar-thumb {
-        background: rgba(162, 78, 78, 0.3);
-        border-radius: 2px;
+        background: linear-gradient(135deg, #A24E4E, #8B3E3E);
+        border-radius: 3px;
         
         &:hover {
-          background: rgba(162, 78, 78, 0.5);
+          background: linear-gradient(135deg, #913F3F, #7A3535);
         }
       }
       

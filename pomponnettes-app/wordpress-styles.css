@@ -4,6 +4,11 @@
   background-color: #E4D6D6;
 }
 
+  /* Remove extra bottom margin utility */
+  html:has(.pomponnettes-app-container) .l-section--bottom-margin {
+    margin-bottom: 0 !important;
+  }
+
 /* Mobile-only: keep theme spacing, just blend the background under the app */
 @media (max-width: 480px) {
   html:has(.pomponnettes-app-container) .c-post__inner {
@@ -13,6 +18,13 @@
 
 /* Desktop-only: allow the page to use full width by removing the fixed max-width */
 @media (min-width: 481px) {
+
+  .pomponnettes-app-container {
+    background-color: #E4D6D6;
+    padding: 3rem;
+  }
+  
+  /* Remove the theme page max width */
   html:has(.pomponnettes-app-container) .c-post--page {
     max-width: none !important;
     width: 100% !important;
@@ -25,5 +37,17 @@
   /* Remove inner padding around the app wrapper */
   html:has(.pomponnettes-app-container) .c-post__inner {
     padding: 0 !important;
+  }
+  /* Remove outer vertical margins around the post container */
+  html:has(.pomponnettes-app-container) .c-post__container--page,
+  html:has(.pomponnettes-app-container) .c-post__container--post {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  html:has(.pomponnettes-app-container) .l-section__container, 
+  html:has(.pomponnettes-app-container) .l-section--container {
+    width: 100% !important;
+    max-width: none !important;
   }
 }
