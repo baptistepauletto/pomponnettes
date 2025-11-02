@@ -95,7 +95,7 @@ const CharmSelector: React.FC = () => {
 
   return (
     <div className="charm-selector">
-      <h3>ÉTAPE 2: PLACE TES CHARMS</h3>
+      <h3>ÉTAPE 3: PLACE TES CHARMS</h3>
       
       {/* Category tabs for desktop only */}
       {!isMobile && (

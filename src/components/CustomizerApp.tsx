@@ -72,7 +72,6 @@ const CustomizerApp: React.FC = () => {
                   <div className="left-panel">
                     <ActionButtons />
                     <CharmSelector />
-                    <Description />
                   </div>
                   
                   {/* Center panel - Necklace display */}
@@ -85,6 +84,7 @@ const CustomizerApp: React.FC = () => {
                     <PriceCalculator />
                     <CartOptions />
                     <AddToCartButton />
+                    <Description />
                   </div>
                 </>
               )}
