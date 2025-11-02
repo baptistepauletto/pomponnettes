@@ -26,8 +26,9 @@ const Description: React.FC = () => {
             </p>
             <p>
               <strong>COMPOSITION </strong>
-               <br />Chaîne : Acier inoxydable.
+               <br />Bandana : 100% coton, <strong>Made in USA</strong>.
                <br />Charms : Tous nos charms dorés sont en acier inoxydable. Les charms colorés sont en porcelaine, en résine ou en perle naturelle d’eau douce.
+               <br />Nos bandanas sont faits pour vous, pas pour vos boules de poil à quatre pattes – si vous animal grignote un charm, c’est à vos risques et périls.
             </p>
             <p>
               <strong>FABRICATION ET DÉLAIS</strong>
@@ -35,6 +36,7 @@ const Description: React.FC = () => {
             </p>
             <p>
              <strong>ENTRETIEN</strong>
+              <br />Lavage à la main à froid. Ne pas passer en machine à laver.
               <br />Vos créations sont précieuses protégez-les, certains charms sont plus fragiles que d’autres (les charms colorés en porcelaine par exemple) ils peuvent s’accrocher à vos vêtements. Éviter l’eau et le parfum pour garder votre bijou dans le temps.
             </p>
             <p className="note">

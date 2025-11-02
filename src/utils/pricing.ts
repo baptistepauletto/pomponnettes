@@ -3,7 +3,6 @@ import { Necklace, PlacedCharm } from '../types';
 // Pricing constants
 export const CHARM_PRICE = 7.00; // Each charm costs 7 euros
 export const GIFT_WRAP_PRICE = 1.50; // Gift wrap costs 1.5 euros
-export const FREE_SHIPPING_THRESHOLD = 90.00; // Free shipping over 90€
 
 // Free charm thresholds based on necklace type
 export const FREE_CHARM_THRESHOLDS = {
@@ -119,12 +118,9 @@ export function calculateTotalPrice(necklace: Necklace | null, placedCharms: Pla
     const charmsOriginalPrice = charmCount * CHARM_PRICE;
     const giftWrapPrice = giftWrap ? GIFT_WRAP_PRICE : 0;
     const subtotal = necklacePrice + giftWrapPrice; // No charm cost for bandanas
-    
-    // Calculate shipping
-    const freeShipping = subtotal >= FREE_SHIPPING_THRESHOLD;
-    const shipping = freeShipping ? 0 : 5.90;
-    
-    const total = subtotal + shipping;
+    const shipping = 0;
+    const freeShipping = false;
+    const total = subtotal;
     
     return {
       necklacePrice,
@@ -153,12 +149,9 @@ export function calculateTotalPrice(necklace: Necklace | null, placedCharms: Pla
   const giftWrapPrice = giftWrap ? GIFT_WRAP_PRICE : 0;
   
   const subtotal = necklacePrice + charmsPrice + giftWrapPrice;
-  
-  // Calculate shipping
-  const freeShipping = subtotal >= FREE_SHIPPING_THRESHOLD;
-  const shipping = freeShipping ? 0 : 5.90; // Standard shipping cost
-  
-  const total = subtotal + shipping;
+  const shipping = 0;
+  const freeShipping = false;
+  const total = subtotal;
   const savings = freeCharmsValue;
 
   return {
