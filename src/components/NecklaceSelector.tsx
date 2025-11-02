@@ -8,6 +8,11 @@ const NecklaceSelector: React.FC = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(false);
+  const isDraggingRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollStartLeftRef = useRef(0);
+  const hasDraggedRef = useRef(false);
+  const [dragging, setDragging] = useState(false);
 
   // Check scroll position and update arrow visibility
   const updateArrowVisibility = () => {
@@ -43,21 +48,68 @@ const NecklaceSelector: React.FC = () => {
     };
   }, [necklaces]); // Re-run when necklaces change
 
+  const scrollByAmount = (direction: 'left' | 'right') => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const amount = Math.max(200, Math.floor(container.clientWidth * 0.8));
+    container.scrollBy({ left: direction === 'left' ? -amount : amount, behavior: 'smooth' });
+  };
+
+  // Desktop drag-to-scroll using pointer events (mouse only)
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== 'mouse') return; // Keep native touch scroll on mobile/tablet
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    isDraggingRef.current = true;
+    hasDraggedRef.current = false;
+    setDragging(true);
+    startXRef.current = e.clientX;
+    scrollStartLeftRef.current = container.scrollLeft;
+    try { container.setPointerCapture(e.pointerId); } catch {}
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current) return;
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const dx = e.clientX - startXRef.current;
+    if (Math.abs(dx) > 3) { hasDraggedRef.current = true; }
+    container.scrollLeft = scrollStartLeftRef.current - dx;
+  };
+
+  const endDrag = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current) return;
+    isDraggingRef.current = false;
+    setDragging(false);
+    const container = scrollContainerRef.current;
+    try { container?.releasePointerCapture(e.pointerId); } catch {}
+  };
+
   return (
     <div className="necklace-selector">
       <h3>ÉTAPE 1: CHOISIS TON BANDANA</h3>
       <div className="carousel-container">
         {/* Left arrow - only visible on mobile when can scroll left */}
-        <div className={`scroll-arrow left-arrow ${showLeftArrow ? 'visible' : ''}`}>
+        <div className={`scroll-arrow left-arrow ${showLeftArrow ? 'visible' : ''}`} onClick={() => scrollByAmount('left')}>
           ←
         </div>
         
-        <div className="necklace-options" ref={scrollContainerRef}>
+        <div
+          className={`necklace-options ${dragging ? 'dragging' : ''}`}
+          ref={scrollContainerRef}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={endDrag}
+          onPointerLeave={endDrag}
+        >
           {necklaces.map((necklace) => (
             <div
               key={necklace.id}
               className={`necklace-option ${selectedNecklace?.id === necklace.id ? 'selected' : ''}`}
-              onClick={() => selectNecklace(necklace.id)}
+              onClick={(e) => {
+                if (hasDraggedRef.current) { e.preventDefault(); return; }
+                selectNecklace(necklace.id);
+              }}
             >
               <img 
                 src={toThumbWebpUrl(necklace.imagePath)} 
@@ -74,7 +126,7 @@ const NecklaceSelector: React.FC = () => {
         </div>
         
         {/* Right arrow - only visible on mobile when can scroll right */}
-        <div className={`scroll-arrow right-arrow ${showRightArrow ? 'visible' : ''}`}>
+        <div className={`scroll-arrow right-arrow ${showRightArrow ? 'visible' : ''}`} onClick={() => scrollByAmount('right')}>
           →
         </div>
       </div>
