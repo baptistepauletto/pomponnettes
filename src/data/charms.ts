@@ -1355,7 +1355,7 @@ export const charms: Charm[] = [
     name: 'Tortue Bleue',
     imagePath: getImagePath('images/charms/tortue-bleue-2cm.png'),
     sizeScale: 2.0,
-    sizeMark: 'XL',
+    sizeMark: 'M',
     category: '🦞 Océan',
     attachmentOffset: { x: 0, y: -2 }
   },
