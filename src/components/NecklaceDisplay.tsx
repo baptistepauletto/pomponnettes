@@ -143,6 +143,8 @@ const getCharmTransformStyles = (position: { x: number; y: number }) => {
 };
 
 // Component for a charm that has been placed on the necklace
+import { toThumbWebpUrl } from '../utils/images';
+
 const PlacedCharm: React.FC<{
   id: string;
   charmId: string;
@@ -258,13 +260,14 @@ const PlacedCharm: React.FC<{
       onClick={handleClick}
     >
       <img 
-        src={charm.imagePath} 
+        src={toThumbWebpUrl(charm.imagePath)} 
         alt={charm.name} 
         style={{
           width: `${baseCharmSize * charm.sizeScale * deviceScaleFactor}px`,
           height: `${baseCharmSize * charm.sizeScale * deviceScaleFactor}px`,
           transformOrigin: 'center center',
         }}
+        onError={(e) => { e.currentTarget.src = charm.imagePath; }}
       />
     </div>
   );
