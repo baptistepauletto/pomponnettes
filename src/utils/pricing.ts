@@ -4,6 +4,21 @@ import { Necklace, PlacedCharm } from '../types';
 export const CHARM_PRICE = 7.00; // Each charm costs 7 euros
 export const GIFT_WRAP_PRICE = 1.50; // Gift wrap costs 1.5 euros
 
+// Bandana pricing tiers by number of charms
+export const BANDANA_PRICE_BY_CHARMS: Record<1 | 3 | 5 | 7, number> = {
+  1: 21.00,
+  3: 35.00,
+  5: 49.00,
+  7: 63.00
+};
+
+function normalizeBandanaCount(count: number): 1 | 3 | 5 | 7 {
+  if (count <= 1) return 1;
+  if (count <= 3) return 3;
+  if (count <= 5) return 5;
+  return 7;
+}
+
 // Free charm thresholds based on necklace type
 export const FREE_CHARM_THRESHOLDS = {
   // Grigri necklaces: Buy 8, get 9th free
@@ -93,7 +108,12 @@ export function calculateFreeCharms(necklace: Necklace | null, charmCount: numbe
 /**
  * Calculate the total price for a customized necklace
  */
-export function calculateTotalPrice(necklace: Necklace | null, placedCharms: PlacedCharm[], giftWrap: boolean = false) {
+export function calculateTotalPrice(
+  necklace: Necklace | null,
+  placedCharms: PlacedCharm[],
+  giftWrap: boolean = false,
+  selectedHoleCount?: 1 | 3 | 5 | 7
+) {
   if (!necklace) {
     return {
       necklacePrice: 0,
@@ -115,15 +135,17 @@ export function calculateTotalPrice(necklace: Necklace | null, placedCharms: Pla
   
   // Special pricing for bandanas: fixed price regardless of charms
   if (isBandana(necklace)) {
+    const countForPricing = selectedHoleCount ?? normalizeBandanaCount(charmCount);
+    const bandanaPrice = BANDANA_PRICE_BY_CHARMS[countForPricing];
     const charmsOriginalPrice = charmCount * CHARM_PRICE;
     const giftWrapPrice = giftWrap ? GIFT_WRAP_PRICE : 0;
-    const subtotal = necklacePrice + giftWrapPrice; // No charm cost for bandanas
+    const subtotal = bandanaPrice + giftWrapPrice; // Bandana price varies with selected charms count
     const shipping = 0;
     const freeShipping = false;
     const total = subtotal;
     
     return {
-      necklacePrice,
+      necklacePrice: bandanaPrice,
       charmsPrice: 0, // Charms are free with bandanas
       charmsOriginalPrice,
       freeCharmsCount: 0, // No free charm system for bandanas
@@ -214,8 +236,13 @@ export function calculateNextFreeCharmInfo(necklace: Necklace | null, currentCha
 /**
  * Get price breakdown for display
  */
-export function getPriceBreakdown(necklace: Necklace | null, placedCharms: PlacedCharm[], giftWrap: boolean = false) {
-  const pricing = calculateTotalPrice(necklace, placedCharms, giftWrap);
+export function getPriceBreakdown(
+  necklace: Necklace | null,
+  placedCharms: PlacedCharm[],
+  giftWrap: boolean = false,
+  selectedHoleCount?: 1 | 3 | 5 | 7
+) {
+  const pricing = calculateTotalPrice(necklace, placedCharms, giftWrap, selectedHoleCount);
   const nextFreeCharm = calculateNextFreeCharmInfo(necklace, placedCharms.length);
   const freeCharmInfo = calculateFreeCharms(necklace, placedCharms.length);
   

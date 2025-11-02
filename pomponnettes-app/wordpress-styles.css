@@ -24,3 +24,51 @@ html:has(.pomponnettes-app-container) .entry-content {
 */
 
 
+
+/*
+  Ensure the WordPress page wrappers around the app use the same background
+  and allow the app to span the full page width. Scoped so it only applies
+  on pages where the app exists.
+*/
+html:has(.pomponnettes-app-container) body,
+html:has(.pomponnettes-app-container) .site,
+html:has(.pomponnettes-app-container) .l-section__content,
+html:has(.pomponnettes-app-container) .c-post__container,
+html:has(.pomponnettes-app-container) .c-post__wrap,
+html:has(.pomponnettes-app-container) .c-post__inner,
+html:has(.pomponnettes-app-container) .c-post__content,
+html:has(.pomponnettes-app-container) .entry-content {
+  background-color: #E4D6D6 !important;
+}
+
+/* Remove theme padding/gutters so the app blends edge-to-edge */
+html:has(.pomponnettes-app-container) .l-section__content,
+html:has(.pomponnettes-app-container) .c-post__inner,
+html:has(.pomponnettes-app-container) .c-post__content,
+html:has(.pomponnettes-app-container) .entry-content {
+  padding: 0 !important;
+}
+
+/* Let the app area be full width instead of theme-constrained container */
+html:has(.pomponnettes-app-container) .c-post__container,
+html:has(.pomponnettes-app-container) .l-section__content,
+html:has(.pomponnettes-app-container) .c-post__wrap,
+html:has(.pomponnettes-app-container) .c-post__inner,
+html:has(.pomponnettes-app-container) .c-post__content,
+html:has(.pomponnettes-app-container) .entry-content {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  box-shadow: none !important;
+}
+
+/* Ensure the app container itself stretches fully */
+.pomponnettes-app-container {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Optional: if your theme adds extra row spacing after content blocks */
+html:has(.pomponnettes-app-container) .c-post__row-2 {
+  background: #E4D6D6 !important;
+}
