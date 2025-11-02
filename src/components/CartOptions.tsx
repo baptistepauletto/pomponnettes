@@ -30,7 +30,7 @@ const CartOptions: React.FC = () => {
             className="cart-option-checkbox"
           />
           <span className="cart-option-text">
-            Je laisse les Pomponnettes décider de l'ordre des charms sur mon bijou.
+            Je fais confiance aux Pomponnettes pour l'ordre de mes charms sur mon bijou.
           </span>
         </label>
       </div>
