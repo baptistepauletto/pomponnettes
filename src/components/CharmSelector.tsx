@@ -1,9 +1,10 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { useCustomizer } from '../context/CustomizerContext';
 import { useDraggableCharm } from '../hooks/useDragAndDrop';
 import { useTapToPlace, isTouchDevice } from '../hooks/useTapToPlace';
 import '../styles/CharmSelector.scss';
 import { toThumbWebpUrl } from '../utils/images';
+import { includesNormalized, startsWithNormalized } from '../utils/text';
 
 const CharmOption: React.FC<{ id: string; name: string; imagePath: string; sizeMark: string }> = ({
   id,
@@ -55,6 +56,8 @@ const CharmOption: React.FC<{ id: string; name: string; imagePath: string; sizeM
 const CharmSelector: React.FC = () => {
   const { charms, placedCharms } = useCustomizer();
   const isMobile = isTouchDevice();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [debouncedQuery, setDebouncedQuery] = useState('');
   
   // Category management state (desktop only)
   const [categories, setCategories] = useState<string[]>([]);
@@ -69,6 +72,12 @@ const CharmSelector: React.FC = () => {
     setSelectedCategory('All Charms');
   }, [charms]);
 
+  // Debounce query
+  useEffect(() => {
+    const t = setTimeout(() => setDebouncedQuery(searchQuery), 200);
+    return () => clearTimeout(t);
+  }, [searchQuery]);
+
   // Track recently used charms based on placed charms
   useEffect(() => {
     const currentCharmIds = placedCharms.map(placedCharm => placedCharm.charmId);
@@ -79,15 +88,33 @@ const CharmSelector: React.FC = () => {
     }
   }, [placedCharms, recentlyUsedCharmIds]);
 
-  // Get filtered charms based on selected category
+  // Global search when query present, otherwise filter by category
   const getFilteredCharms = () => {
-    if (selectedCategory === 'All Charms') {
-      return charms;
-    } else if (selectedCategory === 'Recently Used') {
-      return charms.filter(charm => recentlyUsedCharmIds.includes(charm.id));
-    } else {
-      return charms.filter(charm => (charm.category || 'Other') === selectedCategory);
-    }
+    const base = debouncedQuery ? charms : (
+      selectedCategory === 'All Charms' ? charms :
+      selectedCategory === 'Recently Used' ? charms.filter(c => recentlyUsedCharmIds.includes(c.id)) :
+      charms.filter(c => (c.category || 'Other') === selectedCategory)
+    );
+    if (!debouncedQuery) return base;
+    const q = debouncedQuery;
+    // score: name includes +2, startsWith +1, keyword +1, current category +1, recently used +1.5
+    const score = (c: typeof charms[number]): number => {
+      let s = 0;
+      if (includesNormalized(c.name, q)) s += 2;
+      if (startsWithNormalized(c.name, q)) s += 1;
+      if ((c.keywords || []).some(k => includesNormalized(k, q))) s += 1;
+      if (selectedCategory && selectedCategory !== 'All Charms' && selectedCategory !== 'Recently Used' && (c.category || 'Other') === selectedCategory) s += 1;
+      if (recentlyUsedCharmIds.includes(c.id)) s += 1.5;
+      return s;
+    };
+    return base
+      .filter(c => score(c) > 0)
+      .sort((a, b) => {
+        const sa = score(a);
+        const sb = score(b);
+        if (sb !== sa) return sb - sa;
+        return a.name.localeCompare(b.name);
+      });
   };
 
   const filteredCharms = getFilteredCharms();
@@ -97,23 +124,37 @@ const CharmSelector: React.FC = () => {
     <div className="charm-selector">
       <h3>ÉTAPE 3: PLACE TES CHARMS</h3>
       
-      {/* Category tabs for desktop only */}
+      {/* Search + Category tabs for desktop only */}
       {!isMobile && (
-        <div className="category-tabs">
-          {categories.map(category => (
-            <div 
-              key={category}
-              className={`category-tab ${category === selectedCategory ? 'active' : ''} ${category === 'Recently Used' ? 'recent-tab' : ''}`}
-              onClick={() => setSelectedCategory(category)}
-            >
-              {category === 'All Charms' 
-                ? '✨ Tous' 
-                : category === 'Recently Used' 
-                  ? '🕒 Vus récents' 
-                  : category}
-            </div>
-          ))}
-        </div>
+        <>
+          <div className="charm-search">
+            <span className="icon">🔎</span>
+            <input
+              type="text"
+              placeholder="Rechercher un charm..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            {searchQuery && (
+              <button className="clear" onClick={() => setSearchQuery('')}>×</button>
+            )}
+          </div>
+          <div className="category-tabs">
+            {categories.map(category => (
+              <div 
+                key={category}
+                className={`category-tab ${category === selectedCategory ? 'active' : ''} ${category === 'Recently Used' ? 'recent-tab' : ''}`}
+                onClick={() => setSelectedCategory(category)}
+              >
+                {category === 'All Charms' 
+                  ? '✨ Tous' 
+                  : category === 'Recently Used' 
+                    ? '🕒 Vus récents' 
+                    : category}
+              </div>
+            ))}
+          </div>
+        </>
       )}
 
       {/* Empty state for Recently Used */}

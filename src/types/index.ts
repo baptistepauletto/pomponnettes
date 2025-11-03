@@ -19,6 +19,7 @@ export interface Charm {
   sizeScale: number;
   category?: string;
   sizeMark?: 'XS' | 'S' | 'M' | 'L' | 'XL'; // Size category based on charm size
+  keywords?: string[]; // Optional aliases/synonyms to improve search
   // Optional offset for attachment point (in percentage from center)
   // Default is {x: 0, y: 0} which means the attachment is at center top
   attachmentOffset?: Position;

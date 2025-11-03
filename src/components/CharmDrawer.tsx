@@ -3,6 +3,7 @@ import { useCustomizer } from '../context/CustomizerContext';
 import '../styles/CharmDrawer.scss';
 import { toThumbWebpUrl } from '../utils/images';
 import { useTapToPlace } from '../hooks/useTapToPlace';
+import { includesNormalized, startsWithNormalized } from '../utils/text';
 
 interface CharmDrawerProps {
   isOpen: boolean;
@@ -15,6 +16,8 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [recentlyUsedCharmIds, setRecentlyUsedCharmIds] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [debouncedQuery, setDebouncedQuery] = useState('');
   const drawerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -33,6 +36,12 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
     // Select "All Charms" by default
     setSelectedCategory('All Charms');
   }, [charms]);
+
+  // Debounce query for smoother filtering
+  useEffect(() => {
+    const t = setTimeout(() => setDebouncedQuery(searchQuery), 200);
+    return () => clearTimeout(t);
+  }, [searchQuery]);
   
   // Update recently used charms when placedCharms changes
   useEffect(() => {
@@ -207,15 +216,32 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
     }
   };
 
-  // Get filtered charms based on selected category
+  // Global search when query present, otherwise filter by category
   const getFilteredCharms = () => {
-    if (selectedCategory === 'All Charms') {
-      return charms;
-    } else if (selectedCategory === 'Recently Used') {
-      return charms.filter(charm => recentlyUsedCharmIds.includes(charm.id));
-    } else {
-      return charms.filter(charm => (charm.category || 'Other') === selectedCategory);
-    }
+    const base = debouncedQuery ? charms : (
+      selectedCategory === 'All Charms' ? charms :
+      selectedCategory === 'Recently Used' ? charms.filter(c => recentlyUsedCharmIds.includes(c.id)) :
+      charms.filter(c => (c.category || 'Other') === selectedCategory)
+    );
+    if (!debouncedQuery) return base;
+    const q = debouncedQuery;
+    const score = (c: typeof charms[number]): number => {
+      let s = 0;
+      if (includesNormalized(c.name, q)) s += 2;
+      if (startsWithNormalized(c.name, q)) s += 1;
+      if ((c.keywords || []).some(k => includesNormalized(k, q))) s += 1;
+      if (selectedCategory && selectedCategory !== 'All Charms' && selectedCategory !== 'Recently Used' && (c.category || 'Other') === selectedCategory) s += 1;
+      if (recentlyUsedCharmIds.includes(c.id)) s += 1.5;
+      return s;
+    };
+    return base
+      .filter(c => score(c) > 0)
+      .sort((a, b) => {
+        const sa = score(a);
+        const sb = score(b);
+        if (sb !== sa) return sb - sa;
+        return a.name.localeCompare(b.name);
+      });
   };
 
   // Check if a charm is currently placed on any necklace
@@ -251,6 +277,19 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
       </div>
       
       <div className="charm-drawer-content">
+        {/* Search bar inside the drawer, above categories */}
+        <div className="drawer-search">
+          <span className="icon">🔎</span>
+          <input
+            type="text"
+            placeholder="Rechercher un charm..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          {searchQuery && (
+            <button className="clear" onClick={() => setSearchQuery('')}>×</button>
+          )}
+        </div>
         {/* Category tabs */}
         <div className="category-tabs">
           {categories.map(category => (
