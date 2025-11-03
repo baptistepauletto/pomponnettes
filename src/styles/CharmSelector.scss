@@ -167,9 +167,9 @@
     }
     
     @media (min-width: 481px) {
-      /* Fixed-size columns so items don't expand when there is extra space */
-      grid-template-columns: repeat(auto-fill, minmax(140px, 140px));
-      justify-content: flex-start;
+      /* Slight, capped flexibility to reduce edge gap while keeping cards consistent */
+      grid-template-columns: repeat(auto-fit, minmax(140px, clamp(140px, 17vw, 180px)));
+      justify-content: center;
       align-content: flex-start;
       overflow-y: auto;
       max-height: calc(100vh - 220px);
