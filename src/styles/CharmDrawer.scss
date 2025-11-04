@@ -330,7 +330,7 @@
     max-height: 44vh;
     
     &.closed {
-      transform: translateY(calc(100% - 31%));
+      transform: translateY(75%);
     }
     
     &.open {
