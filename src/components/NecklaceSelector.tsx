@@ -9,6 +9,7 @@ const NecklaceSelector: React.FC = () => {
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(false);
   const isDraggingRef = useRef(false);
+  const isPointerDownRef = useRef(false);
   const startXRef = useRef(0);
   const scrollStartLeftRef = useRef(0);
   const hasDraggedRef = useRef(false);
@@ -58,29 +59,44 @@ const NecklaceSelector: React.FC = () => {
   // Desktop drag-to-scroll using pointer events (mouse only)
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     if (e.pointerType !== 'mouse') return; // Keep native touch scroll on mobile/tablet
+    if (e.button !== 0) return; // only left click
     const container = scrollContainerRef.current;
     if (!container) return;
-    isDraggingRef.current = true;
+    isPointerDownRef.current = true;
+    isDraggingRef.current = false;
     hasDraggedRef.current = false;
-    setDragging(true);
     startXRef.current = e.clientX;
     scrollStartLeftRef.current = container.scrollLeft;
-    try { container.setPointerCapture(e.pointerId); } catch {}
+    // Do NOT set pointer capture yet; wait until threshold is exceeded
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!isDraggingRef.current) return;
     const container = scrollContainerRef.current;
-    if (!container) return;
+    if (!isPointerDownRef.current || !container) return;
     const dx = e.clientX - startXRef.current;
-    if (Math.abs(dx) > 3) { hasDraggedRef.current = true; }
+    const threshold = 10;
+
+    // Only start dragging after exceeding threshold
+    if (!isDraggingRef.current) {
+      if (Math.abs(dx) >= threshold) {
+        isDraggingRef.current = true;
+        hasDraggedRef.current = true;
+        setDragging(true);
+        try { container.setPointerCapture(e.pointerId); } catch {}
+      } else {
+        return; // ignore tiny movements; keep clickability
+      }
+    }
     container.scrollLeft = scrollStartLeftRef.current - dx;
   };
 
   const endDrag = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!isDraggingRef.current) return;
-    isDraggingRef.current = false;
-    setDragging(false);
+    if (!isPointerDownRef.current && !isDraggingRef.current) return;
+    isPointerDownRef.current = false;
+    if (isDraggingRef.current) {
+      isDraggingRef.current = false;
+      setDragging(false);
+    }
     const container = scrollContainerRef.current;
     try { container?.releasePointerCapture(e.pointerId); } catch {}
   };
@@ -101,6 +117,7 @@ const NecklaceSelector: React.FC = () => {
           onPointerMove={handlePointerMove}
           onPointerUp={endDrag}
           onPointerLeave={endDrag}
+          onPointerCancel={endDrag}
         >
           {necklaces.map((necklace) => (
             <div
