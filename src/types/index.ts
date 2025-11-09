@@ -36,6 +36,12 @@ export interface Necklace {
   basePrice: number; // Base price in euros
   displayScale?: number; // Optional scale factor for necklace image display (default: 1.0)
   sizeDescription?: string; // Description of the necklace size/length
+  /**
+   * Optional per-hole-count mappings for bandanas.
+   * If provided, these take precedence over the single woocommerceId/variationId when adding to cart.
+   */
+  woocommerceIdsByHoleCount?: Partial<Record<1 | 3 | 5 | 7, number>>;
+  variationIdsByHoleCount?: Partial<Record<1 | 3 | 5 | 7, number>>;
 }
 
 // Placed charm type for a charm that has been positioned on the necklace

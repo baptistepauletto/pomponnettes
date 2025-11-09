@@ -76,7 +76,8 @@ export const addToCart = async (
   necklace: Necklace,
   placedCharms: PlacedCharm[],
   giftWrap: boolean = false,
-  charmOrderTrust: boolean = false
+  charmOrderTrust: boolean = false,
+  selectedHoleCount?: 1 | 3 | 5 | 7
 ): Promise<{ success: boolean; message: string }> => {
   if (!necklace) {
     return { success: false, message: "No necklace selected" };
@@ -92,18 +93,32 @@ export const addToCart = async (
   // Get the formatted attribute data
   const attributeData = formatCustomizerData(necklace, placedCharms);
   
+  // Resolve product and variation IDs (bandanas can change per hole count)
+  const isBandana = necklace.name.toLowerCase().includes('bandana');
+  const countKey: 1 | 3 | 5 | 7 | undefined = selectedHoleCount;
+
+  const resolvedProductId =
+    isBandana && countKey && necklace.woocommerceIdsByHoleCount && necklace.woocommerceIdsByHoleCount[countKey]
+      ? necklace.woocommerceIdsByHoleCount[countKey]!
+      : necklace.woocommerceId;
+
+  const resolvedVariationId =
+    isBandana && countKey && necklace.variationIdsByHoleCount && necklace.variationIdsByHoleCount[countKey]
+      ? necklace.variationIdsByHoleCount[countKey]!
+      : necklace.variationId;
+
   // Create the data object for the request
   const data: Record<string, any> = {
-    product_id: necklace.woocommerceId,
-    'add-to-cart': necklace.woocommerceId,
+    product_id: resolvedProductId,
+    'add-to-cart': resolvedProductId,
     quantity: 1,
     // Flag to identify that this request came from the Pomponnettes customizer
     pomponnettes_customizer_used: 'true'
   };
   
   // Add variation ID if applicable
-  if (necklace.variationId) {
-    data.variation_id = necklace.variationId;
+  if (resolvedVariationId) {
+    data.variation_id = resolvedVariationId;
   }
   
   // Add all attributes
