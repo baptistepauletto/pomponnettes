@@ -4,10 +4,10 @@ import { getPriceBreakdown, formatPrice, CHARM_PRICE } from '../utils/pricing';
 import '../styles/PriceCalculator.scss';
 
 const PriceCalculator: React.FC = () => {
-  const { selectedNecklace, placedCharms, giftWrap } = useCustomizer();
+  const { selectedNecklace, placedCharms, giftWrap, selectedHoleCount } = useCustomizer();
   const [showBreakdown, setShowBreakdown] = useState(false);
   
-  const pricing = getPriceBreakdown(selectedNecklace, placedCharms, giftWrap);
+  const pricing = getPriceBreakdown(selectedNecklace, placedCharms, giftWrap, selectedHoleCount);
 
   if (!selectedNecklace) {
     return (
@@ -86,37 +86,11 @@ const PriceCalculator: React.FC = () => {
             <span className="item-price">{formatPrice(pricing.subtotal)}</span>
           </div>
 
-          {/* Shipping */}
-          <div className="breakdown-item">
-            <span className="item-label">
-              Livraison 
-              {pricing.freeShipping && <span className="free-badge">GRATUITE</span>}
-            </span>
-            <span className="item-price">
-              {pricing.freeShipping ? formatPrice(0) : formatPrice(pricing.shipping)}
-            </span>
-          </div>
-
           {/* Total */}
           <div className="breakdown-item total">
             <span className="item-label">Total</span>
             <span className="item-price">{formatPrice(pricing.total)}</span>
           </div>
-
-          {/* Free shipping progress */}
-          {!pricing.freeShipping && (
-            <div className="shipping-progress">
-              <div className="progress-text">
-                Ajoutez {formatPrice(90 - pricing.subtotal)} pour obtenir la livraison gratuite!
-              </div>
-              <div className="progress-bar">
-                <div 
-                  className="progress-fill" 
-                  style={{ width: `${Math.min((pricing.subtotal / 90) * 100, 100)}%` }}
-                />
-              </div>
-            </div>
-          )}
 
           {/* Next free charm hint - purple when close, yellow when not */}
           {pricing.nextFreeCharm && (

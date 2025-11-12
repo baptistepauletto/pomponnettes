@@ -1,26 +1,53 @@
-/*
-  WordPress page-level styles for the Pomponnettes app
-  - This file styles ONLY the host page/wrappers around the app.
-  - It does NOT affect anything inside the Shadow DOM app.
-  - Safe to tweak layout, spacing, backgrounds around the app container.
-*/
 
 /* Match the app background to blend with the page */
 .pomponnettes-app-container {
   background-color: #E4D6D6;
 }
 
-/* Suggested starting layout (uncomment/tweak as needed) */
-/*
-.pomponnettes-app-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 16px;
+  /* Remove extra bottom margin utility */
+  html:has(.pomponnettes-app-container) .l-section--bottom-margin {
+    margin-bottom: 0 !important;
+  }
+
+/* Mobile-only: keep theme spacing, just blend the background under the app */
+@media (max-width: 480px) {
+  html:has(.pomponnettes-app-container) .c-post__inner {
+    background-color: #E4D6D6 !important;
+  }
 }
 
-html:has(.pomponnettes-app-container) .entry-content {
-  padding: 0; 
+/* Desktop-only: allow the page to use full width by removing the fixed max-width */
+@media (min-width: 481px) {
+
+  .pomponnettes-app-container {
+    background-color: #E4D6D6;
+    padding: 3rem;
+  }
+  
+  /* Remove the theme page max width */
+  html:has(.pomponnettes-app-container) .c-post--page {
+    max-width: none !important;
+    width: 100% !important;
+  }
+  /* Remove the theme content max width */
+  html:has(.pomponnettes-app-container) .c-post__content {
+    max-width: none !important;
+    width: 100% !important;
+  }
+  /* Remove inner padding around the app wrapper */
+  html:has(.pomponnettes-app-container) .c-post__inner {
+    padding: 0 !important;
+  }
+  /* Remove outer vertical margins around the post container */
+  html:has(.pomponnettes-app-container) .c-post__container--page,
+  html:has(.pomponnettes-app-container) .c-post__container--post {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  html:has(.pomponnettes-app-container) .l-section__container, 
+  html:has(.pomponnettes-app-container) .l-section--container {
+    width: 100% !important;
+    max-width: none !important;
+  }
 }
-*/
-
-

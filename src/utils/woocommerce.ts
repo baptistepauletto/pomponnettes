@@ -24,43 +24,33 @@ const getWooCommerceCharmId = (internalCharmId: string) => {
  * Uses position-based approach where each attachment point position becomes an attribute
  */
 const formatCustomizerData = (necklace: Necklace, placedCharms: PlacedCharm[]) => {
-  // Get the maximum number of attachment points
-  const maxPosition = necklace.attachmentPoints.length;
+  // Use the currently derived attachment points (already filtered and left-to-right)
+  const orderedPoints = necklace.attachmentPoints;
+  const maxPosition = orderedPoints.length;
 
-  // Create a map of charms by their position number
-  const charmsByPosition = new Map<string, string>();
-  
-  // Fill the map with the placed charms
-  placedCharms.forEach(placedCharm => {
-    const attachmentPoint = necklace.attachmentPoints.find(
-      point => point.id === placedCharm.attachmentPointId
-    );
-    
-    if (attachmentPoint) {
-      // Extract the position number from the attachment point ID
-      // The format is typically "xx-pointN" where N is the position number
-      const positionMatch = attachmentPoint.id.match(/point(\d+)$/);
-      
-      if (positionMatch && positionMatch[1]) {
-        // Use the extracted position number
-        charmsByPosition.set(positionMatch[1], placedCharm.charmId);
-      } else {
-        // Fallback: use the index in the attachment points array + 1
-        const positionIndex = (necklace.attachmentPoints.indexOf(attachmentPoint) + 1).toString();
-        charmsByPosition.set(positionIndex, placedCharm.charmId);
-      }
+  // Build a lookup from attachmentPointId -> sequential position (1..N)
+  const positionByPointId = new Map<string, number>();
+  orderedPoints.forEach((point, idx) => {
+    positionByPointId.set(point.id, idx + 1);
+  });
+
+  // Map of sequential position -> charmId
+  const charmsBySequentialPosition = new Map<number, string>();
+
+  placedCharms.forEach((placedCharm) => {
+    const pos = positionByPointId.get(placedCharm.attachmentPointId);
+    if (pos) {
+      charmsBySequentialPosition.set(pos, placedCharm.charmId);
     }
   });
 
-  // Create the data object for WooCommerce attributes
+  // Create the data object for WooCommerce attributes using 1..N numbering
   const attributeData: Record<string, string> = {};
-  
-  // For each possible position, add an attribute
   for (let i = 1; i <= maxPosition; i++) {
-    const charmId = getWooCommerceCharmId(charmsByPosition.get(i.toString()) || '');
+    const charmId = getWooCommerceCharmId(charmsBySequentialPosition.get(i) || '');
     attributeData[`attribute_pa_charm-${i}`] = charmId;
   }
-  
+
   return attributeData;
 };
 
@@ -76,7 +66,8 @@ export const addToCart = async (
   necklace: Necklace,
   placedCharms: PlacedCharm[],
   giftWrap: boolean = false,
-  charmOrderTrust: boolean = false
+  charmOrderTrust: boolean = false,
+  selectedHoleCount?: 1 | 3 | 5 | 7
 ): Promise<{ success: boolean; message: string }> => {
   if (!necklace) {
     return { success: false, message: "No necklace selected" };
@@ -92,18 +83,32 @@ export const addToCart = async (
   // Get the formatted attribute data
   const attributeData = formatCustomizerData(necklace, placedCharms);
   
+  // Resolve product and variation IDs (bandanas can change per hole count)
+  const isBandana = necklace.name.toLowerCase().includes('bandana');
+  const countKey: 1 | 3 | 5 | 7 | undefined = selectedHoleCount;
+
+  const resolvedProductId =
+    isBandana && countKey && necklace.woocommerceIdsByHoleCount && necklace.woocommerceIdsByHoleCount[countKey]
+      ? necklace.woocommerceIdsByHoleCount[countKey]!
+      : necklace.woocommerceId;
+
+  const resolvedVariationId =
+    isBandana && countKey && necklace.variationIdsByHoleCount && necklace.variationIdsByHoleCount[countKey]
+      ? necklace.variationIdsByHoleCount[countKey]!
+      : necklace.variationId;
+
   // Create the data object for the request
   const data: Record<string, any> = {
-    product_id: necklace.woocommerceId,
-    'add-to-cart': necklace.woocommerceId,
+    product_id: resolvedProductId,
+    'add-to-cart': resolvedProductId,
     quantity: 1,
     // Flag to identify that this request came from the Pomponnettes customizer
     pomponnettes_customizer_used: 'true'
   };
   
   // Add variation ID if applicable
-  if (necklace.variationId) {
-    data.variation_id = necklace.variationId;
+  if (resolvedVariationId) {
+    data.variation_id = resolvedVariationId;
   }
   
   // Add all attributes

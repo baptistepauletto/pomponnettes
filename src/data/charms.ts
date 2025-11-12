@@ -1355,12 +1355,12 @@ export const charms: Charm[] = [
     name: 'Tortue Bleue',
     imagePath: getImagePath('images/charms/tortue-bleue-2cm.png'),
     sizeScale: 2.0,
-    sizeMark: 'XL',
+    sizeMark: 'M',
     category: '🦞 Océan',
     attachmentOffset: { x: 0, y: -2 }
   },
   {
-    id: 'double-oeil-blanc',
+    id: 'double-eyes-blanc',
     name: 'Double Oeil Blanc',
     imagePath: getImagePath('images/charms/double-oeil-blanc-1.5cm.png'),
     sizeScale: 1.5,
@@ -1369,7 +1369,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: -5 }
   },
   {
-    id: 'double-oeil-bleu',
+    id: 'double-eyes-bleu',
     name: 'Double Oeil Bleu',
     imagePath: getImagePath('images/charms/double-oeil-bleu-1.5cm.png'),
     sizeScale: 1.5,
@@ -1378,7 +1378,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: -5 }
   },
   {
-    id: 'double-oeil-rose',
+    id: 'double-eyes-rose',
     name: 'Double Oeil Rose',
     imagePath: getImagePath('images/charms/double-oeil-rose-1.5cm.png'),
     sizeScale: 1.5,
@@ -1387,7 +1387,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 5, y: 0 }
   },
   {
-    id: 'double-oeil-rouge',
+    id: 'double-eyes-rouge',
     name: 'Double Oeil Rouge',
     imagePath: getImagePath('images/charms/double-oeil-rouge-1.5cm.png'),
     sizeScale: 1.5,
@@ -1414,7 +1414,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: 5 }
   },
   {
-    id: 'perle-cylindre-bleue',
+    id: 'perle-cylindre-bleu',
     name: 'Perle Cylindre Bleue',
     imagePath: getImagePath('images/charms/perle-cylindre-bleue-2cm.png'),
     sizeScale: 2.0,
@@ -1666,7 +1666,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: -5 }
   },
   {
-    id: 'fleur-bleue-ciel',
+    id: 'fleur-bleu-ciel',
     name: 'Fleur Bleue Ciel',
     imagePath: getImagePath('images/charms/fleur-bleue-ciel-2cm.png'),
     sizeScale: 1.8,
@@ -1675,7 +1675,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: -5 }
   },
   {
-    id: 'fleur-bleue-fonce',
+    id: 'fleur-bleu-fonce',
     name: 'Fleur Bleue Foncé',
     imagePath: getImagePath('images/charms/fleur-bleue-fonce-2cm.png'),
     sizeScale: 1.8,
@@ -1801,7 +1801,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: -2 }
   },
   {
-    id: 'lettre-a',
+    id: 'a',
     name: 'Lettre A',
     imagePath: getImagePath('images/charms/lettre-A-1.1cm.png'),
     sizeScale: 1.0,
@@ -1810,7 +1810,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: 0 }
   },
   {
-    id: 'lettre-b',
+    id: 'b',
     name: 'Lettre B',
     imagePath: getImagePath('images/charms/lettre-B-1.1cm.png'),
     sizeScale: 1.0,
@@ -1819,7 +1819,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: 0 }
   },
   {
-    id: 'lettre-c',
+    id: 'c',
     name: 'Lettre C',
     imagePath: getImagePath('images/charms/lettre-C-1.1cm.png'),
     sizeScale: 1.0,
@@ -1828,7 +1828,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: 0 }
   },
   {
-    id: 'lettre-d',
+    id: 'd',
     name: 'Lettre D',
     imagePath: getImagePath('images/charms/lettre-D-1.1cm.png'),
     sizeScale: 1.0,
@@ -1837,7 +1837,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: 0 }
   },
   {
-    id: 'lettre-e',
+    id: 'e',
     name: 'Lettre E',
     imagePath: getImagePath('images/charms/lettre-E-1.1cm.png'),
     sizeScale: 1.0,
@@ -1846,7 +1846,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: 0 }
   },
   {
-    id: 'lettre-f',
+    id: 'f',
     name: 'Lettre F',
     imagePath: getImagePath('images/charms/lettre-F-1.1cm.png'),
     sizeScale: 1.0,
@@ -1855,7 +1855,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: 0 }
   },
   {
-    id: 'lettre-g',
+    id: 'g',
     name: 'Lettre G',
     imagePath: getImagePath('images/charms/lettre-G-1.1cm.png'),
     sizeScale: 1.0,
@@ -1864,7 +1864,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: 0 }
   },
   {
-    id: 'lettre-h',
+    id: 'h',
     name: 'Lettre H',
     imagePath: getImagePath('images/charms/lettre-H-1.1cm.png'),
     sizeScale: 1.0,
@@ -1873,7 +1873,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 30, y: 0 }
   },
   {
-    id: 'lettre-i',
+    id: 'i',
     name: 'Lettre I',
     imagePath: getImagePath('images/charms/lettre-I-1.1cm.png'),
     sizeScale: 1.0,
@@ -1882,7 +1882,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: 0 }
   },
   {
-    id: 'lettre-j',
+    id: 'j',
     name: 'Lettre J',
     imagePath: getImagePath('images/charms/lettre-J-1.1cm.png'),
     sizeScale: 1.0,
@@ -1891,7 +1891,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: 0 }
   },
   {
-    id: 'lettre-k',
+    id: 'k',
     name: 'Lettre K',
     imagePath: getImagePath('images/charms/lettre-K-1.1cm.png'),
     sizeScale: 1.0,
@@ -1900,7 +1900,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 30, y: 0 }
   },
   {
-    id: 'lettre-l',
+    id: 'l',
     name: 'Lettre L',
     imagePath: getImagePath('images/charms/lettre-L-1.1cm.png'),
     sizeScale: 1.0,
@@ -1909,7 +1909,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 20, y: 0 }
   },
   {
-    id: 'lettre-m',
+    id: 'm',
     name: 'Lettre M',
     imagePath: getImagePath('images/charms/lettre-M-1.1cm.png'),
     sizeScale: 1.0,
@@ -1918,7 +1918,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 35, y: 0 }
   },
   {
-    id: 'lettre-n',
+    id: 'n',
     name: 'Lettre N',
     imagePath: getImagePath('images/charms/lettre-N-1.1cm.png'),
     sizeScale: 1.0,
@@ -1927,7 +1927,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 30, y: 0 }
   },
   {
-    id: 'lettre-o',
+    id: 'o',
     name: 'Lettre O',
     imagePath: getImagePath('images/charms/lettre-O-1.1cm.png'),
     sizeScale: 1.0,
@@ -1936,7 +1936,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: 0 }
   },
   {
-    id: 'lettre-p',
+    id: 'p',
     name: 'Lettre P',
     imagePath: getImagePath('images/charms/lettre-P-1.1cm.png'),
     sizeScale: 1.0,
@@ -1945,7 +1945,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: 0 }
   },
   {
-    id: 'lettre-q',
+    id: 'q',
     name: 'Lettre Q',
     imagePath: getImagePath('images/charms/lettre-Q-1.1cm.png'),
     sizeScale: 1.0,
@@ -1954,7 +1954,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: 0 }
   },
   {
-    id: 'lettre-r',
+    id: 'r',
     name: 'Lettre R',
     imagePath: getImagePath('images/charms/lettre-R-1.1cm.png'),
     sizeScale: 1.0,
@@ -1963,7 +1963,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 10, y: 0 }
   },
   {
-    id: 'lettre-s',
+    id: 's',
     name: 'Lettre S',
     imagePath: getImagePath('images/charms/lettre-S-1.1cm.png'),
     sizeScale: 1.0,
@@ -1972,7 +1972,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: 0 }
   },
   {
-    id: 'lettre-t',
+    id: 't',
     name: 'Lettre T',
     imagePath: getImagePath('images/charms/lettre-T-1.1cm.png'),
     sizeScale: 1.0,
@@ -1981,7 +1981,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: 0 }
   },
   {
-    id: 'lettre-u',
+    id: 'u',
     name: 'Lettre U',
     imagePath: getImagePath('images/charms/lettre-U-1.1cm.png'),
     sizeScale: 1.0,
@@ -1990,7 +1990,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 30, y: 0 }
   },
   {
-    id: 'lettre-v',
+    id: 'v',
     name: 'Lettre V',
     imagePath: getImagePath('images/charms/lettre-V-1.1cm.png'),
     sizeScale: 1.0,
@@ -1999,7 +1999,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 25, y: 0 }
   },
   {
-    id: 'lettre-w',
+    id: 'w',
     name: 'Lettre W',
     imagePath: getImagePath('images/charms/lettre-W-1.1cm.png'),
     sizeScale: 1.2,
@@ -2008,7 +2008,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: -10 }
   },
   {
-    id: 'lettre-x',
+    id: 'x',
     name: 'Lettre X',
     imagePath: getImagePath('images/charms/lettre-X-1.1cm.png'),
     sizeScale: 1.0,
@@ -2017,7 +2017,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 20, y: 0 }
   },
   {
-    id: 'lettre-y',
+    id: 'y',
     name: 'Lettre Y',
     imagePath: getImagePath('images/charms/lettre-Y-1.1cm.png'),
     sizeScale: 1.0,
@@ -2026,7 +2026,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 25, y: 0 }
   },
   {
-    id: 'lettre-z',
+    id: 'z',
     name: 'Lettre Z',
     imagePath: getImagePath('images/charms/lettre-Z-1.1cm.png'),
     sizeScale: 1.0,

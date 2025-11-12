@@ -1,12 +1,19 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useCustomizer } from '../context/CustomizerContext';
 import '../styles/NecklaceSelector.scss';
+import { toThumbWebpUrl } from '../utils/images';
 
 const NecklaceSelector: React.FC = () => {
   const { necklaces, selectedNecklace, selectNecklace, selectedHoleCount, setSelectedHoleCount } = useCustomizer();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(false);
+  const isDraggingRef = useRef(false);
+  const isPointerDownRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollStartLeftRef = useRef(0);
+  const hasDraggedRef = useRef(false);
+  const [dragging, setDragging] = useState(false);
 
   // Check scroll position and update arrow visibility
   const updateArrowVisibility = () => {
@@ -42,23 +49,92 @@ const NecklaceSelector: React.FC = () => {
     };
   }, [necklaces]); // Re-run when necklaces change
 
+  const scrollByAmount = (direction: 'left' | 'right') => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const amount = Math.max(200, Math.floor(container.clientWidth * 0.8));
+    container.scrollBy({ left: direction === 'left' ? -amount : amount, behavior: 'smooth' });
+  };
+
+  // Desktop drag-to-scroll using pointer events (mouse only)
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== 'mouse') return; // Keep native touch scroll on mobile/tablet
+    if (e.button !== 0) return; // only left click
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    isPointerDownRef.current = true;
+    isDraggingRef.current = false;
+    hasDraggedRef.current = false;
+    startXRef.current = e.clientX;
+    scrollStartLeftRef.current = container.scrollLeft;
+    // Do NOT set pointer capture yet; wait until threshold is exceeded
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const container = scrollContainerRef.current;
+    if (!isPointerDownRef.current || !container) return;
+    const dx = e.clientX - startXRef.current;
+    const threshold = 10;
+
+    // Only start dragging after exceeding threshold
+    if (!isDraggingRef.current) {
+      if (Math.abs(dx) >= threshold) {
+        isDraggingRef.current = true;
+        hasDraggedRef.current = true;
+        setDragging(true);
+        try { container.setPointerCapture(e.pointerId); } catch {}
+      } else {
+        return; // ignore tiny movements; keep clickability
+      }
+    }
+    container.scrollLeft = scrollStartLeftRef.current - dx;
+  };
+
+  const endDrag = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isPointerDownRef.current && !isDraggingRef.current) return;
+    isPointerDownRef.current = false;
+    if (isDraggingRef.current) {
+      isDraggingRef.current = false;
+      setDragging(false);
+    }
+    const container = scrollContainerRef.current;
+    try { container?.releasePointerCapture(e.pointerId); } catch {}
+  };
+
   return (
     <div className="necklace-selector">
       <h3>ÉTAPE 1: CHOISIS TON BANDANA</h3>
       <div className="carousel-container">
         {/* Left arrow - only visible on mobile when can scroll left */}
-        <div className={`scroll-arrow left-arrow ${showLeftArrow ? 'visible' : ''}`}>
+        <div className={`scroll-arrow left-arrow ${showLeftArrow ? 'visible' : ''}`} onClick={() => scrollByAmount('left')}>
           ←
         </div>
         
-        <div className="necklace-options" ref={scrollContainerRef}>
+        <div
+          className={`necklace-options ${dragging ? 'dragging' : ''}`}
+          ref={scrollContainerRef}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={endDrag}
+          onPointerLeave={endDrag}
+          onPointerCancel={endDrag}
+        >
           {necklaces.map((necklace) => (
             <div
               key={necklace.id}
               className={`necklace-option ${selectedNecklace?.id === necklace.id ? 'selected' : ''}`}
-              onClick={() => selectNecklace(necklace.id)}
+              onClick={(e) => {
+                if (hasDraggedRef.current) { e.preventDefault(); return; }
+                selectNecklace(necklace.id);
+              }}
             >
-              <img src={necklace.imagePath} alt={necklace.name} />
+              <img 
+                src={toThumbWebpUrl(necklace.imagePath)} 
+                alt={necklace.name} 
+                loading="lazy" 
+                decoding="async"
+                onError={(e) => { e.currentTarget.src = necklace.imagePath; }}
+              />
               <div className="necklace-info">
                 <p className="necklace-name">{necklace.name}</p>
               </div>
@@ -67,7 +143,7 @@ const NecklaceSelector: React.FC = () => {
         </div>
         
         {/* Right arrow - only visible on mobile when can scroll right */}
-        <div className={`scroll-arrow right-arrow ${showRightArrow ? 'visible' : ''}`}>
+        <div className={`scroll-arrow right-arrow ${showRightArrow ? 'visible' : ''}`} onClick={() => scrollByAmount('right')}>
           →
         </div>
       </div>
@@ -77,7 +153,7 @@ const NecklaceSelector: React.FC = () => {
         <div className="hole-count-selector">
           <h3>ÉTAPE 2: CHOISIS TON NOMBRE DE CHARMS</h3>
           <div className="hole-count-buttons">
-            {[7, 5, 3, 1].map((count) => (
+            {[1, 3, 5, 7].map((count) => (
               <button
                 key={count}
                 type="button"

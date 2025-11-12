@@ -19,6 +19,14 @@
     color: #A24E4E;
     font-family: "Jost", sans-serif;
     text-align: center;
+    
+    // Desktop: match ETAPE 3 style
+    @media (min-width: 481px) {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+      color: #A24E4E;
+    }
   }
   
   .carousel-container {
@@ -34,42 +42,36 @@
       margin: 0 auto;
     }
     
-    // Scroll arrows - only visible on mobile
+    // Scroll arrows - visible on all breakpoints when scrolling is possible
     .scroll-arrow {
-      display: none; // Hidden by default
-      
-      // Only show on mobile
-      @media (max-width: 480px) {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 16px;
-        color: #011627;
-        z-index: 10;
-        opacity: 0;
-        transition: opacity 0.2s ease;
-        pointer-events: none;
-        font-weight: bold;
-        
-        &.visible {
-          opacity: 0.7;
-        }
-        
-        &.left-arrow {
-          left: -24px;
-        }
-        
-        &.right-arrow {
-          right: -24px;
-        }
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: #011627;
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 4px 6px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+
+      &.visible {
+        opacity: 0.85;
       }
       
-      // Hide completely on desktop
-      @media (min-width: 481px) {
-        display: none !important;
+      &.left-arrow {
+        left: -24px;
+      }
+      
+      &.right-arrow {
+        right: -24px;
       }
     }
   }
@@ -105,16 +107,21 @@
       gap: 0.8rem;
     }
     
-    // Desktop optimization - responsive sizing
+    // Desktop: keep horizontal carousel behavior
     @media (min-width: 481px) {
-      overflow-x: visible;
-      justify-content: center;
-      flex-wrap: wrap;
-      padding: 15px 0;
-      gap: 1rem; // Reduced from 1.5rem
+      overflow-x: auto;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      padding: 15px 20px;
+      gap: 1rem;
       max-width: 100%;
-      width: auto; // Allow natural width based on content
-      margin: 0 auto; // Center the flex container
+      width: 100%;
+      margin: 0 auto;
+      /* Hide scrollbar for Chrome/Safari */
+      &::-webkit-scrollbar { display: none; }
+      scrollbar-width: none; /* Firefox */
+      cursor: grab;
+      &.dragging { cursor: grabbing; }
     }
     
     // Larger desktop screens - more space
@@ -286,6 +293,14 @@
       color: #A24E4E;
       font-family: "Jost", sans-serif;
       text-align: center;
+      
+      // Desktop: match ETAPE 3 style
+      @media (min-width: 481px) {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        font-size: 1.3rem;
+        color: #A24E4E;
+      }
     }
 
     .hole-count-buttons {
