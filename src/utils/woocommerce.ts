@@ -120,6 +120,12 @@ export const addToCart = async (
   // Add cart options
   data['emballage-cadeau'] = giftWrap ? 'oui' : 'non';
   data['confiance-charms'] = charmOrderTrust ? 'oui' : 'non';
+
+  // Send WooCommerce Product Add-Ons field for gift wrap so pricing/rules apply
+  if (giftWrap) {
+    const addonKey = `addon-${resolvedProductId}-1715207785[]`;
+    data[addonKey] = 'emballage-cadeau';
+  }
   
   // Use jQuery's AJAX method
   return new Promise((resolve) => {

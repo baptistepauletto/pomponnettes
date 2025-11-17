@@ -182,6 +182,15 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         // Store cart options
         if (isset($_POST['emballage-cadeau'])) {
             $cart_item_data['gift_wrap'] = sanitize_text_field($_POST['emballage-cadeau']);
+		} else {
+			// Support WooCommerce Product Add-Ons field: addon-{productId}-1715207785[] -> $_POST['addon-{productId}-1715207785']
+			$addon_key = 'addon-' . $product_id . '-1715207785';
+			if (isset($_POST[$addon_key])) {
+				$addon_values = $_POST[$addon_key];
+				if (is_array($addon_values) && in_array('emballage-cadeau', $addon_values, true)) {
+					$cart_item_data['gift_wrap'] = 'oui';
+				}
+			}
         }
         
         if (isset($_POST['confiance-charms'])) {
