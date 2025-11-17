@@ -195,6 +195,16 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         
         if (isset($_POST['confiance-charms'])) {
             $cart_item_data['charm_order_trust'] = sanitize_text_field($_POST['confiance-charms']);
+		} else {
+			// Support WooCommerce Product Add-Ons field for charm order trust:
+			// addon-{productId}-1738266915[] -> $_POST['addon-{productId}-1738266915']
+			$addon_key_trust = 'addon-' . $product_id . '-1738266915';
+			if (isset($_POST[$addon_key_trust])) {
+				$addon_values = $_POST[$addon_key_trust];
+				if (is_array($addon_values) && in_array('je-fais-confiance-aux-pomponnettes-pour-lordre-de-mes-charms-sur-mon-bijou', $addon_values, true)) {
+					$cart_item_data['charm_order_trust'] = 'oui';
+				}
+			}
         }
         
         return $cart_item_data;

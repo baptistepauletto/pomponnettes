@@ -126,6 +126,12 @@ export const addToCart = async (
     const addonKey = `addon-${resolvedProductId}-1715207785[]`;
     data[addonKey] = 'emballage-cadeau';
   }
+
+  // Send WooCommerce Product Add-Ons field for charm order trust
+  if (charmOrderTrust) {
+    const trustAddonKey = `addon-${resolvedProductId}-1738266915[]`;
+    data[trustAddonKey] = 'je-fais-confiance-aux-pomponnettes-pour-lordre-de-mes-charms-sur-mon-bijou';
+  }
   
   // Use jQuery's AJAX method
   return new Promise((resolve) => {
