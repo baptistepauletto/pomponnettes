@@ -1,6 +1,10 @@
 interface PomponnettesData {
   pluginUrl: string;
   imagesPath: string;
+  stock?: {
+    parentProductId: number;
+    inStockVariationIds: number[];
+  };
 }
 
 interface Window {

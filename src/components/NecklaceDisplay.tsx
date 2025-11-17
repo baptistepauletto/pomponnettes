@@ -320,6 +320,7 @@ const NecklaceDisplay: React.FC = () => {
   const [hasInteractedWithNecklace, setHasInteractedWithNecklace] = useState(false);
   const necklaceContainerRef = useRef<HTMLDivElement>(null!);
   const [targetedPointId, setTargetedPointId] = useState<string | null>(null);
+  const inStockVariationIds = (window.pomponnettesData?.stock?.inStockVariationIds || []) as number[];
   
   // Use proximity dropping only for desktop (non-touch devices)
   const attachmentPoints = selectedNecklace?.attachmentPoints || [];
@@ -394,6 +395,14 @@ const NecklaceDisplay: React.FC = () => {
     }
   };
 
+  // Wide availability for the currently selected bandana (ignoring hole count)
+  const isBandana = selectedNecklace.name.toLowerCase().includes('bandana');
+  const candidateVariationIds: number[] =
+    selectedNecklace.variationIdsByHoleCount
+      ? Object.values(selectedNecklace.variationIdsByHoleCount).filter((v): v is number => typeof v === 'number')
+      : (typeof (selectedNecklace as any).variationId === 'number' ? [(selectedNecklace as any).variationId as number] : []);
+  const wideAvailable = !isBandana || candidateVariationIds.some(id => inStockVariationIds.includes(id));
+
   return (
     <div className={`necklace-display ${isDrawerOpen ? 'placement-mode' : ''}`}>
       {/* Show removal tip when charms are placed and tip hasn't been shown yet */}
@@ -414,6 +423,9 @@ const NecklaceDisplay: React.FC = () => {
         ref={necklaceContainerRef}
         className={`necklace-container ${showGrid ? 'with-grid' : ''}`}
       >
+        {!wideAvailable && (
+          <div className="oos-overlay-badge">Rupture de stock</div>
+        )}
         <picture>
           <source 
             type="image/webp" 

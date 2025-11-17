@@ -54,7 +54,38 @@ function pomponnettes_enqueue_scripts() {
         'pomponnettesData',
         array(
             'pluginUrl' => $plugin_url,
-            'imagesPath' => $plugin_url . 'images/'
+            'imagesPath' => $plugin_url . 'images/',
+            // Inject stock info without using REST to avoid SSL issues
+            'stock' => (function () {
+                // Default structure
+                $data = array(
+                    'parentProductId' => 21290,
+                    'inStockVariationIds' => array()
+                );
+
+                // Only if WooCommerce functions are available
+                if (!function_exists('wc_get_product')) {
+                    return $data;
+                }
+
+                $parent_id = 21290; // Bandana variable product
+                $product = wc_get_product($parent_id);
+                if (!$product || !$product->is_type('variable')) {
+                    return $data;
+                }
+
+                $children = $product->get_children(); // variation IDs
+                $in_stock = array();
+                foreach ($children as $variation_id) {
+                    $variation = wc_get_product($variation_id);
+                    if ($variation && $variation->is_in_stock()) {
+                        $in_stock[] = $variation_id;
+                    }
+                }
+
+                $data['inStockVariationIds'] = $in_stock;
+                return $data;
+            })()
         )
     );
 }
@@ -88,6 +119,36 @@ add_filter('script_loader_tag', function($tag, $handle, $src) {
 
 // Check if WooCommerce is active before adding integration
 if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
+    
+    /**
+     * Validate stock on add to cart for bandanas (product 21290 variations)
+     * Ensures a friendly message is returned if selected variant is OOS.
+     */
+    add_filter('woocommerce_add_to_cart_validation', function($passed, $product_id, $quantity, $variation_id = 0, $variations = array()) {
+        // Only enforce for our bandana product parent (21290)
+        $bandana_parent_id = 21290;
+
+        // If not our product, allow
+        if (intval($product_id) !== $bandana_parent_id) {
+            return $passed;
+        }
+
+        // If no variation provided, allow default WC handling
+        if (empty($variation_id)) {
+            return $passed;
+        }
+
+        // Validate variation stock
+        if (function_exists('wc_get_product')) {
+            $variation = wc_get_product($variation_id);
+            if ($variation instanceof WC_Product && !$variation->is_in_stock()) {
+                wc_add_notice(__('Ce bandana est en rupture de stock.', 'pomponnettes'), 'error');
+                return false;
+            }
+        }
+
+        return $passed;
+    }, 10, 5);
     
     /**
      * Save custom configuration data to cart item meta

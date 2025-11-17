@@ -14,6 +14,7 @@ const NecklaceSelector: React.FC = () => {
   const scrollStartLeftRef = useRef(0);
   const hasDraggedRef = useRef(false);
   const [dragging, setDragging] = useState(false);
+  const inStockVariationIds = (window.pomponnettesData?.stock?.inStockVariationIds || []) as number[];
 
   // Check scroll position and update arrow visibility
   const updateArrowVisibility = () => {
@@ -119,27 +120,40 @@ const NecklaceSelector: React.FC = () => {
           onPointerLeave={endDrag}
           onPointerCancel={endDrag}
         >
-          {necklaces.map((necklace) => (
-            <div
-              key={necklace.id}
-              className={`necklace-option ${selectedNecklace?.id === necklace.id ? 'selected' : ''}`}
-              onClick={(e) => {
-                if (hasDraggedRef.current) { e.preventDefault(); return; }
-                selectNecklace(necklace.id);
-              }}
-            >
-              <img 
-                src={toThumbWebpUrl(necklace.imagePath)} 
-                alt={necklace.name} 
-                loading="lazy" 
-                decoding="async"
-                onError={(e) => { e.currentTarget.src = necklace.imagePath; }}
-              />
-              <div className="necklace-info">
-                <p className="necklace-name">{necklace.name}</p>
+          {necklaces.map((necklace) => {
+            const isBandana = necklace.name.toLowerCase().includes('bandana');
+            const candidateVariationIds: number[] =
+              necklace.variationIdsByHoleCount
+                ? Object.values(necklace.variationIdsByHoleCount).filter((v): v is number => typeof v === 'number')
+                : (typeof (necklace as any).variationId === 'number' ? [(necklace as any).variationId as number] : []);
+            const wideAvailable = !isBandana || candidateVariationIds.some(id => inStockVariationIds.includes(id));
+            return (
+              <div
+                key={necklace.id}
+                className={`necklace-option ${selectedNecklace?.id === necklace.id ? 'selected' : ''} ${!wideAvailable ? 'oos' : ''}`}
+                onClick={(e) => {
+                  if (hasDraggedRef.current) { e.preventDefault(); return; }
+                  selectNecklace(necklace.id);
+                }}
+              >
+                <div className="image-wrap">
+                  <img 
+                    src={toThumbWebpUrl(necklace.imagePath)} 
+                    alt={necklace.name} 
+                    loading="lazy" 
+                    decoding="async"
+                    onError={(e) => { e.currentTarget.src = necklace.imagePath; }}
+                  />
+                  {!wideAvailable && (
+                    <div className="oos-badge">Rupture de stock</div>
+                  )}
+                </div>
+                <div className="necklace-info">
+                  <p className="necklace-name">{necklace.name}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         
         {/* Right arrow - only visible on mobile when can scroll right */}

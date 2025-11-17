@@ -138,6 +138,7 @@
       transition: all 0.2s ease;
       min-width: 140px;
       flex: 0 0 auto;
+      position: relative;
       
       /* Improve touch interactions */
       -webkit-tap-highlight-color: transparent;
@@ -235,6 +236,39 @@
         @media (min-width: 1024px) {
           height: 90px;
           margin-bottom: 0.5rem;
+        }
+      }
+
+      .image-wrap {
+        position: relative;
+      }
+
+      &.oos {
+        opacity: 0.65;
+      }
+
+      .oos-badge {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        background-color: rgba(255, 255, 255, 0.95);
+        color: #A24E4E;
+        border: 1px solid rgba(162, 78, 78, 0.3);
+        border-radius: 10px;
+        padding: 4px 8px;
+        font-size: 11px;
+        font-weight: 600;
+        font-family: "Jost", sans-serif;
+        text-transform: none;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+        pointer-events: none;
+
+        // Make badge half-size on mobile
+        @media (max-width: 480px) {
+          transform: scale(0.7);
+          transform-origin: top right;
+          top: 0;
+          right: 0;
         }
       }
       

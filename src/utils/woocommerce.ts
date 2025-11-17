@@ -67,7 +67,8 @@ export const addToCart = async (
   placedCharms: PlacedCharm[],
   giftWrap: boolean = false,
   charmOrderTrust: boolean = false,
-  selectedHoleCount?: 1 | 3 | 5 | 7
+  selectedHoleCount?: 1 | 3 | 5 | 7,
+  quantity: number = 1
 ): Promise<{ success: boolean; message: string }> => {
   if (!necklace) {
     return { success: false, message: "No necklace selected" };
@@ -101,7 +102,7 @@ export const addToCart = async (
   const data: Record<string, any> = {
     product_id: resolvedProductId,
     'add-to-cart': resolvedProductId,
-    quantity: 1,
+    quantity: Math.max(1, quantity || 1),
     // Flag to identify that this request came from the Pomponnettes customizer
     pomponnettes_customizer_used: 'true'
   };
@@ -150,9 +151,11 @@ export const addToCart = async (
             message: "Product added to cart" 
           });
         } else {
+          // Try to surface a message if present
+          const msg = (response && (response.error || response.message)) ? (response.error || response.message) : "Failed to add to cart";
           resolve({ 
             success: false, 
-            message: "Failed to add to cart" 
+            message: msg 
           });
         }
       },
