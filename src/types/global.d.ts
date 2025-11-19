@@ -5,6 +5,7 @@ interface PomponnettesData {
     parentProductId: number;
     inStockVariationIds: number[];
   };
+  availableCharms?: string[];
 }
 
 interface Window {
@@ -12,4 +13,4 @@ interface Window {
 }
 
 // Add jQuery as a global
-declare const jQuery: any; 
+declare const jQuery: any;

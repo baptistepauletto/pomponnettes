@@ -6,11 +6,12 @@ import '../styles/CharmSelector.scss';
 import { toThumbWebpUrl } from '../utils/images';
 import { includesNormalized, startsWithNormalized } from '../utils/text';
 
-const CharmOption: React.FC<{ id: string; name: string; imagePath: string; sizeMark: string }> = ({
+const CharmOption: React.FC<{ id: string; name: string; imagePath: string; sizeMark: string; disabled?: boolean }> = ({
   id,
   name,
   imagePath,
   sizeMark,
+  disabled = false,
 }) => {
   const { isDragging, drag } = useDraggableCharm(id);
   const { selectCharm, isCharmSelected, clearSelectedAttachmentPoint } = useTapToPlace();
@@ -18,11 +19,15 @@ const CharmOption: React.FC<{ id: string; name: string; imagePath: string; sizeM
   const isMobile = isTouchDevice();
   const ref = useRef<HTMLDivElement>(null);
 
-  // Apply the drag ref to the element
-  drag(ref);
+  // Apply the drag ref to the element only if not disabled
+  if (!disabled) {
+    drag(ref);
+  }
 
   // Handle tap on mobile
   const handleTap = () => {
+    if (disabled) return;
+    
     // Clear any selected attachment point when choosing a charm
     clearSelectedAttachmentPoint();
     
@@ -34,9 +39,10 @@ const CharmOption: React.FC<{ id: string; name: string; imagePath: string; sizeM
   return (
     <div
       ref={ref}
-      className={`charm-option ${isDragging ? 'dragging' : ''} ${isSelected ? 'selected' : ''}`}
-      style={{ opacity: isDragging ? 0.4 : 1 }}
+      className={`charm-option ${isDragging ? 'dragging' : ''} ${isSelected ? 'selected' : ''} ${disabled ? 'disabled' : ''}`}
+      style={{ opacity: isDragging || disabled ? 0.4 : 1, cursor: disabled ? 'not-allowed' : 'pointer' }}
       onClick={handleTap}
+      title={disabled ? 'Rupture de stock' : name}
     >
       <img 
         src={toThumbWebpUrl(imagePath)} 
@@ -44,10 +50,18 @@ const CharmOption: React.FC<{ id: string; name: string; imagePath: string; sizeM
         loading="lazy" 
         decoding="async"
         onError={(e) => { e.currentTarget.src = imagePath; }}
+        style={{ filter: disabled ? 'grayscale(100%)' : 'none' }}
       />
-      <div className="size-indicator">
-        {sizeMark}
-      </div>
+      {disabled && (
+        <div className="out-of-stock-overlay">
+          <span>Épuisé</span>
+        </div>
+      )}
+      {!disabled && (
+        <div className="size-indicator">
+          {sizeMark}
+        </div>
+      )}
       <p>{name}</p>
     </div>
   );
@@ -63,6 +77,17 @@ const CharmSelector: React.FC = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [recentlyUsedCharmIds, setRecentlyUsedCharmIds] = useState<string[]>([]);
+  
+  // Get available charms from injected WP data
+  // If pomponnettesData is not defined (dev mode) or availableCharms is missing, assume all are available
+  const availableCharms = window.pomponnettesData?.availableCharms;
+
+  // Check availability helper
+  const isCharmAvailable = (charmId: string): boolean => {
+    // If no data provided at all, assume in stock (dev mode safety)
+    if (!availableCharms) return true;
+    return availableCharms.includes(charmId);
+  };
 
   // Extract unique categories on component mount
   useEffect(() => {
@@ -174,6 +199,7 @@ const CharmSelector: React.FC = () => {
               name={charm.name}
               imagePath={charm.imagePath}
               sizeMark={charm.sizeMark || 'M'}
+              disabled={!isCharmAvailable(charm.id)}
             />
           ))}
         </div>

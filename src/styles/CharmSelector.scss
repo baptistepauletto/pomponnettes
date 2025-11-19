@@ -281,6 +281,53 @@
           border-color: #A24E4E;
         }
       }
+
+      &.disabled {
+        opacity: 0.6;
+        cursor: not-allowed !important;
+        background-color: #f9f9f9;
+        border-color: #eee;
+        
+        &:hover {
+          border-color: #eee;
+          transform: none !important;
+          box-shadow: none !important;
+        }
+
+        img {
+          opacity: 0.4;
+          filter: grayscale(100%);
+        }
+
+        p {
+          color: #aaa;
+        }
+
+        .out-of-stock-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 10;
+          pointer-events: none;
+          
+          span {
+            background: rgba(255, 255, 255, 0.95);
+            color: #999;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            border: 1px solid #ddd;
+            transform: rotate(-10deg);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+          }
+        }
+      }
       
       .size-indicator {
         position: absolute;

@@ -85,6 +85,18 @@ function pomponnettes_enqueue_scripts() {
 
                 $data['inStockVariationIds'] = $in_stock;
                 return $data;
+            })(),
+            // Inject available charm terms (slugs) from pa_charm-1
+            'availableCharms' => (function() {
+                if (!function_exists('get_terms') || !taxonomy_exists('pa_charm-1')) {
+                    return array();
+                }
+                $terms = get_terms(array(
+                    'taxonomy' => 'pa_charm-1',
+                    'hide_empty' => false,
+                    'fields' => 'id=>slug',
+                ));
+                return !is_wp_error($terms) ? array_values($terms) : array();
             })()
         )
     );
