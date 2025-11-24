@@ -285,6 +285,38 @@
           display: none;
         }
       }
+
+      &.disabled {
+        background-color: rgba(245, 245, 245, 0.9);
+        border-color: #eee;
+        cursor: not-allowed;
+        
+        .out-of-stock-badge {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 4;
+          pointer-events: none;
+          
+          span {
+            background: rgba(255, 255, 255, 0.95);
+            color: #999;
+            font-size: 0.55rem; /* Smaller for drawer items */
+            padding: 1.5px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+            border: 1px solid #ddd;
+            transform: rotate(-10deg);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            white-space: nowrap;
+          }
+        }
+      }
       
       .size-indicator {
         position: absolute;
