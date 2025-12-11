@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import { useCustomizer } from '../context/CustomizerContext';
 import { addToCart } from '../utils/woocommerce';
+import { isBandanaProduct } from '../types';
 import '../styles/AddToCartButton.scss';
 
 const AddToCartButton: React.FC = () => {
-  const { selectedNecklace, placedCharms, giftWrap, charmOrderTrust, selectedHoleCount } = useCustomizer();
+  const { selectedProduct, placedCharms, giftWrap, charmOrderTrust, selectedHoleCount } = useCustomizer();
   const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [error, setError] = useState<string>('');
 
   const handleAddToCart = async () => {
-    if (!selectedNecklace) return;
-
+    if (!selectedProduct) return;
 
     setLoading(true);
     setError('');
 
     try {
       const result = await addToCart(
-        selectedNecklace,
+        selectedProduct,
         placedCharms,
         giftWrap,
         charmOrderTrust,
@@ -26,7 +26,7 @@ const AddToCartButton: React.FC = () => {
         quantity
       );
       if (!result.success) {
-        setError(result.message || 'Une erreur est survenue lors de l’ajout au panier.');
+        setError(result.message || "Une erreur est survenue lors de l'ajout au panier.");
       }
     } catch (error) {
       // swallow errors (no UI message requested)
@@ -44,15 +44,13 @@ const AddToCartButton: React.FC = () => {
 
   // Compute wide availability for bandanas (ignore eyelet count; any variant for this bandana color is fine)
   const inStockVariationIds = (window.pomponnettesData?.stock?.inStockVariationIds || []) as number[];
-  const isBandana = !!selectedNecklace && selectedNecklace.name.toLowerCase().includes('bandana');
+  const isBandana = isBandanaProduct(selectedProduct);
   const candidateVariationIds: number[] =
-    selectedNecklace
-      ? (
-          selectedNecklace.variationIdsByHoleCount
-            ? Object.values(selectedNecklace.variationIdsByHoleCount).filter((v): v is number => typeof v === 'number')
-            : (typeof selectedNecklace.variationId === 'number' ? [selectedNecklace.variationId] : [])
-        )
-      : [];
+    selectedProduct && isBandana
+      ? Object.values(selectedProduct.variationIdsByHoleCount).filter((v): v is number => typeof v === 'number')
+      : selectedProduct
+        ? [selectedProduct.variationId]
+        : [];
   const isWideAvailable = !isBandana || candidateVariationIds.some(id => inStockVariationIds.includes(id));
 
   return (
@@ -80,7 +78,7 @@ const AddToCartButton: React.FC = () => {
         <button 
           className="add-to-cart-button"
           onClick={handleAddToCart}
-          disabled={loading || !selectedNecklace || !isWideAvailable}
+          disabled={loading || !selectedProduct || !isWideAvailable}
         >
           {loading ? (
             <span className="loading-spinner"></span>

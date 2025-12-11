@@ -4,7 +4,7 @@ import { useDroppableAttachmentPoint, usePlacedCharm, useDraggablePlacedCharm, u
 import '../styles/NecklaceDisplay.scss';
 import { useTapToPlace, isTouchDevice, triggerHapticFeedback } from '../hooks/useTapToPlace';
 import CharmDrawer from './CharmDrawer';
-import { Position } from '../types';
+import { Position, getProductTypeLabel, isBandanaProduct } from '../types';
 
 // Component for a single attachment point
 const AttachmentPointComponent: React.FC<{
@@ -23,7 +23,7 @@ const AttachmentPointComponent: React.FC<{
   const isMobile = isTouchDevice();
   
   // Apply the drop ref to the element only if not occupied AND on mobile
-  // For desktop, we use proximity dropping on the necklace container
+  // For desktop, we use proximity dropping on the product container
   if (!isOccupied && isMobile) {
     drop(attachmentPointRef);
   }
@@ -83,11 +83,11 @@ const AttachmentPointComponent: React.FC<{
   );
 };
 
-// Determine charm rotation and position based on its location on the necklace
+// Determine charm rotation and position based on its location on the product
 const getCharmTransformStyles = (position: { x: number; y: number }) => {
   const { x, y } = position;
-  const centerX = 53; // Assuming center of the necklace is at 50%
-  const bottomY = 85; // Approximate bottom position of the necklace
+  const centerX = 53; // Assuming center of the product is at 50%
+  const bottomY = 85; // Approximate bottom position of the product
   
   // Check if we're on a mobile device
   const isMobile = window.innerWidth <= 480;
@@ -142,7 +142,7 @@ const getCharmTransformStyles = (position: { x: number; y: number }) => {
   };
 };
 
-// Component for a charm that has been placed on the necklace
+// Component for a charm that has been placed on the product
 import { toThumbWebpUrl } from '../utils/images';
 
 const PlacedCharm: React.FC<{
@@ -307,7 +307,7 @@ const PositionGrid: React.FC = () => {
 };
 
 const NecklaceDisplay: React.FC = () => {
-  const { selectedNecklace, placedCharms } = useCustomizer();
+  const { selectedProduct, placedCharms } = useCustomizer();
   const [showAttachmentPoints, setShowAttachmentPoints] = useState(false);
   const [showPointNames, setShowPointNames] = useState(false);
   const [showGrid, setShowGrid] = useState(false);
@@ -317,22 +317,22 @@ const NecklaceDisplay: React.FC = () => {
   const [hasPlacedCharm, setHasPlacedCharm] = useState(false);
   const [showRemovalTip, setShowRemovalTip] = useState(false);
   const [hasShownRemovalTip, setHasShownRemovalTip] = useState(false);
-  const [hasInteractedWithNecklace, setHasInteractedWithNecklace] = useState(false);
-  const necklaceContainerRef = useRef<HTMLDivElement>(null!);
+  const [hasInteractedWithProduct, setHasInteractedWithProduct] = useState(false);
+  const productContainerRef = useRef<HTMLDivElement>(null!);
   const [targetedPointId, setTargetedPointId] = useState<string | null>(null);
   const inStockVariationIds = (window.pomponnettesData?.stock?.inStockVariationIds || []) as number[];
   
   // Use proximity dropping only for desktop (non-touch devices)
-  const attachmentPoints = selectedNecklace?.attachmentPoints || [];
+  const attachmentPoints = selectedProduct?.attachmentPoints || [];
   const proximityDrop = useProximityDroppableNecklace(
     attachmentPoints,
     setTargetedPointId,
-    necklaceContainerRef
+    productContainerRef
   );
 
-  // Apply drop functionality to necklace container for desktop
+  // Apply drop functionality to product container for desktop
   if (!isMobile) {
-    proximityDrop.drop(necklaceContainerRef);
+    proximityDrop.drop(productContainerRef);
   }
 
   // Effect to track if a charm has been placed
@@ -359,13 +359,13 @@ const NecklaceDisplay: React.FC = () => {
 
   // Effect to mark the user as interacted when drawer is opened
   useEffect(() => {
-    if (isDrawerOpen && !hasInteractedWithNecklace) {
-      setHasInteractedWithNecklace(true);
+    if (isDrawerOpen && !hasInteractedWithProduct) {
+      setHasInteractedWithProduct(true);
     }
-  }, [isDrawerOpen, hasInteractedWithNecklace]);
+  }, [isDrawerOpen, hasInteractedWithProduct]);
 
-  if (!selectedNecklace) {
-    return <div className="necklace-display empty">Please select a necklace</div>;
+  if (!selectedProduct) {
+    return <div className="necklace-display empty">Sélectionne un produit</div>;
   }
 
   // Handle drawer open/close state
@@ -380,27 +380,29 @@ const NecklaceDisplay: React.FC = () => {
       setShowAttachmentPoints(true);
       
       // Mark as interacted when drawer is opened
-      if (!hasInteractedWithNecklace) {
-        setHasInteractedWithNecklace(true);
+      if (!hasInteractedWithProduct) {
+        setHasInteractedWithProduct(true);
       }
     }
   };
 
-  // Handle necklace tap to open drawer
-  const handleNecklaceTap = () => {
+  // Handle product tap to open drawer
+  const handleProductTap = () => {
     if (isMobile && !isDrawerOpen) {
-      setHasInteractedWithNecklace(true);
+      setHasInteractedWithProduct(true);
       handleDrawerOpenChange(true);
       triggerHapticFeedback('light');
     }
   };
 
+// Get product type label for dynamic text
+  const productTypeLabel = getProductTypeLabel(selectedProduct).toUpperCase();
+
   // Wide availability for the currently selected bandana (ignoring hole count)
-  const isBandana = selectedNecklace.name.toLowerCase().includes('bandana');
-  const candidateVariationIds: number[] =
-    selectedNecklace.variationIdsByHoleCount
-      ? Object.values(selectedNecklace.variationIdsByHoleCount).filter((v): v is number => typeof v === 'number')
-      : (typeof (selectedNecklace as any).variationId === 'number' ? [(selectedNecklace as any).variationId as number] : []);
+  const isBandana = isBandanaProduct(selectedProduct);
+  const candidateVariationIds: number[] = isBandana
+    ? Object.values(selectedProduct.variationIdsByHoleCount).filter((v): v is number => typeof v === 'number')
+    : [selectedProduct.variationId];
   const wideAvailable = !isBandana || candidateVariationIds.some(id => inStockVariationIds.includes(id));
 
   return (
@@ -420,7 +422,7 @@ const NecklaceDisplay: React.FC = () => {
       )}
       
       <div 
-        ref={necklaceContainerRef}
+        ref={productContainerRef}
         className={`necklace-container ${showGrid ? 'with-grid' : ''}`}
       >
         {!wideAvailable && (
@@ -429,25 +431,25 @@ const NecklaceDisplay: React.FC = () => {
         <picture>
           <source 
             type="image/webp" 
-            srcSet={selectedNecklace.imagePath.replace(/\.(png|jpe?g|webp)$/i, '.webp')} 
+            srcSet={selectedProduct.imagePath.replace(/\.(png|jpe?g|webp)$/i, '.webp')} 
           />
           <img
-            src={selectedNecklace.imagePath}
-            alt={selectedNecklace.name}
+            src={selectedProduct.imagePath}
+            alt={selectedProduct.name}
             className="necklace-image"
             style={{
-              transform: selectedNecklace.displayScale 
-                ? `scale(${selectedNecklace.displayScale})` 
+              transform: selectedProduct.displayScale 
+                ? `scale(${selectedProduct.displayScale})` 
                 : undefined
             }}
-            onClick={handleNecklaceTap}
+            onClick={handleProductTap}
           />
         </picture>
 
         {showGrid && <PositionGrid />}
 
         {/* Render attachment points */}
-        {selectedNecklace.attachmentPoints.map((point) => {
+        {selectedProduct.attachmentPoints.map((point) => {
           // Calculate occupation status considering move mode
           let isOccupied = point.isOccupied;
           
@@ -486,10 +488,10 @@ const NecklaceDisplay: React.FC = () => {
         ))}
       </div>
       
-      {/* Show first-time interaction hint if never interacted with necklace */}
-      {isMobile && !hasInteractedWithNecklace && !isDrawerOpen && (
+      {/* Show first-time interaction hint if never interacted with product */}
+      {isMobile && !hasInteractedWithProduct && !isDrawerOpen && (
         <div className="first-interaction-hint">
-          TAP LE BANDANA POUR COMMENCER
+          TAP LE {productTypeLabel} POUR COMMENCER
         </div>
       )}
       

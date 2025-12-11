@@ -1,10 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useCustomizer } from '../context/CustomizerContext';
+import { isBandanaProduct, HoleCount, getProductTypeLabel } from '../types';
 import '../styles/NecklaceSelector.scss';
 import { toThumbWebpUrl } from '../utils/images';
 
 const NecklaceSelector: React.FC = () => {
-  const { necklaces, selectedNecklace, selectNecklace, selectedHoleCount, setSelectedHoleCount } = useCustomizer();
+  const { products, selectedProduct, selectProduct, selectedHoleCount, setSelectedHoleCount } = useCustomizer();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(false);
@@ -48,7 +49,7 @@ const NecklaceSelector: React.FC = () => {
       container.removeEventListener('scroll', updateArrowVisibility);
       window.removeEventListener('resize', updateArrowVisibility);
     };
-  }, [necklaces]); // Re-run when necklaces change
+  }, [products]); // Re-run when products change
 
   const scrollByAmount = (direction: 'left' | 'right') => {
     const container = scrollContainerRef.current;
@@ -102,9 +103,15 @@ const NecklaceSelector: React.FC = () => {
     try { container?.releasePointerCapture(e.pointerId); } catch {}
   };
 
+  // Get step 1 label based on product type
+  const getStep1Label = () => {
+    const productType = getProductTypeLabel(selectedProduct);
+    return `ÉTAPE 1: CHOISIS TON ${productType.toUpperCase()}`;
+  };
+
   return (
     <div className="necklace-selector">
-      <h3>ÉTAPE 1: CHOISIS TON BANDANA</h3>
+      <h3>{getStep1Label()}</h3>
       <div className="carousel-container">
         {/* Left arrow - only visible on mobile when can scroll left */}
         <div className={`scroll-arrow left-arrow ${showLeftArrow ? 'visible' : ''}`} onClick={() => scrollByAmount('left')}>
@@ -120,36 +127,35 @@ const NecklaceSelector: React.FC = () => {
           onPointerLeave={endDrag}
           onPointerCancel={endDrag}
         >
-          {necklaces.map((necklace) => {
-            const isBandana = necklace.name.toLowerCase().includes('bandana');
-            const candidateVariationIds: number[] =
-              necklace.variationIdsByHoleCount
-                ? Object.values(necklace.variationIdsByHoleCount).filter((v): v is number => typeof v === 'number')
-                : (typeof (necklace as any).variationId === 'number' ? [(necklace as any).variationId as number] : []);
+          {products.map((product) => {
+            const isBandana = isBandanaProduct(product);
+            const candidateVariationIds: number[] = isBandana
+              ? Object.values(product.variationIdsByHoleCount).filter((v): v is number => typeof v === 'number')
+              : [product.variationId];
             const wideAvailable = !isBandana || candidateVariationIds.some(id => inStockVariationIds.includes(id));
             return (
               <div
-                key={necklace.id}
-                className={`necklace-option ${selectedNecklace?.id === necklace.id ? 'selected' : ''} ${!wideAvailable ? 'oos' : ''}`}
+                key={product.id}
+                className={`necklace-option ${selectedProduct?.id === product.id ? 'selected' : ''} ${!wideAvailable ? 'oos' : ''}`}
                 onClick={(e) => {
                   if (hasDraggedRef.current) { e.preventDefault(); return; }
-                  selectNecklace(necklace.id);
+                  selectProduct(product.id);
                 }}
               >
                 <div className="image-wrap">
                   <img 
-                    src={toThumbWebpUrl(necklace.imagePath)} 
-                    alt={necklace.name} 
+                    src={toThumbWebpUrl(product.imagePath)} 
+                    alt={product.name} 
                     loading="lazy" 
                     decoding="async"
-                    onError={(e) => { e.currentTarget.src = necklace.imagePath; }}
+                    onError={(e) => { e.currentTarget.src = product.imagePath; }}
                   />
                   {!wideAvailable && (
                     <div className="oos-badge">Rupture de stock</div>
                   )}
                 </div>
                 <div className="necklace-info">
-                  <p className="necklace-name">{necklace.name}</p>
+                  <p className="necklace-name">{product.name}</p>
                 </div>
               </div>
             );
@@ -163,16 +169,16 @@ const NecklaceSelector: React.FC = () => {
       </div>
 
       {/* Step 2 - hole count selection (bandanas only) */}
-      {selectedNecklace && selectedNecklace.name.toLowerCase().includes('bandana') && (
+      {isBandanaProduct(selectedProduct) && (
         <div className="hole-count-selector">
           <h3>ÉTAPE 2: CHOISIS TON NOMBRE DE CHARMS</h3>
           <div className="hole-count-buttons">
-            {[1, 3, 5, 7].map((count) => (
+            {([1, 3, 5, 7] as HoleCount[]).map((count) => (
               <button
                 key={count}
                 type="button"
                 className={`hole-count-button ${selectedHoleCount === count ? 'selected' : ''}`}
-                onClick={() => setSelectedHoleCount(count as 1 | 3 | 5 | 7)}
+                onClick={() => setSelectedHoleCount(count)}
               >
                 {count}
               </button>

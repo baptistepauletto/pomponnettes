@@ -4,7 +4,7 @@ import { useCustomizer } from '../context/CustomizerContext';
 
 const Description: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const { selectedNecklace } = useCustomizer();
+  const { selectedProduct } = useCustomizer();
 
   return (
     <div className="description">
@@ -22,7 +22,7 @@ const Description: React.FC = () => {
           <div className="description-text">
             <p>
               <strong>TAILLE</strong>
-               <br />{selectedNecklace?.sizeDescription}
+               <br />{selectedProduct?.sizeDescription}
             </p>
             <p>
               <strong>COMPOSITION </strong>

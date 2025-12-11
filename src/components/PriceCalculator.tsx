@@ -4,16 +4,16 @@ import { getPriceBreakdown, formatPrice, CHARM_PRICE } from '../utils/pricing';
 import '../styles/PriceCalculator.scss';
 
 const PriceCalculator: React.FC = () => {
-  const { selectedNecklace, placedCharms, giftWrap, selectedHoleCount } = useCustomizer();
+  const { selectedProduct, placedCharms, giftWrap, selectedHoleCount } = useCustomizer();
   const [showBreakdown, setShowBreakdown] = useState(false);
   
-  const pricing = getPriceBreakdown(selectedNecklace, placedCharms, giftWrap, selectedHoleCount);
+  const pricing = getPriceBreakdown(selectedProduct, placedCharms, giftWrap, selectedHoleCount);
 
-  if (!selectedNecklace) {
+  if (!selectedProduct) {
     return (
       <div className="price-calculator">
         <div className="price-display">
-          <span className="price-label">Select a necklace to see pricing</span>
+          <span className="price-label">Sélectionne un produit pour voir le prix</span>
         </div>
       </div>
     );
@@ -37,10 +37,10 @@ const PriceCalculator: React.FC = () => {
       {/* Expanded breakdown */}
       {showBreakdown && (
         <div className="price-breakdown">
-          {/* Necklace price */}
+          {/* Product price */}
           <div className="breakdown-item">
-            <span className="item-label">{selectedNecklace.name}</span>
-            <span className="item-price">{formatPrice(pricing.necklacePrice)}</span>
+            <span className="item-label">{selectedProduct.name}</span>
+            <span className="item-price">{formatPrice(pricing.productPrice)}</span>
           </div>
 
           {/* Charms section */}
