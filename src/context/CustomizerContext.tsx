@@ -1,25 +1,25 @@
 import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
-import { Necklace, Charm, PlacedCharm, AttachmentPoint } from '../types';
-import { necklaces } from '../data/necklaces';
+import { Product, Charm, PlacedCharm, AttachmentPoint, HoleCount, isBandanaProduct } from '../types';
+import { products } from '../data/products';
 import { charms } from '../data/charms';
 
 // Interface for the context state
 interface CustomizerContextState {
   // Data
-  necklaces: Necklace[];
+  products: Product[];
   charms: Charm[];
   
   // Current selections
-  selectedNecklace: Necklace | null;
+  selectedProduct: Product | null;
   placedCharms: PlacedCharm[];
-  selectedHoleCount: 1 | 3 | 5 | 7;
+  selectedHoleCount: HoleCount;
   
   // Cart options
   giftWrap: boolean;
   charmOrderTrust: boolean;
   
   // Actions
-  selectNecklace: (necklaceId: number) => void;
+  selectProduct: (productId: number) => void;
   addCharm: (charmId: string, attachmentPointId: string) => void;
   removeCharm: (placedCharmId: string) => void;
   moveCharm: (placedCharmId: string, newAttachmentPointId: string) => void;
@@ -27,7 +27,15 @@ interface CustomizerContextState {
   clearAllCharms: () => void;
   setGiftWrap: (enabled: boolean) => void;
   setCharmOrderTrust: (enabled: boolean) => void;
-  setSelectedHoleCount: (count: 1 | 3 | 5 | 7) => void;
+  setSelectedHoleCount: (count: HoleCount) => void;
+  
+  // Legacy aliases for backward compatibility
+  /** @deprecated Use products instead */
+  necklaces: Product[];
+  /** @deprecated Use selectedProduct instead */
+  selectedNecklace: Product | null;
+  /** @deprecated Use selectProduct instead */
+  selectNecklace: (productId: number) => void;
 }
 
 // Create context with initial empty state
@@ -41,16 +49,14 @@ interface CustomizerProviderProps {
 // Provider component
 export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children }) => {
   // State
-  const [selectedNecklaceId, setSelectedNecklaceId] = useState<number>(necklaces[0].id);
+  const [selectedProductId, setSelectedProductId] = useState<number>(products[0].id);
   const [placedCharms, setPlacedCharms] = useState<PlacedCharm[]>([]);
   const [giftWrap, setGiftWrap] = useState<boolean>(false);
   const [charmOrderTrust, setCharmOrderTrust] = useState<boolean>(false);
-  const [selectedHoleCount, setSelectedHoleCountState] = useState<1 | 3 | 5 | 7>(5);
+  const [selectedHoleCount, setSelectedHoleCountState] = useState<HoleCount>(5);
 
-  // Helpers
-  const isBandana = (n: Necklace | null) => !!n && n.name.toLowerCase().includes('bandana');
-
-  const getBandanaVariantImagePath = (basePath: string, count: 1 | 3 | 5 | 7) => {
+  // Helper to get bandana variant image path
+  const getBandanaVariantImagePath = (basePath: string, count: HoleCount) => {
     // basePath like images/necklaces/bandana-beige.png or full resolved from imagePaths
     // Extract filename
     const parts = basePath.split('/');
@@ -64,7 +70,8 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
     return parts.join('/');
   };
 
-  const computeAttachmentPointsForCount = (basePoints: AttachmentPoint[], count: 1 | 3 | 5 | 7): AttachmentPoint[] => {
+  // Helper to compute attachment points for a given hole count (bandana-specific)
+  const computeAttachmentPointsForCount = (basePoints: AttachmentPoint[], count: HoleCount): AttachmentPoint[] => {
     // Always work with a left-to-right ordered copy
     const points = [...basePoints].sort((a, b) => a.position.x - b.position.x);
 
@@ -96,54 +103,54 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
     return [ { ...points[Math.floor(len / 2)] } ];
   };
 
-  // Get the currently selected necklace with computed occupation status
-  const baseNecklace = necklaces.find(n => n.id === selectedNecklaceId) || null;
+  // Get the currently selected product with computed occupation status
+  const baseProduct = products.find(p => p.id === selectedProductId) || null;
   
-  // Derive bandana-specific fields
-  const derivedImagePath = baseNecklace && isBandana(baseNecklace)
-    ? getBandanaVariantImagePath(baseNecklace.imagePath, selectedHoleCount)
-    : baseNecklace?.imagePath;
+  // Derive bandana-specific fields using type guard
+  const derivedImagePath = isBandanaProduct(baseProduct)
+    ? getBandanaVariantImagePath(baseProduct.imagePath, selectedHoleCount)
+    : baseProduct?.imagePath;
 
-  const derivedAttachmentPoints = baseNecklace && isBandana(baseNecklace)
-    ? computeAttachmentPointsForCount(baseNecklace.attachmentPoints, selectedHoleCount)
-    : baseNecklace?.attachmentPoints || [];
+  const derivedAttachmentPoints = isBandanaProduct(baseProduct)
+    ? computeAttachmentPointsForCount(baseProduct.attachmentPoints, selectedHoleCount)
+    : baseProduct?.attachmentPoints || [];
   
   // Compute occupation status from placed charms without mutating original data
-  const selectedNecklace = baseNecklace ? {
-    ...baseNecklace,
-    imagePath: derivedImagePath || baseNecklace.imagePath,
+  const selectedProduct = baseProduct ? {
+    ...baseProduct,
+    imagePath: derivedImagePath || baseProduct.imagePath,
     attachmentPoints: derivedAttachmentPoints.map(point => ({
       ...point,
       isOccupied: placedCharms.some(charm => charm.attachmentPointId === point.id)
     }))
   } : null;
 
-  // Action to select a necklace
-  const selectNecklace = useCallback((necklaceId: number) => {
-    // If it's the same necklace, don't do anything
-    if (necklaceId === selectedNecklaceId) return;
+  // Action to select a product
+  const selectProduct = useCallback((productId: number) => {
+    // If it's the same product, don't do anything
+    if (productId === selectedProductId) return;
     
-    const currentNecklace = necklaces.find(n => n.id === selectedNecklaceId);
-    const newNecklace = necklaces.find(n => n.id === necklaceId);
+    const currentProduct = products.find(p => p.id === selectedProductId);
+    const newProduct = products.find(p => p.id === productId);
     
-    if (!currentNecklace || !newNecklace) {
-      setSelectedNecklaceId(necklaceId);
+    if (!currentProduct || !newProduct) {
+      setSelectedProductId(productId);
       return;
     }
     
-    // Transfer charms from current necklace to new necklace based on attachment point indices
+    // Transfer charms from current product to new product based on attachment point indices
     const transferredCharms: PlacedCharm[] = [];
     
     // Create a map of current charms by their attachment point index
     const charmsByAttachmentIndex = new Map<number, {charmId: string, placedCharmId: string}>();
     
     placedCharms.forEach(charm => {
-      const attachmentPoint = currentNecklace.attachmentPoints.find(
+      const attachmentPoint = currentProduct.attachmentPoints.find(
         p => p.id === charm.attachmentPointId
       );
       
       if (attachmentPoint) {
-        const index = currentNecklace.attachmentPoints.indexOf(attachmentPoint);
+        const index = currentProduct.attachmentPoints.indexOf(attachmentPoint);
         charmsByAttachmentIndex.set(index, {
           charmId: charm.charmId,
           placedCharmId: charm.id
@@ -151,11 +158,11 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
       }
     });
     
-    // Apply charms to the new necklace based on index mapping
+    // Apply charms to the new product based on index mapping
     charmsByAttachmentIndex.forEach((charmInfo, index) => {
-      // Only transfer if the new necklace has enough attachment points
-      if (index < newNecklace.attachmentPoints.length) {
-        const newAttachmentPoint = newNecklace.attachmentPoints[index];
+      // Only transfer if the new product has enough attachment points
+      if (index < newProduct.attachmentPoints.length) {
+        const newAttachmentPoint = newProduct.attachmentPoints[index];
         
         // Create a new placed charm with the updated attachment point
         const newPlacedCharm: PlacedCharm = {
@@ -169,17 +176,17 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
       }
     });
     
-    // Update the selected necklace and placed charms
-    setSelectedNecklaceId(necklaceId);
+    // Update the selected product and placed charms
+    setSelectedProductId(productId);
     setPlacedCharms(transferredCharms);
-  }, [selectedNecklaceId, placedCharms]);
+  }, [selectedProductId, placedCharms]);
 
-  // Action to add a charm to the necklace
+  // Action to add a charm to the product
   const addCharm = useCallback((charmId: string, attachmentPointId: string) => {
-    if (!selectedNecklace) return;
+    if (!selectedProduct) return;
 
     // Find the attachment point
-    const attachmentPoint = selectedNecklace.attachmentPoints.find(
+    const attachmentPoint = selectedProduct.attachmentPoints.find(
       p => p.id === attachmentPointId
     );
 
@@ -211,29 +218,29 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
       }
     ]);
     
-  }, [selectedNecklace, placedCharms]);
+  }, [selectedProduct, placedCharms]);
 
-  // Action to remove a charm from the necklace
+  // Action to remove a charm from the product
   const removeCharm = useCallback((placedCharmId: string) => {
     // Find the charm to remove
     const charmToRemove = placedCharms.find(c => c.id === placedCharmId);
-    if (!charmToRemove || !selectedNecklace) return;
+    if (!charmToRemove || !selectedProduct) return;
 
     // Remove the charm (occupation status will be computed automatically)
     setPlacedCharms(prev => prev.filter(c => c.id !== placedCharmId));
     
-  }, [placedCharms, selectedNecklace]);
+  }, [placedCharms, selectedProduct]);
 
   // Action to move a charm to a different attachment point
   const moveCharm = useCallback((placedCharmId: string, newAttachmentPointId: string) => {
-    if (!selectedNecklace) return;
+    if (!selectedProduct) return;
 
     // Find the charm to move
     const charmToMove = placedCharms.find(c => c.id === placedCharmId);
     if (!charmToMove) return;
 
     // Find the new attachment point
-    const newAttachmentPoint = selectedNecklace.attachmentPoints.find(
+    const newAttachmentPoint = selectedProduct.attachmentPoints.find(
       p => p.id === newAttachmentPointId
     );
     if (!newAttachmentPoint) return;
@@ -257,11 +264,11 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
         : charm
     ));
     
-  }, [placedCharms, selectedNecklace]);
+  }, [placedCharms, selectedProduct]);
 
   // Action to swap two charms between attachment points
   const swapCharms = useCallback((placedCharmId: string, targetAttachmentPointId: string) => {
-    if (!selectedNecklace) return;
+    if (!selectedProduct) return;
 
     // Find the charm to move
     const charmToMove = placedCharms.find(c => c.id === placedCharmId);
@@ -276,10 +283,10 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
     }
 
     // Find the attachment points
-    const sourceAttachmentPoint = selectedNecklace.attachmentPoints.find(
+    const sourceAttachmentPoint = selectedProduct.attachmentPoints.find(
       p => p.id === charmToMove.attachmentPointId
     );
-    const targetAttachmentPoint = selectedNecklace.attachmentPoints.find(
+    const targetAttachmentPoint = selectedProduct.attachmentPoints.find(
       p => p.id === targetAttachmentPointId
     );
 
@@ -304,41 +311,44 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
       return charm;
     }));
     
-  }, [placedCharms, selectedNecklace, moveCharm]);
+  }, [placedCharms, selectedProduct, moveCharm]);
 
-  // Action to clear all charms from the necklace
+  // Action to clear all charms from the product
   const clearAllCharms = useCallback(() => {
-    if (!selectedNecklace) return;
+    if (!selectedProduct) return;
     
     // Clear all placed charms (occupation status will be computed automatically)
     setPlacedCharms([]);
     
-  }, [selectedNecklace]);
+  }, [selectedProduct]);
 
   // Update hole count with cleanup of placed charms that no longer have valid points (bandanas only)
-  const setSelectedHoleCount = useCallback((count: 1 | 3 | 5 | 7) => {
+  const setSelectedHoleCount = useCallback((count: HoleCount) => {
     setSelectedHoleCountState(count);
-    const current = necklaces.find(n => n.id === selectedNecklaceId) || null;
-    if (!current || !isBandana(current)) return;
+    const current = products.find(p => p.id === selectedProductId) || null;
+    
+    // Only apply hole count logic to bandanas
+    if (!isBandanaProduct(current)) return;
 
     // Compute allowed points for new count
     const allowedPoints = computeAttachmentPointsForCount(current.attachmentPoints, count);
     const allowedIds = new Set(allowedPoints.map(p => p.id));
     // Filter placed charms to only those on allowed ids
     setPlacedCharms(prev => prev.filter(c => allowedIds.has(c.attachmentPointId)));
-  }, [selectedNecklaceId]);
+  }, [selectedProductId]);
 
 
   // Context value
   const value: CustomizerContextState = {
-    necklaces,
+    // New naming
+    products,
     charms,
-    selectedNecklace,
+    selectedProduct,
     placedCharms,
     selectedHoleCount,
     giftWrap,
     charmOrderTrust,
-    selectNecklace,
+    selectProduct,
     addCharm,
     removeCharm,
     moveCharm,
@@ -346,7 +356,12 @@ export const CustomizerProvider: React.FC<CustomizerProviderProps> = ({ children
     clearAllCharms,
     setGiftWrap,
     setCharmOrderTrust,
-    setSelectedHoleCount
+    setSelectedHoleCount,
+    
+    // Legacy aliases for backward compatibility
+    necklaces: products,
+    selectedNecklace: selectedProduct,
+    selectNecklace: selectProduct,
   };
 
   return (
@@ -363,4 +378,4 @@ export const useCustomizer = () => {
     throw new Error('useCustomizer must be used within a CustomizerProvider');
   }
   return context;
-}; 
+};
