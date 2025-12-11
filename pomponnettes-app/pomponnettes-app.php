@@ -54,7 +54,50 @@ function pomponnettes_enqueue_scripts() {
         'pomponnettesData',
         array(
             'pluginUrl' => $plugin_url,
-            'imagesPath' => $plugin_url . 'images/'
+            'imagesPath' => $plugin_url . 'images/',
+            // Inject stock info without using REST to avoid SSL issues
+            'stock' => (function () {
+                // Default structure
+                $data = array(
+                    'parentProductId' => 21290,
+                    'inStockVariationIds' => array()
+                );
+
+                // Only if WooCommerce functions are available
+                if (!function_exists('wc_get_product')) {
+                    return $data;
+                }
+
+                $parent_id = 21290; // Bandana variable product
+                $product = wc_get_product($parent_id);
+                if (!$product || !$product->is_type('variable')) {
+                    return $data;
+                }
+
+                $children = $product->get_children(); // variation IDs
+                $in_stock = array();
+                foreach ($children as $variation_id) {
+                    $variation = wc_get_product($variation_id);
+                    if ($variation && $variation->is_in_stock()) {
+                        $in_stock[] = $variation_id;
+                    }
+                }
+
+                $data['inStockVariationIds'] = $in_stock;
+                return $data;
+            })(),
+            // Inject available charm terms (slugs) from pa_charm-1
+            'availableCharms' => (function() {
+                if (!function_exists('get_terms') || !taxonomy_exists('pa_charm-1')) {
+                    return array();
+                }
+                $terms = get_terms(array(
+                    'taxonomy' => 'pa_charm-1',
+                    'hide_empty' => false,
+                    'fields' => 'id=>slug',
+                ));
+                return !is_wp_error($terms) ? array_values($terms) : array();
+            })()
         )
     );
 }
@@ -90,6 +133,36 @@ add_filter('script_loader_tag', function($tag, $handle, $src) {
 if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
     
     /**
+     * Validate stock on add to cart for bandanas (product 21290 variations)
+     * Ensures a friendly message is returned if selected variant is OOS.
+     */
+    add_filter('woocommerce_add_to_cart_validation', function($passed, $product_id, $quantity, $variation_id = 0, $variations = array()) {
+        // Only enforce for our bandana product parent (21290)
+        $bandana_parent_id = 21290;
+
+        // If not our product, allow
+        if (intval($product_id) !== $bandana_parent_id) {
+            return $passed;
+        }
+
+        // If no variation provided, allow default WC handling
+        if (empty($variation_id)) {
+            return $passed;
+        }
+
+        // Validate variation stock
+        if (function_exists('wc_get_product')) {
+            $variation = wc_get_product($variation_id);
+            if ($variation instanceof WC_Product && !$variation->is_in_stock()) {
+                wc_add_notice(__('Ce bandana est en rupture de stock.', 'pomponnettes'), 'error');
+                return false;
+            }
+        }
+
+        return $passed;
+    }, 10, 5);
+    
+    /**
      * Save custom configuration data to cart item meta
      */
     function pomponnettes_add_cart_item_data($cart_item_data, $product_id, $variation_id) {
@@ -121,10 +194,29 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         // Store cart options
         if (isset($_POST['emballage-cadeau'])) {
             $cart_item_data['gift_wrap'] = sanitize_text_field($_POST['emballage-cadeau']);
+		} else {
+			// Support WooCommerce Product Add-Ons field: addon-{productId}-1715207785[] -> $_POST['addon-{productId}-1715207785']
+			$addon_key = 'addon-' . $product_id . '-1715207785';
+			if (isset($_POST[$addon_key])) {
+				$addon_values = $_POST[$addon_key];
+				if (is_array($addon_values) && in_array('emballage-cadeau', $addon_values, true)) {
+					$cart_item_data['gift_wrap'] = 'oui';
+				}
+			}
         }
         
         if (isset($_POST['confiance-charms'])) {
             $cart_item_data['charm_order_trust'] = sanitize_text_field($_POST['confiance-charms']);
+		} else {
+			// Support WooCommerce Product Add-Ons field for charm order trust:
+			// addon-{productId}-1738266915[] -> $_POST['addon-{productId}-1738266915']
+			$addon_key_trust = 'addon-' . $product_id . '-1738266915';
+			if (isset($_POST[$addon_key_trust])) {
+				$addon_values = $_POST[$addon_key_trust];
+				if (is_array($addon_values) && in_array('je-fais-confiance-aux-pomponnettes-pour-lordre-de-mes-charms-sur-mon-bijou', $addon_values, true)) {
+					$cart_item_data['charm_order_trust'] = 'oui';
+				}
+			}
         }
         
         return $cart_item_data;

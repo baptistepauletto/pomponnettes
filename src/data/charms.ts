@@ -1542,7 +1542,7 @@ export const charms: Charm[] = [
   {
     id: 'poupee-bleue',
     name: 'Poupée Bleue',
-    imagePath: getImagePath('images/charms/poupée-bleue-2.8cm.png'),
+    imagePath: getImagePath('images/charms/poupee-bleue-2.8cm.png'),
     sizeScale: 2.0,
     sizeMark: 'L',
     category: '🐻 Animaux',
@@ -1551,7 +1551,7 @@ export const charms: Charm[] = [
   {
     id: 'poupee-rose',
     name: 'Poupée Rose',
-    imagePath: getImagePath('images/charms/poupée-rose-2.8cm.png'),
+    imagePath: getImagePath('images/charms/poupee-rose-2.8cm.png'),
     sizeScale: 2.0,
     sizeMark: 'L',
     category: '🐻 Animaux',
@@ -1560,7 +1560,7 @@ export const charms: Charm[] = [
   {
     id: 'poupee-rouge',
     name: 'Poupée Rouge',
-    imagePath: getImagePath('images/charms/poupée-rouge-2.8cm.png'),
+    imagePath: getImagePath('images/charms/poupee-rouge-2.8cm.png'),
     sizeScale: 2.0,
     sizeMark: 'L',
     category: '🐻 Animaux',

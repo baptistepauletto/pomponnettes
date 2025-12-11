@@ -7,22 +7,27 @@ const AddToCartButton: React.FC = () => {
   const { selectedNecklace, placedCharms, giftWrap, charmOrderTrust, selectedHoleCount } = useCustomizer();
   const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [error, setError] = useState<string>('');
 
   const handleAddToCart = async () => {
     if (!selectedNecklace) return;
 
 
     setLoading(true);
-    
+    setError('');
 
     try {
-      await addToCart(
+      const result = await addToCart(
         selectedNecklace,
         placedCharms,
         giftWrap,
         charmOrderTrust,
-        selectedHoleCount
+        selectedHoleCount,
+        quantity
       );
+      if (!result.success) {
+        setError(result.message || 'Une erreur est survenue lors de l’ajout au panier.');
+      }
     } catch (error) {
       // swallow errors (no UI message requested)
     } finally {
@@ -36,6 +41,19 @@ const AddToCartButton: React.FC = () => {
       setQuantity(newQuantity);
     }
   };
+
+  // Compute wide availability for bandanas (ignore eyelet count; any variant for this bandana color is fine)
+  const inStockVariationIds = (window.pomponnettesData?.stock?.inStockVariationIds || []) as number[];
+  const isBandana = !!selectedNecklace && selectedNecklace.name.toLowerCase().includes('bandana');
+  const candidateVariationIds: number[] =
+    selectedNecklace
+      ? (
+          selectedNecklace.variationIdsByHoleCount
+            ? Object.values(selectedNecklace.variationIdsByHoleCount).filter((v): v is number => typeof v === 'number')
+            : (typeof selectedNecklace.variationId === 'number' ? [selectedNecklace.variationId] : [])
+        )
+      : [];
+  const isWideAvailable = !isBandana || candidateVariationIds.some(id => inStockVariationIds.includes(id));
 
   return (
     <div className="add-to-cart-container">
@@ -62,7 +80,7 @@ const AddToCartButton: React.FC = () => {
         <button 
           className="add-to-cart-button"
           onClick={handleAddToCart}
-          disabled={loading || !selectedNecklace}
+          disabled={loading || !selectedNecklace || !isWideAvailable}
         >
           {loading ? (
             <span className="loading-spinner"></span>
@@ -71,8 +89,11 @@ const AddToCartButton: React.FC = () => {
           )}
         </button>
       </div>
-      
-      
+      {!!error && (
+        <div className="add-to-cart-error" role="alert" aria-live="polite">
+          {error}
+        </div>
+      )}
     </div>
   );
 };

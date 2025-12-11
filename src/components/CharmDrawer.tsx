@@ -250,6 +250,16 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
     return placedCharms.some(placedCharm => placedCharm.charmId === charmId);
   };
 
+  // Get available charms from injected WP data
+  const availableCharms = window.pomponnettesData?.availableCharms;
+
+  // Check availability helper
+  const isCharmAvailable = (charmId: string): boolean => {
+    // If no data provided at all, assume in stock (dev mode safety)
+    if (!availableCharms) return true;
+    return availableCharms.includes(charmId);
+  };
+
   const filteredCharms = getFilteredCharms();
 
   return (
@@ -317,25 +327,36 @@ const CharmDrawer: React.FC<CharmDrawerProps> = ({ isOpen, onOpenChange }) => {
         {/* Charms grid */}
         {!(selectedCategory === 'Recently Used' && recentlyUsedCharmIds.length === 0) && (
           <div className="charm-grid" ref={gridRef}>
-            {filteredCharms.map(charm => (
-              <div 
-                key={charm.id}
-                className={`charm-item ${charm.id === selectedCharmId ? 'selected' : ''} ${isCharmPlaced(charm.id) ? 'placed' : ''}`}
-                onClick={() => handleCharmSelect(charm.id)}
-              >
-                <img 
-                  src={toThumbWebpUrl(charm.imagePath)} 
-                  alt={charm.name} 
-                  loading="lazy" 
-                  decoding="async"
-                  onError={(e) => { e.currentTarget.src = charm.imagePath; }}
-                />
-                {isCharmPlaced(charm.id) && <div className="placed-badge"></div>}
-                <div className="size-indicator">
-                  {charm.sizeMark}
+            {filteredCharms.map(charm => {
+              const isAvailable = isCharmAvailable(charm.id);
+              return (
+                <div 
+                  key={charm.id}
+                  className={`charm-item ${charm.id === selectedCharmId ? 'selected' : ''} ${isCharmPlaced(charm.id) ? 'placed' : ''} ${!isAvailable ? 'disabled' : ''}`}
+                  onClick={() => isAvailable && handleCharmSelect(charm.id)}
+                >
+                  <img 
+                    src={toThumbWebpUrl(charm.imagePath)} 
+                    alt={charm.name} 
+                    loading="lazy" 
+                    decoding="async"
+                    onError={(e) => { e.currentTarget.src = charm.imagePath; }}
+                    style={{ filter: !isAvailable ? 'grayscale(100%)' : 'none', opacity: !isAvailable ? 0.5 : 1 }}
+                  />
+                  {isCharmPlaced(charm.id) && <div className="placed-badge"></div>}
+                  {!isAvailable && (
+                    <div className="out-of-stock-badge">
+                      <span>Épuisé</span>
+                    </div>
+                  )}
+                  {isAvailable && (
+                    <div className="size-indicator">
+                      {charm.sizeMark}
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
