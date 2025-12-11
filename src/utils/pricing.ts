@@ -1,66 +1,75 @@
-import { Necklace, PlacedCharm } from '../types';
+import { Product, PlacedCharm, HoleCount, isBandanaProduct, isNecklaceProduct } from '../types';
 
 // Pricing constants
 export const CHARM_PRICE = 7.00; // Each charm costs 7 euros
 export const GIFT_WRAP_PRICE = 1.50; // Gift wrap costs 1.5 euros
 
-// Bandana pricing tiers by number of charms
-export const BANDANA_PRICE_BY_CHARMS: Record<1 | 3 | 5 | 7, number> = {
+// Bandana pricing tiers by number of holes/charms
+export const BANDANA_PRICE_BY_HOLES: Record<HoleCount, number> = {
   1: 21.00,
   3: 35.00,
   5: 49.00,
   7: 63.00
 };
 
-function normalizeBandanaCount(count: number): 1 | 3 | 5 | 7 {
+/** @deprecated Use BANDANA_PRICE_BY_HOLES instead */
+export const BANDANA_PRICE_BY_CHARMS = BANDANA_PRICE_BY_HOLES;
+
+function normalizeBandanaCount(count: number): HoleCount {
   if (count <= 1) return 1;
   if (count <= 3) return 3;
   if (count <= 5) return 5;
   return 7;
 }
 
-// Free charm thresholds based on necklace type
-export const FREE_CHARM_THRESHOLDS = {
+// Necklace subtypes for free charm thresholds
+type NecklaceSubtype = 'GRIGRI' | 'GYPSO';
+
+// Free charm thresholds based on necklace subtype
+export const FREE_CHARM_THRESHOLDS: Record<NecklaceSubtype, { buyCount: number; freeCount: number }> = {
   // Grigri necklaces: Buy 8, get 9th free
   GRIGRI: { buyCount: 8, freeCount: 1 },
   // Gypso necklaces: Buy 6, get 7th free  
   GYPSO: { buyCount: 6, freeCount: 1 }
 };
 
-// Helper function to determine necklace type from name
-export function getNecklaceType(necklaceName: string): 'GRIGRI' | 'GYPSO' | null {
-  const name = necklaceName.toLowerCase();
+/**
+ * Helper function to determine necklace subtype from name
+ * Only applies to necklace products
+ */
+export function getNecklaceSubtype(product: Product | null): NecklaceSubtype | null {
+  if (!product || !isNecklaceProduct(product)) return null;
+  
+  const name = product.name.toLowerCase();
   if (name.includes('grigri')) return 'GRIGRI';
   if (name.includes('gypso')) return 'GYPSO';
   return null;
 }
 
-// Helper function to check if necklace is a bandana
-export function isBandana(necklace: Necklace | null): boolean {
-  if (!necklace) return false;
-  const name = necklace.name.toLowerCase();
-  return name.includes('bandana');
+/** @deprecated Use isBandanaProduct from types instead */
+export function isBandana(product: Product | null): boolean {
+  return isBandanaProduct(product);
 }
 
 /**
- * Calculate free charms based on necklace type and charm count
+ * Calculate free charms based on product type and charm count
+ * Only necklaces have free charm promotions
  */
-export function calculateFreeCharms(necklace: Necklace | null, charmCount: number) {
-  if (!necklace) {
-    return { freeCharms: 0, totalFreeCharms: 0, nextFreeAt: null, charmsUntilFree: 0 };
-  }
+export function calculateFreeCharms(product: Product | null, charmCount: number) {
+  const defaultResult = { freeCharms: 0, totalFreeCharms: 0, nextFreeAt: null as number | null, charmsUntilFree: 0, threshold: 0 };
   
-  // Bandanas don't have free charm promotions since charms don't affect price
-  if (isBandana(necklace)) {
-    return { freeCharms: 0, totalFreeCharms: 0, nextFreeAt: null, charmsUntilFree: 0 };
-  }
+  if (!product) return defaultResult;
   
-  const necklaceType = getNecklaceType(necklace.name);
-  if (!necklaceType) {
-    return { freeCharms: 0, totalFreeCharms: 0, nextFreeAt: null, charmsUntilFree: 0 };
-  }
+  // Bandanas don't have free charm promotions (charms are included in price tiers)
+  if (isBandanaProduct(product)) return defaultResult;
   
-  const threshold = FREE_CHARM_THRESHOLDS[necklaceType];
+  // Only necklaces have free charm promotions
+  if (!isNecklaceProduct(product)) return defaultResult;
+  
+  const necklaceSubtype = getNecklaceSubtype(product);
+  if (!necklaceSubtype) return defaultResult;
+  
+  const threshold = FREE_CHARM_THRESHOLDS[necklaceSubtype];
   const cycles = Math.floor(charmCount / (threshold.buyCount + threshold.freeCount));
   const remainingInCurrentCycle = charmCount % (threshold.buyCount + threshold.freeCount);
   
@@ -71,7 +80,7 @@ export function calculateFreeCharms(necklace: Necklace | null, charmCount: numbe
   }
   
   // Calculate when next free charm will be available
-  let nextFreeAt = null;
+  let nextFreeAt: number | null = null;
   let charmsUntilFree = 0;
   
   if (remainingInCurrentCycle <= threshold.buyCount) {
@@ -80,7 +89,6 @@ export function calculateFreeCharms(necklace: Necklace | null, charmCount: numbe
     charmsUntilFree = nextFreeAt - charmCount;
   } else if (remainingInCurrentCycle < threshold.buyCount + threshold.freeCount) {
     // In free phase of current cycle, but more free charms available
-    // (though currently we only have 1 free charm per cycle, this handles future expansion)
     const remainingFreeInCycle = threshold.freeCount - (remainingInCurrentCycle - threshold.buyCount);
     if (remainingFreeInCycle > 0) {
       nextFreeAt = charmCount + 1; // Next charm is free
@@ -106,17 +114,85 @@ export function calculateFreeCharms(necklace: Necklace | null, charmCount: numbe
 }
 
 /**
- * Calculate the total price for a customized necklace
+ * Calculate bandana price based on hole count
+ */
+function calculateBandanaPrice(
+  _product: Product,
+  placedCharms: PlacedCharm[],
+  giftWrap: boolean,
+  selectedHoleCount?: HoleCount
+) {
+  const charmCount = placedCharms.length;
+  const countForPricing = selectedHoleCount ?? normalizeBandanaCount(charmCount);
+  const bandanaPrice = BANDANA_PRICE_BY_HOLES[countForPricing];
+  const charmsOriginalPrice = charmCount * CHARM_PRICE;
+  const giftWrapPrice = giftWrap ? GIFT_WRAP_PRICE : 0;
+  const subtotal = bandanaPrice + giftWrapPrice;
+  
+  return {
+    productPrice: bandanaPrice,
+    charmsPrice: 0, // Charms are included in bandana price tiers
+    charmsOriginalPrice,
+    freeCharmsCount: 0,
+    freeCharmsValue: 0,
+    giftWrapPrice,
+    subtotal,
+    shipping: 0,
+    total: subtotal,
+    freeShipping: false,
+    savings: 0
+  };
+}
+
+/**
+ * Calculate necklace price with charm pricing
+ */
+function calculateNecklacePrice(
+  product: Product,
+  placedCharms: PlacedCharm[],
+  giftWrap: boolean
+) {
+  const productPrice = product.basePrice;
+  const charmCount = placedCharms.length;
+  const charmsOriginalPrice = charmCount * CHARM_PRICE;
+  
+  // Calculate free charms
+  const freeCharmInfo = calculateFreeCharms(product, charmCount);
+  const freeCharmsValue = freeCharmInfo.freeCharms * CHARM_PRICE;
+  const charmsPrice = charmsOriginalPrice - freeCharmsValue;
+  
+  // Calculate gift wrap cost
+  const giftWrapPrice = giftWrap ? GIFT_WRAP_PRICE : 0;
+  
+  const subtotal = productPrice + charmsPrice + giftWrapPrice;
+  
+  return {
+    productPrice,
+    charmsPrice,
+    charmsOriginalPrice,
+    freeCharmsCount: freeCharmInfo.freeCharms,
+    freeCharmsValue,
+    giftWrapPrice,
+    subtotal,
+    shipping: 0,
+    total: subtotal,
+    freeShipping: false,
+    savings: freeCharmsValue
+  };
+}
+
+/**
+ * Calculate the total price for a customized product
  */
 export function calculateTotalPrice(
-  necklace: Necklace | null,
+  product: Product | null,
   placedCharms: PlacedCharm[],
   giftWrap: boolean = false,
-  selectedHoleCount?: 1 | 3 | 5 | 7
+  selectedHoleCount?: HoleCount
 ) {
-  if (!necklace) {
+  if (!product) {
     return {
-      necklacePrice: 0,
+      productPrice: 0,
       charmsPrice: 0,
       charmsOriginalPrice: 0,
       freeCharmsCount: 0,
@@ -126,69 +202,26 @@ export function calculateTotalPrice(
       shipping: 0,
       total: 0,
       freeShipping: false,
-      savings: 0
+      savings: 0,
+      // Legacy alias
+      necklacePrice: 0
     };
   }
 
-  const necklacePrice = necklace.basePrice;
-  const charmCount = placedCharms.length;
-  
-  // Special pricing for bandanas: fixed price regardless of charms
-  if (isBandana(necklace)) {
-    const countForPricing = selectedHoleCount ?? normalizeBandanaCount(charmCount);
-    const bandanaPrice = BANDANA_PRICE_BY_CHARMS[countForPricing];
-    const charmsOriginalPrice = charmCount * CHARM_PRICE;
-    const giftWrapPrice = giftWrap ? GIFT_WRAP_PRICE : 0;
-    const subtotal = bandanaPrice + giftWrapPrice; // Bandana price varies with selected charms count
-    const shipping = 0;
-    const freeShipping = false;
-    const total = subtotal;
-    
-    return {
-      necklacePrice: bandanaPrice,
-      charmsPrice: 0, // Charms are free with bandanas
-      charmsOriginalPrice,
-      freeCharmsCount: 0, // No free charm system for bandanas
-      freeCharmsValue: 0,
-      giftWrapPrice,
-      subtotal,
-      shipping,
-      total,
-      freeShipping,
-      savings: 0 // Don't show savings bubble for bandanas
-    };
+  // Use type guards for clean branching
+  if (isBandanaProduct(product)) {
+    const result = calculateBandanaPrice(product, placedCharms, giftWrap, selectedHoleCount);
+    return { ...result, necklacePrice: result.productPrice };
   }
   
-  // Standard pricing for other necklaces
-  const charmsOriginalPrice = charmCount * CHARM_PRICE;
+  if (isNecklaceProduct(product)) {
+    const result = calculateNecklacePrice(product, placedCharms, giftWrap);
+    return { ...result, necklacePrice: result.productPrice };
+  }
   
-  // Calculate free charms
-  const freeCharmInfo = calculateFreeCharms(necklace, charmCount);
-  const freeCharmsValue = freeCharmInfo.freeCharms * CHARM_PRICE;
-  const charmsPrice = charmsOriginalPrice - freeCharmsValue;
-  
-  // Calculate gift wrap cost
-  const giftWrapPrice = giftWrap ? GIFT_WRAP_PRICE : 0;
-  
-  const subtotal = necklacePrice + charmsPrice + giftWrapPrice;
-  const shipping = 0;
-  const freeShipping = false;
-  const total = subtotal;
-  const savings = freeCharmsValue;
-
-  return {
-    necklacePrice,
-    charmsPrice,
-    charmsOriginalPrice,
-    freeCharmsCount: freeCharmInfo.freeCharms,
-    freeCharmsValue,
-    giftWrapPrice,
-    subtotal,
-    shipping,
-    total,
-    freeShipping,
-    savings
-  };
+  // Fallback for unknown product types (shouldn't happen with proper typing)
+  const result = calculateNecklacePrice(product, placedCharms, giftWrap);
+  return { ...result, necklacePrice: result.productPrice };
 }
 
 /**
@@ -199,27 +232,28 @@ export function formatPrice(price: number, currency: string = '€'): string {
 }
 
 /**
- * Calculate progress toward next free charm
+ * Calculate progress toward next free charm (necklaces only)
  */
-export function calculateNextFreeCharmInfo(necklace: Necklace | null, currentCharmCount: number) {
-  if (!necklace) return null;
+export function calculateNextFreeCharmInfo(product: Product | null, currentCharmCount: number) {
+  if (!product) return null;
   
-  // Bandanas don't have free charm promotions since charms don't affect price
-  if (isBandana(necklace)) return null;
+  // Bandanas don't have free charm promotions
+  if (isBandanaProduct(product)) return null;
   
-  const necklaceType = getNecklaceType(necklace.name);
-  if (!necklaceType) return null;
+  // Only necklaces have free charm promotions
+  if (!isNecklaceProduct(product)) return null;
   
-  const threshold = FREE_CHARM_THRESHOLDS[necklaceType];
+  const necklaceSubtype = getNecklaceSubtype(product);
+  if (!necklaceSubtype) return null;
+  
+  const threshold = FREE_CHARM_THRESHOLDS[necklaceSubtype];
   
   // Hide the message once the user has reached the free charm threshold
-  // For Grigri: hide after 9 charms (8 + 1 free)
-  // For Gypso: hide after 7 charms (6 + 1 free)
   if (currentCharmCount >= threshold.buyCount + threshold.freeCount) {
     return null; // User has already claimed their free charm
   }
   
-  const freeCharmInfo = calculateFreeCharms(necklace, currentCharmCount);
+  const freeCharmInfo = calculateFreeCharms(product, currentCharmCount);
   
   if (freeCharmInfo.charmsUntilFree === 0) {
     return null; // Next charm is already free
@@ -237,14 +271,14 @@ export function calculateNextFreeCharmInfo(necklace: Necklace | null, currentCha
  * Get price breakdown for display
  */
 export function getPriceBreakdown(
-  necklace: Necklace | null,
+  product: Product | null,
   placedCharms: PlacedCharm[],
   giftWrap: boolean = false,
-  selectedHoleCount?: 1 | 3 | 5 | 7
+  selectedHoleCount?: HoleCount
 ) {
-  const pricing = calculateTotalPrice(necklace, placedCharms, giftWrap, selectedHoleCount);
-  const nextFreeCharm = calculateNextFreeCharmInfo(necklace, placedCharms.length);
-  const freeCharmInfo = calculateFreeCharms(necklace, placedCharms.length);
+  const pricing = calculateTotalPrice(product, placedCharms, giftWrap, selectedHoleCount);
+  const nextFreeCharm = calculateNextFreeCharmInfo(product, placedCharms.length);
+  const freeCharmInfo = calculateFreeCharms(product, placedCharms.length);
   
   return {
     ...pricing,
@@ -252,7 +286,19 @@ export function getPriceBreakdown(
     freeCharmInfo,
     hasCharms: placedCharms.length > 0,
     hasFreeCharms: pricing.freeCharmsCount > 0,
-    // Check if user is close to next free charm (for Grigri: 7+ charms, for Gypso: 5+ charms)
+    // Check if user is close to next free charm (necklaces only)
     closeToFreeCharm: freeCharmInfo.threshold && placedCharms.length >= freeCharmInfo.threshold - 2 && nextFreeCharm
   };
+}
+
+// ============================================
+// Legacy aliases for backward compatibility
+// ============================================
+
+/** @deprecated Use getNecklaceSubtype instead */
+export function getNecklaceType(necklaceName: string): 'GRIGRI' | 'GYPSO' | null {
+  const name = necklaceName.toLowerCase();
+  if (name.includes('grigri')) return 'GRIGRI';
+  if (name.includes('gypso')) return 'GYPSO';
+  return null;
 }

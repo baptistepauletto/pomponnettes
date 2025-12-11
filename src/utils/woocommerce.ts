@@ -3,7 +3,7 @@
  * This module handles the integration with WooCommerce for adding products to cart
  */
 
-import { Necklace, PlacedCharm } from '../types';
+import { Product, PlacedCharm, HoleCount, isBandanaProduct } from '../types';
 
 /**
  * Maps internal charm IDs to WooCommerce attribute values
@@ -23,9 +23,9 @@ const getWooCommerceCharmId = (internalCharmId: string) => {
  * Formats customizer data into a format that can be sent to WooCommerce
  * Uses position-based approach where each attachment point position becomes an attribute
  */
-const formatCustomizerData = (necklace: Necklace, placedCharms: PlacedCharm[]) => {
+const formatCustomizerData = (product: Product, placedCharms: PlacedCharm[]) => {
   // Use the currently derived attachment points (already filtered and left-to-right)
-  const orderedPoints = necklace.attachmentPoints;
+  const orderedPoints = product.attachmentPoints;
   const maxPosition = orderedPoints.length;
 
   // Build a lookup from attachmentPointId -> sequential position (1..N)
@@ -55,23 +55,23 @@ const formatCustomizerData = (necklace: Necklace, placedCharms: PlacedCharm[]) =
 };
 
 /**
- * Adds the customized necklace to the WooCommerce cart using AJAX
+ * Adds the customized product to the WooCommerce cart using AJAX
  * This matches how regular product pages add to cart without page navigation
  * 
- * @param necklace The selected necklace
+ * @param product The selected product (necklace or bandana)
  * @param placedCharms Array of placed charms
  * @returns Promise with the result of the add to cart operation
  */
 export const addToCart = async (
-  necklace: Necklace,
+  product: Product,
   placedCharms: PlacedCharm[],
   giftWrap: boolean = false,
   charmOrderTrust: boolean = false,
-  selectedHoleCount?: 1 | 3 | 5 | 7,
+  selectedHoleCount?: HoleCount,
   quantity: number = 1
 ): Promise<{ success: boolean; message: string }> => {
-  if (!necklace) {
-    return { success: false, message: "No necklace selected" };
+  if (!product) {
+    return { success: false, message: "No product selected" };
   }
   
 
@@ -82,21 +82,23 @@ export const addToCart = async (
   }
 
   // Get the formatted attribute data
-  const attributeData = formatCustomizerData(necklace, placedCharms);
+  const attributeData = formatCustomizerData(product, placedCharms);
   
-  // Resolve product and variation IDs (bandanas can change per hole count)
-  const isBandana = necklace.name.toLowerCase().includes('bandana');
-  const countKey: 1 | 3 | 5 | 7 | undefined = selectedHoleCount;
+  // Resolve product and variation IDs using type guards
+  const countKey: HoleCount | undefined = selectedHoleCount;
 
-  const resolvedProductId =
-    isBandana && countKey && necklace.woocommerceIdsByHoleCount && necklace.woocommerceIdsByHoleCount[countKey]
-      ? necklace.woocommerceIdsByHoleCount[countKey]!
-      : necklace.woocommerceId;
+  let resolvedProductId: number;
+  let resolvedVariationId: number;
 
-  const resolvedVariationId =
-    isBandana && countKey && necklace.variationIdsByHoleCount && necklace.variationIdsByHoleCount[countKey]
-      ? necklace.variationIdsByHoleCount[countKey]!
-      : necklace.variationId;
+  if (isBandanaProduct(product) && countKey) {
+    // Bandana: use hole count specific IDs
+    resolvedProductId = product.woocommerceIdsByHoleCount[countKey];
+    resolvedVariationId = product.variationIdsByHoleCount[countKey];
+  } else {
+    // Necklace or default: use standard IDs
+    resolvedProductId = product.woocommerceId;
+    resolvedVariationId = product.variationId;
+  }
 
   // Create the data object for the request
   const data: Record<string, any> = {
@@ -179,4 +181,4 @@ export const addToCart = async (
       }
     });
   });
-}; 
+};
