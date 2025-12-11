@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
+import { injectMockStockData } from './utils/mockStockData'
 
 // Mount strategy: use Shadow DOM on WordPress, regular mount in standalone/dev
 const rootHost = document.getElementById('root');
@@ -37,7 +38,10 @@ if (rootHost) {
       </React.StrictMode>,
     );
   } else {
-    // Standalone/dev: load CSS into document and render into light DOM
+    // Standalone/dev: inject mock stock data for testing realistic availability
+    injectMockStockData();
+    
+    // Load CSS into document and render into light DOM
     import('./index.css');
     // GH Pages only: add scope class on body so prefixed CSS applies
     if (import.meta.env.PROD && window.location.hostname.endsWith('github.io')) {
