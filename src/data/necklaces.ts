@@ -307,6 +307,27 @@ export const necklaces: Necklace[] = [
     ]
   },
   {
+    id: 19,
+    woocommerceId: 21290,
+    name: 'Bandana Rouge',
+    imagePath: getImagePath('images/necklaces/bandana-rouge-5-oeillets.png'),
+    variationId: 24767,
+    woocommerceIdsByHoleCount: { 1: 24933, 5: 21290 },
+    variationIdsByHoleCount: { 1: 25015, 5: 24767 },
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 54 cm x 54 cm', 
+    attachmentPoints: [
+      { id: 'bd-rouge-point0', position: { x: 24.25, y: 63.8 }, isOccupied: false },
+      { id: 'bd-rouge-point1', position: { x: 32, y: 71.5 }, isOccupied: false },
+      { id: 'bd-rouge-point2', position: { x: 40.1, y: 79.6}, isOccupied: false },
+      { id: 'bd-rouge-point3', position: { x: 49.1, y: 87.8 }, isOccupied: false },
+      { id: 'bd-rouge-point4', position: { x: 57.15, y: 80.6}, isOccupied: false },
+      { id: 'bd-rouge-point5', position: { x: 65.4, y: 73.25 }, isOccupied: false },
+      { id: 'bd-rouge-point6', position: { x: 73.9, y: 66.1 }, isOccupied: false }
+    ]
+  },
+  {
     id: 21,
     woocommerceId: 21290,
     name: 'Bandana Vieux Rouge',
@@ -411,27 +432,6 @@ export const necklaces: Necklace[] = [
       { id: 'bd-rose-fuchsia-point6', position: { x: 76.8, y: 65.6 }, isOccupied: false }
     ]
   },
-  // {
-  //   id: 19,
-  //   woocommerceId: 21290,
-  //   name: 'Bandana Rouge',
-  //   imagePath: getImagePath('images/necklaces/bandana-rouge-5-oeillets.png'),
-  //   variationId: 24767,
-  //   woocommerceIdsByHoleCount: { 1: 24933, 5: 21290 },
-  //   variationIdsByHoleCount: { 1: 25015, 5: 24767 },
-  //   basePrice: 49.00,
-  //   displayScale: .8,
-  //   sizeDescription: 'Taille du bandana : 54 cm x 54 cm', 
-  //   attachmentPoints: [
-  //     { id: 'bd-rose-fushia-point0', position: { x: 25.6, y: 67.1 }, isOccupied: false },
-  //     { id: 'bd-rose-fushia-point1', position: { x: 34.6, y: 73.8 }, isOccupied: false },
-  //     { id: 'bd-rose-fushia-point2', position: { x: 43.4, y: 80.3}, isOccupied: false },
-  //     { id: 'bd-rose-fushia-point3', position: { x: 52.9, y: 87.1 }, isOccupied: false },
-  //     { id: 'bd-rose-fushia-point4', position: { x: 61.3, y: 80.}, isOccupied: false },
-  //     { id: 'bd-rose-fushia-point5', position: { x: 68.9, y: 72.5 }, isOccupied: false },
-  //     { id: 'bd-rose-fushia-point6', position: { x: 76.8, y: 65.6 }, isOccupied: false }
-  //   ]
-  // },
   {
     id: 20,
     woocommerceId: 21290,
