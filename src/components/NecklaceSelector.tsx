@@ -104,7 +104,7 @@ const NecklaceSelector: React.FC = () => {
 
   return (
     <div className="necklace-selector">
-      <h3>ÉTAPE 1: CHOISIS TON BANDANA</h3>
+      <h3>ÉTAPE 1: SÉLECTIONNE TA COULEUR</h3>
       <div className="carousel-container">
         {/* Left arrow - only visible on mobile when can scroll left */}
         <div className={`scroll-arrow left-arrow ${showLeftArrow ? 'visible' : ''}`} onClick={() => scrollByAmount('left')}>

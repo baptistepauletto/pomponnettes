@@ -97,6 +97,48 @@ export const necklaces: Necklace[] = [
     ]
   }, */
   {
+    id: 15,
+    woocommerceId: 21290,
+    name: 'Bandana Marron',
+    imagePath: getImagePath('images/necklaces/bandana-marron-5-oeillets.png'),
+    variationId: 24404,
+    woocommerceIdsByHoleCount: { 1: 24933, 3: 25045, 5: 21290, 7: 25075 },
+    variationIdsByHoleCount: { 1: 25010, 3: 25050, 5: 24404, 7: 25080 },
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 54 cm x 54 cm', 
+    attachmentPoints: [
+      { id: 'bd-marron-point0', position: { x: 21.3, y: 65.6 }, isOccupied: false },
+      { id: 'bd-marron-point1', position: { x: 30.2, y: 72.8 }, isOccupied: false },
+      { id: 'bd-marron-point2', position: { x: 39.7, y: 80.7}, isOccupied: false },
+      { id: 'bd-marron-point3', position: { x: 48.6, y: 87.8 }, isOccupied: false },
+      { id: 'bd-marron-point4', position: { x: 57.7, y: 80.4}, isOccupied: false },
+      { id: 'bd-marron-point5', position: { x: 65.7, y: 73.5 }, isOccupied: false },
+      { id: 'bd-marron-point6', position: { x: 74.4, y: 65.8 }, isOccupied: false }
+    ]
+  },
+  {
+    id: 9,
+    woocommerceId: 21290,
+    name: 'Bandana Bleu Jean',
+    imagePath: getImagePath('images/necklaces/bandana-bleu-jean-5-oeillets.png'),
+    variationId: 22371,
+    woocommerceIdsByHoleCount: { 1: 24933, 3: 25045, 5: 21290, 7: 25075 },
+    variationIdsByHoleCount: { 1: 25004, 3: 25051, 5: 22371, 7: 25081 },
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 54 cm x 54 cm', 
+    attachmentPoints: [
+      { id: 'bd-bleu-jean-point0', position: { x: 23.7, y: 65.3 }, isOccupied: false },
+      { id: 'bd-bleu-jean-point1', position: { x: 33.1, y: 73.2 }, isOccupied: false },
+      { id: 'bd-bleu-jean-point2', position: { x: 41.85, y: 80.7}, isOccupied: false },
+      { id: 'bd-bleu-jean-point3', position: { x: 50.6, y: 87.6 }, isOccupied: false },
+      { id: 'bd-bleu-jean-point4', position: { x: 58.9, y: 79.8}, isOccupied: false },
+      { id: 'bd-bleu-jean-point5', position: { x: 66.3, y: 72.6 }, isOccupied: false },
+      { id: 'bd-bleu-jean-point6', position: { x: 74.35, y: 65.5 }, isOccupied: false }
+    ]
+  },
+  {
     id: 5,
     woocommerceId: 21290,
     name: 'Bandana Beige',
@@ -115,6 +157,48 @@ export const necklaces: Necklace[] = [
       { id: 'bb-point4', position: { x: 60.15, y: 80.3}, isOccupied: false },
       { id: 'bb-point5', position: { x: 68.1, y: 72.9 }, isOccupied: false },
       { id: 'bb-point6', position: { x: 76.3, y: 65.9 }, isOccupied: false }
+    ]
+  },
+  {
+    id: 13,
+    woocommerceId: 21290,
+    name: 'Bandana Kaki (Motif Blanc)',
+    imagePath: getImagePath('images/necklaces/bandana-kaki-motif-blanc-5-oeillets.png'),
+    variationId: 24715,
+    woocommerceIdsByHoleCount: { 1: 24933, 3: 25045, 5: 21290, 7: 25075 },
+    variationIdsByHoleCount: { 1: 25008, 3: 25048, 5: 24715, 7: 25078 },
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 54 cm x 54 cm', 
+    attachmentPoints: [
+      { id: 'bd-kaki-motif-blanc-point0', position: { x: 24.35, y: 66.1 }, isOccupied: false },
+      { id: 'bd-kaki-motif-blanc-point1', position: { x: 33.25, y: 73.7 }, isOccupied: false },
+      { id: 'bd-kaki-motif-blanc-point2', position: { x: 42.1, y: 81}, isOccupied: false },
+      { id: 'bd-kaki-motif-blanc-point3', position: { x: 51.25, y: 87.7 }, isOccupied: false },
+      { id: 'bd-kaki-motif-blanc-point4', position: { x: 60.2, y: 80.4}, isOccupied: false },
+      { id: 'bd-kaki-motif-blanc-point5', position: { x: 68.3, y: 73.1 }, isOccupied: false },
+      { id: 'bd-kaki-motif-blanc-point6', position: { x: 77.3, y: 66.3}, isOccupied: false }
+    ]
+  },
+  {
+    id: 14,
+    woocommerceId: 21290,
+    name: 'Bandana Kaki (Motif Noir)',
+    imagePath: getImagePath('images/necklaces/bandana-kaki-motif-noir-5-oeillets.png'),
+    variationId: 24766,
+    woocommerceIdsByHoleCount: { 1: 24933, 3: 25045, 5: 21290, 7: 25075 },
+    variationIdsByHoleCount: { 1: 25009, 3: 25047, 5: 24766, 7: 25077 },
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 54 cm x 54 cm', 
+    attachmentPoints: [
+      { id: 'bd-kaki-motif-noir-point0', position: { x: 25.9, y: 64.9 }, isOccupied: false },
+      { id: 'bd-kaki-motif-noir-point1', position: { x: 34.4, y: 72.8 }, isOccupied: false },
+      { id: 'bd-kaki-motif-noir-point2', position: { x: 42.65, y: 80.6}, isOccupied: false },
+      { id: 'bd-kaki-motif-noir-point3', position: { x: 51, y: 87.8 }, isOccupied: false },
+      { id: 'bd-kaki-motif-noir-point4', position: { x: 59.9, y: 80.4}, isOccupied: false },
+      { id: 'bd-kaki-motif-noir-point5', position: { x: 68, y: 73.6 }, isOccupied: false },
+      { id: 'bd-kaki-motif-noir-point6', position: { x: 76.05, y: 66.75 }, isOccupied: false }
     ]
   },
   {
@@ -139,27 +223,6 @@ export const necklaces: Necklace[] = [
     ]
   },
   {
-    id: 7,
-    woocommerceId: 21290,
-    name: 'Bandana Blanc',
-    imagePath: getImagePath('images/necklaces/bandana-blanc-5-oeillets.png'),
-    variationId: 24515,
-    woocommerceIdsByHoleCount: { 1: 24933, 3: 25045, 5: 21290, 7: 25075 },
-    variationIdsByHoleCount: { 1: 25020, 3: 25054, 5: 24515, 7: 25084 },
-    basePrice: 49.00,
-    displayScale: .8,
-    sizeDescription: 'Taille du bandana : 54 cm x 54 cm', 
-    attachmentPoints: [
-      { id: 'bd-blanc-point0', position: { x: 23.2, y: 67 }, isOccupied: false },
-      { id: 'bd-blanc-point1', position: { x: 32.1, y: 73.8 }, isOccupied: false },
-      { id: 'bd-blanc-point2', position: { x: 41, y: 81}, isOccupied: false },
-      { id: 'bd-blanc-point3', position: { x: 50.9, y: 87.4 }, isOccupied: false },
-      { id: 'bd-blanc-point4', position: { x: 59, y: 80.1}, isOccupied: false },
-      { id: 'bd-blanc-point5', position: { x: 67, y: 72.7 }, isOccupied: false },
-      { id: 'bd-blanc-point6', position: { x: 75, y: 65.5 }, isOccupied: false }
-    ]
-  },
-  {
     id: 8,
     woocommerceId: 21290,
     name: 'Bandana Bleu Électrique',
@@ -178,27 +241,6 @@ export const necklaces: Necklace[] = [
       { id: 'bd-bleu-electrique-point4', position: { x: 58.5, y: 80.4}, isOccupied: false },
       { id: 'bd-bleu-electrique-point5', position: { x: 67.1, y: 73.1 }, isOccupied: false },
       { id: 'bd-bleu-electrique-point6', position: { x: 76.5, y: 65 }, isOccupied: false }
-    ]
-  },
-  {
-    id: 9,
-    woocommerceId: 21290,
-    name: 'Bandana Bleu Jean',
-    imagePath: getImagePath('images/necklaces/bandana-bleu-jean-5-oeillets.png'),
-    variationId: 22371,
-    woocommerceIdsByHoleCount: { 1: 24933, 3: 25045, 5: 21290, 7: 25075 },
-    variationIdsByHoleCount: { 1: 25004, 3: 25051, 5: 22371, 7: 25081 },
-    basePrice: 49.00,
-    displayScale: .8,
-    sizeDescription: 'Taille du bandana : 54 cm x 54 cm', 
-    attachmentPoints: [
-      { id: 'bd-bleu-jean-point0', position: { x: 23.7, y: 65.3 }, isOccupied: false },
-      { id: 'bd-bleu-jean-point1', position: { x: 33.1, y: 73.2 }, isOccupied: false },
-      { id: 'bd-bleu-jean-point2', position: { x: 41.85, y: 80.7}, isOccupied: false },
-      { id: 'bd-bleu-jean-point3', position: { x: 50.6, y: 87.6 }, isOccupied: false },
-      { id: 'bd-bleu-jean-point4', position: { x: 58.9, y: 79.8}, isOccupied: false },
-      { id: 'bd-bleu-jean-point5', position: { x: 66.3, y: 72.6 }, isOccupied: false },
-      { id: 'bd-bleu-jean-point6', position: { x: 74.35, y: 65.5 }, isOccupied: false }
     ]
   },
   {
@@ -265,66 +307,24 @@ export const necklaces: Necklace[] = [
     ]
   },
   {
-    id: 13,
+    id: 21,
     woocommerceId: 21290,
-    name: 'Bandana Kaki (Motif Blanc)',
-    imagePath: getImagePath('images/necklaces/bandana-kaki-motif-blanc-5-oeillets.png'),
-    variationId: 24715,
+    name: 'Bandana Vieux Rouge',
+    imagePath: getImagePath('images/necklaces/bandana-vieux-rouge-5-oeillets.png'),
+    variationId: 24406,
     woocommerceIdsByHoleCount: { 1: 24933, 3: 25045, 5: 21290, 7: 25075 },
-    variationIdsByHoleCount: { 1: 25008, 3: 25048, 5: 24715, 7: 25078 },
+    variationIdsByHoleCount: { 1: 25018, 3: 25055, 5: 24406, 7: 25085 },
     basePrice: 49.00,
     displayScale: .8,
     sizeDescription: 'Taille du bandana : 54 cm x 54 cm', 
     attachmentPoints: [
-      { id: 'bd-kaki-motif-blanc-point0', position: { x: 24.35, y: 66.1 }, isOccupied: false },
-      { id: 'bd-kaki-motif-blanc-point1', position: { x: 33.25, y: 73.7 }, isOccupied: false },
-      { id: 'bd-kaki-motif-blanc-point2', position: { x: 42.1, y: 81}, isOccupied: false },
-      { id: 'bd-kaki-motif-blanc-point3', position: { x: 51.25, y: 87.7 }, isOccupied: false },
-      { id: 'bd-kaki-motif-blanc-point4', position: { x: 60.2, y: 80.4}, isOccupied: false },
-      { id: 'bd-kaki-motif-blanc-point5', position: { x: 68.3, y: 73.1 }, isOccupied: false },
-      { id: 'bd-kaki-motif-blanc-point6', position: { x: 77.3, y: 66.3}, isOccupied: false }
-    ]
-  },
-  {
-    id: 14,
-    woocommerceId: 21290,
-    name: 'Bandana Kaki (Motif Noir)',
-    imagePath: getImagePath('images/necklaces/bandana-kaki-motif-noir-5-oeillets.png'),
-    variationId: 24766,
-    woocommerceIdsByHoleCount: { 1: 24933, 3: 25045, 5: 21290, 7: 25075 },
-    variationIdsByHoleCount: { 1: 25009, 3: 25047, 5: 24766, 7: 25077 },
-    basePrice: 49.00,
-    displayScale: .8,
-    sizeDescription: 'Taille du bandana : 54 cm x 54 cm', 
-    attachmentPoints: [
-      { id: 'bd-kaki-motif-noir-point0', position: { x: 25.9, y: 64.9 }, isOccupied: false },
-      { id: 'bd-kaki-motif-noir-point1', position: { x: 34.4, y: 72.8 }, isOccupied: false },
-      { id: 'bd-kaki-motif-noir-point2', position: { x: 42.65, y: 80.6}, isOccupied: false },
-      { id: 'bd-kaki-motif-noir-point3', position: { x: 51, y: 87.8 }, isOccupied: false },
-      { id: 'bd-kaki-motif-noir-point4', position: { x: 59.9, y: 80.4}, isOccupied: false },
-      { id: 'bd-kaki-motif-noir-point5', position: { x: 68, y: 73.6 }, isOccupied: false },
-      { id: 'bd-kaki-motif-noir-point6', position: { x: 76.05, y: 66.75 }, isOccupied: false }
-    ]
-  },
-  {
-    id: 15,
-    woocommerceId: 21290,
-    name: 'Bandana Marron',
-    imagePath: getImagePath('images/necklaces/bandana-marron-5-oeillets.png'),
-    variationId: 24404,
-    woocommerceIdsByHoleCount: { 1: 24933, 3: 25045, 5: 21290, 7: 25075 },
-    variationIdsByHoleCount: { 1: 25010, 3: 25050, 5: 24404, 7: 25080 },
-    basePrice: 49.00,
-    displayScale: .8,
-    sizeDescription: 'Taille du bandana : 54 cm x 54 cm', 
-    attachmentPoints: [
-      { id: 'bd-marron-point0', position: { x: 21.3, y: 65.6 }, isOccupied: false },
-      { id: 'bd-marron-point1', position: { x: 30.2, y: 72.8 }, isOccupied: false },
-      { id: 'bd-marron-point2', position: { x: 39.7, y: 80.7}, isOccupied: false },
-      { id: 'bd-marron-point3', position: { x: 48.6, y: 87.8 }, isOccupied: false },
-      { id: 'bd-marron-point4', position: { x: 57.7, y: 80.4}, isOccupied: false },
-      { id: 'bd-marron-point5', position: { x: 65.7, y: 73.5 }, isOccupied: false },
-      { id: 'bd-marron-point6', position: { x: 74.4, y: 65.8 }, isOccupied: false }
+      { id: 'bd-vieux-rouge-point0', position: { x: 29.3, y: 67.9 }, isOccupied: false },
+      { id: 'bd-vieux-rouge-point1', position: { x: 38.2, y: 74.6 }, isOccupied: false },
+      { id: 'bd-vieux-rouge-point2', position: { x: 46.9, y: 80.7}, isOccupied: false },
+      { id: 'bd-vieux-rouge-point3', position: { x: 56.6, y: 86.7 }, isOccupied: false },
+      { id: 'bd-vieux-rouge-point4', position: { x: 64.8, y: 79.1}, isOccupied: false },
+      { id: 'bd-vieux-rouge-point5', position: { x: 72.4, y: 71.7 }, isOccupied: false },
+      { id: 'bd-vieux-rouge-point6', position: { x: 80.7, y: 64.1 }, isOccupied: false }
     ]
   },
   {
@@ -451,27 +451,6 @@ export const necklaces: Necklace[] = [
       { id: 'bd-sauge-point4', position: { x: 60.2, y: 81.2}, isOccupied: false },
       { id: 'bd-sauge-point5', position: { x: 68.7, y: 74.1 }, isOccupied: false },
       { id: 'bd-sauge-point6', position: { x: 78.1, y: 66.3 }, isOccupied: false }
-    ]
-  },
-  {
-    id: 21,
-    woocommerceId: 21290,
-    name: 'Bandana Vieux Rouge',
-    imagePath: getImagePath('images/necklaces/bandana-vieux-rouge-5-oeillets.png'),
-    variationId: 24406,
-    woocommerceIdsByHoleCount: { 1: 24933, 3: 25045, 5: 21290, 7: 25075 },
-    variationIdsByHoleCount: { 1: 25018, 3: 25055, 5: 24406, 7: 25085 },
-    basePrice: 49.00,
-    displayScale: .8,
-    sizeDescription: 'Taille du bandana : 54 cm x 54 cm', 
-    attachmentPoints: [
-      { id: 'bd-vieux-rouge-point0', position: { x: 29.3, y: 67.9 }, isOccupied: false },
-      { id: 'bd-vieux-rouge-point1', position: { x: 38.2, y: 74.6 }, isOccupied: false },
-      { id: 'bd-vieux-rouge-point2', position: { x: 46.9, y: 80.7}, isOccupied: false },
-      { id: 'bd-vieux-rouge-point3', position: { x: 56.6, y: 86.7 }, isOccupied: false },
-      { id: 'bd-vieux-rouge-point4', position: { x: 64.8, y: 79.1}, isOccupied: false },
-      { id: 'bd-vieux-rouge-point5', position: { x: 72.4, y: 71.7 }, isOccupied: false },
-      { id: 'bd-vieux-rouge-point6', position: { x: 80.7, y: 64.1 }, isOccupied: false }
     ]
   },
   {
