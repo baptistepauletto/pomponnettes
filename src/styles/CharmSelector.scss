@@ -168,14 +168,14 @@
     
     @media (min-width: 481px) {
       /* Slight, capped flexibility to reduce edge gap while keeping cards consistent */
-      grid-template-columns: repeat(auto-fit, minmax(140px, clamp(140px, 17vw, 180px)));
+      grid-template-columns: repeat(auto-fit, minmax(130px, clamp(130px, 8vw, 180px)));
       justify-content: center;
       align-content: flex-start;
       overflow-y: auto;
       max-height: calc(100vh - 220px);
       width: 100%;
-      gap: 0.6rem;
-      padding: 6px;
+      gap: 0.4rem;
+      padding: 4px;
       
       &::-webkit-scrollbar {
         width: 6px;
@@ -228,20 +228,20 @@
       }
       
       @media (min-width: 481px) {
-        padding: 0.6rem 0.4rem;
-        margin: 3px;
+        padding: 0.5rem 0.3rem;
+        margin: 2px;
         border-radius: 12px;
-        border: 1.5px solid #f0f0f0;
+        border: 1px solid #f0f0f0;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
         
         @media (min-width: 481px) and (max-width: 768px) {
-          padding: 0.5rem 0.3rem;
-          margin: 2px;
+          padding: 0.4rem 0.25rem;
+          margin: 1px;
         }
         
         @media (min-width: 1024px) {
-          padding: 0.7rem 0.5rem;
-          margin: 3px;
+          padding: 0.6rem 0.4rem;
+          margin: 2px;
         }
       }
       
