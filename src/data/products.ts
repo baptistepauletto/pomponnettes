@@ -15,3 +15,14 @@ export const products: Product[] = [
 export { bandanas } from './bandanas';
 export { necklaces } from './necklaces';
 
+
+
+
+
+
+
+
+
+
+
+
