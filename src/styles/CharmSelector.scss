@@ -168,7 +168,7 @@
     
     @media (min-width: 481px) {
       /* Slight, capped flexibility to reduce edge gap while keeping cards consistent */
-      grid-template-columns: repeat(auto-fit, minmax(130px, clamp(130px, 8vw, 180px)));
+      grid-template-columns: repeat(auto-fit, minmax(130px, clamp(130px, 9vw, 180px)));
       justify-content: center;
       align-content: flex-start;
       overflow-y: auto;
