@@ -2476,7 +2476,7 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: 0 }
   },
   {
-    id: 'lettre-damour',
+    id: 'lettre-d-amour',
     name: 'Lettre D\'Amour',
     imagePath: getImagePath('images/charms/lettre-d-amour-0.9cm.png'),
     sizeScale: 1.1,
