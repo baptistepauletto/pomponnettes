@@ -164,10 +164,6 @@ const PlacedCharm: React.FC<{
   const { selectPlacedCharm, isPlacedCharmSelected, clearSelectedPlacedCharm, selectedPlacedCharmId } = useTapToPlace();
   const isInMoveMode = isMobileDevice && isPlacedCharmSelected(id);
   
-  // Double tap detection for mobile
-  const lastTapTime = useRef<number>(0);
-  const tapTimeout = useRef<number | null>(null);
-
   // Find the charm data
   const charm = charms.find((c) => c.id === charmId);
   if (!charm) return null;
@@ -194,18 +190,9 @@ const PlacedCharm: React.FC<{
   const offsetX = charm.attachmentOffset?.x || 0;
   const offsetY = charm.attachmentOffset?.y || 0;
 
-  // Handle mobile tap interactions (single tap = move mode, double tap = remove)
+  // Handle mobile tap interactions
   const handleMobileTap = () => {
     if (!isMobileDevice) return;
-    
-    const currentTime = Date.now();
-    const timeDiff = currentTime - lastTapTime.current;
-    
-    // Clear any existing timeout
-    if (tapTimeout.current) {
-      window.clearTimeout(tapTimeout.current);
-      tapTimeout.current = null;
-    }
     
     // If another charm is in move mode and we tap this charm, swap them
     if (selectedPlacedCharmId && selectedPlacedCharmId !== id) {
@@ -214,25 +201,13 @@ const PlacedCharm: React.FC<{
       return;
     }
     
-    // Double tap detection (within 300ms)
-    if (timeDiff < 300) {
-      // Double tap - remove charm
+    // If this charm is already in move mode (selected), remove it
+    if (isInMoveMode) {
       handleRemove();
-      clearSelectedPlacedCharm(); // Clear move mode
-      lastTapTime.current = 0;
+      clearSelectedPlacedCharm();
     } else {
-      // Single tap - enter/exit move mode
-      tapTimeout.current = window.setTimeout(() => {
-        if (isInMoveMode) {
-          // Already in move mode, exit it
-          clearSelectedPlacedCharm();
-        } else {
-          // Enter move mode
-          selectPlacedCharm(id);
-        }
-        tapTimeout.current = null;
-      }, 300);
-      lastTapTime.current = currentTime;
+      // Enter move mode
+      selectPlacedCharm(id);
     }
   };
 
@@ -312,7 +287,7 @@ const NecklaceDisplay: React.FC = () => {
   const [showPointNames, setShowPointNames] = useState(false);
   const [showGrid, setShowGrid] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const { selectedCharmId, selectedPlacedCharmId } = useTapToPlace();
+  const { selectedCharmId, selectedPlacedCharmId, clearSelectedPlacedCharm } = useTapToPlace();
   const isMobile = window.innerWidth <= 480;
   const [hasPlacedCharm, setHasPlacedCharm] = useState(false);
   const [showRemovalTip, setShowRemovalTip] = useState(false);
@@ -386,9 +361,19 @@ const NecklaceDisplay: React.FC = () => {
     }
   };
 
-  // Handle necklace tap to open drawer
+  // Handle necklace tap to open drawer or cancel move mode
   const handleNecklaceTap = () => {
-    if (isMobile && !isDrawerOpen) {
+    if (!isMobile) return;
+    
+    // If in move mode, cancel it
+    if (selectedPlacedCharmId) {
+      clearSelectedPlacedCharm();
+      triggerHapticFeedback('light');
+      return;
+    }
+    
+    // Otherwise, open drawer if closed
+    if (!isDrawerOpen) {
       setHasInteractedWithNecklace(true);
       handleDrawerOpenChange(true);
       triggerHapticFeedback('light');
