@@ -40,7 +40,7 @@ export const charms: Charm[] = [
   {
     id: 'croix-diamant',
     name: 'Croix Diamant',
-    imagePath: getImagePath('images/charms/croix-diamant-0.8cm.png'),
+    imagePath: getImagePath('images/charms/croix-diamant-1.5cm.png'),
     sizeScale: 0.8,
     sizeMark: 'XS',
     category: '⭐ Symboles',
@@ -1036,9 +1036,9 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: -5 }
   },
   {
-    id: 'homard',
-    name: 'Homard',
-    imagePath: getImagePath('images/charms/homard-1.5cm.png'),
+    id: 'homard-rouge',
+    name: 'Homard Rouge',
+    imagePath: getImagePath('images/charms/homard-rouge-1.5cm.png'),
     sizeScale: 1.5,
     sizeMark: 'M',
     category: '🦞 Océan',
@@ -1315,9 +1315,9 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: -2 }
   },
   {
-    id: 'piment',
-    name: 'Piment',
-    imagePath: getImagePath('images/charms/piment-1.5cm.png'),
+    id: 'piment-rouge',
+    name: 'Piment Rouge',
+    imagePath: getImagePath('images/charms/piment-rouge-1.5cm.png'),
     sizeScale: 1.5,
     sizeMark: 'M',
     category: '🍒 Nourriture',
@@ -1738,8 +1738,8 @@ export const charms: Charm[] = [
     attachmentOffset: { x: 0, y: 0 }
   },
   {
-    id: 'homard-grand',
-    name: 'Homard Grand',
+    id: 'homard',
+    name: 'Homard',
     imagePath: getImagePath('images/charms/homard-2cm.png'),
     sizeScale: 2.0,
     sizeMark: 'M',
@@ -2141,5 +2141,356 @@ export const charms: Charm[] = [
     sizeMark: 'S',
     category: '🦀 Signes Astrologiques',
     attachmentOffset: { x: 0, y: 5 }
+  },
+  {
+    id: 'medaille',
+    name: 'Médaille',
+    imagePath: getImagePath('images/charms/medaille-2.1cm.png'),
+    sizeScale: 2.1,
+    sizeMark: 'L',
+    category: '🌞 Médailles',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'medaille-croix',
+    name: 'Médaille Croix',
+    imagePath: getImagePath('images/charms/medaille-croix-1.7cm.png'),
+    sizeScale: 1.7,
+    sizeMark: 'M',
+    category: '🌞 Médailles',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'medaille-etoile',
+    name: 'Médaille Étoile',
+    imagePath: getImagePath('images/charms/medaille-etoile-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '🌞 Médailles',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'medaille-tulipe',
+    name: 'Médaille Tulipe',
+    imagePath: getImagePath('images/charms/medaille-tulipe-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'M',
+    category: '🌞 Médailles',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'medaillon-pierre-marron',
+    name: 'Médaillon Pierre Marron',
+    imagePath: getImagePath('images/charms/medaillon-pierre-marron-1.7cm.png'),
+    sizeScale: 1.7,
+    sizeMark: 'M',
+    category: '🌞 Médailles',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'medaillon-pierre-verte',
+    name: 'Médaillon Pierre Verte',
+    imagePath: getImagePath('images/charms/medaillon-pierre-verte-1.7cm.png'),
+    sizeScale: 1.7,
+    sizeMark: 'M',
+    category: '🌞 Médailles',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'moyen-coquillage-spirale',
+    name: 'Moyen Coquillage Spirale',
+    imagePath: getImagePath('images/charms/moyen-coquillage-spirale-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'M',
+    category: '🦞 Océan',
+    attachmentOffset: { x: 5, y: 0 }
+  },
+  {
+    id: 'moyen-soleil',
+    name: 'Moyen Soleil',
+    imagePath: getImagePath('images/charms/moyen-soleil-2.2cm.png'),
+    sizeScale: 2.2,
+    sizeMark: 'L',
+    category: '🌸 Nature',
+    attachmentOffset: { x: -2, y: -2 }
+  },
+  {
+    id: 'oiseau',
+    name: 'Oiseau',
+    imagePath: getImagePath('images/charms/oiseau-1.7cm.png'),
+    sizeScale: 1.7,
+    sizeMark: 'M',
+    category: '🐻 Animaux',
+    attachmentOffset: { x: 2, y: -5 }
+  },
+  {
+    id: 'patin',
+    name: 'Patin',
+    imagePath: getImagePath('images/charms/patin-1.4cm.png'),
+    sizeScale: 1.4,
+    sizeMark: 'M',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'perle-cylindre-marron',
+    name: 'Perle Cylindre Marron',
+    imagePath: getImagePath('images/charms/perle-cylindre-marron-1.4cm.png'),
+    sizeScale: 1.4,
+    sizeMark: 'M',
+    category: '🐚 Perles',
+    attachmentOffset: { x: 2, y: 0 }
+  },
+  {
+    id: 'perle-cylindre-noire',
+    name: 'Perle Cylindre Noire',
+    imagePath: getImagePath('images/charms/perle-cylindre-noire-1.4cm.png'),
+    sizeScale: 1.4,
+    sizeMark: 'M',
+    category: '🐚 Perles',
+    attachmentOffset: { x: 2, y: 0 }
+  },
+  {
+    id: 'perle-pierres-marrons',
+    name: 'Perle Pierres Marrons',
+    imagePath: getImagePath('images/charms/perle-pierres-marrons-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '🐚 Perles',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'perle-pierres-vertes',
+    name: 'Perle Pierres Vertes',
+    imagePath: getImagePath('images/charms/perle-pierres-vertes-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '🐚 Perles',
+    attachmentOffset: { x: 2, y: 0 }
+  },
+  {
+    id: 'perle-plate',
+    name: 'Perle Plate',
+    imagePath: getImagePath('images/charms/perle-plate-2.2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'L',
+    category: '🐚 Perles',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'petit-avion',
+    name: 'Petit Avion',
+    imagePath: getImagePath('images/charms/petit-avion-1.3cm.png'),
+    sizeScale: 1.3,
+    sizeMark: 'S',
+    category: '✈️ Voyage',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'petit-casque-musique',
+    name: 'Petit Casque Musique',
+    imagePath: getImagePath('images/charms/petit-casque-musique-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'petit-elephant',
+    name: 'Petit Éléphant',
+    imagePath: getImagePath('images/charms/petit-elephant-1.6cm.png'),
+    sizeScale: 1.6,
+    sizeMark: 'M',
+    category: '🐻 Animaux',
+    attachmentOffset: { x: -15, y: 0 }
+  },
+  {
+    id: 'petite-pate',
+    name: 'Petite Pâte',
+    imagePath: getImagePath('images/charms/petite-pate-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '🍒 Nourriture',
+    attachmentOffset: { x: -11, y: 0 }
+  },
+  {
+    id: 'petit-palmier',
+    name: 'Petit Palmier',
+    imagePath: getImagePath('images/charms/petit-palmier-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '🌸 Nature',
+    attachmentOffset: { x: 0, y: -2 }
+  },
+  {
+    id: 'piment',
+    name: 'Piment',
+    imagePath: getImagePath('images/charms/piment-2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'M',
+    category: '🍒 Nourriture',
+    attachmentOffset: { x: -5, y: 0 }
+  },
+  {
+    id: 'pizza',
+    name: 'Pizza',
+    imagePath: getImagePath('images/charms/pizza-1.5cm.png'),
+    sizeScale: 1.5,
+    sizeMark: 'M',
+    category: '🍒 Nourriture',
+    attachmentOffset: { x: 3, y: 0 }
+  },
+  {
+    id: 'timbre-coeur',
+    name: 'Timbre Coeur',
+    imagePath: getImagePath('images/charms/timbre-coeur-2.7cm.png'),
+    sizeScale: 2.2,
+    sizeMark: 'XL',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'tong',
+    name: 'Tong',
+    imagePath: getImagePath('images/charms/tong-1.9cm.png'),
+    sizeScale: 1.7,
+    sizeMark: 'M',
+    category: '✈️ Voyage',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'trefle',
+    name: 'Trèfle',
+    imagePath: getImagePath('images/charms/trefle-1.7cm.png'),
+    sizeScale: 1.7,
+    sizeMark: 'M',
+    category: '🌸 Nature',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'trefle-coeur',
+    name: 'Trèfle Coeur',
+    imagePath: getImagePath('images/charms/trefle-coeur-1.1cm.png'),
+    sizeScale: 1.3,
+    sizeMark: 'S',
+    category: '❤️ Cœurs',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'appareil-photo',
+    name: 'Appareil Photo',
+    imagePath: getImagePath('images/charms/appareil-photo-1.1cm.png'),
+    sizeScale: 1.2,
+    sizeMark: 'S',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 1, y: -5 }
+  },
+  {
+    id: 'as-de-trefle',
+    name: 'As De Trèfle',
+    imagePath: getImagePath('images/charms/as-de-trefle-1.8cm.png'),
+    sizeScale: 1.8,
+    sizeMark: 'M',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'bulot',
+    name: 'Bulot',
+    imagePath: getImagePath('images/charms/bulot-1.8cm.png'),
+    sizeScale: 1.8,
+    sizeMark: 'M',
+    category: '🦞 Océan',
+    attachmentOffset: { x: 5, y: 0 }
+  },
+  {
+    id: 'chameau',
+    name: 'Chameau',
+    imagePath: getImagePath('images/charms/chameau-1.7cm.png'),
+    sizeScale: 1.7,
+    sizeMark: 'M',
+    category: '🐻 Animaux',
+    attachmentOffset: { x: -5, y: 0 }
+  },
+  {
+    id: 'chapeau',
+    name: 'Chapeau',
+    imagePath: getImagePath('images/charms/chapeau-2.3cm.png'),
+    sizeScale: 2.2,
+    sizeMark: 'L',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'coeur-sacre-marron',
+    name: 'Coeur Sacre Marron',
+    imagePath: getImagePath('images/charms/coeur-sacre-marron-2.2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'L',
+    category: '❤️ Cœurs',
+    attachmentOffset: { x: 3, y: 0 }
+  },
+  {
+    id: 'coeur-sacre-noir',
+    name: 'Coeur Sacre Noir',
+    imagePath: getImagePath('images/charms/coeur-sacre-noir-2.2cm.png'),
+    sizeScale: 2.0,
+    sizeMark: 'L',
+    category: '❤️ Cœurs',
+    attachmentOffset: { x: 3, y: 0 }
+  },
+  {
+    id: 'croix-coeur',
+    name: 'Croix Coeur',
+    imagePath: getImagePath('images/charms/croix-coeur-1.7cm.png'),
+    sizeScale: 1.7,
+    sizeMark: 'M',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 2, y: -3 }
+  },
+  {
+    id: 'etoile-de-david',
+    name: 'Étoile De David',
+    imagePath: getImagePath('images/charms/etoile-de-david-1.6cm.png'),
+    sizeScale: 1.6,
+    sizeMark: 'M',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 0, y: -2 }
+  },
+  {
+    id: 'etoile-diamant',
+    name: 'Étoile Diamant',
+    imagePath: getImagePath('images/charms/etoile-diamant-2.5cm.png'),
+    sizeScale: 2.3,
+    sizeMark: 'XL',
+    category: '🌸 Nature',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'grand-casque-musique',
+    name: 'Grand Casque Musique',
+    imagePath: getImagePath('images/charms/grand-casque-musique-1.6cm.png'),
+    sizeScale: 1.7,
+    sizeMark: 'M',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 0, y: 0 }
+  },
+  {
+    id: 'lettre-d-amour',
+    name: 'Lettre D\'Amour',
+    imagePath: getImagePath('images/charms/lettre-d-amour-0.9cm.png'),
+    sizeScale: 1.1,
+    sizeMark: 'XS',
+    category: '⭐ Symboles',
+    attachmentOffset: { x: 0, y: -5 }
+  },
+  {
+    id: 'lune-diamant',
+    name: 'Lune Diamant',
+    imagePath: getImagePath('images/charms/lune-diamant-1.2cm.png'),
+    sizeScale: 1.2,
+    sizeMark: 'S',
+    category: '🌸 Nature',
+    attachmentOffset: { x: 0, y: -5 }
   }
 ];
