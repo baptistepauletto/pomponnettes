@@ -654,9 +654,10 @@
     }
     
     .removal-tip {
-      top: 5px;
+      top: 50%;
       font-size: 13px;
       padding: 8px 12px;
+      animation: pulse-scale-centered 2s infinite ease-in-out;
     }
     
     .first-interaction-hint {
