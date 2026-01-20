@@ -39,16 +39,14 @@ function pomponnettes_enqueue_scripts() {
     wp_enqueue_script(
         'pomponnettes-js',
         $plugin_url . 'assets/index.js',
-        array('jquery'),
-        '1.0.0',
+        array(),
+        '1.0.1',
         true
     );
-    // Load as ES module so modern build (import.meta, dynamic imports) works
-    if (function_exists('wp_script_add_data')) {
-        wp_script_add_data('pomponnettes-js', 'type', 'module');
-    }
     
     // Pass the plugin URL to JavaScript
+    // Note: wp_localize_script is called before the script tag is output,
+    // and we manually inline the data in the script_loader_tag filter below
     wp_localize_script(
         'pomponnettes-js',
         'pomponnettesData',
@@ -115,10 +113,16 @@ add_shortcode('pomponnettes_app', 'pomponnettes_app_shortcode');
 add_action('wp_enqueue_scripts', 'pomponnettes_enqueue_scripts', 100);
 
 // Force our JS to load as an ES module (needed for import.meta)
+// Important: Inline the pomponnettesData BEFORE the module script since
+// wp_localize_script doesn't work properly with ES modules
 add_filter('script_loader_tag', function($tag, $handle, $src) {
     if ($handle === 'pomponnettes-js') {
+        global $wp_scripts;
+        $data = $wp_scripts->get_data($handle, 'data');
         $id_attr = ' id="' . esc_attr($handle) . '-js"';
-        return '<script type="module" src="' . esc_url($src) . '"' . $id_attr . '></script>';
+        // Output the inline script first, then the module
+        $inline_script = $data ? '<script>' . $data . '</script>' . "\n" : '';
+        return $inline_script . '<script type="module" src="' . esc_url($src) . '"' . $id_attr . '></script>';
     }
     return $tag;
 }, 10, 3);
