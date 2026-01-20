@@ -35,14 +35,14 @@ export const charms: Charm[] = [
     sizeScale: 0.8,
     sizeMark: 'XS',
     category: '⭐ Symboles',
-    attachmentOffset: { x: 0, y: -5 }
+    attachmentOffset: { x: 0, y: 10}
   },
   {
     id: 'croix-diamant',
     name: 'Croix Diamant',
     imagePath: getImagePath('images/charms/croix-diamant-1.5cm.png'),
-    sizeScale: 0.8,
-    sizeMark: 'XS',
+    sizeScale: 1.4,
+    sizeMark: 'S',
     category: '⭐ Symboles',
     attachmentOffset: { x: 0, y: -5 }
   },
@@ -119,7 +119,7 @@ export const charms: Charm[] = [
     id: 'soleil',
     name: 'Soleil',
     imagePath: getImagePath('images/charms/soleil-1.2cm.png'),
-    sizeScale: 1.4,
+    sizeScale: 1.3,
     sizeMark: 'S',
     category: '🌸 Nature',
     attachmentOffset: { x: 0, y: -10 }
@@ -689,7 +689,7 @@ export const charms: Charm[] = [
     id: 'medaille-soleil-lune',
     name: 'Médaille Soleil Lune',
     imagePath: getImagePath('images/charms/medaille-soleil-lune-3cm.png'),
-    sizeScale: 2.3,
+    sizeScale: 2.4,
     sizeMark: 'L',
     category: '🌞 Médailles',
     attachmentOffset: { x: 0, y: -5 }
@@ -1039,7 +1039,7 @@ export const charms: Charm[] = [
     id: 'homard-rouge',
     name: 'Homard Rouge',
     imagePath: getImagePath('images/charms/homard-rouge-1.5cm.png'),
-    sizeScale: 1.5,
+    sizeScale: 1.4,
     sizeMark: 'M',
     category: '🦞 Océan',
     attachmentOffset: { x: 10, y: 0 }
@@ -2155,7 +2155,7 @@ export const charms: Charm[] = [
     id: 'medaille-croix',
     name: 'Médaille Croix',
     imagePath: getImagePath('images/charms/medaille-croix-1.7cm.png'),
-    sizeScale: 1.7,
+    sizeScale: 1.1,
     sizeMark: 'M',
     category: '🌞 Médailles',
     attachmentOffset: { x: 0, y: 0 }
@@ -2164,7 +2164,7 @@ export const charms: Charm[] = [
     id: 'medaille-etoile',
     name: 'Médaille Étoile',
     imagePath: getImagePath('images/charms/medaille-etoile-1.5cm.png'),
-    sizeScale: 1.5,
+    sizeScale: 1.4,
     sizeMark: 'M',
     category: '🌞 Médailles',
     attachmentOffset: { x: 0, y: 0 }
@@ -2173,7 +2173,7 @@ export const charms: Charm[] = [
     id: 'medaille-tulipe',
     name: 'Médaille Tulipe',
     imagePath: getImagePath('images/charms/medaille-tulipe-2cm.png'),
-    sizeScale: 2.0,
+    sizeScale: 1.9,
     sizeMark: 'M',
     category: '🌞 Médailles',
     attachmentOffset: { x: 0, y: 0 }
@@ -2182,7 +2182,7 @@ export const charms: Charm[] = [
     id: 'medaillon-pierre-marron',
     name: 'Médaillon Pierre Marron',
     imagePath: getImagePath('images/charms/medaillon-pierre-marron-1.7cm.png'),
-    sizeScale: 1.7,
+    sizeScale: 1.6,
     sizeMark: 'M',
     category: '🌞 Médailles',
     attachmentOffset: { x: 0, y: 0 }
@@ -2191,7 +2191,7 @@ export const charms: Charm[] = [
     id: 'medaillon-pierre-verte',
     name: 'Médaillon Pierre Verte',
     imagePath: getImagePath('images/charms/medaillon-pierre-verte-1.7cm.png'),
-    sizeScale: 1.7,
+    sizeScale: 1.6,
     sizeMark: 'M',
     category: '🌞 Médailles',
     attachmentOffset: { x: 0, y: 0 }
@@ -2200,7 +2200,7 @@ export const charms: Charm[] = [
     id: 'moyen-coquillage-spirale',
     name: 'Moyen Coquillage Spirale',
     imagePath: getImagePath('images/charms/moyen-coquillage-spirale-2cm.png'),
-    sizeScale: 2.0,
+    sizeScale: 1.9,
     sizeMark: 'M',
     category: '🦞 Océan',
     attachmentOffset: { x: 5, y: 0 }
@@ -2209,7 +2209,7 @@ export const charms: Charm[] = [
     id: 'moyen-soleil',
     name: 'Moyen Soleil',
     imagePath: getImagePath('images/charms/moyen-soleil-2.2cm.png'),
-    sizeScale: 2.2,
+    sizeScale: 2.1,
     sizeMark: 'L',
     category: '🌸 Nature',
     attachmentOffset: { x: -2, y: -2 }
@@ -2272,7 +2272,7 @@ export const charms: Charm[] = [
     id: 'perle-plate',
     name: 'Perle Plate',
     imagePath: getImagePath('images/charms/perle-plate-2.2cm.png'),
-    sizeScale: 2.0,
+    sizeScale: 1.9,
     sizeMark: 'L',
     category: '🐚 Perles',
     attachmentOffset: { x: 0, y: 0 }
@@ -2290,7 +2290,7 @@ export const charms: Charm[] = [
     id: 'petit-casque-musique',
     name: 'Petit Casque Musique',
     imagePath: getImagePath('images/charms/petit-casque-musique-1.5cm.png'),
-    sizeScale: 1.5,
+    sizeScale: 1.4,
     sizeMark: 'M',
     category: '⭐ Symboles',
     attachmentOffset: { x: 0, y: 0 }
@@ -2308,7 +2308,7 @@ export const charms: Charm[] = [
     id: 'petite-pate',
     name: 'Petite Pâte',
     imagePath: getImagePath('images/charms/petite-pate-1.5cm.png'),
-    sizeScale: 1.5,
+    sizeScale: 1.4,
     sizeMark: 'M',
     category: '🍒 Nourriture',
     attachmentOffset: { x: -11, y: 0 }
@@ -2317,7 +2317,7 @@ export const charms: Charm[] = [
     id: 'petit-palmier',
     name: 'Petit Palmier',
     imagePath: getImagePath('images/charms/petit-palmier-1.5cm.png'),
-    sizeScale: 1.5,
+    sizeScale: 1.4,
     sizeMark: 'M',
     category: '🌸 Nature',
     attachmentOffset: { x: 0, y: -2 }
@@ -2335,7 +2335,7 @@ export const charms: Charm[] = [
     id: 'pizza',
     name: 'Pizza',
     imagePath: getImagePath('images/charms/pizza-1.5cm.png'),
-    sizeScale: 1.5,
+    sizeScale: 1.4,
     sizeMark: 'M',
     category: '🍒 Nourriture',
     attachmentOffset: { x: 3, y: 0 }
@@ -2362,7 +2362,7 @@ export const charms: Charm[] = [
     id: 'trefle',
     name: 'Trèfle',
     imagePath: getImagePath('images/charms/trefle-1.7cm.png'),
-    sizeScale: 1.7,
+    sizeScale: 1.6,
     sizeMark: 'M',
     category: '🌸 Nature',
     attachmentOffset: { x: 0, y: 0 }
@@ -2371,7 +2371,7 @@ export const charms: Charm[] = [
     id: 'trefle-coeur',
     name: 'Trèfle Coeur',
     imagePath: getImagePath('images/charms/trefle-coeur-1.1cm.png'),
-    sizeScale: 1.3,
+    sizeScale: 1.2,
     sizeMark: 'S',
     category: '❤️ Cœurs',
     attachmentOffset: { x: 0, y: 0 }
@@ -2389,7 +2389,7 @@ export const charms: Charm[] = [
     id: 'as-de-trefle',
     name: 'As De Trèfle',
     imagePath: getImagePath('images/charms/as-de-trefle-1.8cm.png'),
-    sizeScale: 1.8,
+    sizeScale: 1.7,
     sizeMark: 'M',
     category: '⭐ Symboles',
     attachmentOffset: { x: 0, y: 0 }
@@ -2398,7 +2398,7 @@ export const charms: Charm[] = [
     id: 'bulot',
     name: 'Bulot',
     imagePath: getImagePath('images/charms/bulot-1.8cm.png'),
-    sizeScale: 1.8,
+    sizeScale: 1.7,
     sizeMark: 'M',
     category: '🦞 Océan',
     attachmentOffset: { x: 5, y: 0 }
@@ -2407,7 +2407,7 @@ export const charms: Charm[] = [
     id: 'chameau',
     name: 'Chameau',
     imagePath: getImagePath('images/charms/chameau-1.7cm.png'),
-    sizeScale: 1.7,
+    sizeScale: 1.6,
     sizeMark: 'M',
     category: '🐻 Animaux',
     attachmentOffset: { x: -5, y: 0 }
@@ -2443,7 +2443,7 @@ export const charms: Charm[] = [
     id: 'croix-coeur',
     name: 'Croix Coeur',
     imagePath: getImagePath('images/charms/croix-coeur-1.7cm.png'),
-    sizeScale: 1.7,
+    sizeScale: 1.6,
     sizeMark: 'M',
     category: '⭐ Symboles',
     attachmentOffset: { x: 2, y: -3 }
@@ -2452,7 +2452,7 @@ export const charms: Charm[] = [
     id: 'etoile-de-david',
     name: 'Étoile De David',
     imagePath: getImagePath('images/charms/etoile-de-david-1.6cm.png'),
-    sizeScale: 1.6,
+    sizeScale: 1.5,
     sizeMark: 'M',
     category: '⭐ Symboles',
     attachmentOffset: { x: 0, y: -2 }
@@ -2461,7 +2461,7 @@ export const charms: Charm[] = [
     id: 'etoile-diamant',
     name: 'Étoile Diamant',
     imagePath: getImagePath('images/charms/etoile-diamant-2.5cm.png'),
-    sizeScale: 2.3,
+    sizeScale: 2.1,
     sizeMark: 'XL',
     category: '🌸 Nature',
     attachmentOffset: { x: 0, y: 0 }
