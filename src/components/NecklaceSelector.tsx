@@ -167,16 +167,23 @@ const NecklaceSelector: React.FC = () => {
         <div className="hole-count-selector">
           <h3>ÉTAPE 2: CHOISIS TON NOMBRE DE CHARMS</h3>
           <div className="hole-count-buttons">
-            {[1, 3, 5, 7].map((count) => (
-              <button
-                key={count}
-                type="button"
-                className={`hole-count-button ${selectedHoleCount === count ? 'selected' : ''}`}
-                onClick={() => setSelectedHoleCount(count as 1 | 3 | 5 | 7)}
-              >
-                {count}
-              </button>
-            ))}
+            {[1, 3, 5, 7].map((count) => {
+              const isDisabled = [1, 3, 7].includes(count);
+              return (
+                <button
+                  key={count}
+                  type="button"
+                  disabled={isDisabled}
+                  className={`hole-count-button ${selectedHoleCount === count ? 'selected' : ''} ${isDisabled ? 'disabled' : ''}`}
+                  onClick={() => !isDisabled && setSelectedHoleCount(count as 1 | 3 | 5 | 7)}
+                >
+                  {count}
+                </button>
+              );
+            })}
+          </div>
+          <div className="temporarily-disabled-message">
+            1, 3 et 7 charms de retour bientôt!
           </div>
         </div>
       )}

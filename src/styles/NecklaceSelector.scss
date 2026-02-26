@@ -370,12 +370,38 @@
           color: white;
         }
 
+        &.disabled {
+          opacity: 0.4;
+          cursor: not-allowed;
+          background-color: #f1f3f5;
+          color: #adb5bd;
+          
+          &:hover {
+            background-color: #f1f3f5;
+            transform: none;
+          }
+        }
+
         @media (min-width: 481px) {
           padding: 0.45rem 1rem;
           font-size: 1rem;
           border-radius: 12px;
           min-width: 52px;
         }
+      }
+    }
+
+    .temporarily-disabled-message {
+      margin-top: 0.75rem;
+      font-size: 0.75rem;
+      color: #868e96;
+      font-family: "Jost", sans-serif;
+      text-align: center;
+      font-style: italic;
+
+      @media (min-width: 481px) {
+        margin-top: 1rem;
+        font-size: 0.9rem;
       }
     }
   }
