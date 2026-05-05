@@ -412,7 +412,7 @@ export const necklaces: Necklace[] = [
     ]
   },
   {
-    id: 19,
+    id: 23,
     woocommerceId: 21290,
     name: 'Bandana Rose Fuchsia',
     imagePath: getImagePath('images/necklaces/bandana-rose-fushia-5-oeillets.png'),

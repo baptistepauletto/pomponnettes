@@ -168,7 +168,7 @@ const NecklaceSelector: React.FC = () => {
           <h3>ÉTAPE 2: CHOISIS TON NOMBRE DE CHARMS</h3>
           <div className="hole-count-buttons">
             {[1, 3, 5, 7].map((count) => {
-              const isDisabled = [1, 3, 7].includes(count);
+              const isDisabled = false;
               return (
                 <button
                   key={count}
@@ -181,9 +181,6 @@ const NecklaceSelector: React.FC = () => {
                 </button>
               );
             })}
-          </div>
-          <div className="temporarily-disabled-message">
-            1, 3 et 7 charms de retour bientôt!
           </div>
         </div>
       )}
