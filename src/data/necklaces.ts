@@ -117,6 +117,48 @@ export const necklaces: Necklace[] = [
       { id: 'bd-marron-point6', position: { x: 74.4, y: 65.8 }, isOccupied: false }
     ]
   },
+    {
+    id: 22,
+    woocommerceId: 21290,
+    name: 'Bandana Bleu Ciel',
+    imagePath: getImagePath('images/necklaces/bandana-bleu-ciel-5-oeillets.png'),
+    variationId: 21319,
+    woocommerceIdsByHoleCount: { 1: 24933, 3: 25045, 5: 21290, 7: 25075 },
+    variationIdsByHoleCount: { 1: 25019, 3: 25063, 5: 21319, 7: 25093 },
+    basePrice: 49.00,
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 54 cm x 54 cm', 
+    attachmentPoints: [
+      { id: 'bd-bleu-ciel-point0', position: { x: 22.8, y: 63.3 }, isOccupied: false },
+      { id: 'bd-bleu-ciel-point1', position: { x: 31.25, y: 71.9 }, isOccupied: false },
+      { id: 'bd-bleu-ciel-point2', position: { x: 40.6, y: 79.8}, isOccupied: false },
+      { id: 'bd-bleu-ciel-point3', position: { x: 50.2, y: 87.4 }, isOccupied: false },
+      { id: 'bd-bleu-ciel-point4', position: { x: 59.1, y: 79.6}, isOccupied: false },
+      { id: 'bd-bleu-ciel-point5', position: { x: 68.4, y: 72.3 }, isOccupied: false },
+      { id: 'bd-bleu-ciel-point6', position: { x: 78.3, y: 64.5 }, isOccupied: false }
+    ]
+  },
+  {
+    id: 24,
+    woocommerceId: 21290,
+    name: 'Bandana Violet',
+    imagePath: getImagePath('images/necklaces/bandana-violet-5-oeillets.png'),
+    variationId: 21319,
+    woocommerceIdsByHoleCount: { 1: 24933, 3: 25045, 5: 21290, 7: 25075 },
+    variationIdsByHoleCount: { 1: 25019, 3: 25063, 5: 21319, 7: 25093 },
+    basePrice: 49.00, 
+    displayScale: .8,
+    sizeDescription: 'Taille du bandana : 54 cm x 54 cm', 
+    attachmentPoints: [
+      { id: 'bd-violet-point0', position: { x: 22.6, y: 66.5 }, isOccupied: false },
+      { id: 'bd-violet-point1', position: { x: 30.7, y: 73.3 }, isOccupied: false },
+      { id: 'bd-violet-point2', position: { x: 39.1, y: 80.5}, isOccupied: false },
+      { id: 'bd-violet-point3', position: { x: 47.6, y: 87.7 }, isOccupied: false },
+      { id: 'bd-violet-point4', position: { x: 55.9, y: 80.9}, isOccupied: false },
+      { id: 'bd-violet-point5', position: { x: 64.2, y: 73.1 }, isOccupied: false },
+      { id: 'bd-violet-point6', position: { x: 72.5, y: 66.2 }, isOccupied: false }
+    ]
+  },
   {
     id: 9,
     woocommerceId: 21290,
@@ -451,27 +493,6 @@ export const necklaces: Necklace[] = [
       { id: 'bd-sauge-point4', position: { x: 60.2, y: 81.2}, isOccupied: false },
       { id: 'bd-sauge-point5', position: { x: 68.7, y: 74.1 }, isOccupied: false },
       { id: 'bd-sauge-point6', position: { x: 78.1, y: 66.3 }, isOccupied: false }
-    ]
-  },
-  {
-    id: 22,
-    woocommerceId: 21290,
-    name: 'Bandana Violet',
-    imagePath: getImagePath('images/necklaces/bandana-violet-5-oeillets.png'),
-    variationId: 21319,
-    woocommerceIdsByHoleCount: { 1: 24933, 3: 25045, 5: 21290, 7: 25075 },
-    variationIdsByHoleCount: { 1: 25019, 3: 25063, 5: 21319, 7: 25093 },
-    basePrice: 49.00,
-    displayScale: .8,
-    sizeDescription: 'Taille du bandana : 54 cm x 54 cm', 
-    attachmentPoints: [
-      { id: 'bd-violet-point0', position: { x: 22.6, y: 66.5 }, isOccupied: false },
-      { id: 'bd-violet-point1', position: { x: 30.7, y: 73.3 }, isOccupied: false },
-      { id: 'bd-violet-point2', position: { x: 39.1, y: 80.5}, isOccupied: false },
-      { id: 'bd-violet-point3', position: { x: 47.6, y: 87.7 }, isOccupied: false },
-      { id: 'bd-violet-point4', position: { x: 55.9, y: 80.9}, isOccupied: false },
-      { id: 'bd-violet-point5', position: { x: 64.2, y: 73.1 }, isOccupied: false },
-      { id: 'bd-violet-point6', position: { x: 72.5, y: 66.2 }, isOccupied: false }
     ]
   },
     // {
